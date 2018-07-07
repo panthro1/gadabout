@@ -19,6 +19,7 @@
 		E3261B1820F0A72C0056CE99 /* turkey.png in Resources */ = {isa = PBXBuildFile; fileRef = E3261B1720F0A72C0056CE99 /* turkey.png */; };
 		E3261B1A20F0A73D0056CE99 /* united-states.png in Resources */ = {isa = PBXBuildFile; fileRef = E3261B1920F0A73D0056CE99 /* united-states.png */; };
 		E3261B1C20F0A7820056CE99 /* lovetravel.png in Resources */ = {isa = PBXBuildFile; fileRef = E3261B1B20F0A7820056CE99 /* lovetravel.png */; };
+		E3FFD48420F14EE1001C974D /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FFD48320F14EE1001C974D /* MainPageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		E3261B1720F0A72C0056CE99 /* turkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = turkey.png; sourceTree = "<group>"; };
 		E3261B1920F0A73D0056CE99 /* united-states.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "united-states.png"; sourceTree = "<group>"; };
 		E3261B1B20F0A7820056CE99 /* lovetravel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lovetravel.png; sourceTree = "<group>"; };
+		E3FFD48320F14EE1001C974D /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				E3261AE620F098920056CE99 /* AppDelegate.swift */,
 				E3261AE820F098920056CE99 /* ViewController.swift */,
 				E3261AEA20F098920056CE99 /* Main.storyboard */,
+				E3FFD48320F14EE1001C974D /* MainPageViewController.swift */,
 				E3261AF020F098940056CE99 /* Assets.xcassets */,
 				E3261AF220F098940056CE99 /* LaunchScreen.storyboard */,
 				E3261AF520F098940056CE99 /* Info.plist */,
@@ -338,6 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3FFD48420F14EE1001C974D /* MainPageViewController.swift in Sources */,
 				E3261AE920F098920056CE99 /* ViewController.swift in Sources */,
 				E3261AEF20F098920056CE99 /* gadabout.xcdatamodeld in Sources */,
 				E3261AE720F098920056CE99 /* AppDelegate.swift in Sources */,

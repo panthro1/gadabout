@@ -56,7 +56,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 }
             }
             else {
-                let newUser = NSEntityDescription.insertNewObject(forEntityName: "Users", into: context)
+                let newUser = NSEntityDescription.insertNewObject(forEntityName: "UserLanguageSelection", into: context)
                 
                 newUser.setValue(English, forKey: "isEnglish")
                 
@@ -108,6 +108,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         print("Hello World")
         
+        /*
         let gameScore = PFObject(className:"GameScore")
         gameScore["score"] = 1337
         gameScore["playerName"] = "Sean Plott"
@@ -120,6 +121,52 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 print("There was a problem, check error.description")
             }
         }
+         */
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserLanguageSelection")
+        
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            let results = try context.fetch(request)
+            
+            if results.count > 0 {
+                
+                for result in results as! [NSManagedObject] {
+                    
+                    if let isEnglishBool = result.value(forKey: "isEnglish") as? Bool {
+                        SetLabelLanguages(English: isEnglishBool)
+                        isEnglish = isEnglishBool
+                        print("View Did Load \(isEnglishBool)")
+                        
+                    }
+                    /*context.delete(result)
+                     
+                     do {
+                     try context.save()
+                     print("Saved")
+                     } catch {
+                     print("There was error in Core Data save")
+                     }*/
+                    
+                }
+            }
+            else {
+                print("No results")
+            }
+        } catch {
+            
+            print("Couldn't fetch the results")
+        }
+        
+
+        
+        
+        
 
     }
     
