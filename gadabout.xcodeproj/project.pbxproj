@@ -16,6 +16,9 @@
 		E3261AF420F098940056CE99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3261AF220F098940056CE99 /* LaunchScreen.storyboard */; };
 		E3261AFF20F098940056CE99 /* gadaboutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3261AFE20F098940056CE99 /* gadaboutTests.swift */; };
 		E3261B0A20F098940056CE99 /* gadaboutUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3261B0920F098940056CE99 /* gadaboutUITests.swift */; };
+		E3261B1820F0A72C0056CE99 /* turkey.png in Resources */ = {isa = PBXBuildFile; fileRef = E3261B1720F0A72C0056CE99 /* turkey.png */; };
+		E3261B1A20F0A73D0056CE99 /* united-states.png in Resources */ = {isa = PBXBuildFile; fileRef = E3261B1920F0A73D0056CE99 /* united-states.png */; };
+		E3261B1C20F0A7820056CE99 /* lovetravel.png in Resources */ = {isa = PBXBuildFile; fileRef = E3261B1B20F0A7820056CE99 /* lovetravel.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,9 @@
 		E3261B0520F098940056CE99 /* gadaboutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gadaboutUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3261B0920F098940056CE99 /* gadaboutUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gadaboutUITests.swift; sourceTree = "<group>"; };
 		E3261B0B20F098940056CE99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E3261B1720F0A72C0056CE99 /* turkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = turkey.png; sourceTree = "<group>"; };
+		E3261B1920F0A73D0056CE99 /* united-states.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "united-states.png"; sourceTree = "<group>"; };
+		E3261B1B20F0A7820056CE99 /* lovetravel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lovetravel.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +135,9 @@
 				E3261AF020F098940056CE99 /* Assets.xcassets */,
 				E3261AF220F098940056CE99 /* LaunchScreen.storyboard */,
 				E3261AF520F098940056CE99 /* Info.plist */,
+				E3261B1720F0A72C0056CE99 /* turkey.png */,
+				E3261B1B20F0A7820056CE99 /* lovetravel.png */,
+				E3261B1920F0A73D0056CE99 /* united-states.png */,
 				E3261AED20F098920056CE99 /* gadabout.xcdatamodeld */,
 			);
 			path = gadabout;
@@ -259,6 +268,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3261AF420F098940056CE99 /* LaunchScreen.storyboard in Resources */,
+				E3261B1C20F0A7820056CE99 /* lovetravel.png in Resources */,
+				E3261B1820F0A72C0056CE99 /* turkey.png in Resources */,
+				E3261B1A20F0A73D0056CE99 /* united-states.png in Resources */,
 				E3261AF120F098940056CE99 /* Assets.xcassets in Resources */,
 				E3261AEC20F098920056CE99 /* Main.storyboard in Resources */,
 			);
