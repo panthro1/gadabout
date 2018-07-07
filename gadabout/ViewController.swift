@@ -25,7 +25,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var haveAnAccountLabel: UILabel!
     
     @IBOutlet weak var logIn: UIButton!
-    
+        
     var isEnglish = true
     
     func SaveLanguageSelection(English: Bool) {
@@ -76,29 +76,28 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func SetLabelLanguages(English: Bool) {
         
-        print("Set Label Languages: \(English)")
         
         if English {
             
             
             enterPassLabel.text = "Enter your email and password!"
-            usernameTextField.placeholder = "Username"
+            usernameTextField.placeholder = "Email"
             passwordTextField.placeholder = "Password"
             logIn.setTitle("Login", for: [])
             signIn.setTitle("Sign In", for: [])
             haveAnAccountLabel.text = "Do not have an account?"
+            welcomeLabel.text = "Welcome to Gadabout"
             
         } else {
-            print("inside else")
-            
             
             enterPassLabel.text = "Email ve şifrenizi giriniz!"
-            usernameTextField.placeholder = "Kullanıcı adı"
+            usernameTextField.placeholder = "Email"
             passwordTextField.placeholder = "Şifre"
             logIn.setTitle("Giriş", for: [])
             signIn.setTitle("Kaydol", for: [])
             haveAnAccountLabel.text = "Kaydolmadınız mı?"
-            
+            welcomeLabel.text = "Gadabout'a Hoşgeldiniz"
+
         }
     }
 
@@ -141,7 +140,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     if let isEnglishBool = result.value(forKey: "isEnglish") as? Bool {
                         SetLabelLanguages(English: isEnglishBool)
                         isEnglish = isEnglishBool
-                        print("View Did Load \(isEnglishBool)")
                         
                     }
                     /*context.delete(result)
@@ -170,8 +168,96 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     }
     
+    @IBAction func SignInButtonTapped(_ sender: Any) {
+        
+        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        print("Signing up...")
+        
+        let user = PFUser()
+        
+        user.username = usernameTextField.text
+        user.password = passwordTextField.text
+        user.email = usernameTextField.text
+        
+        user.signUpInBackground { (success, error) in
+            
+            activityIndicator.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
+            
+            if let error = error {
+                
+                self.displayAlert(title: "Could not sign you up", message: error.localizedDescription)
+            }
+            else {
+                
+                print("signed up")
+                self.performSegue(withIdentifier: "loginSegue", sender: self)
+            }
+        }
+
+        
+    }
+    
+    
+    @IBAction func LoginButtonTapped(_ sender: Any) {
+        
+        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        PFUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTextField.text!) { (user, error) in
+            
+            activityIndicator.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
+            
+            if user != nil
+            {
+                print("Login successfull")
+                self.performSegue(withIdentifier: "loginSegue", sender: self)
+            }
+            else {
+                
+                var errorText = "Unknown error: Please try again"
+                
+                if let error = error {
+                    
+                    errorText = error.localizedDescription
+                    
+                }
+                self.displayAlert(title: "Could not log in", message: errorText)
+            }
+            
+        }
+
+        
+    }
+    
+    func displayAlert(title: String, message: String) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+
+    
     
     @IBAction func SetTurkish(_ sender: Any) {
+        isEnglish = false
         
         SetLabelLanguages(English: isEnglish)
         SaveLanguageSelection(English: isEnglish)

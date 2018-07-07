@@ -7,11 +7,59 @@
 //
 
 import UIKit
+import CoreData
+import Parse
+
 
 class MainPageViewController: UIViewController {
+    
+    var isEnglish = true
+    
+    @IBOutlet weak var logout: UIBarButtonItem!
+    
+    
+    @IBAction func logoutButtonTapped(_ sender: Any) {
+        
+        PFUser.logOut()
+        
+        performSegue(withIdentifier: "logoutSegue", sender: self)
 
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        super.viewDidLoad()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserLanguageSelection")
+        
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            let results = try context.fetch(request)
+            
+            if results.count > 0 {
+                
+                for result in results as! [NSManagedObject] {
+                    
+                    if let isEnglishBool = result.value(forKey: "isEnglish") as? Bool {
+                        isEnglish = isEnglishBool
+                        print("After login isEnglish: \(isEnglish)")
+                        
+                    }
+                }
+            }
+            else {
+                print("No results")
+            }
+        } catch {
+            
+            print("Couldn't fetch the results")
+        }
+
 
         // Do any additional setup after loading the view.
     }
