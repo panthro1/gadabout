@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class ViewController: UIViewController {
 
@@ -14,6 +15,20 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         print("Hello World")
+        
+        let gameScore = PFObject(className:"GameScore")
+        gameScore["score"] = 1337
+        gameScore["playerName"] = "Sean Plott"
+        gameScore["cheatMode"] = false
+        gameScore.saveInBackground {
+            (success: Bool, error: Error?) in
+            if (success) {
+                print("The object has been saved.")
+            } else {
+                print("There was a problem, check error.description")
+            }
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
