@@ -29,7 +29,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Gadabout" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qpO-1l-vXO">
                                 <rect key="frame" x="5" y="66" width="365" height="33.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
-                                <color key="textColor" red="0.28584319353103638" green="0.77905970811843872" blue="0.9133344292640686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.25130575895309448" green="0.42023712396621704" blue="0.91945129632949829" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bfL-sq-cO4">
@@ -37,6 +37,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="4gn-sb-d14"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your username and password!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHp-Hp-zfr">
                                 <rect key="frame" x="10" y="113" width="355" height="21"/>
@@ -56,23 +59,28 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="wvz-Pt-VrR"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QH7-qF-S9v">
-                                <rect key="frame" x="5" y="257" width="196" height="21"/>
+                                <rect key="frame" x="5" y="261" width="196" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v4n-eG-oCn">
-                                <rect key="frame" x="164" y="218" width="47" height="30"/>
+                                <rect key="frame" x="160" y="218" width="55" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Sign In"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ovh-NS-QPo">
-                                <rect key="frame" x="221" y="252" width="42" height="30"/>
+                                <rect key="frame" x="221" y="254" width="50" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Log In"/>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lovetravel.png" translatesAutoresizingMaskIntoConstraints="NO" id="6nX-nf-AhB">
-                                <rect key="frame" x="5" y="312" width="365" height="304"/>
+                                <rect key="frame" x="5" y="318" width="365" height="304"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="6nX-nf-AhB" secondAttribute="height" multiplier="365:304" id="Xnc-VY-Z17"/>
                                 </constraints>
@@ -114,6 +122,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="enterPassLabel" destination="FHp-Hp-zfr" id="oip-eO-gya"/>
+                        <outlet property="haveAnAccountLabel" destination="QH7-qF-S9v" id="pzg-YU-vJ3"/>
+                        <outlet property="logIn" destination="Ovh-NS-QPo" id="4zg-z3-HOm"/>
+                        <outlet property="passwordTextField" destination="pIv-5d-vVT" id="4F0-Sa-noX"/>
+                        <outlet property="signIn" destination="v4n-eG-oCn" id="iPy-mH-GEY"/>
+                        <outlet property="usernameTextField" destination="bfL-sq-cO4" id="D5J-qh-vQp"/>
+                        <outlet property="welcomeLabel" destination="qpO-1l-vXO" id="ZSU-aN-3Ow"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
