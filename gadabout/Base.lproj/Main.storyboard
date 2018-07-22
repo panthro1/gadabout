@@ -163,18 +163,56 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QCB-3j-bJV">
+                                <rect key="frame" x="87" y="74" width="45" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Places"/>
+                                <connections>
+                                    <action selector="placesTapped:" destination="77F-Fn-Frx" eventType="touchUpInside" id="l72-Yy-lcY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="ZDo-MM-aax"/>
                     </view>
                     <connections>
                         <outlet property="logout" destination="X9e-YW-YYo" id="Eqt-Y6-5nH"/>
+                        <outlet property="places" destination="QCB-3j-bJV" id="qbe-jH-fBl"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="sUt-K6-2Q9"/>
+                        <segue destination="uTK-Ez-dNz" kind="presentation" identifier="placesSegue" id="g5u-6c-66d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0XW-Pd-7Op" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="912.79999999999995" y="117.39130434782609"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="mMv-Gr-sEI">
+            <objects>
+                <tableViewController id="uTK-Ez-dNz" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="T6w-Zd-HDa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="za3-bl-xS9">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="za3-bl-xS9" id="gC7-dK-CRM">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="uTK-Ez-dNz" id="Tep-vH-ntW"/>
+                            <outlet property="delegate" destination="uTK-Ez-dNz" id="fE4-5G-1r9"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rnj-gU-qii" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1644" y="119"/>
         </scene>
     </scenes>
     <resources>

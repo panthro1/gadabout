@@ -18,6 +18,13 @@ class MainPageViewController: UIViewController {
     @IBOutlet weak var logout: UIBarButtonItem!
     
     
+    @IBOutlet weak var places: UIButton!
+    
+    @IBAction func placesTapped(_ sender: Any) {
+        
+        
+    }
+    
     @IBAction func logoutButtonTapped(_ sender: Any) {
         
         PFUser.logOut()
