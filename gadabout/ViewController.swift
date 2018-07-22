@@ -168,6 +168,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        
+        if PFUser.current() != nil {
+            
+            performSegue(withIdentifier: "loginSegue", sender: self)
+            
+        }
+    }
+    
     @IBAction func SignInButtonTapped(_ sender: Any) {
         
         let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
