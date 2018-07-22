@@ -35,6 +35,26 @@ class PostViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     
     @IBAction func chooseImageTapped(_ sender: Any) {
+        
+        let imagePicker = UIImagePickerController()
+        
+        imagePicker.delegate = self
+        
+        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        
+        imagePicker.allowsEditing = false
+        
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            
+            imageToPost.image = image
+        }
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     
