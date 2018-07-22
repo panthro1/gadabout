@@ -22,7 +22,7 @@ class MainPageViewController: UIViewController {
     
     @IBAction func placesTapped(_ sender: Any) {
         
-        
+        performSegue(withIdentifier: "placesSegue", sender: self)
     }
     
     @IBAction func logoutButtonTapped(_ sender: Any) {
