@@ -20,6 +20,13 @@ class MainPageViewController: UIViewController {
     
     @IBOutlet weak var places: UIButton!
     
+    
+    
+    @IBAction func postTapped(_ sender: Any) {
+        
+        performSegue(withIdentifier: "postSegue", sender: self)
+    }
+    
     @IBAction func placesTapped(_ sender: Any) {
         
         performSegue(withIdentifier: "placesSegue", sender: self)
