@@ -22,6 +22,9 @@ class PlacesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        self.tableView.rowHeight = 200
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -48,9 +51,16 @@ class PlacesTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "placesIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "placesIdentifier", for: indexPath) as! PlacesTableViewCell
+        
+        
+        cell.placeImage.image = UIImage(named: "collesium.jpg")
+        
+        cell.option1.text = "Rome"
+        cell.option2.text = "Paris"
+        cell.option3.text = "London"
+        cell.option4.text = "Madrid"
 
-        cell.textLabel?.text = "Test"
 
         return cell
     }
