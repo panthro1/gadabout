@@ -7,9 +7,16 @@
 //
 
 import UIKit
+import Parse
 
 class PlacesTableViewController: UITableViewController {
     
+    var option1 = [String]()
+    var option2 = [String]()
+    var option3 = [String]()
+    var option4 = [String]()
+    var imageFile = [PFFile]()
+
     @IBOutlet weak var back: UIBarButtonItem!
     
     @IBAction func backTapped(_ sender: Any) {
@@ -23,13 +30,29 @@ class PlacesTableViewController: UITableViewController {
         super.viewDidLoad()
 
         
-        self.tableView.rowHeight = 200
+        self.tableView.rowHeight = 220
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        let placesQuery = PFQuery(className: "Places")
+        
+        placesQuery.findObjectsInBackground { (objects, error) in
+            
+            if let places = objects {
+                
+                for place in places {
+                    
+                    self.option1.append(place["alternative1"] as! String)
+                    self.option2.append(place["alternative2"] as! String)
+                    self.option3.append(place["alternative3"] as! String)
+                    self.option4.append(place["alternative4"] as! String)
+                    self.imageFile.append(place["imageFile"] as! PFFile)
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+                    self.tableView.reloadData()
+                    
+                }
+            }
+            
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,7 +69,7 @@ class PlacesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 4
+        return option1.count
     }
 
     
@@ -54,12 +77,23 @@ class PlacesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "placesIdentifier", for: indexPath) as! PlacesTableViewCell
         
         
-        cell.placeImage.image = UIImage(named: "collesium.jpg")
+        imageFile[indexPath.row].getDataInBackground { (data, error) in
+            
+            if let imageData = data {
+                
+                if let imageToDisplay = UIImage(data: imageData) {
+                    
+                    cell.placeImage.image = imageToDisplay
+                    
+                }
+            }
+            
+        }
         
-        cell.option1.text = "Rome"
-        cell.option2.text = "Paris"
-        cell.option3.text = "London"
-        cell.option4.text = "Madrid"
+        cell.option1.text = option1[indexPath.row]
+        cell.option2.text = option2[indexPath.row]
+        cell.option3.text = option3[indexPath.row]
+        cell.option4.text = option4[indexPath.row]
 
 
         return cell
