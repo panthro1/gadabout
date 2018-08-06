@@ -211,7 +211,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="226.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tdo-3Q-VB2">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tdo-3Q-VB2">
                                             <rect key="frame" x="67" y="10" width="240" height="128"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="128" id="BRc-HL-Q13"/>
@@ -236,21 +236,49 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0B-kA-2X6">
-                                            <rect key="frame" x="28" y="177" width="46" height="30"/>
-                                            <state key="normal" title="Button"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0B-kA-2X6">
+                                            <rect key="frame" x="35" y="177" width="32" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="32" id="8fE-gQ-aBU"/>
+                                                <constraint firstAttribute="width" constant="32" id="C65-Jt-akl"/>
+                                            </constraints>
+                                            <state key="normal" title="Button" image="uncheck.png"/>
+                                            <connections>
+                                                <action selector="markOption1Tapped:" destination="daD-zG-i3o" eventType="touchUpInside" id="YUX-rl-LFK"/>
+                                            </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49V-sp-gbt">
-                                            <rect key="frame" x="115" y="177" width="46" height="30"/>
-                                            <state key="normal" title="Button"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49V-sp-gbt">
+                                            <rect key="frame" x="122" y="177" width="32" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="32" id="CQM-Xi-vbN"/>
+                                                <constraint firstAttribute="height" constant="32" id="F1T-hX-GoP"/>
+                                            </constraints>
+                                            <state key="normal" title="Button" image="uncheck.png"/>
+                                            <connections>
+                                                <action selector="markOption2Tapped:" destination="daD-zG-i3o" eventType="touchUpInside" id="0b5-ex-c0b"/>
+                                            </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XbF-1o-sos">
-                                            <rect key="frame" x="223" y="177" width="46" height="30"/>
-                                            <state key="normal" title="Button"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XbF-1o-sos">
+                                            <rect key="frame" x="230" y="177" width="32" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="32" id="5pe-1a-15V"/>
+                                                <constraint firstAttribute="height" constant="32" id="GYm-yE-spG"/>
+                                            </constraints>
+                                            <state key="normal" title="Button" image="uncheck.png"/>
+                                            <connections>
+                                                <action selector="markOption3Tapped:" destination="daD-zG-i3o" eventType="touchUpInside" id="V9S-ug-n9x"/>
+                                            </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4rK-OE-GTb">
-                                            <rect key="frame" x="310" y="177" width="46" height="30"/>
-                                            <state key="normal" title="Button"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4rK-OE-GTb">
+                                            <rect key="frame" x="317" y="177" width="32" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="32" id="OtS-up-2iD"/>
+                                                <constraint firstAttribute="width" constant="32" id="nR4-rF-asM"/>
+                                            </constraints>
+                                            <state key="normal" title="Button" image="uncheck.png"/>
+                                            <connections>
+                                                <action selector="markOption4Tapped:" destination="daD-zG-i3o" eventType="touchUpInside" id="dg0-QW-731"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kn-kH-Mny">
                                             <rect key="frame" x="312" y="155" width="42" height="21"/>
@@ -465,6 +493,7 @@
     <resources>
         <image name="lovetravel.png" width="200" height="200"/>
         <image name="turkey.png" width="32" height="32"/>
+        <image name="uncheck.png" width="32" height="32"/>
         <image name="united-states.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>

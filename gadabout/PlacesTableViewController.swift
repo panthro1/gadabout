@@ -16,12 +16,19 @@ class PlacesTableViewController: UITableViewController {
     var option3 = [String]()
     var option4 = [String]()
     var imageFile = [PFFile]()
+    
+    var answer:[Int] = []
 
     @IBOutlet weak var back: UIBarButtonItem!
     
     @IBAction func backTapped(_ sender: Any) {
+        let indexPath = IndexPath(row: 0, section: 0)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "placesIdentifier", for: indexPath as IndexPath) as! PlacesTableViewCell
+        
+        print("\(cell.checkedOption)")
         
         performSegue(withIdentifier: "placesBackSegue", sender: self)
+
     }
     
     
@@ -94,6 +101,7 @@ class PlacesTableViewController: UITableViewController {
         cell.option2.text = option2[indexPath.row]
         cell.option3.text = option3[indexPath.row]
         cell.option4.text = option4[indexPath.row]
+        
 
 
         return cell

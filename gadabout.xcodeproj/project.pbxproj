@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		469C627A0D02DD7767E4FDA1 /* Pods_gadabout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F48E22C09028D3F9283040 /* Pods_gadabout.framework */; };
+		E313DF5F2118D4A500BAE4C6 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = E313DF5E2118D4A500BAE4C6 /* check.png */; };
+		E313DF612118D4AD00BAE4C6 /* uncheck.png in Resources */ = {isa = PBXBuildFile; fileRef = E313DF602118D4AD00BAE4C6 /* uncheck.png */; };
 		E3261AE720F098920056CE99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3261AE620F098920056CE99 /* AppDelegate.swift */; };
 		E3261AE920F098920056CE99 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3261AE820F098920056CE99 /* ViewController.swift */; };
 		E3261AEC20F098920056CE99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3261AEA20F098920056CE99 /* Main.storyboard */; };
@@ -47,6 +49,8 @@
 		304B1BEC845C003FCF6E1992 /* Pods-gadabout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gadabout.release.xcconfig"; path = "Pods/Target Support Files/Pods-gadabout/Pods-gadabout.release.xcconfig"; sourceTree = "<group>"; };
 		37596C782F7F1EEECE83BA6C /* Pods-gadabout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gadabout.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gadabout/Pods-gadabout.debug.xcconfig"; sourceTree = "<group>"; };
 		79F48E22C09028D3F9283040 /* Pods_gadabout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gadabout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E313DF5E2118D4A500BAE4C6 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
+		E313DF602118D4AD00BAE4C6 /* uncheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uncheck.png; sourceTree = "<group>"; };
 		E3261AE320F098920056CE99 /* gadabout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gadabout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3261AE620F098920056CE99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3261AE820F098920056CE99 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +152,8 @@
 				E3FFD48320F14EE1001C974D /* MainPageViewController.swift */,
 				E3261AF020F098940056CE99 /* Assets.xcassets */,
 				E3261AF220F098940056CE99 /* LaunchScreen.storyboard */,
+				E313DF602118D4AD00BAE4C6 /* uncheck.png */,
+				E313DF5E2118D4A500BAE4C6 /* check.png */,
 				E3687E8C2115D25800CC60E9 /* collesium.jpg */,
 				E3261AF520F098940056CE99 /* Info.plist */,
 				E3261B1720F0A72C0056CE99 /* turkey.png */,
@@ -284,11 +290,13 @@
 			files = (
 				E3687E8D2115D25800CC60E9 /* collesium.jpg in Resources */,
 				E3261AF420F098940056CE99 /* LaunchScreen.storyboard in Resources */,
+				E313DF5F2118D4A500BAE4C6 /* check.png in Resources */,
 				E3261B1C20F0A7820056CE99 /* lovetravel.png in Resources */,
 				E3261B1820F0A72C0056CE99 /* turkey.png in Resources */,
 				E3261B1A20F0A73D0056CE99 /* united-states.png in Resources */,
 				E3261AF120F098940056CE99 /* Assets.xcassets in Resources */,
 				E3261AEC20F098920056CE99 /* Main.storyboard in Resources */,
+				E313DF612118D4AD00BAE4C6 /* uncheck.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
