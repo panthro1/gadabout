@@ -22,11 +22,6 @@ class PlacesTableViewController: UITableViewController {
     @IBOutlet weak var back: UIBarButtonItem!
     
     @IBAction func backTapped(_ sender: Any) {
-        let indexPath = IndexPath(row: 0, section: 0)
-        let cell = tableView.dequeueReusableCell(withIdentifier: "placesIdentifier", for: indexPath as IndexPath) as! PlacesTableViewCell
-        
-        print("\(cell.checkedOption)")
-        
         performSegue(withIdentifier: "placesBackSegue", sender: self)
 
     }
@@ -105,6 +100,16 @@ class PlacesTableViewController: UITableViewController {
 
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "placesIdentifier", for: indexPath) as! PlacesTableViewCell
+        
+        answer[indexPath.row] = cell.checkedOption
+        
+        print("\(cell.checkedOption)")
+
     }
     
 
