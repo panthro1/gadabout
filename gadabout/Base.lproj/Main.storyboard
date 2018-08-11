@@ -324,8 +324,8 @@
                         </prototypes>
                         <sections/>
                         <connections>
-                            <outlet property="dataSource" destination="puX-zQ-xb1" id="52d-Kd-yad"/>
-                            <outlet property="delegate" destination="puX-zQ-xb1" id="rms-lR-qdf"/>
+                            <outlet property="dataSource" destination="puX-zQ-xb1" id="XdD-EZ-PoG"/>
+                            <outlet property="delegate" destination="puX-zQ-xb1" id="Zks-IZ-m12"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="3lS-s2-JCE">

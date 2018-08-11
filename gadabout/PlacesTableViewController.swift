@@ -9,7 +9,8 @@
 import UIKit
 import Parse
 
-class PlacesTableViewController: UITableViewController {
+class PlacesTableViewController: UITableViewController, placesTableViewCellDelegate {
+    
     
     var option1 = [String]()
     var option2 = [String]()
@@ -30,7 +31,10 @@ class PlacesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.allowsSelection = true
         
         self.tableView.rowHeight = 220
 
@@ -77,6 +81,7 @@ class PlacesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "placesIdentifier", for: indexPath) as! PlacesTableViewCell
+        cell.delegate = self
         
         
         imageFile[indexPath.row].getDataInBackground { (data, error) in
@@ -103,15 +108,17 @@ class PlacesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "placesIdentifier", for: indexPath) as! PlacesTableViewCell
-        
-        answer[indexPath.row] = cell.checkedOption
-        
-        print("\(cell.checkedOption)")
+
+        print("Hell Yeah")
+
 
     }
     
+    func didAlternativeSelected(sender: PlacesTableViewCell, selectedIndex: Int){
+        let tappedIndexPath = tableView.indexPath(for: sender)
+        print("tapped index: \(tappedIndexPath?.row)")
+        print("\(selectedIndex)")
+    }
 
     /*
     // Override to support conditional editing of the table view.

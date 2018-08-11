@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol placesTableViewCellDelegate {
+    func didAlternativeSelected(sender: PlacesTableViewCell, selectedIndex: Int)
+}
+
 class PlacesTableViewCell: UITableViewCell {
     var option1Marked = false
     var option2Marked = false
@@ -15,6 +19,9 @@ class PlacesTableViewCell: UITableViewCell {
     var option4Marked = false
     
     var checkedOption = -1
+    
+    var delegate: placesTableViewCellDelegate?
+    
 
     @IBOutlet weak var placeImage: UIImageView!
     
@@ -33,6 +40,8 @@ class PlacesTableViewCell: UITableViewCell {
     @IBOutlet weak var markOption3: UIButton!
     
     @IBOutlet weak var markOption4: UIButton!
+    
+
     
     
     @IBAction func markOption1Tapped(_ sender: Any) {
@@ -60,7 +69,8 @@ class PlacesTableViewCell: UITableViewCell {
             option4Marked = false
             checkedOption = 1
         }
-        print("\(checkedOption)")
+        //print("\(checkedOption)")
+        delegate?.didAlternativeSelected( sender: self,selectedIndex: checkedOption)
     }
     
     
@@ -89,7 +99,8 @@ class PlacesTableViewCell: UITableViewCell {
             option4Marked = false
             checkedOption = 2
         }
-        print("\(checkedOption)")
+        //print("\(checkedOption)")
+        delegate?.didAlternativeSelected( sender: self,selectedIndex: checkedOption)
 
     }
     
@@ -120,7 +131,8 @@ class PlacesTableViewCell: UITableViewCell {
             option4Marked = false
             checkedOption = 3
         }
-        print("\(checkedOption)")
+        //print("\(checkedOption)")
+        delegate?.didAlternativeSelected( sender: self,selectedIndex: checkedOption)
     }
     
     
@@ -149,7 +161,8 @@ class PlacesTableViewCell: UITableViewCell {
             option4Marked = true
             checkedOption = 4
         }
-        print("\(checkedOption)")
+        //print("\(checkedOption)")
+        delegate?.didAlternativeSelected( sender: self,selectedIndex: checkedOption)
 
         
     }
