@@ -9,6 +9,8 @@
 import UIKit
 import Parse
 
+
+
 class PlacesTableViewController: UITableViewController, placesTableViewCellDelegate {
     
     
@@ -16,9 +18,12 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var option2 = [String]()
     var option3 = [String]()
     var option4 = [String]()
+    var correctAnswer = [String]()
     var imageFile = [PFFile]()
     
     var answer:[Int] = []
+    var questionNo:[Int] = []
+    
 
     @IBOutlet weak var back: UIBarButtonItem!
     
@@ -26,6 +31,23 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         performSegue(withIdentifier: "placesBackSegue", sender: self)
 
     }
+    
+    @IBOutlet weak var complete: UIBarButtonItem!
+    
+    @IBAction func didCompleteTapped(_ sender: Any) {
+        
+        let rowToSelect: IndexPath = IndexPath(row: 1, section: 1)
+
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "placesIdentifier", for: rowToSelect) as! PlacesTableViewCell
+        cell.delegate = self
+        
+        cell.markOption1.setImage(UIImage(named: "wrong.gif"), for: [])
+        print("TEST!!!!!")
+        
+        
+    }
+    
     
     
 
@@ -51,6 +73,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     self.option3.append(place["alternative3"] as! String)
                     self.option4.append(place["alternative4"] as! String)
                     self.imageFile.append(place["imageFile"] as! PFFile)
+                    self.correctAnswer.append(place["correctAlternative"] as! String)
 
                     self.tableView.reloadData()
                     
@@ -101,8 +124,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         cell.option2.text = option2[indexPath.row]
         cell.option3.text = option3[indexPath.row]
         cell.option4.text = option4[indexPath.row]
-        
-
 
         return cell
     }
@@ -116,8 +137,15 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     
     func didAlternativeSelected(sender: PlacesTableViewCell, selectedIndex: Int){
         let tappedIndexPath = tableView.indexPath(for: sender)
-        print("tapped index: \(tappedIndexPath?.row)")
-        print("\(selectedIndex)")
+        
+        if let selectedQuestion = tappedIndexPath?.row {
+            questionNo.append(selectedQuestion)
+        }
+        
+        answer.append(selectedIndex)
+        
+        print(questionNo)
+        print(answer)
     }
 
     /*

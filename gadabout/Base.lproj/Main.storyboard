@@ -334,9 +334,15 @@
                                 <action selector="backTapped:" destination="puX-zQ-xb1" id="ut5-FD-LHx"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Complete" id="pKr-8r-BhV">
+                            <connections>
+                                <action selector="didCompleteTapped:" destination="puX-zQ-xb1" id="9fL-jW-1En"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="back" destination="oEG-da-ERF" id="RQy-pX-8Kq"/>
+                        <outlet property="complete" destination="pKr-8r-BhV" id="yOh-E1-rN0"/>
                         <segue destination="77F-Fn-Frx" kind="presentation" identifier="placesBackSegue" id="ERg-ar-XpG"/>
                     </connections>
                 </tableViewController>
