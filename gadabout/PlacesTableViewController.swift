@@ -24,6 +24,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var answer:[Int] = []
     var questionNo:[Int] = []
     
+    var isCompleted = false
+    
 
     @IBOutlet weak var back: UIBarButtonItem!
     
@@ -36,14 +38,15 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     
     @IBAction func didCompleteTapped(_ sender: Any) {
         
-        let rowToSelect: IndexPath = IndexPath(row: 1, section: 1)
+        let rowToSelect: IndexPath = IndexPath(row: 0, section: 0)
+        
+        isCompleted = true
+        
+        self.tableView.reloadRows(at: [rowToSelect], with: .fade)
+        
 
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "placesIdentifier", for: rowToSelect) as! PlacesTableViewCell
-        cell.delegate = self
         
-        cell.markOption1.setImage(UIImage(named: "wrong.gif"), for: [])
-        print("TEST!!!!!")
         
         
     }
@@ -124,6 +127,11 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         cell.option2.text = option2[indexPath.row]
         cell.option3.text = option3[indexPath.row]
         cell.option4.text = option4[indexPath.row]
+        
+        if isCompleted {
+            print("Inside")
+            cell.markOption1.setImage(UIImage(named: "wrong.gif"), for: [])
+        }
 
         return cell
     }
