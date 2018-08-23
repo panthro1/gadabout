@@ -25,6 +25,9 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var questionNo:[Int] = []
     
     var isCompleted = false
+    var status: Int = -1
+    var selected: Int = -1
+    var mustBeSelected: Int = -1
     
 
     @IBOutlet weak var back: UIBarButtonItem!
@@ -38,16 +41,39 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     
     @IBAction func didCompleteTapped(_ sender: Any) {
         
-        let rowToSelect: IndexPath = IndexPath(row: 0, section: 0)
+        let sectionNo = 0
+        var rowNo = 1
+        var rowToSelect: IndexPath = IndexPath(row: rowNo, section: sectionNo)
+        var answerIndex: Int = 0
+        var correctAnswerInt: Int = 0
         
         isCompleted = true
-        
-        self.tableView.reloadRows(at: [rowToSelect], with: .fade)
-        
 
-        
-        
-        
+        for question in questionNo {
+            rowNo = question
+            
+            rowToSelect = IndexPath(row: rowNo, section: sectionNo)
+            
+            if let correctAnsInt = Int(correctAnswer[question]) {
+                correctAnswerInt = correctAnsInt
+                selected = answer[answerIndex]
+                mustBeSelected = correctAnswerInt
+
+                if answer[answerIndex] == correctAnswerInt {
+                    status = 1 // correct answer
+                }
+                else {
+                    status = 0 // wrong answer
+                    
+                }
+            }
+            else {
+                status = -1 // no valid string
+            }
+            
+            answerIndex = answerIndex + 1
+            self.tableView.reloadRows(at: [rowToSelect], with: .fade)
+        }
         
     }
     
@@ -130,7 +156,57 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         
         if isCompleted {
             print("Inside")
-            cell.markOption1.setImage(UIImage(named: "wrong.gif"), for: [])
+            
+            if status == 1 {
+
+                if selected == 1 {
+
+                    cell.markOption1.setImage(UIImage(named: "correct.png"), for: [])
+
+                }
+                else if selected == 2 {
+
+                    cell.markOption2.setImage(UIImage(named: "correct.png"), for: [])
+
+                }
+                else if selected == 3 {
+
+                    cell.markOption3.setImage(UIImage(named: "correct.png"), for: [])
+
+                }
+                else if selected == 4 {
+
+                    cell.markOption4.setImage(UIImage(named: "correct.png"), for: [])
+
+                }
+                
+            }
+            else if status == 0 {
+
+                if selected == 1 {
+                    
+                    cell.markOption1.setImage(UIImage(named: "wrong.gif"), for: [])
+                    
+                }
+                else if selected == 2 {
+                    
+                    cell.markOption2.setImage(UIImage(named: "wrong.gif"), for: [])
+                    
+                }
+                else if selected == 3 {
+                    
+                    cell.markOption3.setImage(UIImage(named: "wrong.gif"), for: [])
+                    
+                }
+                else if selected == 4 {
+                    
+                    cell.markOption4.setImage(UIImage(named: "wrong.gif"), for: [])
+                    
+                }
+            }
+            else {
+                
+            }
         }
 
         return cell
