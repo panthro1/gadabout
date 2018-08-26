@@ -150,9 +150,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0za-ce-opn">
+                            <navigationBar contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0za-ce-opn">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem id="36Q-er-9bH">
                                         <barButtonItem key="leftBarButtonItem" title="Logout" id="X9e-YW-YYo">
@@ -163,14 +162,6 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QCB-3j-bJV">
-                                <rect key="frame" x="87" y="74" width="45" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Places"/>
-                                <connections>
-                                    <action selector="placesTapped:" destination="77F-Fn-Frx" eventType="touchUpInside" id="l72-Yy-lcY"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYU-QB-dov">
                                 <rect key="frame" x="95" y="178" width="31" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -179,10 +170,33 @@
                                     <action selector="postTapped:" destination="77F-Fn-Frx" eventType="touchUpInside" id="nR2-eb-rdr"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QCB-3j-bJV">
+                                <rect key="frame" x="5" y="103" width="354" height="67"/>
+                                <state key="normal" image="keyboard-right-arrow-button.png">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Places">
+                                            <attributes>
+                                                <font key="NSFont" size="42" name=".SFNSDisplay"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingMiddle" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="placesTapped:" destination="77F-Fn-Frx" eventType="touchUpInside" id="l72-Yy-lcY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="QCB-3j-bJV" firstAttribute="leading" secondItem="ZDo-MM-aax" secondAttribute="leading" constant="5" id="49o-Jo-Mo8"/>
+                            <constraint firstItem="ZDo-MM-aax" firstAttribute="trailing" secondItem="QCB-3j-bJV" secondAttribute="trailing" constant="5" id="4Yl-ye-3Cq"/>
+                            <constraint firstItem="QCB-3j-bJV" firstAttribute="top" secondItem="0za-ce-opn" secondAttribute="bottom" constant="59" id="f3F-ij-fP3"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ZDo-MM-aax"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="logout" destination="X9e-YW-YYo" id="Eqt-Y6-5nH"/>
                         <outlet property="places" destination="QCB-3j-bJV" id="qbe-jH-fBl"/>
@@ -497,12 +511,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="keyboard-right-arrow-button.png" width="32" height="32"/>
         <image name="lovetravel.png" width="200" height="200"/>
         <image name="turkey.png" width="32" height="32"/>
         <image name="uncheck.png" width="32" height="32"/>
         <image name="united-states.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="kvK-Dz-cGm"/>
         <segue reference="ERg-ar-XpG"/>
     </inferredMetricsTieBreakers>
 </document>

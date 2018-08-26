@@ -40,6 +40,25 @@ class MainPageViewController: UIViewController {
 
     }
     
+    @objc func isRotated() {
+        switch UIDevice.current.orientation {
+        case .landscapeLeft:
+                print("Landscape left")
+        case .landscapeRight:
+                print("Landscape right")
+        case .portrait:
+                print("Portrait")
+        case .portraitUpsideDown:
+                print("Portrait upside down")
+        case .unknown:
+            print("unknown")
+        case .faceUp:
+            print("face up")
+        case .faceDown:
+            print("face down")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,6 +91,14 @@ class MainPageViewController: UIViewController {
         } catch {
             
             print("Couldn't fetch the results")
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(isRotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        
+        if places.imageView != nil {
+            
+            places.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: (places.imageView?.frame.width)!)
+            places.imageEdgeInsets = UIEdgeInsets(top: 5, left: places.frame.width - 100, bottom: 5, right: 0)
         }
 
 
