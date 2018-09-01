@@ -11,7 +11,7 @@ import UIKit
 protocol placesTableViewCellDelegate {
     func didAlternativeSelected(sender: PlacesTableViewCell, selectedIndex: Int)
     
-    func isDetailButtonTapped(sender: PlacesTableViewCell)
+    func isDetailButtonTapped(sender: PlacesTableViewCell, showDetail: Bool)
 }
 
 class PlacesTableViewCell: UITableViewCell {
@@ -19,6 +19,8 @@ class PlacesTableViewCell: UITableViewCell {
     var option2Marked = false
     var option3Marked = false
     var option4Marked = false
+    
+    var showDetail = false
     
     var checkedOption = -1
     
@@ -170,7 +172,15 @@ class PlacesTableViewCell: UITableViewCell {
     }
     
     @IBAction func detailButtonTapped(_ sender: Any) {
-        delegate?.isDetailButtonTapped(sender: self)
+        
+        if showDetail == false {
+            showDetail = true
+        }
+        else {
+            showDetail = false
+        }
+        delegate?.isDetailButtonTapped(sender: self, showDetail: showDetail)
+        print("Cell: \(showDetail)")
     }
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -23,6 +23,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var correctAnswer = [String]()
     var imageFile = [PFFile]()
     
+    var showDetail: Bool = false
+    
     var answer:[Int] = []
     var questionNo:[Int] = []
     
@@ -30,6 +32,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var status: Int = -1
     var selected: Int = -1
     var mustBeSelected: Int = -1
+    
+    var detailText: String = ""
     
 
     @IBOutlet weak var back: UIBarButtonItem!
@@ -142,82 +146,146 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         let cell = tableView.dequeueReusableCell(withIdentifier: "placesIdentifier", for: indexPath) as! PlacesTableViewCell
         cell.delegate = self
         
+        print(self.showDetail)
         
-        imageFile[indexPath.row].getDataInBackground { (data, error) in
+        
+        if self.showDetail == false {
+            imageFile[indexPath.row].getDataInBackground { (data, error) in
             
-            if let imageData = data {
+                if let imageData = data {
                 
-                if let imageToDisplay = UIImage(data: imageData) {
+                    if let imageToDisplay = UIImage(data: imageData) {
                     
-                    cell.placeImage.image = imageToDisplay
+                        cell.placeImage.image = imageToDisplay
                     
+                    }
                 }
+            
             }
+        
+            cell.option1.text = option1[indexPath.row]
+            cell.option2.text = option2[indexPath.row]
+            cell.option3.text = option3[indexPath.row]
+            cell.option4.text = option4[indexPath.row]
+        
+            cell.detailsButton.isHidden = true
+        
+            /*if isCompleted {
+                cell.detailsButton.isHidden = false
+            
+                if status == 1 {
+
+                    if selected == 1 {
+
+                        cell.markOption1.setImage(UIImage(named: "correct.png"), for: [])
+
+                    }
+                    else if selected == 2 {
+
+                        cell.markOption2.setImage(UIImage(named: "correct.png"), for: [])
+
+                    }
+                    else if selected == 3 {
+
+                        cell.markOption3.setImage(UIImage(named: "correct.png"), for: [])
+
+                    }
+                    else if selected == 4 {
+
+                        cell.markOption4.setImage(UIImage(named: "correct.png"), for: [])
+
+                    }
+                
+                }
+                else if status == 0 {
+
+                    if selected == 1 {
+                    
+                        cell.markOption1.setImage(UIImage(named: "wrong.gif"), for: [])
+                    
+                    }
+                    else if selected == 2 {
+                    
+                        cell.markOption2.setImage(UIImage(named: "wrong.gif"), for: [])
+                    
+                    }
+                    else if selected == 3 {
+                    
+                        cell.markOption3.setImage(UIImage(named: "wrong.gif"), for: [])
+                    
+                    }
+                    else if selected == 4 {
+                    
+                        cell.markOption4.setImage(UIImage(named: "wrong.gif"), for: [])
+                    
+                    }
+                }
+                else {
+                
+                }
+            }*/
             
         }
-        
-        cell.option1.text = option1[indexPath.row]
-        cell.option2.text = option2[indexPath.row]
-        cell.option3.text = option3[indexPath.row]
-        cell.option4.text = option4[indexPath.row]
-        
-        cell.detailsButton.isHidden = true
-        
-        if isCompleted {
-            print("Inside")
+        else {
+            cell.placeImage.isHidden = true
             cell.detailsButton.isHidden = false
-            
+        }
+    
+        if isCompleted {
+            cell.detailsButton.isHidden = false
+    
             if status == 1 {
-
+    
                 if selected == 1 {
-
+    
                     cell.markOption1.setImage(UIImage(named: "correct.png"), for: [])
-
+    
                 }
                 else if selected == 2 {
-
+    
                     cell.markOption2.setImage(UIImage(named: "correct.png"), for: [])
-
+    
                 }
                 else if selected == 3 {
-
+    
                     cell.markOption3.setImage(UIImage(named: "correct.png"), for: [])
-
+    
                 }
                 else if selected == 4 {
-
+    
                     cell.markOption4.setImage(UIImage(named: "correct.png"), for: [])
-
+    
                 }
-                
+    
             }
             else if status == 0 {
-
+    
                 if selected == 1 {
-                    
+    
                     cell.markOption1.setImage(UIImage(named: "wrong.gif"), for: [])
-                    
+    
                 }
                 else if selected == 2 {
-                    
+    
                     cell.markOption2.setImage(UIImage(named: "wrong.gif"), for: [])
-                    
+    
                 }
                 else if selected == 3 {
-                    
+    
                     cell.markOption3.setImage(UIImage(named: "wrong.gif"), for: [])
-                    
+    
                 }
                 else if selected == 4 {
-                    
+    
                     cell.markOption4.setImage(UIImage(named: "wrong.gif"), for: [])
-                    
+    
                 }
             }
             else {
-                
+    
             }
         }
+
 
         return cell
     }
@@ -237,22 +305,39 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         }
         
         answer.append(selectedIndex)
-        
-        print(questionNo)
-        print(answer)
+
     }
     
-    func isDetailButtonTapped(sender: PlacesTableViewCell) {
+    func isDetailButtonTapped(sender: PlacesTableViewCell, showDetail: Bool) {
+        
+        
+        /*let tappedIndexPath = tableView.indexPath(for: sender)
+        
+        if let selectedQuestion = tappedIndexPath?.row {
+            if self.descriptionEng[selectedQuestion].count > 0 {
+                detailText = self.descriptionEng[selectedQuestion]
+                print(detailText)
+                performSegue(withIdentifier: "placesDetailSegue", sender: self)
+            }
+        }*/
+        let sectionNo = 0
+        var rowNo = 1
         
         let tappedIndexPath = tableView.indexPath(for: sender)
         
         if let selectedQuestion = tappedIndexPath?.row {
-            if self.descriptionEng[selectedQuestion].count > 0 {
-                let detailText = self.descriptionEng[selectedQuestion]
-                print(detailText)
-            }
+            rowNo = selectedQuestion
         }
+        
+        let rowToSelect: IndexPath = IndexPath(row: rowNo, section: sectionNo)
+        
+        print("Before reload: \(showDetail)")
+        
+        self.showDetail = showDetail
+        
+        self.tableView.reloadRows(at: [rowToSelect], with: .fade)
     }
+    
 
     /*
     // Override to support conditional editing of the table view.
