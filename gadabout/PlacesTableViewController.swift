@@ -18,6 +18,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var option2 = [String]()
     var option3 = [String]()
     var option4 = [String]()
+    var descriptionEng = [String]()
+    var descriptionTr = [String]()
     var correctAnswer = [String]()
     var imageFile = [PFFile]()
     
@@ -38,6 +40,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     }
     
     @IBOutlet weak var complete: UIBarButtonItem!
+
+    
     
     @IBAction func didCompleteTapped(_ sender: Any) {
         
@@ -87,7 +91,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         self.tableView.dataSource = self
         self.tableView.allowsSelection = true
         
-        self.tableView.rowHeight = 220
+        self.tableView.rowHeight = 380
+        
 
         let placesQuery = PFQuery(className: "Places")
         
@@ -103,6 +108,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     self.option4.append(place["alternative4"] as! String)
                     self.imageFile.append(place["imageFile"] as! PFFile)
                     self.correctAnswer.append(place["correctAlternative"] as! String)
+                    self.descriptionEng.append(place["engDescription"] as! String)
+                    self.descriptionTr.append(place["trDescription"] as! String)
 
                     self.tableView.reloadData()
                     
@@ -154,8 +161,11 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         cell.option3.text = option3[indexPath.row]
         cell.option4.text = option4[indexPath.row]
         
+        cell.detailsButton.isHidden = true
+        
         if isCompleted {
             print("Inside")
+            cell.detailsButton.isHidden = false
             
             if status == 1 {
 
@@ -230,6 +240,18 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         
         print(questionNo)
         print(answer)
+    }
+    
+    func isDetailButtonTapped(sender: PlacesTableViewCell) {
+        
+        let tappedIndexPath = tableView.indexPath(for: sender)
+        
+        if let selectedQuestion = tappedIndexPath?.row {
+            if self.descriptionEng[selectedQuestion].count > 0 {
+                let detailText = self.descriptionEng[selectedQuestion]
+                print(detailText)
+            }
+        }
     }
 
     /*

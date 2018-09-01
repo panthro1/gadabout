@@ -10,6 +10,8 @@ import UIKit
 
 protocol placesTableViewCellDelegate {
     func didAlternativeSelected(sender: PlacesTableViewCell, selectedIndex: Int)
+    
+    func isDetailButtonTapped(sender: PlacesTableViewCell)
 }
 
 class PlacesTableViewCell: UITableViewCell {
@@ -41,7 +43,7 @@ class PlacesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var markOption4: UIButton!
     
-
+    @IBOutlet weak var detailsButton: UIButton!
     
     
     @IBAction func markOption1Tapped(_ sender: Any) {
@@ -167,6 +169,9 @@ class PlacesTableViewCell: UITableViewCell {
         
     }
     
+    @IBAction func detailButtonTapped(_ sender: Any) {
+        delegate?.isDetailButtonTapped(sender: self)
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
