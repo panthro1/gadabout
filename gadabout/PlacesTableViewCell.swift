@@ -73,7 +73,7 @@ class PlacesTableViewCell: UITableViewCell {
             option4Marked = false
             checkedOption = 1
         }
-        //print("\(checkedOption)")
+        print("Option 1 marked: \(option1Marked)")
         delegate?.didAlternativeSelected( sender: self,selectedIndex: checkedOption)
     }
     
@@ -103,7 +103,6 @@ class PlacesTableViewCell: UITableViewCell {
             option4Marked = false
             checkedOption = 2
         }
-        //print("\(checkedOption)")
         delegate?.didAlternativeSelected( sender: self,selectedIndex: checkedOption)
 
     }
@@ -135,7 +134,6 @@ class PlacesTableViewCell: UITableViewCell {
             option4Marked = false
             checkedOption = 3
         }
-        //print("\(checkedOption)")
         delegate?.didAlternativeSelected( sender: self,selectedIndex: checkedOption)
     }
     
