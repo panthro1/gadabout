@@ -55,7 +55,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         
         if isCompleted == false {
             isCompleted = true
-            let nofQuestions = questionNo.count
+            let nofQuestions = correctAnswer.count
 
 
             for rowNo in 0...nofQuestions-1 {
