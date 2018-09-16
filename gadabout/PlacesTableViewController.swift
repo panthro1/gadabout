@@ -165,8 +165,10 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             cell.markOption2.isHidden = true
             cell.markOption3.isHidden = true
             cell.markOption4.isHidden = true
+            cell.detailText.text = descriptionEng[indexPath.row]
+            cell.detailText.isHidden = false
             
-            print("Detail bla bla bla \(indexPath.row)")
+            print(cell.detailText.text)
             
         }
         else {
@@ -191,7 +193,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         
         cell.detailsButton.isHidden = true
         
-        if isCompleted {
+        if (isCompleted == true) && (showDetail == false) {
             cell.detailsButton.isHidden = false
             
             cell.markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
@@ -210,13 +212,17 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 let correctAnswerInt = correctAnsInt
                 selected = answer[questionIndex!]
                 mustBeSelected = correctAnswerInt
+                if let qIndex = questionIndex {
+                    if answer[qIndex] == correctAnswerInt {
+                        status = 1 // correct answer
+                    }
+                    else {
+                        status = 0 // wrong answer
              
-                if answer[indexPath.row] == correctAnswerInt {
-                    status = 1 // correct answer
+                    }
                 }
                 else {
                     status = 0 // wrong answer
-             
                 }
              }
              else {

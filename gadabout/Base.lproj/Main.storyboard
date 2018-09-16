@@ -329,14 +329,12 @@
                                                 <action selector="detailButtonTapped:" destination="daD-zG-i3o" eventType="touchUpInside" id="vV5-WQ-c67"/>
                                             </connections>
                                         </button>
-                                        <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5Dc-VF-wZT">
-                                            <rect key="frame" x="135" y="183" width="240" height="128"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        </textView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbM-WP-MWF">
+                                            <rect key="frame" x="14" y="161" width="345" height="177"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="kPo-0z-ZYw" secondAttribute="trailing" constant="5" id="3H3-1w-ej9"/>
@@ -351,6 +349,7 @@
                                         <constraint firstItem="49V-sp-gbt" firstAttribute="centerX" secondItem="j0B-kA-2X6" secondAttribute="centerX" id="MwG-t2-6bN"/>
                                         <constraint firstItem="49V-sp-gbt" firstAttribute="top" secondItem="j0B-kA-2X6" secondAttribute="bottom" constant="10" id="NcR-bN-04e"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="9kn-kH-Mny" secondAttribute="trailing" constant="5" id="Poz-BG-qum"/>
+                                        <constraint firstItem="cbM-WP-MWF" firstAttribute="width" secondItem="HuS-0s-onw" secondAttribute="width" id="Q8b-Pj-9jI"/>
                                         <constraint firstItem="4rK-OE-GTb" firstAttribute="centerX" secondItem="XbF-1o-sos" secondAttribute="centerX" id="QCs-qD-Rqt"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="1Md-jV-A2v" secondAttribute="trailing" constant="10" id="QRe-up-Jbt"/>
                                         <constraint firstItem="103-wG-Gqo" firstAttribute="centerY" secondItem="49V-sp-gbt" secondAttribute="centerY" id="RdU-gJ-SPe"/>
@@ -359,14 +358,17 @@
                                         <constraint firstItem="kPo-0z-ZYw" firstAttribute="leading" secondItem="j0B-kA-2X6" secondAttribute="trailing" constant="8" id="bQ6-RS-kOM"/>
                                         <constraint firstItem="tdo-3Q-VB2" firstAttribute="top" secondItem="HuS-0s-onw" secondAttribute="top" constant="10" id="cKH-eQ-V2u"/>
                                         <constraint firstItem="Dka-W2-eNX" firstAttribute="centerY" secondItem="XbF-1o-sos" secondAttribute="centerY" id="cmC-sy-xA7"/>
+                                        <constraint firstItem="cbM-WP-MWF" firstAttribute="top" secondItem="tdo-3Q-VB2" secondAttribute="bottom" constant="1" id="cnE-4L-01r"/>
                                         <constraint firstItem="103-wG-Gqo" firstAttribute="leading" secondItem="49V-sp-gbt" secondAttribute="trailing" constant="8" id="h32-rO-FI3"/>
                                         <constraint firstItem="XbF-1o-sos" firstAttribute="centerX" secondItem="49V-sp-gbt" secondAttribute="centerX" id="i0F-Cd-OGI"/>
+                                        <constraint firstItem="1Md-jV-A2v" firstAttribute="top" secondItem="cbM-WP-MWF" secondAttribute="bottom" constant="5" id="i7W-OQ-eCe"/>
                                         <constraint firstItem="j0B-kA-2X6" firstAttribute="top" secondItem="tdo-3Q-VB2" secondAttribute="bottom" constant="20" id="pm6-eW-yhn"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="103-wG-Gqo" secondAttribute="trailing" constant="5" id="x33-uo-gaZ"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
+                                    <outlet property="detailText" destination="cbM-WP-MWF" id="B7z-oM-aH9"/>
                                     <outlet property="detailsButton" destination="1Md-jV-A2v" id="Hp2-Rr-gQe"/>
                                     <outlet property="markOption1" destination="j0B-kA-2X6" id="J90-9m-cTa"/>
                                     <outlet property="markOption2" destination="49V-sp-gbt" id="VH9-ad-brk"/>

@@ -47,6 +47,7 @@ class PlacesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var detailsButton: UIButton!
     
+    @IBOutlet weak var detailText: UILabel!
     
     @IBAction func markOption1Tapped(_ sender: Any) {
         
