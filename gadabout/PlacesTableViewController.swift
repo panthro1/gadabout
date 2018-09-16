@@ -218,6 +218,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     mustBeSelected = correctAnswerInt
                     if let qIndex = questionIndex {
                         selected = answer[qIndex]
+                        print("Row No: \(indexPath.row) selected: \(selected)")
                         if answer[qIndex] == correctAnswerInt {
                             status = 1 // correct answer
                         }
@@ -227,6 +228,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                         }
                     }
                     else {
+                        selected = -1
                         status = 0 // wrong answer
                     }
                 }
