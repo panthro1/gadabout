@@ -23,8 +23,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var correctAnswer = [String]()
     var imageFile = [PFFile]()
     var imageArr = [UIImage]()
+    var showDetail = [Bool]()
     
-    var showDetail: Bool = false
     var detailCellRow: Int = 0
     
     var answer:[Int] = []
@@ -58,7 +58,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             let nofQuestions = questionNo.count
 
 
-            for rowNo in 0...nofQuestions {
+            for rowNo in 0...nofQuestions-1 {
                 
                 let rowToSelect: IndexPath = IndexPath(row: rowNo, section: sectionNo)
                 self.tableView.reloadRows(at: [rowToSelect], with: .fade)
@@ -96,6 +96,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     self.correctAnswer.append(place["correctAlternative"] as! String)
                     self.descriptionEng.append(place["engDescription"] as! String)
                     self.descriptionTr.append(place["trDescription"] as! String)
+                    self.showDetail.append(false)
                     
                     self.tableView.reloadData()
 
@@ -129,9 +130,9 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         let cell = tableView.dequeueReusableCell(withIdentifier: "placesIdentifier", for: indexPath) as! PlacesTableViewCell
         cell.delegate = self
         
-        print("Row: \(indexPath.row) showDetail: \(showDetail) Completed: \(isCompleted)")
+        //print("Row: \(indexPath.row) showDetail: \(showDetail) Completed: \(isCompleted)")
         
-        if (showDetail == true) && (detailCellRow == indexPath.row) {
+        if (showDetail[indexPath.row] == true)/* && (detailCellRow == indexPath.row)*/ {
 
             //cell.placeImage.isHidden = true
             cell.option1.isHidden = true
@@ -142,11 +143,29 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             cell.markOption2.isHidden = true
             cell.markOption3.isHidden = true
             cell.markOption4.isHidden = true
+            cell.detailsButton.isHidden = false
+            cell.detailsButton.setTitle("Back", for: [])
             
             cell.detailTextInfo.isHidden = false
             cell.detailTextInfo.text = descriptionEng[indexPath.row]
+
+            imageFile[indexPath.row].getDataInBackground { (data, error) in
+                
+                if let imageData = data {
+                    
+                    if let imageToDisplay = UIImage(data: imageData) {
+                        
+                        cell.placeImage.image = imageToDisplay
+                        
+                    }
+                }
+            }
+
+
         }
         else {
+            
+            cell.detailsButton.setTitle("Details", for: [])
             imageFile[indexPath.row].getDataInBackground { (data, error) in
             
                 if let imageData = data {
@@ -159,6 +178,15 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 }
             
             }
+            
+            cell.option1.isHidden = false
+            cell.option2.isHidden = false
+            cell.option3.isHidden = false
+            cell.option4.isHidden = false
+            cell.markOption1.isHidden = false
+            cell.markOption2.isHidden = false
+            cell.markOption3.isHidden = false
+            cell.markOption4.isHidden = false
         
             cell.detailTextInfo.isHidden = true
             cell.option1.text = option1[indexPath.row]
@@ -169,6 +197,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             cell.detailsButton.isHidden = true
         
             if (isCompleted == true) {
+                
+
                 cell.detailsButton.isHidden = false
             
                 cell.markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
@@ -279,7 +309,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
 
     }
     
-    func isDetailButtonTapped(sender: PlacesTableViewCell, showDetail: Bool) {
+    func isDetailButtonTapped(sender: PlacesTableViewCell) {
         
         
         /*let tappedIndexPath = tableView.indexPath(for: sender)
@@ -302,8 +332,14 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         
         let rowToSelect: IndexPath = IndexPath(row: rowNo, section: sectionNo)
         
-        self.showDetail = showDetail
-        self.detailCellRow = rowToSelect.row
+        
+        if self.showDetail[rowNo] == false {
+            self.showDetail[rowNo] = true
+        }
+        else {
+            self.showDetail[rowNo] = false
+        }
+        //self.detailCellRow = rowToSelect.row
         self.tableView.reloadRows(at: [rowToSelect], with: .fade)
     }
     
