@@ -49,6 +49,8 @@ class PlacesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var detailTextInfo: UITextView!
     
+    
+    
     @IBAction func markOption1Tapped(_ sender: Any) {
         
         if option1Marked {

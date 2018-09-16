@@ -151,8 +151,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0za-ce-opn">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0za-ce-opn">
+                                <rect key="frame" x="0.0" y="20" width="375" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="Ywz-mX-R3M"/>
+                                </constraints>
                                 <items>
                                     <navigationItem id="36Q-er-9bH">
                                         <barButtonItem key="leftBarButtonItem" title="Logout" id="X9e-YW-YYo">
@@ -163,36 +166,34 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYU-QB-dov">
-                                <rect key="frame" x="95" y="178" width="31" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Post"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WhE-j5-Xzq">
+                                <rect key="frame" x="0.0" y="120" width="375" height="469"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mainPageCell" id="Vha-kk-gev">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Vha-kk-gev" id="4Ea-1n-neY">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
-                                    <action selector="postTapped:" destination="77F-Fn-Frx" eventType="touchUpInside" id="nR2-eb-rdr"/>
+                                    <outlet property="dataSource" destination="77F-Fn-Frx" id="Isj-TB-JIU"/>
+                                    <outlet property="delegate" destination="77F-Fn-Frx" id="2ij-jv-Jdu"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QCB-3j-bJV">
-                                <rect key="frame" x="5" y="103" width="354" height="67"/>
-                                <state key="normal" image="keyboard-right-arrow-button.png">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Places">
-                                            <attributes>
-                                                <font key="NSFont" size="42" name=".SFNSDisplay"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="truncatingMiddle" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
-                                <connections>
-                                    <action selector="placesTapped:" destination="77F-Fn-Frx" eventType="touchUpInside" id="l72-Yy-lcY"/>
-                                </connections>
-                            </button>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="QCB-3j-bJV" firstAttribute="leading" secondItem="ZDo-MM-aax" secondAttribute="leading" constant="5" id="49o-Jo-Mo8"/>
-                            <constraint firstItem="ZDo-MM-aax" firstAttribute="trailing" secondItem="QCB-3j-bJV" secondAttribute="trailing" constant="5" id="4Yl-ye-3Cq"/>
-                            <constraint firstItem="QCB-3j-bJV" firstAttribute="top" secondItem="0za-ce-opn" secondAttribute="bottom" constant="59" id="f3F-ij-fP3"/>
+                            <constraint firstItem="0za-ce-opn" firstAttribute="leading" secondItem="ZDo-MM-aax" secondAttribute="leading" id="57W-f6-8R6"/>
+                            <constraint firstItem="WhE-j5-Xzq" firstAttribute="top" secondItem="0za-ce-opn" secondAttribute="bottom" id="FA0-eH-lLX"/>
+                            <constraint firstItem="0za-ce-opn" firstAttribute="trailing" secondItem="ZDo-MM-aax" secondAttribute="trailing" id="NFB-wb-xK7"/>
+                            <constraint firstItem="WhE-j5-Xzq" firstAttribute="trailing" secondItem="ZDo-MM-aax" secondAttribute="trailing" id="VaC-fF-rw4"/>
+                            <constraint firstItem="0za-ce-opn" firstAttribute="top" secondItem="Asc-Pw-HXp" secondAttribute="topMargin" id="bOG-WS-JEk"/>
+                            <constraint firstItem="ZDo-MM-aax" firstAttribute="bottom" secondItem="WhE-j5-Xzq" secondAttribute="bottom" constant="34" id="d5I-1R-l3b"/>
+                            <constraint firstItem="WhE-j5-Xzq" firstAttribute="leading" secondItem="ZDo-MM-aax" secondAttribute="leading" id="ohe-Z1-5bx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZDo-MM-aax"/>
                     </view>
@@ -200,7 +201,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="logout" destination="X9e-YW-YYo" id="Eqt-Y6-5nH"/>
-                        <outlet property="places" destination="QCB-3j-bJV" id="qbe-jH-fBl"/>
+                        <outlet property="mainPageTableView" destination="WhE-j5-Xzq" id="84f-vZ-Y7t"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="sUt-K6-2Q9"/>
                         <segue destination="SdN-Tf-nhA" kind="presentation" identifier="placesSegue" id="kvK-Dz-cGm"/>
                         <segue destination="Tzn-P9-zBi" kind="presentation" identifier="postSegue" id="2nL-Lu-Kco"/>
@@ -559,13 +560,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="keyboard-right-arrow-button.png" width="32" height="32"/>
         <image name="lovetravel.png" width="200" height="200"/>
         <image name="turkey.png" width="32" height="32"/>
         <image name="uncheck.png" width="32" height="32"/>
         <image name="united-states.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ERg-ar-XpG"/>
+        <segue reference="FvP-fM-HqY"/>
     </inferredMetricsTieBreakers>
 </document>

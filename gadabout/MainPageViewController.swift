@@ -11,28 +11,26 @@ import CoreData
 import Parse
 
 
-class MainPageViewController: UIViewController {
+
+class MainPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var isEnglish = true
-    
+
     @IBOutlet weak var logout: UIBarButtonItem!
     
-    
-    @IBOutlet weak var places: UIButton!
-    
-    
-    
-    @IBAction func postTapped(_ sender: Any) {
-        
-        performSegue(withIdentifier: "postSegue", sender: self)
-    }
-    
-    @IBAction func placesTapped(_ sender: Any) {
-        
-        performSegue(withIdentifier: "placesSegue", sender: self)
-    }
+    @IBOutlet weak var mainPageTableView: UITableView!
     
     @IBAction func logoutButtonTapped(_ sender: Any) {
+        
+        /*PFUser.logOutInBackground { (error) in
+            
+            if error != nil {
+                print("logout fail")
+                print(error) }
+            else {
+                print("logout success")
+            }
+        }*/
         
         PFUser.logOut()
         
@@ -62,7 +60,14 @@ class MainPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        super.viewDidLoad()
+        //super.viewDidLoad()
+        
+        self.mainPageTableView.delegate = self
+        self.mainPageTableView.dataSource = self
+        self.mainPageTableView.allowsSelection = true
+        
+        self.mainPageTableView.rowHeight = 100
+
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let context = appDelegate.persistentContainer.viewContext
@@ -95,11 +100,11 @@ class MainPageViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(isRotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
-        if places.imageView != nil {
+        /*if places.imageView != nil {
             
             places.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: (places.imageView?.frame.width)!)
             places.imageEdgeInsets = UIEdgeInsets(top: 5, left: places.frame.width - 100, bottom: 5, right: 0)
-        }
+        }*/
 
 
         // Do any additional setup after loading the view.
@@ -110,7 +115,51 @@ class MainPageViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 3
+        
+    }
 
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "mainPageCell")
+        
+        cell.textLabel?.font = UIFont(name: "Avenir", size: 32)
+        
+        if indexPath.row == 0 {
+            cell.textLabel?.text = "    Places"
+        }
+        else if indexPath.row == 1 {
+            cell.textLabel?.text = "    Food"
+        }
+        else if indexPath.row == 2 {
+            cell.textLabel?.text = "    Post"
+        }
+        
+        return cell
+    }
+
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == 0 {
+            print("Places selected")
+            performSegue(withIdentifier: "placesSegue", sender: self)
+        }
+        else if indexPath.row == 1 {
+            print("Food selected")
+        }
+        else if indexPath.row == 2 {
+            print("Post selected")
+            performSegue(withIdentifier: "postSegue", sender: self)
+        }
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 

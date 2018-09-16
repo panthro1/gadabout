@@ -28,6 +28,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     var isEnglish = true
     
+    
     func SaveLanguageSelection(English: Bool) {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -169,9 +170,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
-        
-        if PFUser.current() != nil {
+    
+        if  PFUser.current() != nil {
+            
+            print("viewDidAppear")
             
             performSegue(withIdentifier: "loginSegue", sender: self)
             
@@ -231,21 +233,30 @@ class ViewController: UIViewController, UITextFieldDelegate {
             activityIndicator.stopAnimating()
             UIApplication.shared.endIgnoringInteractionEvents()
             
-            if user != nil
-            {
-                print("Login successfull")
-                self.performSegue(withIdentifier: "loginSegue", sender: self)
+            var errorText = "Unknown error: Please try again"
+            
+            if error != nil {
+                
+                if let err = error {
+                    let errorText = err.localizedDescription
+                    print(errorText)
+                    self.displayAlert(title: "Could not log in", message: errorText)
+                }
             }
             else {
-                
-                var errorText = "Unknown error: Please try again"
-                
-                if let error = error {
-                    
-                    errorText = error.localizedDescription
-                    
+                if user != nil
+                {
+                    self.performSegue(withIdentifier: "loginSegue", sender: self)
                 }
-                self.displayAlert(title: "Could not log in", message: errorText)
+                else {
+                
+                    if let error = error {
+                    
+                        errorText = error.localizedDescription
+                    
+                    }
+                    self.displayAlert(title: "Could not log in", message: errorText)
+                }
             }
             
         }
