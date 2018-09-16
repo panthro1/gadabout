@@ -156,7 +156,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         
         if (showDetail == true) && (detailCellRow == indexPath.row) {
 
-            cell.placeImage.isHidden = true
+            //cell.placeImage.isHidden = true
             cell.option1.isHidden = true
             cell.option2.isHidden = true
             cell.option3.isHidden = true
@@ -165,11 +165,9 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             cell.markOption2.isHidden = true
             cell.markOption3.isHidden = true
             cell.markOption4.isHidden = true
-            cell.detailText.text = descriptionEng[indexPath.row]
-            cell.detailText.isHidden = false
             
-            print(cell.detailText.text)
-            
+            cell.detailTextInfo.isHidden = false
+            cell.detailTextInfo.text = descriptionEng[indexPath.row]
         }
         else {
         imageFile[indexPath.row].getDataInBackground { (data, error) in
@@ -210,9 +208,9 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             
             if let correctAnsInt = Int(correctAnswer[indexPath.row]) {
                 let correctAnswerInt = correctAnsInt
-                selected = answer[questionIndex!]
                 mustBeSelected = correctAnswerInt
                 if let qIndex = questionIndex {
+                    selected = answer[qIndex]
                     if answer[qIndex] == correctAnswerInt {
                         status = 1 // correct answer
                     }
