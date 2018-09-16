@@ -174,12 +174,13 @@ class PlacesTableViewCell: UITableViewCell {
         
         if showDetail == false {
             showDetail = true
+            detailsButton.setTitle("Back", for: [])
         }
         else {
             showDetail = false
+            detailsButton.setTitle("Details", for: [])
         }
         delegate?.isDetailButtonTapped(sender: self, showDetail: showDetail)
-        print("Cell: \(showDetail)")
     }
     override func awakeFromNib() {
         super.awakeFromNib()
