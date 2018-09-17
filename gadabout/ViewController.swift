@@ -241,6 +241,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     let errorText = err.localizedDescription
                     print(errorText)
                     self.displayAlert(title: "Could not log in", message: errorText)
+                    
                 }
             }
             else {
@@ -267,10 +268,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func displayAlert(title: String, message: String) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+        /*alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
             self.dismiss(animated: true, completion: nil)
-        }))
-        
+        }))*/
+
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+
+
         self.present(alert, animated: true, completion: nil)
         
     }
