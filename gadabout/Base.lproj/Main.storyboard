@@ -205,6 +205,7 @@
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="sUt-K6-2Q9"/>
                         <segue destination="SdN-Tf-nhA" kind="presentation" identifier="placesSegue" id="kvK-Dz-cGm"/>
                         <segue destination="Tzn-P9-zBi" kind="presentation" identifier="postSegue" id="2nL-Lu-Kco"/>
+                        <segue destination="pLG-OL-dPP" kind="presentation" identifier="puzzleMapSegue" id="7Bz-LV-gHu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0XW-Pd-7Op" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -558,14 +559,76 @@
             </objects>
             <point key="canvasLocation" x="1695.2" y="883.80809595202402"/>
         </scene>
+        <!--Puzzle Map View Controller-->
+        <scene sceneID="3Yf-fE-6FJ">
+            <objects>
+                <viewController id="pLG-OL-dPP" customClass="puzzleMapViewController" customModule="gadabout" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P7J-iu-hkg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JQx-Bo-aVE">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem id="j2m-N0-6zH">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="Fa4-i0-NZd">
+                                            <connections>
+                                                <action selector="backTapped:" destination="pLG-OL-dPP" id="AKN-Al-GqL"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="collesium.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="o54-T3-0E8">
+                                <rect key="frame" x="54" y="106" width="267" height="204"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d9o-dq-DPM">
+                                <rect key="frame" x="33" y="355" width="120" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r5E-la-X32">
+                                <rect key="frame" x="183" y="363" width="120" height="78"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EGZ-lK-9K4">
+                                <rect key="frame" x="208" y="465" width="113" height="93"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lc7-BR-QQi">
+                                <rect key="frame" x="36" y="472" width="115" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="JQx-Bo-aVE" firstAttribute="trailing" secondItem="BbH-2J-5Xy" secondAttribute="trailing" id="Pj1-vZ-gov"/>
+                            <constraint firstItem="JQx-Bo-aVE" firstAttribute="top" secondItem="BbH-2J-5Xy" secondAttribute="top" id="cUy-Yi-vnr"/>
+                            <constraint firstItem="JQx-Bo-aVE" firstAttribute="leading" secondItem="BbH-2J-5Xy" secondAttribute="leading" id="gax-eu-U5c"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BbH-2J-5Xy"/>
+                    </view>
+                    <connections>
+                        <outlet property="slicedImage1" destination="d9o-dq-DPM" id="AfM-Vj-HL0"/>
+                        <outlet property="slicedImage2" destination="r5E-la-X32" id="f2C-Iw-opy"/>
+                        <outlet property="slicedImage3" destination="lc7-BR-QQi" id="EBv-4V-g4H"/>
+                        <outlet property="slicedImage4" destination="EGZ-lK-9K4" id="da3-1h-ozV"/>
+                        <segue destination="77F-Fn-Frx" kind="presentation" identifier="mapPuzzleBackSegue" id="FcB-5h-H0o"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="taM-3Q-yxH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2749.5999999999999" y="875.71214392803608"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="collesium.jpg" width="390" height="219"/>
         <image name="lovetravel.png" width="200" height="200"/>
         <image name="turkey.png" width="32" height="32"/>
         <image name="uncheck.png" width="32" height="32"/>
         <image name="united-states.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FvP-fM-HqY"/>
+        <segue reference="FcB-5h-H0o"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -118,7 +118,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 3
+        return 4
         
     }
 
@@ -136,6 +136,9 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             cell.textLabel?.text = "    Food"
         }
         else if indexPath.row == 2 {
+            cell.textLabel?.text = "    Map Puzzle"
+        }
+        else if indexPath.row == 3 {
             cell.textLabel?.text = "    Post"
         }
         
@@ -153,6 +156,11 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             print("Food selected")
         }
         else if indexPath.row == 2 {
+            print("Map puzzle selected")
+            performSegue(withIdentifier: "puzzleMapSegue", sender: self)
+
+        }
+        else if indexPath.row == 3 {
             print("Post selected")
             performSegue(withIdentifier: "postSegue", sender: self)
         }
