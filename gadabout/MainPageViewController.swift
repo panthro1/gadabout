@@ -34,6 +34,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         PFUser.logOut()
         
+        dismiss(animated: true, completion: nil)
+        
         performSegue(withIdentifier: "logoutSegue", sender: self)
 
     }
