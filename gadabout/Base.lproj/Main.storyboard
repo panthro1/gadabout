@@ -583,7 +583,7 @@
                                 <rect key="frame" x="54" y="106" width="267" height="204"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d9o-dq-DPM">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d9o-dq-DPM">
                                 <rect key="frame" x="33" y="355" width="120" height="86"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -599,6 +599,14 @@
                                 <rect key="frame" x="36" y="472" width="115" height="86"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7k-ah-WdJ">
+                                <rect key="frame" x="166" y="589" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.035133689641952515" green="0.93834668397903442" blue="0.095309622585773468" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <color key="textColor" red="0.32369780539999998" green="0.1063579395" blue="0.574860394" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -613,6 +621,7 @@
                         <outlet property="slicedImage2" destination="r5E-la-X32" id="f2C-Iw-opy"/>
                         <outlet property="slicedImage3" destination="lc7-BR-QQi" id="EBv-4V-g4H"/>
                         <outlet property="slicedImage4" destination="EGZ-lK-9K4" id="da3-1h-ozV"/>
+                        <outlet property="testLabel" destination="P7k-ah-WdJ" id="4ym-VJ-dAu"/>
                         <segue destination="77F-Fn-Frx" kind="presentation" identifier="mapPuzzleBackSegue" id="FcB-5h-H0o"/>
                     </connections>
                 </viewController>

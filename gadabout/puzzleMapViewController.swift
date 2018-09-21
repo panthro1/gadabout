@@ -19,6 +19,10 @@ class puzzleMapViewController: UIViewController {
     
     @IBOutlet weak var slicedImage4: UIImageView!
     
+    
+    
+    @IBOutlet weak var testLabel: UILabel!
+    
     @IBAction func backTapped(_ sender: Any) {
         
         performSegue(withIdentifier: "mapPuzzleBackSegue", sender: self)
@@ -86,9 +90,25 @@ class puzzleMapViewController: UIViewController {
 
         }
         
-
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(isDragged(gestureRecognizer:)))
+        slicedImage1.addGestureRecognizer(gesture)
         
+    }
+    
+    @objc func isDragged(gestureRecognizer: UIPanGestureRecognizer) {
         
+        let labelPoint = gestureRecognizer.translation(in: view)
+        slicedImage1.center = CGPoint(x: view.bounds.width/2 + labelPoint.x, y: view.bounds.height/2 + labelPoint.y)
+        
+        if gestureRecognizer.state == .ended {
+            if slicedImage1.center.x < (view.bounds.width/2 - 100) {
+                print("Left swiped")
+            }
+            if slicedImage1.center.x > (view.bounds.width/2 + 100) {
+                print("Right swiped")
+            }
+            slicedImage1.center = CGPoint(x: view.bounds.width/2, y: view.bounds.height/2)
+        }
         
     }
 
