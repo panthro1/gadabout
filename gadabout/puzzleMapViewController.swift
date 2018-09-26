@@ -87,11 +87,40 @@ class puzzleMapViewController: UIViewController {
             slicedImage2.image = images[1]
             slicedImage3.image = images[2]
             slicedImage4.image = images[3]
+            
+            
+            
+            var allImgViews = [NSMutableArray]()
+            var xCent: Int = 48
+            var yCent: Int = 48
+            
+            let nofRows = 4
+            let nofColumns = 4
+            
+            for row in 0 ..< nofRows {
+                for col in 0 ..< nofColumns {
+                    var myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96, height: 96))
+                    myImgView.center = CGPoint(x: xCent, y: yCent)
+                    myImgView.image = images[0]
+                    myImgView.isUserInteractionEnabled = true
+                    //allImgViews.append(myImgView)
+                    self.view.addSubview(myImgView)
+                    xCent += 96
+                    
+                }
+                xCent = 48
+                yCent += 96
+            }
 
         }
         
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(isDragged(gestureRecognizer:)))
         slicedImage1.addGestureRecognizer(gesture)
+        
+
+        
+        
+        
         
     }
     

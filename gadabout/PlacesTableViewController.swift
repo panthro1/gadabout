@@ -308,7 +308,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         }
         
         answer.append(selectedIndex)
-
+        
     }
     
     func isDetailButtonTapped(sender: PlacesTableViewCell) {
