@@ -23,20 +23,37 @@ class puzzleMapViewController: UIViewController {
     var rightIsEmpty : Bool = false
     var topIsEmpty : Bool = false
     var bottomIsEmpty : Bool = false
+    var isHintDisplayed: Bool = false
 
     @IBOutlet weak var testLabel: UILabel!
     
+    @IBOutlet weak var hintButton: UIButton!
+    
     @IBAction func backTapped(_ sender: Any) {
+        
+        self.dismiss(animated: true, completion: nil)
         
         performSegue(withIdentifier: "mapPuzzleBackSegue", sender: self)
     }
     
     @IBAction func hintTapped(_ sender: Any) {
         
-        var imageView : UIImageView
-        imageView = UIImageView(frame: CGRect(x: 50, y: 50, width: 300, height: 300))
-        imageView.image = UIImage(named:"collesium.jpg")
-        self.view.addSubview(imageView)
+        if isHintDisplayed == false {
+            var imageView : UIImageView
+            imageView = UIImageView(frame: CGRect(x: 10, y: 100, width: 96*4, height: 96*4))
+            imageView.tag = 100
+            imageView.image = UIImage(named:"collesium.jpg")
+            self.view.addSubview(imageView)
+            isHintDisplayed = true
+            hintButton.setTitle("Back to Puzzle", for: [])
+        }
+        else {
+            if let viewWithTag = self.view.viewWithTag(100) {
+                viewWithTag.removeFromSuperview()
+                isHintDisplayed = false
+                hintButton.setTitle("Hint", for: [])
+            }
+        }
         
     }
     func slice(image: UIImage, into howMany: Int) -> [UIImage] {
@@ -92,52 +109,38 @@ class puzzleMapViewController: UIViewController {
         
         if let mainImage = myPicture {
 
-            let images = slice(image: mainImage, into: 4)
+            let images = slice(image: mainImage, into: 3)
             
-            /*
-            slicedImage1.image = images[0]
-            slicedImage2.image = images[1]
-            slicedImage3.image = images[2]
-            slicedImage4.image = images[3]
-            */
+            var xCent: Int = 10+48/3*4
+            var yCent: Int = 100+48/3*4
             
-            
-            
-            var xCent: Int = 48
-            var yCent: Int = 148
-            
-            let nofRows = 4
-            let nofColumns = 4
+            let nofRows = 3
+            let nofColumns = 3
             
             for row in 0 ..< nofRows {
                 for col in 0 ..< nofColumns {
-                    var myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96, height: 96))
+                    var myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96/3*4, height: 96/3*4))
                     let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
                     allCenters.append(currCent)
                     myImgView.center = currCent
-                    myImgView.image = images[row*4+col]
+                    myImgView.image = images[row*3+col]
                     myImgView.isUserInteractionEnabled = true
                     allImgViews.append(myImgView)
                     self.view.addSubview(myImgView)
-                    xCent += 96
+                    xCent += 96/3*4
                     
                 }
-                xCent = 48
-                yCent += 96
+                xCent = 10+48/3*4
+                yCent += 96/3*4
             }
         }
-        allImgViews[0].removeFromSuperview()
         self.randomizeBlocks()
-        //self.view.removeFromSuperview()
-        
-        let gesture = UIPanGestureRecognizer(target: self, action: #selector(isDragged(gestureRecognizer:)))
-        //slicedImage1.addGestureRecognizer(gesture)
-        
+        allImgViews[0].removeFromSuperview()
 
-        
-        
-        
-        
+        leftIsEmpty = false
+        rightIsEmpty = false
+        topIsEmpty = false
+        bottomIsEmpty = false
     }
     
     
@@ -165,23 +168,28 @@ class puzzleMapViewController: UIViewController {
         if myTouch.view != self.view {
             tapCenter = (myTouch.view?.center)!
             
-            left = CGPoint(x: tapCenter.x - 96, y: tapCenter.y)
-            right = CGPoint(x: tapCenter.x + 96, y: tapCenter.y)
-            top = CGPoint(x: tapCenter.x, y: tapCenter.y + 96)
-            bottom = CGPoint(x: tapCenter.x, y: tapCenter.y - 96)
+            left = CGPoint(x: tapCenter.x - 96/3*4, y: tapCenter.y)
+            right = CGPoint(x: tapCenter.x + 96/3*4, y: tapCenter.y)
+            top = CGPoint(x: tapCenter.x, y: tapCenter.y + 96/3*4)
+            bottom = CGPoint(x: tapCenter.x, y: tapCenter.y - 96/3*4)
             
             if emptySpot.equalTo(left) {
+                print("Left is empty")
                 leftIsEmpty = true
             }
             if emptySpot.equalTo(right) {
+                print("Right is empty")
                 rightIsEmpty = true
             }
             if emptySpot.equalTo(top) {
+                print("Top is empty")
                 topIsEmpty = true
             }
             if emptySpot.equalTo(bottom) {
+                print("Bottom is empty")
                 bottomIsEmpty = true
             }
+            print("X: \(emptySpot.x) Y: \(emptySpot.y)")
             
             if leftIsEmpty || rightIsEmpty || topIsEmpty || bottomIsEmpty {
                 UIView.beginAnimations(nil, context: nil)
@@ -196,16 +204,16 @@ class puzzleMapViewController: UIViewController {
                 topIsEmpty = false
                 bottomIsEmpty = false
                 
-                var xCent: Int = 48
-                var yCent: Int = 148
+                var xCent: Int = 10+48/3*4
+                var yCent: Int = 100+48/3*4
                 
-                let nofRows = 4
-                let nofColumns = 4
+                let nofRows = 3
+                let nofColumns = 3
                 var completed: Bool = true
                 
                 for row in 0 ..< nofRows {
                     for col in 0 ..< nofColumns {
-                        let currCent:CGPoint = allImgViews[row*4+col].center
+                        let currCent:CGPoint = allImgViews[row*3+col].center
                         let mustBe = CGPoint(x: xCent, y: yCent)
                         if currCent.equalTo(mustBe) {
                             completed = true
@@ -214,10 +222,10 @@ class puzzleMapViewController: UIViewController {
                             completed = false
                             break
                         }
-                        xCent += 96
+                        xCent += 96/3*4
                     }
-                    xCent = 48
-                    yCent += 96
+                    xCent = 10+48/3*4
+                    yCent += 96/3*4
                     
                     if completed == false {
                         break
@@ -228,26 +236,6 @@ class puzzleMapViewController: UIViewController {
                 }
             }
         }
-        
-        
-        
-        
-    }
-    
-    @objc func isDragged(gestureRecognizer: UIPanGestureRecognizer) {
-        
-        let labelPoint = gestureRecognizer.translation(in: view)
-        /*slicedImage1.center = CGPoint(x: view.bounds.width/2 + labelPoint.x, y: view.bounds.height/2 + labelPoint.y)
-        
-        if gestureRecognizer.state == .ended {
-            if slicedImage1.center.x < (view.bounds.width/2 - 100) {
-                print("Left swiped")
-            }
-            if slicedImage1.center.x > (view.bounds.width/2 + 100) {
-                print("Right swiped")
-            }
-            slicedImage1.center = CGPoint(x: view.bounds.width/2, y: view.bounds.height/2)
-        }*/
         
     }
 
