@@ -31,6 +31,14 @@ class puzzleMapViewController: UIViewController {
         performSegue(withIdentifier: "mapPuzzleBackSegue", sender: self)
     }
     
+    @IBAction func hintTapped(_ sender: Any) {
+        
+        var imageView : UIImageView
+        imageView = UIImageView(frame: CGRect(x: 50, y: 50, width: 300, height: 300))
+        imageView.image = UIImage(named:"collesium.jpg")
+        self.view.addSubview(imageView)
+        
+    }
     func slice(image: UIImage, into howMany: Int) -> [UIImage] {
         let width: CGFloat
         let height: CGFloat
