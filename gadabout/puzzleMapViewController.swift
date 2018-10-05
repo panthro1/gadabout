@@ -174,22 +174,17 @@ class puzzleMapViewController: UIViewController {
             bottom = CGPoint(x: tapCenter.x, y: tapCenter.y - 96/3*4)
             
             if emptySpot.equalTo(left) {
-                print("Left is empty")
                 leftIsEmpty = true
             }
             if emptySpot.equalTo(right) {
-                print("Right is empty")
                 rightIsEmpty = true
             }
             if emptySpot.equalTo(top) {
-                print("Top is empty")
                 topIsEmpty = true
             }
             if emptySpot.equalTo(bottom) {
-                print("Bottom is empty")
                 bottomIsEmpty = true
             }
-            print("X: \(emptySpot.x) Y: \(emptySpot.y)")
             
             if leftIsEmpty || rightIsEmpty || topIsEmpty || bottomIsEmpty {
                 UIView.beginAnimations(nil, context: nil)
@@ -213,15 +208,21 @@ class puzzleMapViewController: UIViewController {
                 
                 for row in 0 ..< nofRows {
                     for col in 0 ..< nofColumns {
-                        let currCent:CGPoint = allImgViews[row*3+col].center
-                        let mustBe = CGPoint(x: xCent, y: yCent)
-                        if currCent.equalTo(mustBe) {
+                        if row == 0 && col == 0 {
                             completed = true
                         }
                         else {
-                            completed = false
-                            break
+                            let currCent:CGPoint = allImgViews[row*3+col].center
+                            let mustBe = CGPoint(x: xCent, y: yCent)
+                            if currCent.equalTo(mustBe) {
+                                completed = true
+                            }
+                            else {
+                                completed = false
+                                break
+                            }
                         }
+
                         xCent += 96/3*4
                     }
                     xCent = 10+48/3*4
@@ -233,8 +234,7 @@ class puzzleMapViewController: UIViewController {
                 }
                 if completed == true {
                     print("Puzzle Completed")
-                }
-            }
+                }            }
         }
         
     }
