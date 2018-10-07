@@ -595,6 +595,14 @@
                                     <action selector="hintTapped:" destination="pLG-OL-dPP" eventType="touchUpInside" id="kYh-nW-Fgq"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBz-ZL-mbw">
+                                <rect key="frame" x="136" y="513" width="106" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Make it harder?"/>
+                                <connections>
+                                    <action selector="harderTapped:" destination="pLG-OL-dPP" eventType="touchUpInside" id="GIf-nc-TmP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>

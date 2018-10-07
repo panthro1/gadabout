@@ -25,6 +25,7 @@ class puzzleMapViewController: UIViewController {
     var bottomIsEmpty : Bool = false
     var isHintDisplayed: Bool = false
     var startTime = Date()
+    var harder: Bool = false
 
     @IBOutlet weak var testLabel: UILabel!
     
@@ -41,6 +42,64 @@ class puzzleMapViewController: UIViewController {
         
     }
 
+    @IBAction func harderTapped(_ sender: Any) {
+        if harder == false {
+            harder = true
+
+            
+            let nofRows = 3
+            let nofColumns = 3
+
+            for row in 0 ..< nofRows {
+                for col in 0 ..< nofColumns {
+
+                    if let viewWithTag = self.view.viewWithTag(10+row*3+col) {
+                        viewWithTag.removeFromSuperview()
+                    }
+
+                }
+            }
+            allImgViews.removeAll()
+            allCenters.removeAll()
+            
+            
+            let myPicture = UIImage(named: "collesium.jpg")
+            
+            if let mainImage = myPicture {
+                
+                let images = slice(image: mainImage, into: 4)
+                
+                
+                let nofRowsHard = 4
+                let nofColumnsHard = 4
+                
+                var xCent: Int = 10+48
+                var yCent: Int = 100+48
+                
+                for row in 0 ..< nofRowsHard {
+                    for col in 0 ..< nofColumnsHard {
+                        
+                        var myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96, height: 96))
+                        let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
+                        allCenters.append(currCent)
+                        myImgView.center = currCent
+                        myImgView.image = images[row*4+col]
+                        myImgView.isUserInteractionEnabled = true
+                        myImgView.tag = 10+row*4+col
+                        allImgViews.append(myImgView)
+                        self.view.addSubview(myImgView)
+                        xCent += 96
+                        
+                    }
+                    xCent = 10+48
+                    yCent += 96
+                }
+            }
+        }
+        
+        
+    }
+    
     
     @IBAction func backTapped(_ sender: Any) {
         
@@ -138,6 +197,7 @@ class puzzleMapViewController: UIViewController {
                     myImgView.center = currCent
                     myImgView.image = images[row*3+col]
                     myImgView.isUserInteractionEnabled = true
+                    myImgView.tag = 10+row*3+col
                     allImgViews.append(myImgView)
                     self.view.addSubview(myImgView)
                     xCent += 96/3*4
