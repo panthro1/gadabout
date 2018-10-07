@@ -24,10 +24,23 @@ class puzzleMapViewController: UIViewController {
     var topIsEmpty : Bool = false
     var bottomIsEmpty : Bool = false
     var isHintDisplayed: Bool = false
+    var startTime = Date()
 
     @IBOutlet weak var testLabel: UILabel!
     
     @IBOutlet weak var hintButton: UIButton!
+    
+    func displayAlert(title: String, message: String) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            //self.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+
     
     @IBAction func backTapped(_ sender: Any) {
         
@@ -141,6 +154,7 @@ class puzzleMapViewController: UIViewController {
         rightIsEmpty = false
         topIsEmpty = false
         bottomIsEmpty = false
+        let startTime = Date()
     }
     
     
@@ -233,6 +247,10 @@ class puzzleMapViewController: UIViewController {
                     }
                 }
                 if completed == true {
+                    let endTime = Date()
+                    let seconds = endTime.timeIntervalSince(self.startTime)
+                    let formatted = String(format: "%.1f", seconds)
+                    self.displayAlert(title: "Puzzle completed", message: " You have completed in \(formatted) seconds.")
                     print("Puzzle Completed")
                 }            }
         }
