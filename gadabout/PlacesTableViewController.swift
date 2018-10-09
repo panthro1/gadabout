@@ -193,6 +193,31 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             cell.option2.text = option2[indexPath.row]
             cell.option3.text = option3[indexPath.row]
             cell.option4.text = option4[indexPath.row]
+            
+            
+            cell.markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
+            cell.markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
+            cell.markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
+            cell.markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
+
+            let questionIndex = questionNo.index(of: indexPath.row)
+            
+            if let qIndex = questionIndex {
+                let answerIndex = answer[qIndex]
+                if answerIndex == 1 {
+                    cell.markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
+                }
+                else if answerIndex == 2 {
+                    cell.markOption2.setImage(UIImage(named: "check.png"), for: [])
+                }
+                else if answerIndex == 3 {
+                    cell.markOption3.setImage(UIImage(named: "check.png"), for: [])
+                }
+                else if answerIndex == 4 {
+                    cell.markOption4.setImage(UIImage(named: "check.png"), for: [])
+                }
+            }
+
         
             cell.detailsButton.isHidden = true
         
