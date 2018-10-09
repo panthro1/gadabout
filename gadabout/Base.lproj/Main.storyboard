@@ -613,6 +613,7 @@
                         <viewLayoutGuide key="safeArea" id="BbH-2J-5Xy"/>
                     </view>
                     <connections>
+                        <outlet property="harderSimpleButton" destination="CBz-ZL-mbw" id="Rwc-fX-RyK"/>
                         <outlet property="hintButton" destination="SOU-iJ-iWi" id="zSd-SG-cah"/>
                         <outlet property="testLabel" destination="P7k-ah-WdJ" id="4ym-VJ-dAu"/>
                         <segue destination="77F-Fn-Frx" kind="presentation" identifier="mapPuzzleBackSegue" id="FcB-5h-H0o"/>

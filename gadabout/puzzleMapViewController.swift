@@ -31,6 +31,8 @@ class puzzleMapViewController: UIViewController {
     
     @IBOutlet weak var hintButton: UIButton!
     
+    @IBOutlet weak var harderSimpleButton: UIButton!
+    
     func displayAlert(title: String, message: String) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
@@ -95,8 +97,71 @@ class puzzleMapViewController: UIViewController {
                     yCent += 96
                 }
             }
+            harderSimpleButton.setTitle("Back to simple", for: .normal)
         }
+        else {
+            harder = false
+            
+            
+            let nofRows = 4
+            let nofColumns = 4
+            
+            for row in 0 ..< nofRows {
+                for col in 0 ..< nofColumns {
+                    
+                    if let viewWithTag = self.view.viewWithTag(10+row*4+col) {
+                        viewWithTag.removeFromSuperview()
+                    }
+                    
+                }
+            }
+            allImgViews.removeAll()
+            allCenters.removeAll()
+            
+            
+            let myPicture = UIImage(named: "collesium.jpg")
+            
+            if let mainImage = myPicture {
+                
+                let images = slice(image: mainImage, into: 4)
+                
+                
+                let nofRowsHard = 3
+                let nofColumnsHard = 3
+                
+                var xCent: Int = 10+48/3*4
+                var yCent: Int = 100+48/3*4
+                
+                for row in 0 ..< nofRowsHard {
+                    for col in 0 ..< nofColumnsHard {
+                        
+                        var myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96/3*4, height: 96/3*4))
+                        let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
+                        allCenters.append(currCent)
+                        myImgView.center = currCent
+                        myImgView.image = images[row*3+col]
+                        myImgView.isUserInteractionEnabled = true
+                        myImgView.tag = 10+row*3+col
+                        allImgViews.append(myImgView)
+                        self.view.addSubview(myImgView)
+                        xCent += 96/3*4
+                        
+                    }
+                    xCent = 10+48/3*4
+                    yCent += 96/3*4
+                }
+            }
+            harderSimpleButton.setTitle("Make it harder", for: .normal)
+        }
+        self.randomizeBlocks()
+        allImgViews[0].removeFromSuperview()
         
+        leftIsEmpty = false
+        rightIsEmpty = false
+        topIsEmpty = false
+        bottomIsEmpty = false
+        startTime = Date()
+
         
     }
     
@@ -214,7 +279,7 @@ class puzzleMapViewController: UIViewController {
         rightIsEmpty = false
         topIsEmpty = false
         bottomIsEmpty = false
-        let startTime = Date()
+        startTime = Date()
     }
     
     
@@ -242,10 +307,18 @@ class puzzleMapViewController: UIViewController {
         if myTouch.view != self.view {
             tapCenter = (myTouch.view?.center)!
             
-            left = CGPoint(x: tapCenter.x - 96/3*4, y: tapCenter.y)
-            right = CGPoint(x: tapCenter.x + 96/3*4, y: tapCenter.y)
-            top = CGPoint(x: tapCenter.x, y: tapCenter.y + 96/3*4)
-            bottom = CGPoint(x: tapCenter.x, y: tapCenter.y - 96/3*4)
+            if harder == false {
+                left = CGPoint(x: tapCenter.x - 96/3*4, y: tapCenter.y)
+                right = CGPoint(x: tapCenter.x + 96/3*4, y: tapCenter.y)
+                top = CGPoint(x: tapCenter.x, y: tapCenter.y + 96/3*4)
+                bottom = CGPoint(x: tapCenter.x, y: tapCenter.y - 96/3*4)
+            }
+            else {
+                left = CGPoint(x: tapCenter.x - 96, y: tapCenter.y)
+                right = CGPoint(x: tapCenter.x + 96, y: tapCenter.y)
+                top = CGPoint(x: tapCenter.x, y: tapCenter.y + 96)
+                bottom = CGPoint(x: tapCenter.x, y: tapCenter.y - 96)
+            }
             
             if emptySpot.equalTo(left) {
                 leftIsEmpty = true
@@ -276,8 +349,20 @@ class puzzleMapViewController: UIViewController {
                 var xCent: Int = 10+48/3*4
                 var yCent: Int = 100+48/3*4
                 
-                let nofRows = 3
-                let nofColumns = 3
+                if harder {
+                    xCent = 10+48
+                    yCent = 100+48
+                }
+                
+                var nofRows: UInt8 = 3
+                var nofColumns: UInt8 = 3
+                
+                if harder {
+                    nofRows = 4
+                    nofColumns = 4
+                }
+                
+                
                 var completed: Bool = true
                 
                 for row in 0 ..< nofRows {
@@ -286,7 +371,10 @@ class puzzleMapViewController: UIViewController {
                             completed = true
                         }
                         else {
-                            let currCent:CGPoint = allImgViews[row*3+col].center
+                            var currCent:CGPoint = allImgViews[Int(row)*3+Int(col)].center
+                            if harder {
+                                currCent = allImgViews[Int(row)*4+Int(col)].center
+                            }
                             let mustBe = CGPoint(x: xCent, y: yCent)
                             if currCent.equalTo(mustBe) {
                                 completed = true
@@ -296,11 +384,22 @@ class puzzleMapViewController: UIViewController {
                                 break
                             }
                         }
-
-                        xCent += 96/3*4
+                        if harder == false {
+                            xCent += 96/3*4
+                        }
+                        else {
+                            xCent += 96
+                        }
                     }
-                    xCent = 10+48/3*4
-                    yCent += 96/3*4
+                    if harder == false {
+                        xCent = 10+48/3*4
+                        yCent += 96/3*4
+                    }
+                    else {
+                        xCent = 10+48
+                        yCent += 96
+
+                    }
                     
                     if completed == false {
                         break
