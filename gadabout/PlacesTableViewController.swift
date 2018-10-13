@@ -24,6 +24,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var imageFile = [PFFile]()
     var imageArr = [UIImage]()
     var showDetail = [Bool]()
+    var questionSeenBefore = [String]()
+    var secondTry = [String]()
     
     var detailCellRow: Int = 0
     
@@ -79,10 +81,85 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         
         self.tableView.rowHeight = 380
         
+        //questionSeenBefore.removeAll()
+        
+        let questionCoveredQuery = PFQuery(className: "placesCoveredBefore")
+        questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+        questionCoveredQuery.findObjectsInBackground { (objects, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                if let places = objects {
+                    for place in places {
+                        print("\(place["questionId"])")
+                        self.questionSeenBefore.append(place["questionId"] as! String)
+                        self.secondTry.append(place["questionId"] as! String)
+                    }
+                }
+            }
+            let placesQuery = PFQuery(className: "Places")
+            
+            //print("After....")
+            //print("++++++\(self.questionSeenBefore),  \(self.questionSeenBefore.count)")
+            
+            print("++++++\(self.secondTry),  \(self.secondTry.count)")
+            placesQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
+            
+            placesQuery.findObjectsInBackground { (objects, error) in
+                
+                
+                if let places = objects {
+                    
+                    for place in places {
+                        
+                        self.option1.append(place["alternative1"] as! String)
+                        self.option2.append(place["alternative2"] as! String)
+                        self.option3.append(place["alternative3"] as! String)
+                        self.option4.append(place["alternative4"] as! String)
+                        self.imageFile.append(place["imageFile"] as! PFFile)
+                        self.correctAnswer.append(place["correctAlternative"] as! String)
+                        self.descriptionEng.append(place["engDescription"] as! String)
+                        self.descriptionTr.append(place["trDescription"] as! String)
+                        self.showDetail.append(false)
+                        
+                        self.tableView.reloadData()
+                        
+                        if let question = place.objectId {
+                            let needToSaveData = PFObject(className: "placesCoveredBefore")
+                            needToSaveData["userId"] = PFUser.current()?.objectId
+                            needToSaveData["questionId"] = question
+                            needToSaveData.saveInBackground(block: { (success, error) in
+                                
+                                if success {
+                                    print("Current user is saved in place record")
+                                }
+                                else {
+                                    print("Could not saved")
+                                }
+                                
+                            })
+                        }
+                        
+                        
+                    }
+                }
+                
+            }
 
-        let placesQuery = PFQuery(className: "Places")
+        }
+
+        /*let placesQuery = PFQuery(className: "Places")
+
+        //print("After....")
+        //print("++++++\(self.questionSeenBefore),  \(self.questionSeenBefore.count)")
+
+        print("++++++\(self.secondTry),  \(self.secondTry.count)")
+        placesQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
         
         placesQuery.findObjectsInBackground { (objects, error) in
+ 
             
             if let places = objects {
                 
@@ -99,12 +176,28 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     self.showDetail.append(false)
                     
                     self.tableView.reloadData()
+                    
+                    if let question = place.objectId {
+                        let needToSaveData = PFObject(className: "placesCoveredBefore")
+                        needToSaveData["userId"] = PFUser.current()?.objectId
+                        needToSaveData["questionId"] = question
+                        needToSaveData.saveInBackground(block: { (success, error) in
+                        
+                            if success {
+                                print("Current user is saved in place record")
+                            }
+                            else {
+                                print("Could not saved")
+                            }
+                        
+                        })
+                    }
 
                     
                 }
             }
             
-        }
+        }*/
         
     }
 
