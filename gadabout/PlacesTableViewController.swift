@@ -25,7 +25,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var imageArr = [UIImage]()
     var showDetail = [Bool]()
     var questionSeenBefore = [String]()
-    var secondTry = [String]()
+    var questionCompleted = [String]()
     
     var detailCellRow: Int = 0
     
@@ -66,6 +66,24 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 self.tableView.reloadRows(at: [rowToSelect], with: .fade)
             }
         }
+
+        for question in questionCompleted {
+            let needToSaveData = PFObject(className: "placesCoveredBefore")
+            needToSaveData["userId"] = PFUser.current()?.objectId
+            needToSaveData["questionId"] = question
+            needToSaveData.saveInBackground(block: { (success, error) in
+                
+                if success {
+                    print("Current user is saved in place record")
+                }
+                else {
+                    print("Could not saved")
+                }
+                
+            })
+
+        }
+
         
     }
     
@@ -95,7 +113,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     for place in places {
                         print("\(place["questionId"])")
                         self.questionSeenBefore.append(place["questionId"] as! String)
-                        self.secondTry.append(place["questionId"] as! String)
                     }
                 }
             }
@@ -104,7 +121,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             //print("After....")
             //print("++++++\(self.questionSeenBefore),  \(self.questionSeenBefore.count)")
             
-            print("++++++\(self.secondTry),  \(self.secondTry.count)")
+            placesQuery.limit = 2
             placesQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
             
             placesQuery.findObjectsInBackground { (objects, error) in
@@ -126,7 +143,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                         
                         self.tableView.reloadData()
                         
-                        if let question = place.objectId {
+                        
+                        /*if let question = place.objectId {
                             let needToSaveData = PFObject(className: "placesCoveredBefore")
                             needToSaveData["userId"] = PFUser.current()?.objectId
                             needToSaveData["questionId"] = question
@@ -140,9 +158,11 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                                 }
                                 
                             })
-                        }
-                        
-                        
+                        }*/
+ 
+                        if let question = place.objectId {
+                            self.questionCompleted.append(question)
+                         }
                     }
                 }
                 
