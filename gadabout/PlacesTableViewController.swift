@@ -551,6 +551,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         }
         print("itemsName : \(itemsName)")
         print("itemsDescription: \(itemsDescription)")
+
         UserDefaults.standard.set(itemsName, forKey: "toDoItem")
         UserDefaults.standard.set(itemsDescription, forKey: "toDoItemDescription")
     }

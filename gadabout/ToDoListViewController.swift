@@ -71,7 +71,15 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            itemNames.remove(at: indexPath.row)
+            itemDescriptions.remove(at: indexPath.row)
+            UserDefaults.standard.set(itemNames, forKey: "toDoItem")
+            UserDefaults.standard.set(itemDescriptions, forKey: "toDoItemDescription")
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
 
     /*
     // MARK: - Navigation
