@@ -121,7 +121,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 4
+        return 5
         
     }
 
@@ -143,6 +143,9 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         }
         else if indexPath.row == 3 {
             cell.textLabel?.text = "    Post"
+        }
+        else if indexPath.row == 4 {
+            cell.textLabel?.text = "    To Do List"
         }
         
         return cell
@@ -166,6 +169,11 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         else if indexPath.row == 3 {
             print("Post selected")
             performSegue(withIdentifier: "postSegue", sender: self)
+        }
+        else if indexPath.row == 4 {
+            print("To Do List selected")
+            performSegue(withIdentifier: "toDoListSegue", sender: self)
+
         }
     }
     

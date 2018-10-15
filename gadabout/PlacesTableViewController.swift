@@ -8,7 +8,7 @@
 
 import UIKit
 import Parse
-
+import CoreData
 
 
 class PlacesTableViewController: UITableViewController, placesTableViewCellDelegate {
@@ -483,6 +483,78 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         self.tableView.reloadRows(at: [rowToSelect], with: .fade)
     }
     
+    func appendToDoList(sender: PlacesTableViewCell, selectedIndex: Int) {
+        
+        let tappedIndexPath = tableView.indexPath(for: sender)
+        
+        let itemsObjectDescription = UserDefaults.standard.object(forKey: "toDoItemDescription")
+        
+        let itemsObjectName = UserDefaults.standard.object(forKey: "toDoItem")
+        
+        var itemsDescription = [String]()
+        
+        var itemsName = [String]()
+        
+        if let tempItemsDescription = itemsObjectDescription {
+            if let tempItemsName = itemsObjectName {
+                itemsDescription = tempItemsDescription as! [String]
+                itemsName = tempItemsName as! [String]
+                
+                itemsDescription.append(self.descriptionEng[(tappedIndexPath?.row)!])
+                
+                if selectedIndex == 1 {
+                    itemsName.append(self.option1[(tappedIndexPath?.row)!])
+                }
+                else if selectedIndex == 2 {
+                    itemsName.append(self.option2[(tappedIndexPath?.row)!])
+                }
+                else if selectedIndex == 3 {
+                    itemsName.append(self.option3[(tappedIndexPath?.row)!])
+                }
+                else if selectedIndex == 4 {
+                    itemsName.append(self.option4[(tappedIndexPath?.row)!])
+                }
+            }
+            else {
+                itemsDescription.append(self.descriptionEng[(tappedIndexPath?.row)!])
+                
+                if selectedIndex == 1 {
+                    itemsName.append(self.option1[(tappedIndexPath?.row)!])
+                }
+                else if selectedIndex == 2 {
+                    itemsName.append(self.option2[(tappedIndexPath?.row)!])
+                }
+                else if selectedIndex == 3 {
+                    itemsName.append(self.option3[(tappedIndexPath?.row)!])
+                }
+                else if selectedIndex == 4 {
+                    itemsName.append(self.option4[(tappedIndexPath?.row)!])
+                }
+            }
+
+        }
+        else {
+            itemsDescription.append(self.descriptionEng[(tappedIndexPath?.row)!])
+
+            if selectedIndex == 1 {
+                itemsName.append(self.option1[(tappedIndexPath?.row)!])
+            }
+            else if selectedIndex == 2 {
+                itemsName.append(self.option2[(tappedIndexPath?.row)!])
+            }
+            else if selectedIndex == 3 {
+                itemsName.append(self.option3[(tappedIndexPath?.row)!])
+            }
+            else if selectedIndex == 4 {
+                itemsName.append(self.option4[(tappedIndexPath?.row)!])
+            }
+        }
+        print("itemsName : \(itemsName)")
+        print("itemsDescription: \(itemsDescription)")
+        UserDefaults.standard.set(itemsName, forKey: "toDoItem")
+        UserDefaults.standard.set(itemsDescription, forKey: "toDoItemDescription")
+    }
+
 
     /*
     // Override to support conditional editing of the table view.
