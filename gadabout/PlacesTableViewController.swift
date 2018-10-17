@@ -483,9 +483,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         self.tableView.reloadRows(at: [rowToSelect], with: .fade)
     }
     
-    func appendToDoList(sender: PlacesTableViewCell, selectedIndex: Int) {
-        
-        let tappedIndexPath = tableView.indexPath(for: sender)
+    func appendToDoList(sender: PlacesTableViewCell) {
         
         let itemsObjectDescription = UserDefaults.standard.object(forKey: "toDoItemDescription")
         
@@ -495,58 +493,68 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         
         var itemsName = [String]()
         
-        if let tempItemsDescription = itemsObjectDescription {
-            if let tempItemsName = itemsObjectName {
-                itemsDescription = tempItemsDescription as! [String]
-                itemsName = tempItemsName as! [String]
+        if let tappedIndexPath = tableView.indexPath(for: sender) {
+            
+            if let tempItemsDescription = itemsObjectDescription {
+                if let tempItemsName = itemsObjectName {
+                    itemsDescription = tempItemsDescription as! [String]
+                    itemsName = tempItemsName as! [String]
+                    
+                    itemsDescription.append(self.descriptionEng[tappedIndexPath.row])
+                    if let correctAnsInt = Int(correctAnswer[tappedIndexPath.row]) {
+                        
+                        if correctAnsInt == 1 {
+                            itemsName.append(self.option1[tappedIndexPath.row])
+                        }
+                        else if correctAnsInt == 2 {
+                            itemsName.append(self.option2[tappedIndexPath.row])
+                        }
+                        else if correctAnsInt == 3 {
+                            itemsName.append(self.option3[tappedIndexPath.row])
+                        }
+                        else if correctAnsInt == 4 {
+                            itemsName.append(self.option4[tappedIndexPath.row])
+                        }
+                    }
+                }
+                else {
+                    
+                    if let correctAnsInt = Int(correctAnswer[tappedIndexPath.row]) {
+                        itemsDescription.append(self.descriptionEng[tappedIndexPath.row])
+                        
+                        if correctAnsInt == 1 {
+                            itemsName.append(self.option1[tappedIndexPath.row])
+                        }
+                        else if correctAnsInt == 2 {
+                            itemsName.append(self.option2[tappedIndexPath.row])
+                        }
+                        else if correctAnsInt == 3 {
+                            itemsName.append(self.option3[tappedIndexPath.row])
+                        }
+                        else if correctAnsInt == 4 {
+                            itemsName.append(self.option4[tappedIndexPath.row])
+                        }
+                    }
+                }
                 
-                itemsDescription.append(self.descriptionEng[(tappedIndexPath?.row)!])
-                
-                if selectedIndex == 1 {
-                    itemsName.append(self.option1[(tappedIndexPath?.row)!])
-                }
-                else if selectedIndex == 2 {
-                    itemsName.append(self.option2[(tappedIndexPath?.row)!])
-                }
-                else if selectedIndex == 3 {
-                    itemsName.append(self.option3[(tappedIndexPath?.row)!])
-                }
-                else if selectedIndex == 4 {
-                    itemsName.append(self.option4[(tappedIndexPath?.row)!])
-                }
             }
             else {
-                itemsDescription.append(self.descriptionEng[(tappedIndexPath?.row)!])
+                itemsDescription.append(self.descriptionEng[tappedIndexPath.row])
                 
-                if selectedIndex == 1 {
-                    itemsName.append(self.option1[(tappedIndexPath?.row)!])
+                if let correctAnsInt = Int(correctAnswer[tappedIndexPath.row]) {
+                    if correctAnsInt == 1 {
+                        itemsName.append(self.option1[tappedIndexPath.row])
+                    }
+                    else if correctAnsInt == 2 {
+                        itemsName.append(self.option2[tappedIndexPath.row])
+                    }
+                    else if correctAnsInt == 3 {
+                        itemsName.append(self.option3[tappedIndexPath.row])
+                    }
+                    else if correctAnsInt == 4 {
+                        itemsName.append(self.option4[tappedIndexPath.row])
+                    }
                 }
-                else if selectedIndex == 2 {
-                    itemsName.append(self.option2[(tappedIndexPath?.row)!])
-                }
-                else if selectedIndex == 3 {
-                    itemsName.append(self.option3[(tappedIndexPath?.row)!])
-                }
-                else if selectedIndex == 4 {
-                    itemsName.append(self.option4[(tappedIndexPath?.row)!])
-                }
-            }
-
-        }
-        else {
-            itemsDescription.append(self.descriptionEng[(tappedIndexPath?.row)!])
-
-            if selectedIndex == 1 {
-                itemsName.append(self.option1[(tappedIndexPath?.row)!])
-            }
-            else if selectedIndex == 2 {
-                itemsName.append(self.option2[(tappedIndexPath?.row)!])
-            }
-            else if selectedIndex == 3 {
-                itemsName.append(self.option3[(tappedIndexPath?.row)!])
-            }
-            else if selectedIndex == 4 {
-                itemsName.append(self.option4[(tappedIndexPath?.row)!])
             }
         }
         print("itemsName : \(itemsName)")

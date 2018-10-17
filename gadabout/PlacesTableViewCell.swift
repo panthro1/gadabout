@@ -13,7 +13,7 @@ protocol placesTableViewCellDelegate {
     
     func isDetailButtonTapped(sender: PlacesTableViewCell)
     
-    func appendToDoList(sender: PlacesTableViewCell, selectedIndex: Int)
+    func appendToDoList(sender: PlacesTableViewCell)
 
     }
 
@@ -189,7 +189,7 @@ class PlacesTableViewCell: UITableViewCell {
     
     @IBAction func addToDoListTapped(_ sender: Any) {
         
-        delegate?.appendToDoList(sender: self, selectedIndex: checkedOption)
+        delegate?.appendToDoList(sender: self)
     }
     
     override func awakeFromNib() {
