@@ -43,6 +43,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     @IBOutlet weak var back: UIBarButtonItem!
     
     @IBAction func backTapped(_ sender: Any) {
+        
         performSegue(withIdentifier: "placesBackSegue", sender: self)
 
     }
@@ -338,7 +339,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 
 
                 cell.detailsButton.isHidden = false
-            
+                cell.toDoListButton.isHidden = false
+                
                 cell.markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
                 cell.markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
                 cell.markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
@@ -484,6 +486,16 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     }
     
     func appendToDoList(sender: PlacesTableViewCell) {
+        
+        UIButton.animate(withDuration: 0.2,
+         animations: {
+         sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)
+         },
+         completion: { finish in
+         UIButton.animate(withDuration: 0.2, animations: {
+         sender.transform = CGAffineTransform.identity
+         })
+         })
         
         let itemsObjectDescription = UserDefaults.standard.object(forKey: "toDoItemDescription")
         

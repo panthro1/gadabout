@@ -77,7 +77,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
             itemDescriptions.remove(at: indexPath.row)
             UserDefaults.standard.set(itemNames, forKey: "toDoItem")
             UserDefaults.standard.set(itemDescriptions, forKey: "toDoItemDescription")
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.deleteRows(at: [indexPath], with: .bottom)
         }
     }
 

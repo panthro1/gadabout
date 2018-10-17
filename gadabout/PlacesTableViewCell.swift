@@ -52,6 +52,7 @@ class PlacesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var detailTextInfo: UITextView!
     
+    @IBOutlet weak var toDoListButton: UIButton!
     
     
     @IBAction func markOption1Tapped(_ sender: Any) {
@@ -188,6 +189,9 @@ class PlacesTableViewCell: UITableViewCell {
     }
     
     @IBAction func addToDoListTapped(_ sender: Any) {
+        
+        /*let button = sender as! UIButton
+        button.shake()*/
         
         delegate?.appendToDoList(sender: self)
     }

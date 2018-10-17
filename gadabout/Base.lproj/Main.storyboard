@@ -339,7 +339,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUD-0s-ioe">
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUD-0s-ioe">
                                             <rect key="frame" x="20" y="343" width="100" height="30"/>
                                             <state key="normal" title="Add To Do List"/>
                                             <connections>
@@ -393,6 +393,7 @@
                                     <outlet property="option3" destination="Dka-W2-eNX" id="DPe-kt-BrC"/>
                                     <outlet property="option4" destination="9kn-kH-Mny" id="XG2-k9-LVK"/>
                                     <outlet property="placeImage" destination="tdo-3Q-VB2" id="EZi-52-04L"/>
+                                    <outlet property="toDoListButton" destination="rUD-0s-ioe" id="PEy-F7-4Ap"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -701,6 +702,6 @@
         <image name="united-states.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oEp-Lf-uRp"/>
+        <segue reference="ERg-ar-XpG"/>
     </inferredMetricsTieBreakers>
 </document>
