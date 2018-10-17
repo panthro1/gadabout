@@ -8,8 +8,19 @@
 
 import UIKit
 
+protocol foodsTableViewCellDelegate {
+    func didAlternativeSelected(sender: foodsTableViewCell, selectedIndex: Int)
+    
+    func isDetailButtonTapped(sender: foodsTableViewCell)
+    
+    func appendToDoList(sender: foodsTableViewCell)
+    
+}
+
 class foodsTableViewCell: UITableViewCell {
 
+    var delegate: foodsTableViewCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
