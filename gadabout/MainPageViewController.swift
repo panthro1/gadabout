@@ -160,6 +160,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         }
         else if indexPath.row == 1 {
             print("Food selected")
+            performSegue(withIdentifier: "foodsSegue", sender: self)
         }
         else if indexPath.row == 2 {
             print("Map puzzle selected")
