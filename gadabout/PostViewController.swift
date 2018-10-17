@@ -196,7 +196,109 @@ class PostViewController: UIViewController, UINavigationControllerDelegate, UIIm
             else {
                 if foodSwitch.isOn {
                     
-                    //let post = PFObject(className: "Food")
+                    if !(placesSwitch.isOn) {
+                        
+                        let post = PFObject(className: "Foods")
+                        
+                        if (engDescription.text?.count)! > 0 {
+                            
+                            post["engDescription"] = engDescription.text
+                            
+                            if (trDescription.text?.count)! > 0 {
+                                
+                                post["trDescription"] = trDescription.text
+                                
+                                if (alternative1.text?.count)! > 0 {
+                                    
+                                    post["alternative1"] = alternative1.text
+                                    
+                                    if (alternative2.text?.count)! > 0 {
+                                        
+                                        post["alternative2"] = alternative2.text
+                                        
+                                        if (alternative3.text?.count)! > 0 {
+                                            
+                                            post["alternative3"] = alternative3.text
+                                            
+                                            if (alternative4.text?.count)! > 0 {
+                                                
+                                                post["alternative4"] = alternative4.text
+                                                
+                                                if (correctAlternative.text?.count)! > 0 {
+                                                    
+                                                    post["correctAlternative"] = correctAlternative.text
+                                                    
+                                                    if let imageData = UIImagePNGRepresentation(image) {
+                                                        
+                                                        let imageFile = PFFile(name: "image.png", data: imageData)
+                                                        
+                                                        post["imageFile"] = imageFile
+                                                        
+                                                        post.saveInBackground { (success, error) in
+                                                            
+                                                            if success {
+                                                                
+                                                                self.displayAlert(title: "Entity saved", message: "Entity saved successfully")
+                                                                
+                                                                self.alternative1.text = ""
+                                                                
+                                                                self.alternative2.text = ""
+                                                                
+                                                                self.alternative3.text = ""
+                                                                
+                                                                self.alternative4.text = ""
+                                                                
+                                                                self.imageToPost.image = nil
+                                                                
+                                                                self.engDescription.text = ""
+                                                                
+                                                                self.trDescription.text = ""
+                                                                
+                                                                self.correctAlternative.text = ""
+                                                            }
+                                                            else { // success
+                                                                
+                                                                self.displayAlert(title: "Could not saved", message: "Entity could not be saved")
+                                                            }
+                                                        }
+                                                    } // imageData
+                                                    else { // correct alternative
+                                                        
+                                                        self.displayAlert(title: "Eksik veri", message: "Correct alternative alanina veri giriniz")
+                                                        
+                                                    }
+                                                    
+                                                }
+                                                
+                                            }
+                                            else { // alternative 4
+                                                self.displayAlert(title: "Eksik veri", message: "Alternative 4 alanina veri giriniz")
+                                            }
+                                        }
+                                        else { // alternative 3
+                                            self.displayAlert(title: "Eksik veri", message: "Alternative 3 alanina veri giriniz")
+                                        }
+                                    }
+                                    else { // alternative 2
+                                        self.displayAlert(title: "Eksik veri", message: "Alternative 2 alanina veri giriniz")
+                                    }
+                                }
+                                else { // alternative 1
+                                    self.displayAlert(title: "Eksik veri", message: "Alternative 1 alanina veri giriniz")
+                                }
+                            }
+                            else { // tr description
+                                self.displayAlert(title: "Eksik veri", message: "Tr Description alanina veri giriniz")
+                            }
+                        }
+                        else { // eng description
+                            
+                            self.displayAlert(title: "Eksik veri", message: "Eng Description alanina veri giriniz")
+                            
+                            print("Eng description alani bos")
+                        }
+                    } // places switch
+
                 }
             }
         }
