@@ -676,6 +676,9 @@
                                                 <constraint firstAttribute="height" constant="32" id="VAx-lA-rK9"/>
                                             </constraints>
                                             <state key="normal" title="Button" image="uncheck.png"/>
+                                            <connections>
+                                                <action selector="markOption2Tapped:" destination="YMk-yP-PRz" eventType="touchUpInside" id="7e2-PO-TW9"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tu1-0J-9gD">
                                             <rect key="frame" x="30" y="264" width="32" height="32"/>
@@ -684,6 +687,9 @@
                                                 <constraint firstAttribute="width" constant="32" id="Vdt-Ft-FRF"/>
                                             </constraints>
                                             <state key="normal" title="Button" image="uncheck.png"/>
+                                            <connections>
+                                                <action selector="markOption3Tapped:" destination="YMk-yP-PRz" eventType="touchUpInside" id="2mT-Hu-htT"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gew-pe-Xmv">
                                             <rect key="frame" x="30" y="306" width="32" height="32"/>
@@ -692,6 +698,9 @@
                                                 <constraint firstAttribute="height" constant="32" id="qeS-9S-RQn"/>
                                             </constraints>
                                             <state key="normal" title="Button" image="uncheck.png"/>
+                                            <connections>
+                                                <action selector="markOption4Tapped:" destination="YMk-yP-PRz" eventType="touchUpInside" id="IZF-eb-QZM"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQf-Pn-Bzx">
                                             <rect key="frame" x="70" y="184" width="300" height="25"/>
@@ -730,6 +739,9 @@
                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQv-LE-nW5">
                                             <rect key="frame" x="20" y="343" width="100" height="30"/>
                                             <state key="normal" title="Add To Do List"/>
+                                            <connections>
+                                                <action selector="addToDoListTapped:" destination="YMk-yP-PRz" eventType="touchUpInside" id="0Pc-jv-UnP"/>
+                                            </connections>
                                         </button>
                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ras-DS-Jff">
                                             <rect key="frame" x="271" y="343" width="78" height="35"/>
@@ -739,13 +751,24 @@
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <state key="normal" title="Details"/>
+                                            <connections>
+                                                <action selector="detailButtonTapped:" destination="YMk-yP-PRz" eventType="touchUpInside" id="jeU-E0-RNp"/>
+                                            </connections>
                                         </button>
+                                        <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aOG-Mj-G3E">
+                                            <rect key="frame" x="5" y="170" width="365" height="132"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="TQv-LE-nW5" firstAttribute="leading" secondItem="grf-ph-Vcb" secondAttribute="leading" constant="20" id="2aV-TW-pwK"/>
                                         <constraint firstItem="GKm-Md-s7B" firstAttribute="leading" secondItem="EzI-Zc-c0T" secondAttribute="trailing" constant="8" id="9Bg-qm-3OD"/>
                                         <constraint firstItem="Tu1-0J-9gD" firstAttribute="top" secondItem="EzI-Zc-c0T" secondAttribute="bottom" constant="10" id="CM1-Sf-9jd"/>
                                         <constraint firstItem="wVf-8A-bth" firstAttribute="leading" secondItem="gew-pe-Xmv" secondAttribute="trailing" constant="8" id="D2P-UD-eEW"/>
+                                        <constraint firstItem="aOG-Mj-G3E" firstAttribute="top" secondItem="Xbt-XA-VLZ" secondAttribute="bottom" constant="10" id="Dud-w9-6T2"/>
                                         <constraint firstItem="TWi-TK-gCW" firstAttribute="top" secondItem="Xbt-XA-VLZ" secondAttribute="bottom" constant="20" id="EVB-cX-qk9"/>
                                         <constraint firstItem="gew-pe-Xmv" firstAttribute="centerX" secondItem="Tu1-0J-9gD" secondAttribute="centerX" id="EnK-nR-j0X"/>
                                         <constraint firstAttribute="trailing" secondItem="wVf-8A-bth" secondAttribute="trailing" constant="5" id="Gop-RQ-sj0"/>
@@ -757,11 +780,14 @@
                                         <constraint firstAttribute="trailing" secondItem="IG8-tI-aVp" secondAttribute="trailing" constant="5" id="Pfw-Qt-ySq"/>
                                         <constraint firstItem="gew-pe-Xmv" firstAttribute="top" secondItem="Tu1-0J-9gD" secondAttribute="bottom" constant="10" id="RbF-Sc-dqj"/>
                                         <constraint firstItem="NQf-Pn-Bzx" firstAttribute="leading" secondItem="TWi-TK-gCW" secondAttribute="trailing" constant="8" id="UVS-3f-K2b"/>
+                                        <constraint firstAttribute="trailing" secondItem="aOG-Mj-G3E" secondAttribute="trailing" constant="5" id="V2f-5Q-gwc"/>
                                         <constraint firstItem="Ras-DS-Jff" firstAttribute="top" secondItem="gew-pe-Xmv" secondAttribute="bottom" constant="5" id="bQo-El-eA7"/>
                                         <constraint firstItem="IG8-tI-aVp" firstAttribute="centerY" secondItem="Tu1-0J-9gD" secondAttribute="centerY" id="dgz-po-WdY"/>
                                         <constraint firstItem="Tu1-0J-9gD" firstAttribute="centerX" secondItem="EzI-Zc-c0T" secondAttribute="centerX" id="eC5-4D-Iae"/>
                                         <constraint firstItem="IG8-tI-aVp" firstAttribute="leading" secondItem="Tu1-0J-9gD" secondAttribute="trailing" constant="8" id="fKR-Wj-fvq"/>
+                                        <constraint firstItem="Ras-DS-Jff" firstAttribute="top" secondItem="aOG-Mj-G3E" secondAttribute="bottom" constant="41" id="ffR-i6-qLw"/>
                                         <constraint firstItem="NQf-Pn-Bzx" firstAttribute="centerY" secondItem="TWi-TK-gCW" secondAttribute="centerY" id="jOL-gF-xdn"/>
+                                        <constraint firstItem="aOG-Mj-G3E" firstAttribute="leading" secondItem="grf-ph-Vcb" secondAttribute="leading" constant="5" id="nqp-oW-OKU"/>
                                         <constraint firstItem="Xbt-XA-VLZ" firstAttribute="centerX" secondItem="grf-ph-Vcb" secondAttribute="centerX" id="pbZ-U1-m89"/>
                                         <constraint firstItem="TWi-TK-gCW" firstAttribute="leading" secondItem="grf-ph-Vcb" secondAttribute="leading" constant="30" id="rQV-Zv-pQk"/>
                                         <constraint firstItem="wVf-8A-bth" firstAttribute="centerY" secondItem="gew-pe-Xmv" secondAttribute="centerY" id="sqh-ob-oB1"/>
@@ -771,6 +797,9 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="detailTextInfo" destination="aOG-Mj-G3E" id="hO9-Xs-jaH"/>
+                                    <outlet property="detailsButton" destination="Ras-DS-Jff" id="aJE-Kl-Lhf"/>
+                                    <outlet property="foodImage" destination="Xbt-XA-VLZ" id="FPd-t2-YVW"/>
                                     <outlet property="markOption1" destination="TWi-TK-gCW" id="o7N-u3-6pp"/>
                                     <outlet property="markOption2" destination="EzI-Zc-c0T" id="h3C-PC-Cec"/>
                                     <outlet property="markOption3" destination="Tu1-0J-9gD" id="GiT-e6-SqW"/>
@@ -779,6 +808,7 @@
                                     <outlet property="option2" destination="GKm-Md-s7B" id="UBf-yz-cM9"/>
                                     <outlet property="option3" destination="IG8-tI-aVp" id="3h5-lU-A3c"/>
                                     <outlet property="option4" destination="wVf-8A-bth" id="44P-t0-HTL"/>
+                                    <outlet property="toDoListButton" destination="TQv-LE-nW5" id="s4V-74-KYr"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -791,6 +821,11 @@
                         <barButtonItem key="leftBarButtonItem" title="Back" id="deX-to-3oM">
                             <connections>
                                 <action selector="backTapped:" destination="qOe-HN-aI2" id="LoW-Qr-bzE"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Complete" id="2kL-zl-qjx">
+                            <connections>
+                                <action selector="didCompleteTapped:" destination="qOe-HN-aI2" id="KmG-ln-oeT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
