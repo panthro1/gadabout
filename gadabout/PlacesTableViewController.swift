@@ -102,6 +102,17 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         
         //questionSeenBefore.removeAll()
         
+        let nofInstanceQuery = PFQuery(className: "Places")
+        nofInstanceQuery.countObjectsInBackground { (count, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                print("Total place instances: \(count)")
+            }
+        }
+        
         let questionCoveredQuery = PFQuery(className: "placesCoveredBefore")
         questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
         questionCoveredQuery.findObjectsInBackground { (objects, error) in
@@ -112,7 +123,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             else {
                 if let places = objects {
                     for place in places {
-                        print("\(place["questionId"])")
+                        //print("\(place["questionId"])")
                         self.questionSeenBefore.append(place["questionId"] as! String)
                     }
                 }
@@ -380,22 +391,22 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
 
                     if selected == 1 {
 
-                        cell.markOption1.setImage(UIImage(named: "correct.png"), for: [])
+                        cell.markOption1.setImage(UIImage(named: "correct2.png"), for: [])
 
                     }
                     else if selected == 2 {
 
-                        cell.markOption2.setImage(UIImage(named: "correct.png"), for: [])
+                        cell.markOption2.setImage(UIImage(named: "correct2.png"), for: [])
 
                     }
                     else if selected == 3 {
 
-                        cell.markOption3.setImage(UIImage(named: "correct.png"), for: [])
+                        cell.markOption3.setImage(UIImage(named: "correc2t.png"), for: [])
 
                     }
                     else if selected == 4 {
 
-                        cell.markOption4.setImage(UIImage(named: "correct.png"), for: [])
+                        cell.markOption4.setImage(UIImage(named: "correct2.png"), for: [])
 
                     }
                 
@@ -443,11 +454,19 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     func didAlternativeSelected(sender: PlacesTableViewCell, selectedIndex: Int){
         let tappedIndexPath = tableView.indexPath(for: sender)
         
-        if let selectedQuestion = tappedIndexPath?.row {
-            questionNo.append(selectedQuestion)
+        if let questionIndex = questionNo.index(of: (tappedIndexPath?.row)!) {
+            if let selectedQuestion = tappedIndexPath?.row {
+                questionNo[questionIndex] = selectedQuestion
+                answer[questionIndex] = selectedIndex
+            }
         }
-        
-        answer.append(selectedIndex)
+        else {
+            if let selectedQuestion = tappedIndexPath?.row {
+                questionNo.append(selectedQuestion)
+            }
+            
+            answer.append(selectedIndex)
+        }
         
     }
     

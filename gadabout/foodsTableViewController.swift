@@ -300,22 +300,22 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                     
                     if selected == 1 {
                         
-                        cell.markOption1.setImage(UIImage(named: "correct.png"), for: [])
+                        cell.markOption1.setImage(UIImage(named: "correct2.png"), for: [])
                         
                     }
                     else if selected == 2 {
                         
-                        cell.markOption2.setImage(UIImage(named: "correct.png"), for: [])
+                        cell.markOption2.setImage(UIImage(named: "correct2.png"), for: [])
                         
                     }
                     else if selected == 3 {
                         
-                        cell.markOption3.setImage(UIImage(named: "correct.png"), for: [])
+                        cell.markOption3.setImage(UIImage(named: "correct2.png"), for: [])
                         
                     }
                     else if selected == 4 {
                         
-                        cell.markOption4.setImage(UIImage(named: "correct.png"), for: [])
+                        cell.markOption4.setImage(UIImage(named: "correct2.png"), for: [])
                         
                     }
                     
@@ -355,13 +355,22 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
     
 
     func didAlternativeSelected(sender: foodsTableViewCell, selectedIndex: Int){
+        
         let tappedIndexPath = tableView.indexPath(for: sender)
         
-        if let selectedQuestion = tappedIndexPath?.row {
-            questionNo.append(selectedQuestion)
+        if let questionIndex = questionNo.index(of: (tappedIndexPath?.row)!) {
+            if let selectedQuestion = tappedIndexPath?.row {
+                questionNo[questionIndex] = selectedQuestion
+                answer[questionIndex] = selectedIndex
+            }
         }
-        
-        answer.append(selectedIndex)
+        else {
+            if let selectedQuestion = tappedIndexPath?.row {
+                questionNo.append(selectedQuestion)
+            }
+            
+            answer.append(selectedIndex)
+        }
         
     }
     
