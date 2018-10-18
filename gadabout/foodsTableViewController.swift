@@ -106,31 +106,31 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                     }
                 }
             }
-            let placesQuery = PFQuery(className: "Foods")
+            let foodsQuery = PFQuery(className: "Foods")
             
-            placesQuery.limit = 2
-            placesQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
+            foodsQuery.limit = 2
+            foodsQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
             
-            placesQuery.findObjectsInBackground { (objects, error) in
+            foodsQuery.findObjectsInBackground { (objects, error) in
                 
                 
-                if let places = objects {
+                if let foods = objects {
                     
-                    for place in places {
+                    for food in foods {
                         
-                        self.option1.append(place["alternative1"] as! String)
-                        self.option2.append(place["alternative2"] as! String)
-                        self.option3.append(place["alternative3"] as! String)
-                        self.option4.append(place["alternative4"] as! String)
-                        self.imageFile.append(place["imageFile"] as! PFFile)
-                        self.correctAnswer.append(place["correctAlternative"] as! String)
-                        self.descriptionEng.append(place["engDescription"] as! String)
-                        self.descriptionTr.append(place["trDescription"] as! String)
+                        self.option1.append(food["alternative1"] as! String)
+                        self.option2.append(food["alternative2"] as! String)
+                        self.option3.append(food["alternative3"] as! String)
+                        self.option4.append(food["alternative4"] as! String)
+                        self.imageFile.append(food["imageFile"] as! PFFile)
+                        self.correctAnswer.append(food["correctAlternative"] as! String)
+                        self.descriptionEng.append(food["engDescription"] as! String)
+                        self.descriptionTr.append(food["trDescription"] as! String)
                         self.showDetail.append(false)
                         
                         self.tableView.reloadData()
                         
-                        if let question = place.objectId {
+                        if let question = food.objectId {
                             self.questionCompleted.append(question)
                         }
                     }

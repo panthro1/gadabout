@@ -136,10 +136,10 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             cell.textLabel?.text = "    Places"
         }
         else if indexPath.row == 1 {
-            cell.textLabel?.text = "    Food"
+            cell.textLabel?.text = "    Foods"
         }
         else if indexPath.row == 2 {
-            cell.textLabel?.text = "    Map Puzzle"
+            cell.textLabel?.text = "    Puzzle"
         }
         else if indexPath.row == 3 {
             cell.textLabel?.text = "    Post"

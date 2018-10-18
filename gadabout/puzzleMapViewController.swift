@@ -45,6 +45,9 @@ class puzzleMapViewController: UIViewController {
     }
 
     @IBAction func harderTapped(_ sender: Any) {
+        let button = sender as? UIButton
+        button?.shake()
+        
         if harder == false {
             harder = true
 
@@ -174,6 +177,9 @@ class puzzleMapViewController: UIViewController {
     }
     
     @IBAction func hintTapped(_ sender: Any) {
+        
+        let button = sender as? UIButton
+        button?.flash()
         
         if isHintDisplayed == false {
             var imageView : UIImageView

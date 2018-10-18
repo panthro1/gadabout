@@ -16,11 +16,11 @@ extension UIButton {
         
         let pulse = CASpringAnimation(keyPath: "transform.scale")
         
-        pulse.duration = 0.6
+        pulse.duration = 0.2
         pulse.fromValue = 0.95
         pulse.toValue = 1.0
         pulse.autoreverses = true
-        pulse.repeatCount = 2
+        pulse.repeatCount = 1
         pulse.initialVelocity = 0.5
         pulse.damping = 1.0
         
@@ -29,12 +29,12 @@ extension UIButton {
     
     func flash() {
         let flash = CABasicAnimation(keyPath: "opacity")
-        flash.duration = 0.5
+        flash.duration = 0.2
         flash.fromValue = 1
         flash.toValue = 0.1
         flash.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         flash.autoreverses = true
-        flash.repeatCount = 3
+        flash.repeatCount = 1
         
         layer.add(flash, forKey: nil)
     }

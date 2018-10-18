@@ -183,6 +183,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func SignInButtonTapped(_ sender: Any) {
         
+        let button = sender as? UIButton
+        button?.pulsate()
+        
         let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true

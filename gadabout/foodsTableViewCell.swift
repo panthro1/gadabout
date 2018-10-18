@@ -187,6 +187,10 @@ class foodsTableViewCell: UITableViewCell {
     
     
     @IBAction func addToDoListTapped(_ sender: Any) {
+        
+        let button = sender as? UIButton
+        button?.pulsate()
+        
         delegate?.appendToDoList(sender: self)
     }
     
