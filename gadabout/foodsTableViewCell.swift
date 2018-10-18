@@ -19,8 +19,64 @@ protocol foodsTableViewCellDelegate {
 
 class foodsTableViewCell: UITableViewCell {
 
-    var delegate: foodsTableViewCellDelegate?
+    @IBOutlet weak var markOption1: UIButton!
     
+    @IBOutlet weak var markOption2: UIButton!
+    
+    @IBOutlet weak var markOption3: UIButton!
+    
+    @IBOutlet weak var markOption4: UIButton!
+    
+    @IBOutlet weak var option1: UILabel!
+    
+    @IBOutlet weak var option2: UILabel!
+    
+    @IBOutlet weak var option3: UILabel!
+    
+    @IBOutlet weak var option4: UILabel!
+    
+    var option1Marked = false
+    var option2Marked = false
+    var option3Marked = false
+    var option4Marked = false
+    
+    var showDetail = false
+    
+    var checkedOption = -1
+    
+    var delegate: placesTableViewCellDelegate?
+    
+    @IBAction func markOption1Tapped(_ sender: Any) {
+        if option1Marked {
+            markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
+            markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
+            markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
+            markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
+            option1Marked = false
+            option2Marked = false
+            option3Marked = false
+            option4Marked = false
+            checkedOption = 0
+            
+        }
+        else {
+            markOption1.setImage(UIImage(named: "check.png"), for: [])
+            markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
+            markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
+            markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
+            option1Marked = true
+            option2Marked = false
+            option3Marked = false
+            option4Marked = false
+            checkedOption = 1
+        }
+        print("Option 1 marked: \(option1Marked)")
+        //delegate?.didAlternativeSelected( sender: self,selectedIndex: checkedOption)
+
+    }
+    
+    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
