@@ -121,7 +121,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 5
+        return 6
         
     }
 
@@ -141,11 +141,14 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         else if indexPath.row == 2 {
             cell.textLabel?.text = "    Puzzle"
         }
-        else if indexPath.row == 3 {
+        else if indexPath.row == 5 {
             cell.textLabel?.text = "    Post"
         }
         else if indexPath.row == 4 {
             cell.textLabel?.text = "    To Do List"
+        }
+        else if indexPath.row == 3 {
+            cell.textLabel?.text = "    Lucky Strike"
         }
         
         return cell
@@ -167,14 +170,17 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             performSegue(withIdentifier: "puzzleMapSegue", sender: self)
 
         }
-        else if indexPath.row == 3 {
+        else if indexPath.row == 5 {
             print("Post selected")
             performSegue(withIdentifier: "postSegue", sender: self)
         }
         else if indexPath.row == 4 {
             print("To Do List selected")
             performSegue(withIdentifier: "toDoListSegue", sender: self)
-
+        }
+        else if indexPath.row == 3 {
+            print("Lucky Strike selected")
+            performSegue(withIdentifier: "luckyStrikeSegue", sender: self)
         }
     }
     

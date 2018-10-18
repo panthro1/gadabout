@@ -31,6 +31,7 @@
 		E36DA987212D71830031D337 /* wrong.gif in Resources */ = {isa = PBXBuildFile; fileRef = E36DA986212D71830031D337 /* wrong.gif */; };
 		E39D488E212EB87100A32212 /* correct2.png in Resources */ = {isa = PBXBuildFile; fileRef = E39D488D212EB87100A32212 /* correct2.png */; };
 		E3A38444215044A1003A0A8C /* puzzleMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A38443215044A1003A0A8C /* puzzleMapViewController.swift */; };
+		E3E1BEF12179133700C62595 /* luckyStrikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */; };
 		E3E5BD53213295610019BFBC /* keyboard-right-arrow-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E3E5BD52213295600019BFBC /* keyboard-right-arrow-button.png */; };
 		E3EB34A221751483000DB77A /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EB34A121751483000DB77A /* ToDoListViewController.swift */; };
 		E3FFD48420F14EE1001C974D /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FFD48320F14EE1001C974D /* MainPageViewController.swift */; };
@@ -86,6 +87,7 @@
 		E36DA986212D71830031D337 /* wrong.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = wrong.gif; sourceTree = SOURCE_ROOT; };
 		E39D488D212EB87100A32212 /* correct2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = correct2.png; sourceTree = SOURCE_ROOT; };
 		E3A38443215044A1003A0A8C /* puzzleMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = puzzleMapViewController.swift; sourceTree = "<group>"; };
+		E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = luckyStrikeViewController.swift; sourceTree = "<group>"; };
 		E3E5BD52213295600019BFBC /* keyboard-right-arrow-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard-right-arrow-button.png"; sourceTree = SOURCE_ROOT; };
 		E3EB34A121751483000DB77A /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
 		E3FFD48320F14EE1001C974D /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				E342D9AB2104853C009D5C67 /* PlacesTableViewController.swift */,
 				E39D488D212EB87100A32212 /* correct2.png */,
 				E3FFD48320F14EE1001C974D /* MainPageViewController.swift */,
+				E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */,
 				E3E5BD52213295600019BFBC /* keyboard-right-arrow-button.png */,
 				E3261AF020F098940056CE99 /* Assets.xcassets */,
 				E3261AF220F098940056CE99 /* LaunchScreen.storyboard */,
@@ -392,6 +395,7 @@
 				E342D9AE21049038009D5C67 /* PostViewController.swift in Sources */,
 				E32D30832177A5860016D7EC /* UIButtonExtension.swift in Sources */,
 				E32D30852177B6840016D7EC /* foodsTableViewController.swift in Sources */,
+				E3E1BEF12179133700C62595 /* luckyStrikeViewController.swift in Sources */,
 				E3FFD48420F14EE1001C974D /* MainPageViewController.swift in Sources */,
 				E3687E8B2115CE8000CC60E9 /* PlacesTableViewCell.swift in Sources */,
 				E3261AE920F098920056CE99 /* ViewController.swift in Sources */,
