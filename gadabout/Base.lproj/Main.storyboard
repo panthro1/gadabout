@@ -463,7 +463,7 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xrk-5S-5Fk">
+                            <imageView hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xrk-5S-5Fk">
                                 <rect key="frame" x="5" y="69" width="365" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xrk-5S-5Fk" secondAttribute="height" multiplier="365:250" id="pwR-Ga-N3j"/>

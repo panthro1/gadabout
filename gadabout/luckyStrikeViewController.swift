@@ -176,8 +176,28 @@ class luckyStrikeViewController: UIViewController {
             self.headerLabel.isHidden = false
             self.image.isHidden = false
         }
+        
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(wasDragged(gestureRecognizer:)))
+        image.addGestureRecognizer(gesture)
+        
     }
 
+    @objc func wasDragged(gestureRecognizer: UIPanGestureRecognizer) {
+        var rotation = CGAffineTransform(rotationAngle: 0)
+        var scale = 1
+        var scaledAndRotated = rotation.scaledBy(x: 1, y: 1)
+        
+        
+        if gestureRecognizer.state == .ended {
+            if image.center.x < (view.bounds.width / 2 - 100) {
+                print("Not Interested")
+            }
+            if image.center.x > (view.bounds.width / 2 + 100) {
+                print("Interested")
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
