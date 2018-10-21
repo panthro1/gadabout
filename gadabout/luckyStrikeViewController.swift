@@ -20,7 +20,6 @@ class luckyStrikeViewController: UIViewController {
     var descriptionTr: String = ""
     var correctAnswer : String = ""
     var imageFile = [PFFile]()
-    var totalInstances: Int32 = 0
     var nofPlaceInstances: Int32 = 0
     var nofFoodInstances: Int32 = 0
     var placeFoodSelection: UInt32 = 0
@@ -42,65 +41,162 @@ class luckyStrikeViewController: UIViewController {
         let button = sender as? UIButton
         button?.shake()
         
-        let randomIndex = Int(arc4random_uniform(UInt32(self.nofPlaceInstances)))
-        print("Random Index: \(randomIndex)")
+        placeFoodSelection = arc4random_uniform(2)
+        print("Random Index: \(placeFoodSelection)")
         
-        let placesQuery = PFQuery(className: "Places")
-        
-        placesQuery.limit = 1
-        placesQuery.skip = randomIndex
-        self.imageFile.removeAll()
-        
-        placesQuery.findObjectsInBackground { (objects, error) in
+        if placeFoodSelection == 0 {
             
+            let randomIndex = Int(arc4random_uniform(UInt32(self.nofPlaceInstances)))
+            print("Random Index: \(randomIndex)")
             
-            if let places = objects {
+            let placesQuery = PFQuery(className: "Places")
+            
+            placesQuery.limit = 1
+            placesQuery.skip = randomIndex
+            self.imageFile.removeAll()
+            
+            placesQuery.findObjectsInBackground { (objects, error) in
                 
-                for place in places {
-                    
-                    self.option1 = place["alternative1"] as! String
-                    self.option2 = place["alternative2"] as! String
-                    self.option3 = place["alternative3"] as! String
-                    self.option4 = place["alternative4"] as! String
-                    self.imageFile.append(place["imageFile"] as! PFFile)
-                    self.correctAnswer = place["correctAlternative"] as! String
-                    self.descriptionEng = place["engDescription"] as! String
-                    self.descriptionTr = place["trDescription"] as! String
-                    
-                }
-            }
-            
-            self.imageFile[0].getDataInBackground { (data, error) in
                 
-                if let imageData = data {
+                if let places = objects {
                     
-                    if let imageToDisplay = UIImage(data: imageData) {
+                    for place in places {
                         
-                        self.image.image = imageToDisplay
+                        self.option1 = place["alternative1"] as! String
+                        self.option2 = place["alternative2"] as! String
+                        self.option3 = place["alternative3"] as! String
+                        self.option4 = place["alternative4"] as! String
+                        self.imageFile.append(place["imageFile"] as! PFFile)
+                        
+                        self.imageFile[0].getDataInBackground { (data, error) in
+                         
+                            if let imageData = data {
+                         
+                                if let imageToDisplay = UIImage(data: imageData) {
+                         
+                                    self.image.image = imageToDisplay
+                                }
+                            }
+                         
+                        }
+                        
+                        self.correctAnswer = place["correctAlternative"] as! String
+                        self.descriptionEng = place["engDescription"] as! String
+                        self.descriptionTr = place["trDescription"] as! String
                         
                     }
                 }
                 
-            }
-            if let correctAnsInt = Int(self.correctAnswer) {
+                /*self.imageFile[0].getDataInBackground { (data, error) in
+                    
+                    if let imageData = data {
+                        
+                        if let imageToDisplay = UIImage(data: imageData) {
+                            
+                            self.image.image = imageToDisplay
+                            
+                        }
+                    }
+                    
+                }*/
                 
-                if correctAnsInt == 1 {
-                    self.headerLabel.text = self.option1
+                if let correctAnsInt = Int(self.correctAnswer) {
+                    
+                    if correctAnsInt == 1 {
+                        self.headerLabel.text = self.option1
+                    }
+                    else if correctAnsInt == 2 {
+                        self.headerLabel.text = self.option2
+                    }
+                    else if correctAnsInt == 3 {
+                        self.headerLabel.text = self.option3
+                    }
+                    else if correctAnsInt == 4 {
+                        self.headerLabel.text = self.option4
+                    }
                 }
-                else if correctAnsInt == 2 {
-                    self.headerLabel.text = self.option2
-                }
-                else if correctAnsInt == 3 {
-                    self.headerLabel.text = self.option3
-                }
-                else if correctAnsInt == 4 {
-                    self.headerLabel.text = self.option4
-                }
+                self.descriptionText.text = self.descriptionEng
+                self.descriptionText.isHidden = false
+                self.headerLabel.isHidden = false
+                self.image.isHidden = false
             }
-            self.descriptionText.text = self.descriptionEng
-            self.descriptionText.isHidden = false
-            self.headerLabel.isHidden = false
-            self.image.isHidden = false
+        }
+        else {
+            let randomIndex = Int(arc4random_uniform(UInt32(self.nofFoodInstances)))
+            print("Random Index: \(randomIndex)")
+            
+            let placesQuery = PFQuery(className: "Foods")
+            
+            placesQuery.limit = 1
+            placesQuery.skip = randomIndex
+            self.imageFile.removeAll()
+            
+            placesQuery.findObjectsInBackground { (objects, error) in
+                
+                
+                if let places = objects {
+                    
+                    for place in places {
+                        
+                        self.option1 = place["alternative1"] as! String
+                        self.option2 = place["alternative2"] as! String
+                        self.option3 = place["alternative3"] as! String
+                        self.option4 = place["alternative4"] as! String
+                        self.imageFile.append(place["imageFile"] as! PFFile)
+                        
+                        self.imageFile[0].getDataInBackground { (data, error) in
+                         
+                            if let imageData = data {
+                         
+                                if let imageToDisplay = UIImage(data: imageData) {
+                         
+                                    self.image.image = imageToDisplay
+                         
+                                }
+                            }
+                         }
+                        
+                        self.correctAnswer = place["correctAlternative"] as! String
+                        self.descriptionEng = place["engDescription"] as! String
+                        self.descriptionTr = place["trDescription"] as! String
+                        
+                    }
+                }
+                
+                /*self.imageFile[0].getDataInBackground { (data, error) in
+                    
+                    if let imageData = data {
+                        
+                        if let imageToDisplay = UIImage(data: imageData) {
+                            
+                            self.image.image = imageToDisplay
+                            
+                        }
+                    }
+                    
+                }*/
+                
+                if let correctAnsInt = Int(self.correctAnswer) {
+                    
+                    if correctAnsInt == 1 {
+                        self.headerLabel.text = self.option1
+                    }
+                    else if correctAnsInt == 2 {
+                        self.headerLabel.text = self.option2
+                    }
+                    else if correctAnsInt == 3 {
+                        self.headerLabel.text = self.option3
+                    }
+                    else if correctAnsInt == 4 {
+                        self.headerLabel.text = self.option4
+                    }
+                }
+                self.descriptionText.text = self.descriptionEng
+                self.descriptionText.isHidden = false
+                self.headerLabel.isHidden = false
+                self.image.isHidden = false
+            }
+
         }
         
     }
@@ -110,7 +206,6 @@ class luckyStrikeViewController: UIViewController {
         super.viewDidLoad()
         
         placeFoodSelection = arc4random_uniform(2)
-        
         print("Random Index: \(placeFoodSelection)")
         
         let nofInstancePlaceQuery = PFQuery(className: "Places")
@@ -120,14 +215,13 @@ class luckyStrikeViewController: UIViewController {
                 print(error.localizedDescription)
             }
             else {
-                self.totalInstances = count
                 self.nofPlaceInstances = count
                 print("Total place instances: \(count)")
             }
             
             if self.placeFoodSelection == 0 {
                 
-                let randomIndex = Int(arc4random_uniform(UInt32(self.totalInstances)))
+                let randomIndex = Int(arc4random_uniform(UInt32(self.nofPlaceInstances)))
                 print("Random Index for Places: \(randomIndex)")
                 
                 let placesQuery = PFQuery(className: "Places")
@@ -198,14 +292,13 @@ class luckyStrikeViewController: UIViewController {
                 print(error.localizedDescription)
             }
             else {
-                self.totalInstances = count
-                self.nofPlaceInstances = count
+                self.nofFoodInstances = count
                 print("Total place instances: \(count)")
             }
             
             if self.placeFoodSelection == 1 {
                 
-                let randomIndex = Int(arc4random_uniform(UInt32(self.totalInstances)))
+                let randomIndex = Int(arc4random_uniform(UInt32(self.nofFoodInstances)))
                 print("Random Index for Foods: \(randomIndex)")
                 
                 let placesQuery = PFQuery(className: "Foods")
