@@ -41,11 +41,11 @@ class luckyStrikeViewController: UIViewController {
         let button = sender as? UIButton
         button?.shake()
         
-        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.image.center.y, width: 100, height: 100))
+        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
         activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
         activityIndicator.center = self.image.center
         activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
@@ -365,11 +365,11 @@ class luckyStrikeViewController: UIViewController {
         if gestureRecognizer.state == .ended {
             if image.center.x < (view.bounds.width/2 - 100) {
                 
-                let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.image.center.y, width: 100, height: 100))
+                let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
                 activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
                 activityIndicator.center = self.image.center
                 activityIndicator.hidesWhenStopped = true
-                activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+                activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
                 view.addSubview(activityIndicator)
                 activityIndicator.startAnimating()
                 UIApplication.shared.beginIgnoringInteractionEvents()
