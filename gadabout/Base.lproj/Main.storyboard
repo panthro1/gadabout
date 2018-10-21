@@ -78,12 +78,6 @@
                                     <action selector="LoginButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FUa-AT-uOW"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lovetravel.png" translatesAutoresizingMaskIntoConstraints="NO" id="6nX-nf-AhB">
-                                <rect key="frame" x="5" y="297" width="365" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="6nX-nf-AhB" secondAttribute="height" multiplier="73:40" id="UhC-lW-v2p"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v4n-eG-oCn">
                                 <rect key="frame" x="215" y="254" width="55" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -98,7 +92,6 @@
                             <constraint firstItem="qpO-1l-vXO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="29a-AG-oUl"/>
                             <constraint firstItem="pIv-5d-vVT" firstAttribute="top" secondItem="bfL-sq-cO4" secondAttribute="bottom" constant="8" id="4su-yz-1nS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pIv-5d-vVT" secondAttribute="trailing" constant="5" id="7Uh-KE-eLH"/>
-                            <constraint firstItem="6nX-nf-AhB" firstAttribute="top" secondItem="QH7-qF-S9v" secondAttribute="bottom" constant="15" id="8UA-E9-jcd"/>
                             <constraint firstItem="pIv-5d-vVT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AOK-3N-2CQ"/>
                             <constraint firstItem="Ovh-NS-QPo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="D3C-w9-AO6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bfL-sq-cO4" secondAttribute="trailing" constant="5" id="FWv-51-zj4"/>
@@ -109,7 +102,6 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qpO-1l-vXO" secondAttribute="trailing" constant="5" id="Mpc-qy-9En"/>
                             <constraint firstItem="FHp-Hp-zfr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PT3-hA-SCd"/>
                             <constraint firstItem="v4n-eG-oCn" firstAttribute="centerY" secondItem="QH7-qF-S9v" secondAttribute="centerY" id="Sll-Jg-ion"/>
-                            <constraint firstItem="6nX-nf-AhB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="aKb-wR-r3Y"/>
                             <constraint firstItem="bfL-sq-cO4" firstAttribute="top" secondItem="FHp-Hp-zfr" secondAttribute="bottom" constant="8" id="arN-az-F3Y"/>
                             <constraint firstItem="VhR-na-qIn" firstAttribute="centerY" secondItem="WiY-re-xBx" secondAttribute="centerY" id="bqm-U5-FFy"/>
                             <constraint firstItem="FHp-Hp-zfr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="c4y-FE-tUW"/>
@@ -118,7 +110,6 @@
                             <constraint firstItem="WiY-re-xBx" firstAttribute="leading" secondItem="VhR-na-qIn" secondAttribute="trailing" constant="8" id="gdE-Qk-ZlP"/>
                             <constraint firstItem="pIv-5d-vVT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="gdM-08-F6B"/>
                             <constraint firstItem="qpO-1l-vXO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gyU-r0-nyO"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6nX-nf-AhB" secondAttribute="trailing" constant="5" id="hV3-VN-TKb"/>
                             <constraint firstItem="WiY-re-xBx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="4" id="hf9-m3-PFP"/>
                             <constraint firstItem="bfL-sq-cO4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hvb-tV-hSf"/>
                             <constraint firstItem="v4n-eG-oCn" firstAttribute="leading" secondItem="QH7-qF-S9v" secondAttribute="trailing" constant="21" id="j09-Dl-8br"/>
@@ -334,7 +325,7 @@
                                                 <action selector="detailButtonTapped:" destination="daD-zG-i3o" eventType="touchUpInside" id="vV5-WQ-c67"/>
                                             </connections>
                                         </button>
-                                        <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0EJ-pr-Trv">
+                                        <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0EJ-pr-Trv">
                                             <rect key="frame" x="21" y="170" width="345" height="132"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -475,7 +466,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="egR-oY-BhK">
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="egR-oY-BhK">
                                 <rect key="frame" x="5" y="359.5" width="365" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -840,7 +831,7 @@
                                                 <action selector="detailButtonTapped:" destination="YMk-yP-PRz" eventType="touchUpInside" id="jeU-E0-RNp"/>
                                             </connections>
                                         </button>
-                                        <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aOG-Mj-G3E">
+                                        <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aOG-Mj-G3E">
                                             <rect key="frame" x="5" y="170" width="365" height="132"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -1001,7 +992,6 @@
     </scenes>
     <resources>
         <image name="collesium.jpg" width="390" height="219"/>
-        <image name="lovetravel.png" width="200" height="200"/>
         <image name="turkey.png" width="32" height="32"/>
         <image name="uncheck.png" width="32" height="32"/>
         <image name="united-states.png" width="32" height="32"/>

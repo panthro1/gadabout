@@ -21,6 +21,8 @@ class luckyStrikeViewController: UIViewController {
     var correctAnswer : String = ""
     var imageFile = [PFFile]()
     var totalInstances: Int32 = 0
+    var nofPlaceInstances: Int32 = 0
+    var nofFoodInstances: Int32 = 0
 
     
     @IBOutlet weak var image: UIImageView!
@@ -39,6 +41,77 @@ class luckyStrikeViewController: UIViewController {
         let button = sender as? UIButton
         button?.shake()
         
+        let randomIndex = Int(arc4random_uniform(UInt32(self.nofPlaceInstances)))
+        print("Random Index: \(randomIndex)")
+        
+        let placesQuery = PFQuery(className: "Places")
+        
+        placesQuery.limit = 1
+        placesQuery.skip = randomIndex
+        self.imageFile.removeAll()
+        
+        placesQuery.findObjectsInBackground { (objects, error) in
+            
+            
+            if let places = objects {
+                
+                for place in places {
+                    
+                    self.option1 = place["alternative1"] as! String
+                    self.option2 = place["alternative2"] as! String
+                    self.option3 = place["alternative3"] as! String
+                    self.option4 = place["alternative4"] as! String
+                    self.imageFile.append(place["imageFile"] as! PFFile)
+                    self.correctAnswer = place["correctAlternative"] as! String
+                    self.descriptionEng = place["engDescription"] as! String
+                    self.descriptionTr = place["trDescription"] as! String
+                    
+                }
+            }
+            
+            self.imageFile[0].getDataInBackground { (data, error) in
+                
+                if let imageData = data {
+                    
+                    if let imageToDisplay = UIImage(data: imageData) {
+                        
+                        self.image.image = imageToDisplay
+                        
+                    }
+                }
+                
+            }
+            if let correctAnsInt = Int(self.correctAnswer) {
+                
+                if correctAnsInt == 1 {
+                    self.headerLabel.text = self.option1
+                }
+                else if correctAnsInt == 2 {
+                    self.headerLabel.text = self.option2
+                }
+                else if correctAnsInt == 3 {
+                    self.headerLabel.text = self.option3
+                }
+                else if correctAnsInt == 4 {
+                    self.headerLabel.text = self.option4
+                }
+            }
+            self.descriptionText.text = self.descriptionEng
+            self.descriptionText.isHidden = false
+            self.headerLabel.isHidden = false
+            self.image.isHidden = false
+        }
+        
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let randomIndex = arc4random_uniform(2)
+        
+        print("Random Index: \(randomIndex)")
+
         let nofInstanceQuery = PFQuery(className: "Places")
         nofInstanceQuery.countObjectsInBackground { (count, error) in
             
@@ -47,10 +120,11 @@ class luckyStrikeViewController: UIViewController {
             }
             else {
                 self.totalInstances = count
+                self.nofPlaceInstances = count
                 print("Total place instances: \(count)")
             }
             let randomIndex = Int(arc4random_uniform(UInt32(self.totalInstances)))
-            print("Random Index: \(randomIndex)")
+            print("Random Index for Places: \(randomIndex)")
             
             let placesQuery = PFQuery(className: "Places")
             
@@ -111,89 +185,87 @@ class luckyStrikeViewController: UIViewController {
             }
             
         }
-        
-    }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        let placesQuery = PFQuery(className: "Places")
         
-        //print("After....")
-        //print("++++++\(self.questionSeenBefore),  \(self.questionSeenBefore.count)")
         
-        placesQuery.limit = 1
         
-        placesQuery.findObjectsInBackground { (objects, error) in
-            
-            
-            if let places = objects {
-                
-                for place in places {
-                    
-                    self.option1 = place["alternative1"] as! String
-                    self.option2 = place["alternative2"] as! String
-                    self.option3 = place["alternative3"] as! String
-                    self.option4 = place["alternative4"] as! String
-                    self.imageFile.append(place["imageFile"] as! PFFile)
-                    self.correctAnswer = place["correctAlternative"] as! String
-                    self.descriptionEng = place["engDescription"] as! String
-                    self.descriptionTr = place["trDescription"] as! String
-                    
-                }
-            }
-            
-            self.imageFile[0].getDataInBackground { (data, error) in
-                
-                if let imageData = data {
-                    
-                    if let imageToDisplay = UIImage(data: imageData) {
-                        
-                        self.image.image = imageToDisplay
-                        
-                    }
-                }
-                
-            }
-            if let correctAnsInt = Int(self.correctAnswer) {
-            
-                if correctAnsInt == 1 {
-                    self.headerLabel.text = self.option1
-                }
-                else if correctAnsInt == 2 {
-                    self.headerLabel.text = self.option2
-                }
-                else if correctAnsInt == 3 {
-                    self.headerLabel.text = self.option3
-                }
-                else if correctAnsInt == 4 {
-                    self.headerLabel.text = self.option4
-                }
-            }
-            self.descriptionText.text = self.descriptionEng
-            self.descriptionText.isHidden = false
-            self.headerLabel.isHidden = false
-            self.image.isHidden = false
-        }
         
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(wasDragged(gestureRecognizer:)))
         image.addGestureRecognizer(gesture)
-        
     }
 
     @objc func wasDragged(gestureRecognizer: UIPanGestureRecognizer) {
-        var rotation = CGAffineTransform(rotationAngle: 0)
-        var scale = 1
-        var scaledAndRotated = rotation.scaledBy(x: 1, y: 1)
-        
+        let imagePoint = gestureRecognizer.translation(in: view)
+        image.center = CGPoint(x: view.bounds.width/2 + imagePoint.x, y: image.center.y)
         
         if gestureRecognizer.state == .ended {
-            if image.center.x < (view.bounds.width / 2 - 100) {
-                print("Not Interested")
+            if image.center.x < (view.bounds.width/2 - 100) {
+                print("Next Image")
+                
+                let randomIndex = Int(arc4random_uniform(UInt32(self.nofPlaceInstances)))
+                print("Random Index: \(randomIndex)")
+                
+                let placesQuery = PFQuery(className: "Places")
+                
+                placesQuery.limit = 1
+                placesQuery.skip = randomIndex
+                self.imageFile.removeAll()
+                
+                placesQuery.findObjectsInBackground { (objects, error) in
+                    
+                    
+                    if let places = objects {
+                        
+                        for place in places {
+                            
+                            self.option1 = place["alternative1"] as! String
+                            self.option2 = place["alternative2"] as! String
+                            self.option3 = place["alternative3"] as! String
+                            self.option4 = place["alternative4"] as! String
+                            self.imageFile.append(place["imageFile"] as! PFFile)
+                            self.correctAnswer = place["correctAlternative"] as! String
+                            self.descriptionEng = place["engDescription"] as! String
+                            self.descriptionTr = place["trDescription"] as! String
+                            
+                        }
+                    }
+                    
+                    self.imageFile[0].getDataInBackground { (data, error) in
+                        
+                        if let imageData = data {
+                            
+                            if let imageToDisplay = UIImage(data: imageData) {
+                                
+                                self.image.image = imageToDisplay
+                                
+                            }
+                        }
+                        
+                    }
+                    if let correctAnsInt = Int(self.correctAnswer) {
+                        
+                        if correctAnsInt == 1 {
+                            self.headerLabel.text = self.option1
+                        }
+                        else if correctAnsInt == 2 {
+                            self.headerLabel.text = self.option2
+                        }
+                        else if correctAnsInt == 3 {
+                            self.headerLabel.text = self.option3
+                        }
+                        else if correctAnsInt == 4 {
+                            self.headerLabel.text = self.option4
+                        }
+                    }
+                    self.descriptionText.text = self.descriptionEng
+                    self.descriptionText.isHidden = false
+                    self.headerLabel.isHidden = false
+                    self.image.isHidden = false
+                    self.image.center = CGPoint(x: self.view.bounds.width/2, y: self.image.center.y)
+                }
             }
-            if image.center.x > (view.bounds.width / 2 + 100) {
-                print("Interested")
+            else {
+                image.center = CGPoint(x: view.bounds.width/2, y: image.center.y)
             }
         }
     }
