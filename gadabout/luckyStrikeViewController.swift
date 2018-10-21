@@ -41,6 +41,15 @@ class luckyStrikeViewController: UIViewController {
         let button = sender as? UIButton
         button?.shake()
         
+        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.image.center.y, width: 100, height: 100))
+        activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+        activityIndicator.center = self.image.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
         placeFoodSelection = arc4random_uniform(2)
         print("Random Index: \(placeFoodSelection)")
         
@@ -80,25 +89,15 @@ class luckyStrikeViewController: UIViewController {
                          
                         }
                         
+                        activityIndicator.stopAnimating()
+                        UIApplication.shared.endIgnoringInteractionEvents()
+                        
                         self.correctAnswer = place["correctAlternative"] as! String
                         self.descriptionEng = place["engDescription"] as! String
                         self.descriptionTr = place["trDescription"] as! String
                         
                     }
                 }
-                
-                /*self.imageFile[0].getDataInBackground { (data, error) in
-                    
-                    if let imageData = data {
-                        
-                        if let imageToDisplay = UIImage(data: imageData) {
-                            
-                            self.image.image = imageToDisplay
-                            
-                        }
-                    }
-                    
-                }*/
                 
                 if let correctAnsInt = Int(self.correctAnswer) {
                     
@@ -155,6 +154,8 @@ class luckyStrikeViewController: UIViewController {
                                 }
                             }
                          }
+                        activityIndicator.stopAnimating()
+                        UIApplication.shared.endIgnoringInteractionEvents()
                         
                         self.correctAnswer = place["correctAlternative"] as! String
                         self.descriptionEng = place["engDescription"] as! String
@@ -162,19 +163,6 @@ class luckyStrikeViewController: UIViewController {
                         
                     }
                 }
-                
-                /*self.imageFile[0].getDataInBackground { (data, error) in
-                    
-                    if let imageData = data {
-                        
-                        if let imageToDisplay = UIImage(data: imageData) {
-                            
-                            self.image.image = imageToDisplay
-                            
-                        }
-                    }
-                    
-                }*/
                 
                 if let correctAnsInt = Int(self.correctAnswer) {
                     
@@ -376,68 +364,152 @@ class luckyStrikeViewController: UIViewController {
         
         if gestureRecognizer.state == .ended {
             if image.center.x < (view.bounds.width/2 - 100) {
-                print("Next Image")
                 
-                let randomIndex = Int(arc4random_uniform(UInt32(self.nofPlaceInstances)))
-                print("Random Index: \(randomIndex)")
+                let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.image.center.y, width: 100, height: 100))
+                activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+                activityIndicator.center = self.image.center
+                activityIndicator.hidesWhenStopped = true
+                activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+                view.addSubview(activityIndicator)
+                activityIndicator.startAnimating()
+                UIApplication.shared.beginIgnoringInteractionEvents()
                 
-                let placesQuery = PFQuery(className: "Places")
+                placeFoodSelection = arc4random_uniform(2)
+                print("Random Index: \(placeFoodSelection)")
                 
-                placesQuery.limit = 1
-                placesQuery.skip = randomIndex
-                self.imageFile.removeAll()
-                
-                placesQuery.findObjectsInBackground { (objects, error) in
+                if placeFoodSelection == 0 {
                     
+                    let randomIndex = Int(arc4random_uniform(UInt32(self.nofPlaceInstances)))
+                    print("Random Index: \(randomIndex)")
                     
-                    if let places = objects {
+                    let placesQuery = PFQuery(className: "Places")
+                    
+                    placesQuery.limit = 1
+                    placesQuery.skip = randomIndex
+                    self.imageFile.removeAll()
+                    
+                    placesQuery.findObjectsInBackground { (objects, error) in
                         
-                        for place in places {
-                            
-                            self.option1 = place["alternative1"] as! String
-                            self.option2 = place["alternative2"] as! String
-                            self.option3 = place["alternative3"] as! String
-                            self.option4 = place["alternative4"] as! String
-                            self.imageFile.append(place["imageFile"] as! PFFile)
-                            self.correctAnswer = place["correctAlternative"] as! String
-                            self.descriptionEng = place["engDescription"] as! String
-                            self.descriptionTr = place["trDescription"] as! String
-                            
-                        }
-                    }
-                    
-                    self.imageFile[0].getDataInBackground { (data, error) in
                         
-                        if let imageData = data {
+                        if let places = objects {
                             
-                            if let imageToDisplay = UIImage(data: imageData) {
+                            for place in places {
                                 
-                                self.image.image = imageToDisplay
+                                self.option1 = place["alternative1"] as! String
+                                self.option2 = place["alternative2"] as! String
+                                self.option3 = place["alternative3"] as! String
+                                self.option4 = place["alternative4"] as! String
+                                self.imageFile.append(place["imageFile"] as! PFFile)
+                                
+                                self.imageFile[0].getDataInBackground { (data, error) in
+                                    
+                                    if let imageData = data {
+                                        
+                                        if let imageToDisplay = UIImage(data: imageData) {
+                                            
+                                            self.image.image = imageToDisplay
+                                        }
+                                    }
+                                    
+                                }
+                                
+                                activityIndicator.stopAnimating()
+                                UIApplication.shared.endIgnoringInteractionEvents()
+                                
+                                self.correctAnswer = place["correctAlternative"] as! String
+                                self.descriptionEng = place["engDescription"] as! String
+                                self.descriptionTr = place["trDescription"] as! String
                                 
                             }
                         }
                         
+                        if let correctAnsInt = Int(self.correctAnswer) {
+                            
+                            if correctAnsInt == 1 {
+                                self.headerLabel.text = self.option1
+                            }
+                            else if correctAnsInt == 2 {
+                                self.headerLabel.text = self.option2
+                            }
+                            else if correctAnsInt == 3 {
+                                self.headerLabel.text = self.option3
+                            }
+                            else if correctAnsInt == 4 {
+                                self.headerLabel.text = self.option4
+                            }
+                        }
+                        self.descriptionText.text = self.descriptionEng
+                        self.descriptionText.isHidden = false
+                        self.headerLabel.isHidden = false
+                        self.image.isHidden = false
                     }
-                    if let correctAnsInt = Int(self.correctAnswer) {
+                }
+                else {
+                    let randomIndex = Int(arc4random_uniform(UInt32(self.nofFoodInstances)))
+                    print("Random Index: \(randomIndex)")
+                    
+                    let placesQuery = PFQuery(className: "Foods")
+                    
+                    placesQuery.limit = 1
+                    placesQuery.skip = randomIndex
+                    self.imageFile.removeAll()
+                    
+                    placesQuery.findObjectsInBackground { (objects, error) in
                         
-                        if correctAnsInt == 1 {
-                            self.headerLabel.text = self.option1
+                        
+                        if let places = objects {
+                            
+                            for place in places {
+                                
+                                self.option1 = place["alternative1"] as! String
+                                self.option2 = place["alternative2"] as! String
+                                self.option3 = place["alternative3"] as! String
+                                self.option4 = place["alternative4"] as! String
+                                self.imageFile.append(place["imageFile"] as! PFFile)
+                                
+                                self.imageFile[0].getDataInBackground { (data, error) in
+                                    
+                                    if let imageData = data {
+                                        
+                                        if let imageToDisplay = UIImage(data: imageData) {
+                                            
+                                            self.image.image = imageToDisplay
+                                            
+                                        }
+                                    }
+                                }
+                                
+                                activityIndicator.stopAnimating()
+                                UIApplication.shared.endIgnoringInteractionEvents()
+                                
+                                self.correctAnswer = place["correctAlternative"] as! String
+                                self.descriptionEng = place["engDescription"] as! String
+                                self.descriptionTr = place["trDescription"] as! String
+                                
+                            }
                         }
-                        else if correctAnsInt == 2 {
-                            self.headerLabel.text = self.option2
+                        
+                        if let correctAnsInt = Int(self.correctAnswer) {
+                            
+                            if correctAnsInt == 1 {
+                                self.headerLabel.text = self.option1
+                            }
+                            else if correctAnsInt == 2 {
+                                self.headerLabel.text = self.option2
+                            }
+                            else if correctAnsInt == 3 {
+                                self.headerLabel.text = self.option3
+                            }
+                            else if correctAnsInt == 4 {
+                                self.headerLabel.text = self.option4
+                            }
                         }
-                        else if correctAnsInt == 3 {
-                            self.headerLabel.text = self.option3
-                        }
-                        else if correctAnsInt == 4 {
-                            self.headerLabel.text = self.option4
-                        }
+                        self.descriptionText.text = self.descriptionEng
+                        self.descriptionText.isHidden = false
+                        self.headerLabel.isHidden = false
+                        self.image.isHidden = false
                     }
-                    self.descriptionText.text = self.descriptionEng
-                    self.descriptionText.isHidden = false
-                    self.headerLabel.isHidden = false
-                    self.image.isHidden = false
-                    self.image.center = CGPoint(x: self.view.bounds.width/2, y: self.image.center.y)
+                    
                 }
             }
             else {
