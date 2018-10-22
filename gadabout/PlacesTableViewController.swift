@@ -26,6 +26,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var showDetail = [Bool]()
     var questionSeenBefore = [String]()
     var questionCompleted = [String]()
+    var nofPlaceInstances: Int32 = 0
     
     var detailCellRow: Int = 0
     
@@ -109,11 +110,83 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 print(error.localizedDescription)
             }
             else {
+                self.nofPlaceInstances = count
                 print("Total place instances: \(count)")
-            }
+                let questionCoveredQuery = PFQuery(className: "placesCoveredBefore")
+                questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+                questionCoveredQuery.findObjectsInBackground { (objects, error) in
+                    
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    else {
+                        if let places = objects {
+                            for place in places {
+                                //print("\(place["questionId"])")
+                                self.questionSeenBefore.append(place["questionId"] as! String)
+                            }
+                        }
+                    }
+                    let questionLimit = 2
+                    var randomIndexArr = [Int]()
+                    for _ in 0 ..< questionLimit {
+                        let placesQuery = PFQuery(className: "Places")
+                        
+                        var randomIndex = Int(arc4random_uniform(UInt32(self.nofPlaceInstances)))
+                        print("Random Index: \(randomIndex)")
+                        
+                        while true {
+                            
+                            if let rIndex = randomIndexArr.index(of: randomIndex) {
+                                print("Same instance")
+                                randomIndex = Int(arc4random_uniform(UInt32(self.nofPlaceInstances)))
+                                print("Random Index: \(randomIndex)")
+                            }
+                            else {
+                                randomIndexArr.append(randomIndex)
+                                break
+                            }
+                        }
+                            
+                        placesQuery.skip = randomIndex
+
+                        placesQuery.limit = 1
+                        placesQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
+                        
+                        placesQuery.findObjectsInBackground { (objects, error) in
+                            
+                            
+                            if let places = objects {
+                                
+                                for place in places {
+                                    
+                                    self.option1.append(place["alternative1"] as! String)
+                                    self.option2.append(place["alternative2"] as! String)
+                                    self.option3.append(place["alternative3"] as! String)
+                                    self.option4.append(place["alternative4"] as! String)
+                                    self.imageFile.append(place["imageFile"] as! PFFile)
+                                    self.correctAnswer.append(place["correctAlternative"] as! String)
+                                    self.descriptionEng.append(place["engDescription"] as! String)
+                                    self.descriptionTr.append(place["trDescription"] as! String)
+                                    self.showDetail.append(false)
+                                    
+                                    self.tableView.reloadData()
+                                    
+                                    
+                                    if let question = place.objectId {
+                                        self.questionCompleted.append(question)
+                                    }
+                                }
+                            }
+                            
+                        }
+                        
+                    }
+                }
         }
         
-        let questionCoveredQuery = PFQuery(className: "placesCoveredBefore")
+        
+        /*let questionCoveredQuery = PFQuery(className: "placesCoveredBefore")
         questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
         questionCoveredQuery.findObjectsInBackground { (objects, error) in
             
@@ -126,6 +199,18 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                         //print("\(place["questionId"])")
                         self.questionSeenBefore.append(place["questionId"] as! String)
                     }
+                }
+            }
+            
+            let nofInstancePlaceQuery = PFQuery(className: "Places")
+            nofInstancePlaceQuery.countObjectsInBackground { (count, error) in
+                
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                else {
+                    self.nofPlaceInstances = count
+                    print("Total place instances: \(count)")
                 }
             }
             let placesQuery = PFQuery(className: "Places")
@@ -178,7 +263,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     }
                 }
                 
-            }
+            }*/
 
         }
 
