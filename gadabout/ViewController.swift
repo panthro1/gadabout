@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import CoreData
+import GoogleMobileAds
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
@@ -25,6 +26,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var haveAnAccountLabel: UILabel!
     
     @IBOutlet weak var logIn: UIButton!
+    
+    var interstitial: GADInterstitial!
+
         
     var isEnglish = true
     
@@ -105,6 +109,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Ad id
+        // interstitial = GADInterstitial(adUnitID: "ca-app-pub-5745243428784846~5277829027")
+        
+        // Test ad
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        let adRequest = GADRequest()
+        interstitial.load(adRequest)
+        
         // Do any additional setup after loading the view, typically from a nib.
         print("Hello World")
         
@@ -183,6 +196,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func SignInButtonTapped(_ sender: Any) {
         
+        if interstitial.isReady {
+            interstitial.present(fromRootViewController: self)
+        } else {
+            print("Ad wasn't ready")
+        }
+        
         let button = sender as? UIButton
         button?.pulsate()
         
@@ -223,6 +242,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func LoginButtonTapped(_ sender: Any) {
+        
+        if interstitial.isReady {
+            interstitial.present(fromRootViewController: self)
+        } else {
+            print("Ad wasn't ready")
+        }
         
         let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         activityIndicator.center = self.view.center

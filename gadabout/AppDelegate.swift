@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Parse
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         Parse.initialize(with: configuration)
+        
+        FirebaseApp.configure()
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-5745243428784846~5277829027")
         
         return true
     }

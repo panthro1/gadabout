@@ -34,6 +34,7 @@
 		E3E1BEF12179133700C62595 /* luckyStrikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */; };
 		E3E5BD53213295610019BFBC /* keyboard-right-arrow-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E3E5BD52213295600019BFBC /* keyboard-right-arrow-button.png */; };
 		E3EB34A221751483000DB77A /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EB34A121751483000DB77A /* ToDoListViewController.swift */; };
+		E3F72E51217E40FE00487C72 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3F72E50217E40FD00487C72 /* GoogleService-Info.plist */; };
 		E3FFD48420F14EE1001C974D /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FFD48320F14EE1001C974D /* MainPageViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +91,7 @@
 		E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = luckyStrikeViewController.swift; sourceTree = "<group>"; };
 		E3E5BD52213295600019BFBC /* keyboard-right-arrow-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard-right-arrow-button.png"; sourceTree = SOURCE_ROOT; };
 		E3EB34A121751483000DB77A /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
+		E3F72E50217E40FD00487C72 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E3FFD48320F14EE1001C974D /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -177,6 +179,7 @@
 				E3E5BD52213295600019BFBC /* keyboard-right-arrow-button.png */,
 				E3261AF020F098940056CE99 /* Assets.xcassets */,
 				E3261AF220F098940056CE99 /* LaunchScreen.storyboard */,
+				E3F72E50217E40FD00487C72 /* GoogleService-Info.plist */,
 				E313DF602118D4AD00BAE4C6 /* uncheck.png */,
 				E36DA986212D71830031D337 /* wrong.gif */,
 				E313DF5E2118D4A500BAE4C6 /* check.png */,
@@ -315,6 +318,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3F72E51217E40FE00487C72 /* GoogleService-Info.plist in Resources */,
 				E3687E8D2115D25800CC60E9 /* collesium.jpg in Resources */,
 				E3261AF420F098940056CE99 /* LaunchScreen.storyboard in Resources */,
 				E313DF5F2118D4A500BAE4C6 /* check.png in Resources */,
@@ -373,12 +377,16 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-gadabout/Pods-gadabout-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Parse/Parse.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parse.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

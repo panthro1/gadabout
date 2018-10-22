@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import GoogleMobileAds
 
 class luckyStrikeViewController: UIViewController {
     
@@ -30,6 +31,8 @@ class luckyStrikeViewController: UIViewController {
     @IBOutlet weak var headerLabel: UILabel!
     
     @IBOutlet weak var descriptionText: UITextView!
+    
+    @IBOutlet weak var bannerView: GADBannerView!
     
     @IBAction func backTapped(_ sender: Any) {
         
@@ -192,6 +195,15 @@ class luckyStrikeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Account ad
+        //bannerView.adUnitID = "ca-app-pub-5745243428784846~5277829027"
+
+        // Test add
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
         
         placeFoodSelection = arc4random_uniform(2)
         print("Random Index: \(placeFoodSelection)")
