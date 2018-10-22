@@ -24,6 +24,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
     var showDetail = [Bool]()
     var questionSeenBefore = [String]()
     var questionCompleted = [String]()
+    var nofFoodInstances: Int32 = 0
     
     var detailCellRow: Int = 0
     
@@ -89,57 +90,89 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         
         self.tableView.rowHeight = 380
         
-        //questionSeenBefore.removeAll()
-        
-        let questionCoveredQuery = PFQuery(className: "foodsCoveredBefore")
-        questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
-        questionCoveredQuery.findObjectsInBackground { (objects, error) in
+        let nofInstanceQuery = PFQuery(className: "Foods")
+        nofInstanceQuery.countObjectsInBackground { (count, error) in
             
             if let error = error {
                 print(error.localizedDescription)
             }
             else {
-                if let places = objects {
-                    for place in places {
-                        print("\(place["questionId"])")
-                        self.questionSeenBefore.append(place["questionId"] as! String)
-                    }
-                }
-            }
-            let foodsQuery = PFQuery(className: "Foods")
-            
-            foodsQuery.limit = 2
-            foodsQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
-            
-            foodsQuery.findObjectsInBackground { (objects, error) in
+                self.nofFoodInstances = count
+                print("Total place instances: \(count)")
                 
-                
-                if let foods = objects {
+                let questionCoveredQuery = PFQuery(className: "foodsCoveredBefore")
+                questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+                questionCoveredQuery.findObjectsInBackground { (objects, error) in
                     
-                    for food in foods {
-                        
-                        self.option1.append(food["alternative1"] as! String)
-                        self.option2.append(food["alternative2"] as! String)
-                        self.option3.append(food["alternative3"] as! String)
-                        self.option4.append(food["alternative4"] as! String)
-                        self.imageFile.append(food["imageFile"] as! PFFile)
-                        self.correctAnswer.append(food["correctAlternative"] as! String)
-                        self.descriptionEng.append(food["engDescription"] as! String)
-                        self.descriptionTr.append(food["trDescription"] as! String)
-                        self.showDetail.append(false)
-                        
-                        self.tableView.reloadData()
-                        
-                        if let question = food.objectId {
-                            self.questionCompleted.append(question)
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    else {
+                        if let foods = objects {
+                            for food in foods {
+                                //print("\(place["questionId"])")
+                                self.questionSeenBefore.append(food["questionId"] as! String)
+                            }
                         }
                     }
+                    let questionLimit = 2
+                    var randomIndexArr = [Int]()
+                    for _ in 0 ..< questionLimit {
+                        let foodsQuery = PFQuery(className: "Foods")
+                        
+                        var randomIndex = Int(arc4random_uniform(UInt32(self.nofFoodInstances)))
+                        print("Random Index: \(randomIndex)")
+                        
+                        while true {
+                            
+                            if let rIndex = randomIndexArr.index(of: randomIndex) {
+                                print("Same instance")
+                                randomIndex = Int(arc4random_uniform(UInt32(self.nofFoodInstances)))
+                                print("Random Index: \(randomIndex)")
+                            }
+                            else {
+                                randomIndexArr.append(randomIndex)
+                                break
+                            }
+                        }
+                        
+                        foodsQuery.skip = randomIndex
+                        
+                        foodsQuery.limit = 1
+                        foodsQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
+                        
+                        foodsQuery.findObjectsInBackground { (objects, error) in
+                            
+                            
+                            if let foods = objects {
+                                
+                                for food in foods {
+                                    
+                                    self.option1.append(food["alternative1"] as! String)
+                                    self.option2.append(food["alternative2"] as! String)
+                                    self.option3.append(food["alternative3"] as! String)
+                                    self.option4.append(food["alternative4"] as! String)
+                                    self.imageFile.append(food["imageFile"] as! PFFile)
+                                    self.correctAnswer.append(food["correctAlternative"] as! String)
+                                    self.descriptionEng.append(food["engDescription"] as! String)
+                                    self.descriptionTr.append(food["trDescription"] as! String)
+                                    self.showDetail.append(false)
+                                    
+                                    self.tableView.reloadData()
+                                    
+                                    
+                                    if let question = food.objectId {
+                                        self.questionCompleted.append(question)
+                                    }
+                                }
+                            }
+                            
+                        }
+                        
+                    }
                 }
-                
             }
-            
         }
-        
     }
 
     override func didReceiveMemoryWarning() {
