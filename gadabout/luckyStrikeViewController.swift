@@ -377,9 +377,12 @@ class luckyStrikeViewController: UIViewController {
         if gestureRecognizer.state == .ended {
             if image.center.x < (view.bounds.width/2 - 100) {
                 
+                UIView.beginAnimations(nil, context: nil)
+                UIView.setAnimationDuration(0.1)
+                
                 let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
                 activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
-                activityIndicator.center = self.image.center
+                activityIndicator.center = self.view.center
                 activityIndicator.hidesWhenStopped = true
                 activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
                 view.addSubview(activityIndicator)
@@ -457,27 +460,28 @@ class luckyStrikeViewController: UIViewController {
                     }
                 }
                 else {
+                    
                     let randomIndex = Int(arc4random_uniform(UInt32(self.nofFoodInstances)))
                     print("Random Index: \(randomIndex)")
                     
-                    let placesQuery = PFQuery(className: "Foods")
+                    let foodsQuery = PFQuery(className: "Foods")
                     
-                    placesQuery.limit = 1
-                    placesQuery.skip = randomIndex
+                    foodsQuery.limit = 1
+                    foodsQuery.skip = randomIndex
                     self.imageFile.removeAll()
                     
-                    placesQuery.findObjectsInBackground { (objects, error) in
+                    foodsQuery.findObjectsInBackground { (objects, error) in
                         
                         
-                        if let places = objects {
+                        if let foods = objects {
                             
-                            for place in places {
+                            for food in foods {
                                 
-                                self.option1 = place["alternative1"] as! String
-                                self.option2 = place["alternative2"] as! String
-                                self.option3 = place["alternative3"] as! String
-                                self.option4 = place["alternative4"] as! String
-                                self.imageFile.append(place["imageFile"] as! PFFile)
+                                self.option1 = food["alternative1"] as! String
+                                self.option2 = food["alternative2"] as! String
+                                self.option3 = food["alternative3"] as! String
+                                self.option4 = food["alternative4"] as! String
+                                self.imageFile.append(food["imageFile"] as! PFFile)
                                 
                                 self.imageFile[0].getDataInBackground { (data, error) in
                                     
@@ -494,9 +498,9 @@ class luckyStrikeViewController: UIViewController {
                                 activityIndicator.stopAnimating()
                                 UIApplication.shared.endIgnoringInteractionEvents()
                                 
-                                self.correctAnswer = place["correctAlternative"] as! String
-                                self.descriptionEng = place["engDescription"] as! String
-                                self.descriptionTr = place["trDescription"] as! String
+                                self.correctAnswer = food["correctAlternative"] as! String
+                                self.descriptionEng = food["engDescription"] as! String
+                                self.descriptionTr = food["trDescription"] as! String
                                 
                             }
                         }
@@ -523,6 +527,8 @@ class luckyStrikeViewController: UIViewController {
                     }
                     
                 }
+                UIView.commitAnimations()
+
             }
             else {
                 image.center = CGPoint(x: view.bounds.width/2, y: image.center.y)
