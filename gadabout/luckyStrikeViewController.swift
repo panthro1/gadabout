@@ -40,13 +40,108 @@ class luckyStrikeViewController: UIViewController {
     }
     
     
+    @IBAction func toDoListTapped(_ sender: Any) {
+        
+        let button = view
+        
+        UIButton.animate(withDuration: 0.2,
+                         animations: {
+                            button!.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)
+        },
+                         completion: { finish in
+                            UIButton.animate(withDuration: 0.2, animations: {
+                                button!.transform = CGAffineTransform.identity
+                            })
+        })
+        
+        /*let itemsObjectDescription = UserDefaults.standard.object(forKey: "toDoItemDescription")
+        
+        let itemsObjectName = UserDefaults.standard.object(forKey: "toDoItem")
+        
+        var itemsDescription = [String]()
+        
+        var itemsName = [String]()
+        
+        if let tappedIndexPath = tableView.indexPath(for: sender) {
+            
+            if let tempItemsDescription = itemsObjectDescription {
+                if let tempItemsName = itemsObjectName {
+                    itemsDescription = tempItemsDescription as! [String]
+                    itemsName = tempItemsName as! [String]
+                    
+                    itemsDescription.append(self.descriptionEng[tappedIndexPath.row])
+                    if let correctAnsInt = Int(correctAnswer[tappedIndexPath.row]) {
+                        
+                        if correctAnsInt == 1 {
+                            itemsName.append(self.option1[tappedIndexPath.row])
+                        }
+                        else if correctAnsInt == 2 {
+                            itemsName.append(self.option2[tappedIndexPath.row])
+                        }
+                        else if correctAnsInt == 3 {
+                            itemsName.append(self.option3[tappedIndexPath.row])
+                        }
+                        else if correctAnsInt == 4 {
+                            itemsName.append(self.option4[tappedIndexPath.row])
+                        }
+                    }
+                }
+                else {
+                    
+                    if let correctAnsInt = Int(correctAnswer[tappedIndexPath.row]) {
+                        itemsDescription.append(self.descriptionEng[tappedIndexPath.row])
+                        
+                        if correctAnsInt == 1 {
+                            itemsName.append(self.option1[tappedIndexPath.row])
+                        }
+                        else if correctAnsInt == 2 {
+                            itemsName.append(self.option2[tappedIndexPath.row])
+                        }
+                        else if correctAnsInt == 3 {
+                            itemsName.append(self.option3[tappedIndexPath.row])
+                        }
+                        else if correctAnsInt == 4 {
+                            itemsName.append(self.option4[tappedIndexPath.row])
+                        }
+                    }
+                }
+                
+            }
+            else {
+                itemsDescription.append(self.descriptionEng[tappedIndexPath.row])
+                
+                if let correctAnsInt = Int(correctAnswer[tappedIndexPath.row]) {
+                    if correctAnsInt == 1 {
+                        itemsName.append(self.option1[tappedIndexPath.row])
+                    }
+                    else if correctAnsInt == 2 {
+                        itemsName.append(self.option2[tappedIndexPath.row])
+                    }
+                    else if correctAnsInt == 3 {
+                        itemsName.append(self.option3[tappedIndexPath.row])
+                    }
+                    else if correctAnsInt == 4 {
+                        itemsName.append(self.option4[tappedIndexPath.row])
+                    }
+                }
+            }
+        }
+        print("itemsName : \(itemsName)")
+        print("itemsDescription: \(itemsDescription)")
+        
+        UserDefaults.standard.set(itemsName, forKey: "toDoItem")
+        UserDefaults.standard.set(itemsDescription, forKey: "toDoItemDescription")*/
+
+    }
+    
+    
     @IBAction func nextTapped(_ sender: Any) {
         let button = sender as? UIButton
         button?.shake()
         
         let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
         activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
-        activityIndicator.center = self.image.center
+        activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
         view.addSubview(activityIndicator)
@@ -531,7 +626,7 @@ class luckyStrikeViewController: UIViewController {
 
             }
             else {
-                image.center = CGPoint(x: view.bounds.width/2, y: image.center.y)
+                //image.center = CGPoint(x: view.bounds.width/2, y: image.center.y)
             }
         }
     }
