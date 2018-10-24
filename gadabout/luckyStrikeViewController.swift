@@ -54,7 +54,7 @@ class luckyStrikeViewController: UIViewController {
                             })
         })
         
-        /*let itemsObjectDescription = UserDefaults.standard.object(forKey: "toDoItemDescription")
+        let itemsObjectDescription = UserDefaults.standard.object(forKey: "toDoItemDescription")
         
         let itemsObjectName = UserDefaults.standard.object(forKey: "toDoItem")
         
@@ -62,67 +62,34 @@ class luckyStrikeViewController: UIViewController {
         
         var itemsName = [String]()
         
-        if let tappedIndexPath = tableView.indexPath(for: sender) {
-            
-            if let tempItemsDescription = itemsObjectDescription {
-                if let tempItemsName = itemsObjectName {
-                    itemsDescription = tempItemsDescription as! [String]
-                    itemsName = tempItemsName as! [String]
-                    
-                    itemsDescription.append(self.descriptionEng[tappedIndexPath.row])
-                    if let correctAnsInt = Int(correctAnswer[tappedIndexPath.row]) {
-                        
-                        if correctAnsInt == 1 {
-                            itemsName.append(self.option1[tappedIndexPath.row])
-                        }
-                        else if correctAnsInt == 2 {
-                            itemsName.append(self.option2[tappedIndexPath.row])
-                        }
-                        else if correctAnsInt == 3 {
-                            itemsName.append(self.option3[tappedIndexPath.row])
-                        }
-                        else if correctAnsInt == 4 {
-                            itemsName.append(self.option4[tappedIndexPath.row])
-                        }
-                    }
-                }
-                else {
-                    
-                    if let correctAnsInt = Int(correctAnswer[tappedIndexPath.row]) {
-                        itemsDescription.append(self.descriptionEng[tappedIndexPath.row])
-                        
-                        if correctAnsInt == 1 {
-                            itemsName.append(self.option1[tappedIndexPath.row])
-                        }
-                        else if correctAnsInt == 2 {
-                            itemsName.append(self.option2[tappedIndexPath.row])
-                        }
-                        else if correctAnsInt == 3 {
-                            itemsName.append(self.option3[tappedIndexPath.row])
-                        }
-                        else if correctAnsInt == 4 {
-                            itemsName.append(self.option4[tappedIndexPath.row])
-                        }
-                    }
-                }
+        if let tempItemsDescription = itemsObjectDescription {
+            if let tempItemsName = itemsObjectName {
+                itemsDescription = tempItemsDescription as! [String]
+                itemsName = tempItemsName as! [String]
                 
+                if let descText = descriptionText.text {
+                    if let nameText = headerLabel.text {
+                        itemsDescription.append(descText)
+                        itemsName.append(nameText)
+                    }
+                }
             }
             else {
-                itemsDescription.append(self.descriptionEng[tappedIndexPath.row])
                 
-                if let correctAnsInt = Int(correctAnswer[tappedIndexPath.row]) {
-                    if correctAnsInt == 1 {
-                        itemsName.append(self.option1[tappedIndexPath.row])
+                if let descText = descriptionText.text {
+                    if let nameText = headerLabel.text {
+                        itemsDescription.append(descText)
+                        itemsName.append(nameText)
                     }
-                    else if correctAnsInt == 2 {
-                        itemsName.append(self.option2[tappedIndexPath.row])
-                    }
-                    else if correctAnsInt == 3 {
-                        itemsName.append(self.option3[tappedIndexPath.row])
-                    }
-                    else if correctAnsInt == 4 {
-                        itemsName.append(self.option4[tappedIndexPath.row])
-                    }
+                }
+            }
+            
+        }
+        else {
+            if let descText = descriptionText.text {
+                if let nameText = headerLabel.text {
+                    itemsDescription.append(descText)
+                    itemsName.append(nameText)
                 }
             }
         }
@@ -130,7 +97,7 @@ class luckyStrikeViewController: UIViewController {
         print("itemsDescription: \(itemsDescription)")
         
         UserDefaults.standard.set(itemsName, forKey: "toDoItem")
-        UserDefaults.standard.set(itemsDescription, forKey: "toDoItemDescription")*/
+        UserDefaults.standard.set(itemsDescription, forKey: "toDoItemDescription")
 
     }
     

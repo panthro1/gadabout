@@ -66,7 +66,13 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
             toDoDesc = ": " + itemDescriptions[indexPath.row]
         }
         
+        //let str = attributedText(withString: toDoName, boldString: toDoDesc, font: UIFont(name: "Helvetica Neue", size: 15)!)
+        
         cell.textLabel?.text = toDoName + toDoDesc
+        //cell.textLabel?.text = str.string
+        cell.textLabel?.sizeToFit()
+        cell.textLabel?.numberOfLines = 0
+
         
         return cell
     }
@@ -81,6 +87,15 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
 
+    func attributedText(withString string: String, boldString: String, font: UIFont) -> NSAttributedString {
+        let attributedString = NSMutableAttributedString(string: string,
+                                                         attributes: [NSAttributedStringKey.font: font])
+        let boldFontAttribute: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: font.pointSize)]
+        let range = (string as NSString).range(of: boldString)
+        attributedString.addAttributes(boldFontAttribute, range: range)
+        return attributedString
+    }
+    
     /*
     // MARK: - Navigation
 
