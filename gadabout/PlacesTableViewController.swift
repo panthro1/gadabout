@@ -101,6 +101,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         
         self.tableView.rowHeight = 380
         
+        
         //questionSeenBefore.removeAll()
         
         let nofInstanceQuery = PFQuery(className: "Places")
@@ -210,6 +211,15 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "placesIdentifier", for: indexPath) as! PlacesTableViewCell
         cell.delegate = self
+        
+        cell.toDoListButton.layer.cornerRadius = 5
+        cell.toDoListButton.layer.borderWidth = 1
+        cell.toDoListButton.layer.borderColor = UIColor.black.cgColor
+        
+        cell.detailsButton.backgroundColor = .clear
+        cell.detailsButton.layer.cornerRadius = 5
+        cell.detailsButton.layer.borderWidth = 1
+        cell.detailsButton.layer.borderColor = UIColor.black.cgColor
         
         //print("Row: \(indexPath.row) showDetail: \(showDetail) Completed: \(isCompleted)")
         

@@ -197,6 +197,16 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         let cell = tableView.dequeueReusableCell(withIdentifier: "foodsIdentifier", for: indexPath) as! foodsTableViewCell
         cell.delegate = self
         
+        
+        cell.toDoListButton.layer.cornerRadius = 5
+        cell.toDoListButton.layer.borderWidth = 1
+        cell.toDoListButton.layer.borderColor = UIColor.black.cgColor
+        
+        cell.detailsButton.backgroundColor = .clear
+        cell.detailsButton.layer.cornerRadius = 5
+        cell.detailsButton.layer.borderWidth = 1
+        cell.detailsButton.layer.borderColor = UIColor.black.cgColor
+        
         //print("Row: \(indexPath.row) showDetail: \(showDetail) Completed: \(isCompleted)")
         
         if (showDetail[indexPath.row] == true)/* && (detailCellRow == indexPath.row)*/ {

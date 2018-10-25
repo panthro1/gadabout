@@ -333,8 +333,14 @@
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUD-0s-ioe">
-                                            <rect key="frame" x="20" y="343" width="100" height="30"/>
-                                            <state key="normal" title="Add To Do List"/>
+                                            <rect key="frame" x="20" y="343" width="130" height="30"/>
+                                            <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="130" id="udX-7O-MTJ"/>
+                                            </constraints>
+                                            <state key="normal" title="Add To Do List">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
                                             <connections>
                                                 <action selector="addToDoListTapped:" destination="daD-zG-i3o" eventType="touchUpInside" id="bxA-yX-CTW"/>
                                             </connections>
@@ -832,8 +838,14 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQv-LE-nW5">
-                                            <rect key="frame" x="20" y="343" width="100" height="30"/>
-                                            <state key="normal" title="Add To Do List"/>
+                                            <rect key="frame" x="20" y="343" width="130" height="30"/>
+                                            <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="130" id="Ljs-Rt-e9c"/>
+                                            </constraints>
+                                            <state key="normal" title="Add To Do List">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
                                             <connections>
                                                 <action selector="addToDoListTapped:" destination="YMk-yP-PRz" eventType="touchUpInside" id="0Pc-jv-UnP"/>
                                             </connections>
@@ -1016,6 +1028,6 @@
         <image name="united-states.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oEp-Lf-uRp"/>
+        <segue reference="E7f-hZ-Nwc"/>
     </inferredMetricsTieBreakers>
 </document>
