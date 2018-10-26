@@ -26,8 +26,6 @@ class puzzleMapViewController: UIViewController {
     var isHintDisplayed: Bool = false
     var startTime = Date()
     var harder: Bool = false
-
-    @IBOutlet weak var testLabel: UILabel!
     
     @IBOutlet weak var hintButton: UIButton!
     
@@ -247,6 +245,17 @@ class puzzleMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        harderSimpleButton.backgroundColor = .clear
+        harderSimpleButton.layer.cornerRadius = 5
+        harderSimpleButton.layer.borderWidth = 1
+        harderSimpleButton.layer.borderColor = UIColor.black.cgColor
+        
+        hintButton.layer.cornerRadius = 5
+        hintButton.layer.borderWidth = 1
+        hintButton.layer.borderColor = UIColor.black.cgColor
+
+
         
         let myPicture = UIImage(named: "collesium.jpg")
         

@@ -692,28 +692,25 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7k-ah-WdJ">
-                                <rect key="frame" x="166" y="589" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.035133689641952515" green="0.93834668397903442" blue="0.095309622585773468" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
-                                <color key="textColor" red="0.32369780539999998" green="0.1063579395" blue="0.574860394" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOU-iJ-iWi">
-                                <rect key="frame" x="55" y="551" width="263" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Hint"/>
-                                <connections>
-                                    <action selector="hintTapped:" destination="pLG-OL-dPP" eventType="touchUpInside" id="kYh-nW-Fgq"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBz-ZL-mbw">
-                                <rect key="frame" x="136" y="513" width="106" height="30"/>
+                                <rect key="frame" x="117" y="513" width="139" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <state key="normal" title="Make it harder?"/>
                                 <connections>
                                     <action selector="harderTapped:" destination="pLG-OL-dPP" eventType="touchUpInside" id="GIf-nc-TmP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOU-iJ-iWi">
+                                <rect key="frame" x="145" y="551" width="82" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="Hint">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="hintTapped:" destination="pLG-OL-dPP" eventType="touchUpInside" id="kYh-nW-Fgq"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -728,7 +725,6 @@
                     <connections>
                         <outlet property="harderSimpleButton" destination="CBz-ZL-mbw" id="Rwc-fX-RyK"/>
                         <outlet property="hintButton" destination="SOU-iJ-iWi" id="zSd-SG-cah"/>
-                        <outlet property="testLabel" destination="P7k-ah-WdJ" id="4ym-VJ-dAu"/>
                         <segue destination="77F-Fn-Frx" kind="presentation" identifier="mapPuzzleBackSegue" id="FcB-5h-H0o"/>
                     </connections>
                 </viewController>
@@ -1029,6 +1025,6 @@
         <image name="united-states.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="e9z-7M-9hq"/>
+        <segue reference="FcB-5h-H0o"/>
     </inferredMetricsTieBreakers>
 </document>
