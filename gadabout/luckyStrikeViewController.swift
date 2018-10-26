@@ -34,6 +34,10 @@ class luckyStrikeViewController: UIViewController {
     
     @IBOutlet weak var bannerView: GADBannerView!
     
+    @IBOutlet weak var nextButton: UIButton!
+    
+    @IBOutlet weak var toDoListButton: UIButton!
+    
     @IBAction func backTapped(_ sender: Any) {
         
         performSegue(withIdentifier: "luckyStrikeBackSegue", sender: self)
@@ -257,6 +261,16 @@ class luckyStrikeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        nextButton.backgroundColor = .clear
+        nextButton.layer.cornerRadius = 5
+        nextButton.layer.borderWidth = 1
+        nextButton.layer.borderColor = UIColor.black.cgColor
+        
+        toDoListButton.layer.cornerRadius = 5
+        toDoListButton.layer.borderWidth = 1
+        toDoListButton.layer.borderColor = UIColor.black.cgColor
+
 
         // Account ad
         //bannerView.adUnitID = "ca-app-pub-5745243428784846~5277829027"

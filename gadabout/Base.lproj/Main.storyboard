@@ -483,8 +483,11 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Py-TE-VEr">
-                                <rect key="frame" x="165.5" y="507.5" width="43" height="38"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <rect key="frame" x="142.5" y="508" width="90" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="uZb-hS-nCX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Next"/>
                                 <connections>
                                     <action selector="nextTapped:" destination="Mu3-9O-FyB" eventType="touchUpInside" id="nIm-oe-KUh"/>
@@ -498,8 +501,14 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lmc-la-YMg">
-                                <rect key="frame" x="20" y="555" width="100" height="30"/>
-                                <state key="normal" title="Add To Do List"/>
+                                <rect key="frame" x="20" y="558.5" width="130" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="bk8-Nd-0NF"/>
+                                </constraints>
+                                <state key="normal" title="Add To Do List">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="toDoListTapped:" destination="Mu3-9O-FyB" eventType="touchUpInside" id="fVy-SE-Yu6"/>
                                 </connections>
@@ -536,6 +545,8 @@
                         <outlet property="descriptionText" destination="egR-oY-BhK" id="mwh-ig-mK2"/>
                         <outlet property="headerLabel" destination="hC2-C7-Z3W" id="poV-8A-osp"/>
                         <outlet property="image" destination="xrk-5S-5Fk" id="oGw-fh-W1h"/>
+                        <outlet property="nextButton" destination="0Py-TE-VEr" id="1vP-QI-rWy"/>
+                        <outlet property="toDoListButton" destination="Lmc-la-YMg" id="zTo-aP-SbG"/>
                         <segue destination="77F-Fn-Frx" kind="presentation" identifier="luckyStrikeBackSegue" id="e9z-7M-9hq"/>
                     </connections>
                 </viewController>
@@ -1025,6 +1036,6 @@
         <image name="united-states.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FcB-5h-H0o"/>
+        <segue reference="e9z-7M-9hq"/>
     </inferredMetricsTieBreakers>
 </document>
