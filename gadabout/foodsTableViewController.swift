@@ -37,6 +37,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
     var mustBeSelected: Int = -1
     
     var detailText: String = ""
+    var userRecord = [Bool]()
 
     
     
@@ -62,21 +63,24 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             }
         }
         
+        var indx = 0
         for question in questionCompleted {
-            let needToSaveData = PFObject(className: "foodsCoveredBefore")
-            needToSaveData["userId"] = PFUser.current()?.objectId
-            needToSaveData["questionId"] = question
-            needToSaveData.saveInBackground(block: { (success, error) in
-                
-                if success {
-                    print("Current user is saved in place record")
-                }
-                else {
-                    print("Could not saved")
-                }
-                
-            })
-            
+            if userRecord[indx] == true {
+                let needToSaveData = PFObject(className: "foodsCoveredBefore")
+                needToSaveData["userId"] = PFUser.current()?.objectId
+                needToSaveData["questionId"] = question
+                needToSaveData.saveInBackground(block: { (success, error) in
+                    
+                    if success {
+                        print("Current user is saved in place record")
+                    }
+                    else {
+                        print("Could not saved")
+                    }
+                    
+                })
+            }
+            indx = indx + 1
         }
     }
     
@@ -163,6 +167,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                                     
                                     if let question = food.objectId {
                                         self.questionCompleted.append(question)
+                                        self.userRecord.append(false)
                                     }
                                 }
                             }
@@ -324,6 +329,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                         print("Row No: \(indexPath.row) selected: \(selected)")
                         if answer[qIndex] == correctAnswerInt {
                             status = 1 // correct answer
+                            userRecord[indexPath.row] = true
                         }
                         else {
                             status = 0 // wrong answer

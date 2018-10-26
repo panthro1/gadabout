@@ -346,7 +346,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                         }
                         else {
                             status = 0 // wrong answer
-                            userRecord[indexPath.row] = false
              
                         }
                     }
