@@ -39,6 +39,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var mustBeSelected: Int = -1
     
     var detailText: String = ""
+    var userRecord = [Bool]()
     
 
     @IBOutlet weak var back: UIBarButtonItem!
@@ -68,22 +69,25 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 self.tableView.reloadRows(at: [rowToSelect], with: .fade)
             }
         }
-
+        var indx = 0
         for question in questionCompleted {
-            let needToSaveData = PFObject(className: "placesCoveredBefore")
-            needToSaveData["userId"] = PFUser.current()?.objectId
-            needToSaveData["questionId"] = question
-            needToSaveData.saveInBackground(block: { (success, error) in
-                
-                if success {
-                    print("Current user is saved in place record")
-                }
-                else {
-                    print("Could not saved")
-                }
-                
-            })
-
+            
+            if userRecord[indx] == true {
+                let needToSaveData = PFObject(className: "placesCoveredBefore")
+                needToSaveData["userId"] = PFUser.current()?.objectId
+                needToSaveData["questionId"] = question
+                needToSaveData.saveInBackground(block: { (success, error) in
+                    
+                    if success {
+                        print("Current user is saved in place record")
+                    }
+                    else {
+                        print("Could not saved")
+                    }
+                    
+                })
+            }
+            indx = indx + 1
         }
 
         
@@ -175,6 +179,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                                     
                                     if let question = place.objectId {
                                         self.questionCompleted.append(question)
+                                        self.userRecord.append(false)
                                     }
                                 }
                             }
@@ -337,9 +342,11 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                         print("Row No: \(indexPath.row) selected: \(selected)")
                         if answer[qIndex] == correctAnswerInt {
                             status = 1 // correct answer
+                            userRecord[indexPath.row] = true
                         }
                         else {
                             status = 0 // wrong answer
+                            userRecord[indexPath.row] = false
              
                         }
                     }
