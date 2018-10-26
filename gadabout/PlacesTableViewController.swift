@@ -101,7 +101,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         
         self.tableView.rowHeight = 380
         
-        
         //questionSeenBefore.removeAll()
         
         let nofInstanceQuery = PFQuery(className: "Places")

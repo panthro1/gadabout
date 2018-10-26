@@ -24,6 +24,7 @@
 		E32D30832177A5860016D7EC /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32D30822177A5860016D7EC /* UIButtonExtension.swift */; };
 		E32D30852177B6840016D7EC /* foodsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32D30842177B6840016D7EC /* foodsTableViewController.swift */; };
 		E32D30872177B6B70016D7EC /* foodsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32D30862177B6B70016D7EC /* foodsTableViewCell.swift */; };
+		E33D52C32182BB180077E001 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = E33D52C22182BB170077E001 /* back.png */; };
 		E342D9AC2104853C009D5C67 /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E342D9AB2104853C009D5C67 /* PlacesTableViewController.swift */; };
 		E342D9AE21049038009D5C67 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E342D9AD21049038009D5C67 /* PostViewController.swift */; };
 		E3687E8B2115CE8000CC60E9 /* PlacesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3687E8A2115CE8000CC60E9 /* PlacesTableViewCell.swift */; };
@@ -81,6 +82,7 @@
 		E32D30822177A5860016D7EC /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		E32D30842177B6840016D7EC /* foodsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foodsTableViewController.swift; sourceTree = "<group>"; };
 		E32D30862177B6B70016D7EC /* foodsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foodsTableViewCell.swift; sourceTree = "<group>"; };
+		E33D52C22182BB170077E001 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		E342D9AB2104853C009D5C67 /* PlacesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
 		E342D9AD21049038009D5C67 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		E3687E8A2115CE8000CC60E9 /* PlacesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewCell.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				E313DF5E2118D4A500BAE4C6 /* check.png */,
 				E3687E8C2115D25800CC60E9 /* collesium.jpg */,
 				E3261AF520F098940056CE99 /* Info.plist */,
+				E33D52C22182BB170077E001 /* back.png */,
 				E3261B1720F0A72C0056CE99 /* turkey.png */,
 				E3261B1B20F0A7820056CE99 /* lovetravel.png */,
 				E3261B1920F0A73D0056CE99 /* united-states.png */,
@@ -321,6 +324,7 @@
 				E3F72E51217E40FE00487C72 /* GoogleService-Info.plist in Resources */,
 				E3687E8D2115D25800CC60E9 /* collesium.jpg in Resources */,
 				E3261AF420F098940056CE99 /* LaunchScreen.storyboard in Resources */,
+				E33D52C32182BB180077E001 /* back.png in Resources */,
 				E313DF5F2118D4A500BAE4C6 /* check.png in Resources */,
 				E3E5BD53213295610019BFBC /* keyboard-right-arrow-button.png in Resources */,
 				E3261B1C20F0A7820056CE99 /* lovetravel.png in Resources */,
