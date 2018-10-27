@@ -703,19 +703,23 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBz-ZL-mbw">
-                                <rect key="frame" x="117" y="513" width="139" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBz-ZL-mbw">
+                                <rect key="frame" x="117.5" y="508" width="140" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="36u-fx-P1z"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <state key="normal" title="Make it harder?"/>
                                 <connections>
                                     <action selector="harderTapped:" destination="pLG-OL-dPP" eventType="touchUpInside" id="GIf-nc-TmP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOU-iJ-iWi">
-                                <rect key="frame" x="145" y="551" width="82" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOU-iJ-iWi">
+                                <rect key="frame" x="117.5" y="552" width="140" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="JPN-0q-CAt"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <state key="normal" title="Hint">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -727,7 +731,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="CBz-ZL-mbw" firstAttribute="centerX" secondItem="P7J-iu-hkg" secondAttribute="centerX" id="4zQ-Zb-Cyu"/>
+                            <constraint firstItem="SOU-iJ-iWi" firstAttribute="centerX" secondItem="P7J-iu-hkg" secondAttribute="centerX" id="I4Q-5R-9Lz"/>
                             <constraint firstItem="JQx-Bo-aVE" firstAttribute="trailing" secondItem="BbH-2J-5Xy" secondAttribute="trailing" id="Pj1-vZ-gov"/>
+                            <constraint firstItem="SOU-iJ-iWi" firstAttribute="top" secondItem="CBz-ZL-mbw" secondAttribute="bottom" constant="9" id="TGF-DO-F49"/>
+                            <constraint firstItem="BbH-2J-5Xy" firstAttribute="bottom" secondItem="SOU-iJ-iWi" secondAttribute="bottom" constant="80" id="amA-vp-XlG"/>
                             <constraint firstItem="JQx-Bo-aVE" firstAttribute="top" secondItem="BbH-2J-5Xy" secondAttribute="top" id="cUy-Yi-vnr"/>
                             <constraint firstItem="JQx-Bo-aVE" firstAttribute="leading" secondItem="BbH-2J-5Xy" secondAttribute="leading" id="gax-eu-U5c"/>
                         </constraints>
@@ -1036,6 +1044,6 @@
         <image name="united-states.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="e9z-7M-9hq"/>
+        <segue reference="FcB-5h-H0o"/>
     </inferredMetricsTieBreakers>
 </document>
