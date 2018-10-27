@@ -372,7 +372,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     }
                     else if selected == 3 {
 
-                        cell.markOption3.setImage(UIImage(named: "correc2t.png"), for: [])
+                        cell.markOption3.setImage(UIImage(named: "correct2.png"), for: [])
 
                     }
                     else if selected == 4 {
