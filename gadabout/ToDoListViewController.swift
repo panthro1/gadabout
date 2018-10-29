@@ -53,7 +53,8 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
+        //let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
+        let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
         
         var toDoName = ""
         var toDoDesc = ""
@@ -63,15 +64,25 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         if itemDescriptions.count >= indexPath.row {
-            toDoDesc = ": " + itemDescriptions[indexPath.row]
+            toDoDesc = itemDescriptions[indexPath.row]
         }
         
         //let str = attributedText(withString: toDoName, boldString: toDoDesc, font: UIFont(name: "Helvetica Neue", size: 15)!)
         
-        cell.textLabel?.text = toDoName + toDoDesc
+        /*cell.textLabel?.text = toDoName + toDoDesc
         //cell.textLabel?.text = str.string
         cell.textLabel?.sizeToFit()
+        cell.textLabel?.numberOfLines = 0*/
+        
+        cell.textLabel?.text = toDoName
+        cell.textLabel?.sizeToFit()
         cell.textLabel?.numberOfLines = 0
+        
+        cell.detailTextLabel?.text = toDoDesc
+        cell.detailTextLabel?.sizeToFit()
+        cell.detailTextLabel?.numberOfLines = 0
+
+        
 
         
         return cell
