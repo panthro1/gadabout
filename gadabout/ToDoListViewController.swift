@@ -75,10 +75,12 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.textLabel?.numberOfLines = 0*/
         
         cell.textLabel?.text = toDoName
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)
         cell.textLabel?.sizeToFit()
         cell.textLabel?.numberOfLines = 0
         
         cell.detailTextLabel?.text = toDoDesc
+        cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.thin)
         cell.detailTextLabel?.sizeToFit()
         cell.detailTextLabel?.numberOfLines = 0
 
