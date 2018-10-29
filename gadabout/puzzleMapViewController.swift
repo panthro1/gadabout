@@ -629,9 +629,18 @@ class puzzleMapViewController: UIViewController {
                     let seconds = endTime.timeIntervalSince(self.startTime)
                     let formatted = String(format: "%.1f", seconds)
                     self.displayAlert(title: "Puzzle completed", message: " You have completed in \(formatted) seconds.")
+                    showPopup(Score: 3)
                     print("Puzzle Completed")
                 }            }
         }
+        
+    }
+    func showPopup(Score: Int) {
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = self.view.frame
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
         
     }
     
