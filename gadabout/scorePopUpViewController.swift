@@ -10,8 +10,18 @@ import UIKit
 
 class scorePopUpViewController: UIViewController {
 
+    
+    @IBAction func closeTapped(_ sender: Any) {
+        
+        self.removeAnimate()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor.white
+        
+        self.showAnimate()
 
         // Do any additional setup after loading the view.
     }
@@ -21,6 +31,23 @@ class scorePopUpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func showAnimate() {
+        
+        self.view.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+        self.view.alpha = 0.0
+        UIView.animate(withDuration: 0.25) {
+            self.view.alpha = 1.0
+            self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        }
+    }
+    
+    func removeAnimate() {
+        UIView.animate(withDuration: 0.25) {
+            self.view.alpha = 1.0
+            self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        }
+        self.view.removeFromSuperview()
+    }
 
     /*
     // MARK: - Navigation

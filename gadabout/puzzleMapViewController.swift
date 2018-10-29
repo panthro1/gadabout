@@ -203,7 +203,7 @@ class puzzleMapViewController: UIViewController {
                 hintButton.setTitle("Hint", for: [])
             }
         }
-        
+        showPopup(Score: 3)
     }
     func slice(image: UIImage, into howMany: Int) -> [UIImage] {
         let width: CGFloat
