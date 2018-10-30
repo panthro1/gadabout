@@ -41,6 +41,10 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var detailText: String = ""
     var userRecord = [Bool]()
     
+    var timeRemaining = 33
+    var timeLabel = UILabel()
+    var timer = Timer()
+
 
     @IBOutlet weak var back: UIBarButtonItem!
     
@@ -104,6 +108,20 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         self.tableView.allowsSelection = true
         
         self.tableView.rowHeight = 380
+        
+        
+        if let navigationBar = self.navigationController?.navigationBar {
+            let timeFrame = CGRect(x: 0, y: 0, width: navigationBar.frame.width, height: navigationBar.frame.height)
+            
+            timeLabel = UILabel(frame: timeFrame)
+            timeLabel.text = "\(timeRemaining)"
+            timeLabel.textAlignment = .center
+            timeLabel.font = UIFont.boldSystemFont(ofSize: 25)
+            
+            navigationBar.addSubview(timeLabel)
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
+        }
+        
         
         //questionSeenBefore.removeAll()
         
@@ -192,6 +210,11 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             
         }
         
+    }
+    
+    @objc func timeCount() {
+        timeRemaining = timeRemaining - 1
+        timeLabel.text = "\(timeRemaining)"
     }
 
     override func didReceiveMemoryWarning() {
