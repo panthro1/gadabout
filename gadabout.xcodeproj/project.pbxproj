@@ -37,6 +37,7 @@
 		E3E1BEF12179133700C62595 /* luckyStrikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */; };
 		E3E5BD53213295610019BFBC /* keyboard-right-arrow-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E3E5BD52213295600019BFBC /* keyboard-right-arrow-button.png */; };
 		E3EB34A221751483000DB77A /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EB34A121751483000DB77A /* ToDoListViewController.swift */; };
+		E3EF3A3A2188042100821C47 /* score-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E3EF3A392188042000821C47 /* score-icon.png */; };
 		E3F72E51217E40FE00487C72 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3F72E50217E40FD00487C72 /* GoogleService-Info.plist */; };
 		E3FFD48420F14EE1001C974D /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FFD48320F14EE1001C974D /* MainPageViewController.swift */; };
 /* End PBXBuildFile section */
@@ -97,6 +98,7 @@
 		E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = luckyStrikeViewController.swift; sourceTree = "<group>"; };
 		E3E5BD52213295600019BFBC /* keyboard-right-arrow-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard-right-arrow-button.png"; sourceTree = SOURCE_ROOT; };
 		E3EB34A121751483000DB77A /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
+		E3EF3A392188042000821C47 /* score-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "score-icon.png"; sourceTree = "<group>"; };
 		E3F72E50217E40FD00487C72 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E3FFD48320F14EE1001C974D /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -193,6 +195,7 @@
 				E3687E8C2115D25800CC60E9 /* collesium.jpg */,
 				E3261AF520F098940056CE99 /* Info.plist */,
 				E33D52C22182BB170077E001 /* back.png */,
+				E3EF3A392188042000821C47 /* score-icon.png */,
 				E34AB2252186C46F0080A5C4 /* diamond.png */,
 				E3261B1720F0A72C0056CE99 /* turkey.png */,
 				E3261B1B20F0A7820056CE99 /* lovetravel.png */,
@@ -338,6 +341,7 @@
 				E36DA987212D71830031D337 /* wrong.gif in Resources */,
 				E3261B1820F0A72C0056CE99 /* turkey.png in Resources */,
 				E3261B1A20F0A73D0056CE99 /* united-states.png in Resources */,
+				E3EF3A3A2188042100821C47 /* score-icon.png in Resources */,
 				E3261AF120F098940056CE99 /* Assets.xcassets in Resources */,
 				E3261AEC20F098920056CE99 /* Main.storyboard in Resources */,
 				E313DF612118D4AD00BAE4C6 /* uncheck.png in Resources */,

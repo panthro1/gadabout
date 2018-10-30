@@ -1059,16 +1059,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="diamond.png" translatesAutoresizingMaskIntoConstraints="NO" id="x46-bF-dqk">
-                                <rect key="frame" x="100" y="30" width="175" height="175"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="score-icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="x46-bF-dqk">
+                                <rect key="frame" x="100" y="70" width="175" height="175"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="x46-bF-dqk" secondAttribute="height" multiplier="1:1" id="Sec-qp-Wf2"/>
+                                    <constraint firstAttribute="width" constant="100" id="rhd-MI-hB3"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YaW-Ib-2cy">
-                                <rect key="frame" x="168" y="318" width="39" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Close"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Txo-Wd-qUV">
+                                <rect key="frame" x="10" y="317" width="355" height="24"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="20"/>
+                                <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OZY-vZ-1hv">
+                                <rect key="frame" x="84.5" y="265" width="206" height="32"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="26"/>
+                                <color key="textColor" red="0.58105844259999995" green="0.12855249639999999" blue="0.57453137639999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="highlightedColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOH-5B-wt7">
+                                <rect key="frame" x="10" y="361" width="355" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YaW-Ib-2cy">
+                                <rect key="frame" x="120" y="405" width="135" height="56.5"/>
+                                <color key="backgroundColor" red="0.16118329763412476" green="0.46132254600524902" blue="0.71880263090133667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="YaW-Ib-2cy" secondAttribute="height" multiplier="164:69" id="O77-TB-P0a"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </state>
                                 <connections>
                                     <action selector="closeTapped:" destination="NZA-IW-PCG" eventType="touchUpInside" id="7kQ-ed-kHl"/>
                                 </connections>
@@ -1076,13 +1101,32 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="YaW-Ib-2cy" firstAttribute="leading" secondItem="8Fz-mA-xGg" secondAttribute="leading" constant="120" id="4zh-vi-Y2e"/>
+                            <constraint firstItem="OZY-vZ-1hv" firstAttribute="top" secondItem="x46-bF-dqk" secondAttribute="bottom" constant="20" id="6a5-FS-fev"/>
+                            <constraint firstItem="eOH-5B-wt7" firstAttribute="leading" secondItem="8Fz-mA-xGg" secondAttribute="leading" constant="10" id="7p9-HQ-ug2"/>
                             <constraint firstItem="x46-bF-dqk" firstAttribute="centerX" secondItem="Lpe-T5-qBV" secondAttribute="centerX" id="AWO-O8-h7q"/>
-                            <constraint firstItem="x46-bF-dqk" firstAttribute="top" secondItem="8Fz-mA-xGg" secondAttribute="top" constant="10" id="jHU-B2-DVB"/>
+                            <constraint firstItem="YaW-Ib-2cy" firstAttribute="centerX" secondItem="Lpe-T5-qBV" secondAttribute="centerX" id="ElH-rz-eEc"/>
+                            <constraint firstItem="Txo-Wd-qUV" firstAttribute="leading" secondItem="8Fz-mA-xGg" secondAttribute="leading" constant="10" id="Lg1-EC-Bb4"/>
+                            <constraint firstItem="Txo-Wd-qUV" firstAttribute="centerX" secondItem="Lpe-T5-qBV" secondAttribute="centerX" id="N9m-ye-sj1"/>
+                            <constraint firstItem="8Fz-mA-xGg" firstAttribute="trailing" secondItem="YaW-Ib-2cy" secondAttribute="trailing" constant="120" id="Pvd-zz-FMG"/>
+                            <constraint firstItem="YaW-Ib-2cy" firstAttribute="top" secondItem="eOH-5B-wt7" secondAttribute="bottom" constant="20" id="VJr-VG-9hK"/>
+                            <constraint firstItem="8Fz-mA-xGg" firstAttribute="trailing" secondItem="eOH-5B-wt7" secondAttribute="trailing" constant="10" id="YIi-am-Qfo"/>
+                            <constraint firstItem="Txo-Wd-qUV" firstAttribute="top" secondItem="OZY-vZ-1hv" secondAttribute="bottom" constant="20" id="fgw-nJ-0yg"/>
+                            <constraint firstItem="eOH-5B-wt7" firstAttribute="top" secondItem="Txo-Wd-qUV" secondAttribute="bottom" constant="20" id="iJ4-Qt-x34"/>
+                            <constraint firstItem="x46-bF-dqk" firstAttribute="top" secondItem="8Fz-mA-xGg" secondAttribute="top" constant="50" id="jHU-B2-DVB"/>
+                            <constraint firstItem="eOH-5B-wt7" firstAttribute="centerX" secondItem="Lpe-T5-qBV" secondAttribute="centerX" id="kDm-xT-XZh"/>
+                            <constraint firstItem="OZY-vZ-1hv" firstAttribute="centerX" secondItem="Lpe-T5-qBV" secondAttribute="centerX" id="pJD-wi-Bhw"/>
                             <constraint firstItem="8Fz-mA-xGg" firstAttribute="trailing" secondItem="x46-bF-dqk" secondAttribute="trailing" constant="100" id="xlF-3Q-62t"/>
+                            <constraint firstItem="8Fz-mA-xGg" firstAttribute="trailing" secondItem="Txo-Wd-qUV" secondAttribute="trailing" constant="10" id="y2h-fW-pip"/>
                             <constraint firstItem="x46-bF-dqk" firstAttribute="leading" secondItem="8Fz-mA-xGg" secondAttribute="leading" constant="100" id="yJ1-Cv-DDy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8Fz-mA-xGg"/>
                     </view>
+                    <connections>
+                        <outlet property="closeButton" destination="YaW-Ib-2cy" id="VSp-05-adp"/>
+                        <outlet property="scoreWinLabel" destination="Txo-Wd-qUV" id="n19-3w-2pI"/>
+                        <outlet property="totalScoreLabel" destination="eOH-5B-wt7" id="FTL-jQ-HPe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V7V-oH-aT1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1092,12 +1136,12 @@
     <resources>
         <image name="back.png" width="32" height="32"/>
         <image name="collesium.jpg" width="390" height="219"/>
-        <image name="diamond.png" width="32" height="32"/>
+        <image name="score-icon.png" width="400" height="400"/>
         <image name="turkey.png" width="32" height="32"/>
         <image name="uncheck.png" width="32" height="32"/>
         <image name="united-states.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oEp-Lf-uRp"/>
+        <segue reference="ERg-ar-XpG"/>
     </inferredMetricsTieBreakers>
 </document>

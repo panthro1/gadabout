@@ -203,7 +203,7 @@ class puzzleMapViewController: UIViewController {
                 hintButton.setTitle("Hint", for: [])
             }
         }
-        showPopup(Score: 3)
+        showPopup(Score: 3, totalScore: 5)
     }
     func slice(image: UIImage, into howMany: Int) -> [UIImage] {
         let width: CGFloat
@@ -629,14 +629,16 @@ class puzzleMapViewController: UIViewController {
                     let seconds = endTime.timeIntervalSince(self.startTime)
                     let formatted = String(format: "%.1f", seconds)
                     self.displayAlert(title: "Puzzle completed", message: " You have completed in \(formatted) seconds.")
-                    showPopup(Score: 3)
+                    showPopup(Score: 3, totalScore: 5)
                     print("Puzzle Completed")
                 }            }
         }
         
     }
-    func showPopup(Score: Int) {
+    func showPopup(Score: Int, totalScore: Int) {
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
+        popOverVC.scoreWin = Score
+        popOverVC.totalScore = totalScore
         self.addChildViewController(popOverVC)
         popOverVC.view.frame = self.view.frame
         self.view.addSubview(popOverVC.view)

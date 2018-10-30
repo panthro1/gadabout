@@ -9,7 +9,16 @@
 import UIKit
 
 class scorePopUpViewController: UIViewController {
+    
+    public var scoreWin = Int()
+    public var totalScore = Int()
 
+    
+    @IBOutlet weak var scoreWinLabel: UILabel!
+    
+    @IBOutlet weak var totalScoreLabel: UILabel!
+    
+    @IBOutlet weak var closeButton: UIButton!
     
     @IBAction func closeTapped(_ sender: Any) {
         
@@ -18,6 +27,13 @@ class scorePopUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        closeButton.layer.cornerRadius = 5
+        closeButton.layer.borderWidth = 1
+        closeButton.layer.borderColor = UIColor.black.cgColor
+        
+        scoreWinLabel.text = "You have won \(scoreWin) points"
+        totalScoreLabel.text = "Your total score : \(totalScore) points"
         
         self.view.backgroundColor = UIColor.white
         
