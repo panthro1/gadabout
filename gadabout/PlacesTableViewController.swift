@@ -41,9 +41,10 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var detailText: String = ""
     var userRecord = [Bool]()
     
-    var timeRemaining = 33
+    var timeRemaining = 15
     var timeLabel = UILabel()
     var timer = Timer()
+    var score = 0
 
 
     @IBOutlet weak var back: UIBarButtonItem!
@@ -108,6 +109,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         self.tableView.allowsSelection = true
         
         self.tableView.rowHeight = 380
+        score = 0
         
         
         if let navigationBar = self.navigationController?.navigationBar {
@@ -214,7 +216,85 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     
     @objc func timeCount() {
         timeRemaining = timeRemaining - 1
-        timeLabel.text = "\(timeRemaining)"
+        if timeRemaining <= 0 {
+            timer.invalidate()
+            timeLabel.text = "\(0)"
+            quizCompleted()
+            let userScoreQuery = PFQuery(className: "UserScore")
+            userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+            userScoreQuery.findObjectsInBackground { (objects, error) in
+                if let score = objects?.first {
+                    if let totalScore = Int(score["score"] as! String) {
+                        let totalScoreAfterTest = totalScore + self.score
+                        self.showPopup(Score: self.score, totalScore: totalScoreAfterTest)
+                        
+                        /*let needToSaveScoreQuery = PFQuery(className: "UserScore")
+                        needToSaveScoreQuery.getObjectInBackground(withId: score.objectId!, block: { (object, error) in
+                            if error != nil {
+                                print(error?.localizedDescription)
+                            }
+                            else {
+                                object["userId"] = PFUser.current()?.objectId
+                                object["score"] =
+                            }
+                        })*/
+                        
+                    }
+                }
+            }
+
+        }
+        else {
+            timeLabel.text = "\(timeRemaining)"
+        }
+    }
+    
+    func showPopup(Score: Int, totalScore: Int) {
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
+        popOverVC.scoreWin = Score
+        popOverVC.totalScore = totalScore
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = self.view.frame
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
+        
+    }
+    
+    func quizCompleted() {
+        let sectionNo = 0
+        
+        if isCompleted == false {
+            isCompleted = true
+            let nofQuestions = correctAnswer.count
+            
+            
+            for rowNo in 0...nofQuestions-1 {
+                
+                let rowToSelect: IndexPath = IndexPath(row: rowNo, section: sectionNo)
+                self.tableView.reloadRows(at: [rowToSelect], with: .fade)
+            }
+        }
+        var indx = 0
+        for question in questionCompleted {
+            
+            if userRecord[indx] == true {
+                let needToSaveData = PFObject(className: "placesCoveredBefore")
+                needToSaveData["userId"] = PFUser.current()?.objectId
+                needToSaveData["questionId"] = question
+                needToSaveData.saveInBackground(block: { (success, error) in
+                    
+                    if success {
+                        print("Current user is saved in place record")
+                    }
+                    else {
+                        print("Could not saved")
+                    }
+                    
+                })
+            }
+            indx = indx + 1
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -366,6 +446,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                         if answer[qIndex] == correctAnswerInt {
                             status = 1 // correct answer
                             userRecord[indexPath.row] = true
+                            score = score + 7
                         }
                         else {
                             status = 0 // wrong answer

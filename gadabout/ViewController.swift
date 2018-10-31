@@ -233,6 +233,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
             else {
                 
                 print("signed up")
+                let userScoreData = PFObject(className: "UserScore")
+                userScoreData["userId"] = PFUser.current()?.objectId
+                userScoreData["score"] = String(0)
+                userScoreData.saveInBackground(block: { (success, error) in
+                    
+                    if success {
+                        print("User score is initialized")
+                    }
+                    else {
+                        print("User score COULD NOT be initialized")
+                    }
+                    
+                })
+
                 self.performSegue(withIdentifier: "loginSegue", sender: self)
             }
         }
