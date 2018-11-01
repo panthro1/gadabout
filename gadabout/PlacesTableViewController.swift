@@ -95,6 +95,23 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             }
             indx = indx + 1
         }
+        
+        let userScoreQuery = PFQuery(className: "UserScore")
+        userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+        userScoreQuery.findObjectsInBackground { (objects, error) in
+            if let score = objects?.first {
+                if let totalScore = Int(score["score"] as! String) {
+                    self.totalScoreAfterTest = totalScore + self.score
+                    self.showPopup(Score: self.score, totalScore: self.totalScoreAfterTest)
+                    
+                    score["userId"] = PFUser.current()?.objectId
+                    score["score"] = String(self.totalScoreAfterTest)
+                    score.saveInBackground()
+                    
+                }
+            }
+        }
+        timer.invalidate()
 
         
     }
