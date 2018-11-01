@@ -45,6 +45,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var timeLabel = UILabel()
     var timer = Timer()
     var score = 0
+    var totalScoreAfterTest = 0
 
 
     @IBOutlet weak var back: UIBarButtonItem!
@@ -225,24 +226,17 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             userScoreQuery.findObjectsInBackground { (objects, error) in
                 if let score = objects?.first {
                     if let totalScore = Int(score["score"] as! String) {
-                        let totalScoreAfterTest = totalScore + self.score
-                        self.showPopup(Score: self.score, totalScore: totalScoreAfterTest)
+                        self.totalScoreAfterTest = totalScore + self.score
+                        self.showPopup(Score: self.score, totalScore: self.totalScoreAfterTest)
                         
-                        /*let needToSaveScoreQuery = PFQuery(className: "UserScore")
-                        needToSaveScoreQuery.getObjectInBackground(withId: score.objectId!, block: { (object, error) in
-                            if error != nil {
-                                print(error?.localizedDescription)
-                            }
-                            else {
-                                object["userId"] = PFUser.current()?.objectId
-                                object["score"] =
-                            }
-                        })*/
+                        score["userId"] = PFUser.current()?.objectId
+                        score["score"] = String(self.totalScoreAfterTest)
+                        score.saveInBackground()
                         
                     }
                 }
             }
-
+            
         }
         else {
             timeLabel.text = "\(timeRemaining)"
