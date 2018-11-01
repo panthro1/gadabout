@@ -217,6 +217,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     
     @objc func timeCount() {
         timeRemaining = timeRemaining - 1
+        
         if timeRemaining <= 0 {
             timer.invalidate()
             timeLabel.text = "\(0)"
@@ -239,7 +240,20 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             
         }
         else {
-            timeLabel.text = "\(timeRemaining)"
+            if timeRemaining > 5 {
+                timeLabel.textColor = UIColor.black
+                timeLabel.text = "\(timeRemaining)"
+            }
+            else {
+                timeLabel.textColor = UIColor.red
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.timeLabel.alpha = 0.0
+                }) { (bool) in
+                    self.timeLabel.alpha = 1.0
+                    self.timeLabel.text = "\(self.timeRemaining)"
+                }
+            }
+
         }
     }
     
