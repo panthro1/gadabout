@@ -114,6 +114,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         timer.invalidate()*/
         if isCompleted == false {
             isCompleted = true
+            complete.title = "Next"
             let nofQuestions = correctAnswer.count
             
             
@@ -159,6 +160,17 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 }
             }
             timer.invalidate()
+        }
+        else {
+            complete.title = "Complete"
+            isCompleted = false
+            timeRemaining = 15
+            timeLabel.text = "\(timeRemaining)"
+            timeLabel.font = UIFont.boldSystemFont(ofSize: 25)
+            timeLabel.textColor = UIColor.black
+
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
+            pullQuizItems()
         }
         
     }
@@ -334,7 +346,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     
     func quizCompleted() {
         let sectionNo = 0
-        
+        complete.title = "Next"
+
         if isCompleted == false {
             isCompleted = true
             let nofQuestions = correctAnswer.count
@@ -490,7 +503,13 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
 
         
             cell.detailsButton.isHidden = true
-        
+            cell.toDoListButton.isHidden = true
+
+            cell.markOption1.isEnabled = true
+            cell.markOption2.isEnabled = true
+            cell.markOption3.isEnabled = true
+            cell.markOption4.isEnabled = true
+
             if (isCompleted == true) {
                 
 
@@ -741,7 +760,110 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         UserDefaults.standard.set(itemsName, forKey: "toDoItem")
         UserDefaults.standard.set(itemsDescription, forKey: "toDoItemDescription")
     }
+    
+    func pullQuizItems() {
+        questionSeenBefore.removeAll()
+        option1.removeAll()
+        option2.removeAll()
+        option3.removeAll()
+        option4.removeAll()
+        imageFile.removeAll()
+        correctAnswer.removeAll()
+        descriptionEng.removeAll()
+        descriptionTr.removeAll()
+        showDetail.removeAll()
+        questionCompleted.removeAll()
+        userRecord.removeAll()
+        answer.removeAll()
+        questionNo.removeAll()
+        
+        
+        let nofInstanceQuery = PFQuery(className: "Places")
+        nofInstanceQuery.countObjectsInBackground { (count, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                self.nofPlaceInstances = count
+                print("Total place instances: \(count)")
+                let questionCoveredQuery = PFQuery(className: "placesCoveredBefore")
+                questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+                questionCoveredQuery.findObjectsInBackground { (objects, error) in
+                    
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    else {
+                        if let places = objects {
+                            for place in places {
+                                //print("\(place["questionId"])")
+                                self.questionSeenBefore.append(place["questionId"] as! String)
+                            }
+                        }
+                    }
+                    let questionLimit = 4
+                    var randomIndexArr = [Int]()
+                    for _ in 0 ..< questionLimit {
+                        let placesQuery = PFQuery(className: "Places")
+                        
+                        var randomIndex = Int(arc4random_uniform(UInt32(self.nofPlaceInstances)))
+                        print("Random Index: \(randomIndex)")
+                        
+                        while true {
+                            
+                            if let rIndex = randomIndexArr.index(of: randomIndex) {
+                                print("Same instance")
+                                randomIndex = Int(arc4random_uniform(UInt32(self.nofPlaceInstances)))
+                                print("Random Index: \(randomIndex)")
+                            }
+                            else {
+                                randomIndexArr.append(randomIndex)
+                                break
+                            }
+                        }
+                        
+                        placesQuery.skip = randomIndex
+                        
+                        placesQuery.limit = 1
+                        placesQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
+                        
+                        placesQuery.findObjectsInBackground { (objects, error) in
+                            
+                            
+                            if let places = objects {
+                                
+                                for place in places {
+                                    
+                                    self.option1.append(place["alternative1"] as! String)
+                                    self.option2.append(place["alternative2"] as! String)
+                                    self.option3.append(place["alternative3"] as! String)
+                                    self.option4.append(place["alternative4"] as! String)
+                                    self.imageFile.append(place["imageFile"] as! PFFile)
+                                    self.correctAnswer.append(place["correctAlternative"] as! String)
+                                    self.descriptionEng.append(place["engDescription"] as! String)
+                                    self.descriptionTr.append(place["trDescription"] as! String)
+                                    self.showDetail.append(false)
+                                    
+                                    self.tableView.reloadData()
+                                    
+                                    
+                                    if let question = place.objectId {
+                                        self.questionCompleted.append(question)
+                                        self.userRecord.append(false)
+                                    }
+                                }
+                            }
+                            
+                        }
+                        
+                    }
+                }
+            }
+            
+        }
 
+    }
 
     /*
     // Override to support conditional editing of the table view.
