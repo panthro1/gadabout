@@ -30,7 +30,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Gadabout" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qpO-1l-vXO">
                                 <rect key="frame" x="5" y="66" width="365" height="33.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
-                                <color key="textColor" red="0.25130575895309448" green="0.42023712396621704" blue="0.91945129632949829" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.0026559780817478895" green="0.58648008108139038" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bfL-sq-cO4">
@@ -65,22 +65,25 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do not have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QH7-qF-S9v">
-                                <rect key="frame" x="5" y="261" width="189" height="21"/>
+                                <rect key="frame" x="5" y="286" width="189" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ovh-NS-QPo">
-                                <rect key="frame" x="162" y="218" width="50" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Log In"/>
+                                <rect key="frame" x="2" y="218" width="371" height="48"/>
+                                <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Log In">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="LoginButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FUa-AT-uOW"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v4n-eG-oCn">
-                                <rect key="frame" x="215" y="254" width="55" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <rect key="frame" x="215" y="276.5" width="110" height="39"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Sign In"/>
                                 <connections>
                                     <action selector="SignInButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dUO-bP-ia3"/>
@@ -101,8 +104,9 @@
                             <constraint firstItem="VhR-na-qIn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="4" id="MBA-m7-qgf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qpO-1l-vXO" secondAttribute="trailing" constant="5" id="Mpc-qy-9En"/>
                             <constraint firstItem="FHp-Hp-zfr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PT3-hA-SCd"/>
-                            <constraint firstItem="v4n-eG-oCn" firstAttribute="centerY" secondItem="QH7-qF-S9v" secondAttribute="centerY" id="Sll-Jg-ion"/>
+                            <constraint firstItem="Ovh-NS-QPo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="2" id="QHE-uw-YGk"/>
                             <constraint firstItem="bfL-sq-cO4" firstAttribute="top" secondItem="FHp-Hp-zfr" secondAttribute="bottom" constant="8" id="arN-az-F3Y"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ovh-NS-QPo" secondAttribute="trailing" constant="2" id="baA-Ae-dQL"/>
                             <constraint firstItem="VhR-na-qIn" firstAttribute="centerY" secondItem="WiY-re-xBx" secondAttribute="centerY" id="bqm-U5-FFy"/>
                             <constraint firstItem="FHp-Hp-zfr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="c4y-FE-tUW"/>
                             <constraint firstItem="FHp-Hp-zfr" firstAttribute="top" secondItem="qpO-1l-vXO" secondAttribute="bottom" constant="13.5" id="dJ8-v7-TEL"/>
@@ -113,8 +117,10 @@
                             <constraint firstItem="WiY-re-xBx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="4" id="hf9-m3-PFP"/>
                             <constraint firstItem="bfL-sq-cO4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hvb-tV-hSf"/>
                             <constraint firstItem="v4n-eG-oCn" firstAttribute="leading" secondItem="QH7-qF-S9v" secondAttribute="trailing" constant="21" id="j09-Dl-8br"/>
-                            <constraint firstItem="QH7-qF-S9v" firstAttribute="top" secondItem="Ovh-NS-QPo" secondAttribute="bottom" constant="9" id="kWF-ed-Wb3"/>
+                            <constraint firstItem="QH7-qF-S9v" firstAttribute="top" secondItem="Ovh-NS-QPo" secondAttribute="bottom" constant="20" id="kWF-ed-Wb3"/>
+                            <constraint firstItem="v4n-eG-oCn" firstAttribute="centerY" secondItem="QH7-qF-S9v" secondAttribute="centerY" id="pZs-Dg-FIJ"/>
                             <constraint firstItem="bfL-sq-cO4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="tCM-hA-MXq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="v4n-eG-oCn" secondAttribute="trailing" constant="50" id="wkN-qy-2T6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FHp-Hp-zfr" secondAttribute="trailing" constant="10" id="yDJ-OW-CyE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -1142,6 +1148,6 @@
         <image name="united-states.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ERg-ar-XpG"/>
+        <segue reference="y30-Zv-P8M"/>
     </inferredMetricsTieBreakers>
 </document>

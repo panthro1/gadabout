@@ -121,20 +121,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         print("Hello World")
         
-        /*
-        let gameScore = PFObject(className:"GameScore")
-        gameScore["score"] = 1337
-        gameScore["playerName"] = "Sean Plott"
-        gameScore["cheatMode"] = false
-        gameScore.saveInBackground {
-            (success: Bool, error: Error?) in
-            if (success) {
-                print("The object has been saved.")
-            } else {
-                print("There was a problem, check error.description")
-            }
-        }
-         */
+        signIn.backgroundColor = .clear
+        signIn.layer.cornerRadius = 5
+        signIn.layer.borderWidth = 1
+        signIn.layer.borderColor = UIColor.black.cgColor
+        
+        logIn.layer.cornerRadius = 5
+        logIn.layer.borderWidth = 1
+        logIn.layer.borderColor = UIColor.black.cgColor
+
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
@@ -195,15 +190,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func SignInButtonTapped(_ sender: Any) {
+        let button = sender as? UIButton
+        button?.pulsate()
         
         if interstitial.isReady {
             interstitial.present(fromRootViewController: self)
         } else {
             print("Ad wasn't ready")
         }
-        
-        let button = sender as? UIButton
-        button?.pulsate()
         
         let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         activityIndicator.center = self.view.center
@@ -229,6 +223,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             if let error = error {
                 
                 self.displayAlert(title: "Could not sign you up", message: error.localizedDescription)
+
             }
             else {
                 
@@ -250,12 +245,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 self.performSegue(withIdentifier: "loginSegue", sender: self)
             }
         }
+        
+
 
         
     }
     
     
     @IBAction func LoginButtonTapped(_ sender: Any) {
+        let button = sender as? UIButton
+        button?.pulsate()
         
         if interstitial.isReady {
             interstitial.present(fromRootViewController: self)

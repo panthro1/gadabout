@@ -44,7 +44,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var timeRemaining = 15
     var timeLabel = UILabel()
     var timer = Timer()
-    var score = 0
+    var scorePoint = 0
     var totalScoreAfterTest = 0
 
 
@@ -149,8 +149,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             userScoreQuery.findObjectsInBackground { (objects, error) in
                 if let score = objects?.first {
                     if let totalScore = Int(score["score"] as! String) {
-                        self.totalScoreAfterTest = totalScore + self.score
-                        self.showPopup(Score: self.score, totalScore: self.totalScoreAfterTest)
+                        self.totalScoreAfterTest = totalScore + self.scorePoint
+                        self.showPopup(Score: self.scorePoint, totalScore: self.totalScoreAfterTest)
                         
                         score["userId"] = PFUser.current()?.objectId
                         score["score"] = String(self.totalScoreAfterTest)
@@ -186,7 +186,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         self.tableView.allowsSelection = true
         
         self.tableView.rowHeight = 380
-        score = 0
+        scorePoint = 0
         
         
         if let navigationBar = self.navigationController?.navigationBar {
@@ -303,8 +303,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             userScoreQuery.findObjectsInBackground { (objects, error) in
                 if let score = objects?.first {
                     if let totalScore = Int(score["score"] as! String) {
-                        self.totalScoreAfterTest = totalScore + self.score
-                        self.showPopup(Score: self.score, totalScore: self.totalScoreAfterTest)
+                        self.totalScoreAfterTest = totalScore + self.scorePoint
+                        self.showPopup(Score: self.scorePoint, totalScore: self.totalScoreAfterTest)
                         
                         score["userId"] = PFUser.current()?.objectId
                         score["score"] = String(self.totalScoreAfterTest)
@@ -334,6 +334,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     }
     
     func showPopup(Score: Int, totalScore: Int) {
+        
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
         popOverVC.scoreWin = Score
         popOverVC.totalScore = totalScore
@@ -537,7 +538,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                         if answer[qIndex] == correctAnswerInt {
                             status = 1 // correct answer
                             userRecord[indexPath.row] = true
-                            score = score + 7
                         }
                         else {
                             status = 0 // wrong answer
@@ -558,21 +558,26 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     if selected == 1 {
 
                         cell.markOption1.setImage(UIImage(named: "correct2.png"), for: [])
+                        scorePoint = scorePoint + 7
+
 
                     }
                     else if selected == 2 {
 
                         cell.markOption2.setImage(UIImage(named: "correct2.png"), for: [])
+                        scorePoint = scorePoint + 7
 
                     }
                     else if selected == 3 {
 
                         cell.markOption3.setImage(UIImage(named: "correct2.png"), for: [])
+                        scorePoint = scorePoint + 7
 
                     }
                     else if selected == 4 {
 
                         cell.markOption4.setImage(UIImage(named: "correct2.png"), for: [])
+                        scorePoint = scorePoint + 7
 
                     }
                 
@@ -673,14 +678,14 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     func appendToDoList(sender: PlacesTableViewCell) {
         
         UIButton.animate(withDuration: 0.2,
-         animations: {
-         sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)
-         },
-         completion: { finish in
-         UIButton.animate(withDuration: 0.2, animations: {
-         sender.transform = CGAffineTransform.identity
-         })
-         })
+                         animations: {
+                            sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)
+        },
+                         completion: { finish in
+                            UIButton.animate(withDuration: 0.2, animations: {
+                                sender.transform = CGAffineTransform.identity
+                            })
+        })
         
         let itemsObjectDescription = UserDefaults.standard.object(forKey: "toDoItemDescription")
         
