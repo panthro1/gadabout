@@ -340,7 +340,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         popOverVC.scoreWin = Score
         popOverVC.totalScore = totalScore
         self.addChildViewController(popOverVC)
-        popOverVC.view.frame = self.view.frame
+        popOverVC.view.frame = self.view.bounds//self.view.frame
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParentViewController: self)
         
