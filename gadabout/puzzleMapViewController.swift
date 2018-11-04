@@ -327,7 +327,7 @@ class puzzleMapViewController: UIViewController {
                                 
                                 for row in 0 ..< nofRows {
                                     for col in 0 ..< nofColumns {
-                                        var myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96/3*4, height: 96/3*4))
+                                        let myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96/3*4, height: 96/3*4))
                                         let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
                                         self.allCenters.append(currCent)
                                         myImgView.center = currCent

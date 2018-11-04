@@ -352,6 +352,7 @@ class luckyStrikeViewController: UIViewController {
                             self.headerLabel.text = self.option4
                         }
                     }
+                    
                     self.descriptionText.text = self.descriptionEng
                     self.descriptionText.isHidden = false
                     self.headerLabel.isHidden = false
@@ -438,10 +439,6 @@ class luckyStrikeViewController: UIViewController {
             }
         }
 
-        
-        
-        
-        
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(wasDragged(gestureRecognizer:)))
         image.addGestureRecognizer(gesture)
     }

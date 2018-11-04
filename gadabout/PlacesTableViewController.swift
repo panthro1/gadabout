@@ -124,6 +124,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 self.tableView.reloadRows(at: [rowToSelect], with: .fade)
             }
             var indx = 0
+            getQuizScore()
             for question in questionCompleted {
                 
                 if userRecord[indx] == true {
@@ -361,6 +362,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             }
         }
         var indx = 0
+        getQuizScore()
         for question in questionCompleted {
             
             if userRecord[indx] == true {
@@ -537,7 +539,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                         print("Row No: \(indexPath.row) selected: \(selected)")
                         if answer[qIndex] == correctAnswerInt {
                             status = 1 // correct answer
-                            userRecord[indexPath.row] = true
                         }
                         else {
                             status = 0 // wrong answer
@@ -558,29 +559,18 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     if selected == 1 {
 
                         cell.markOption1.setImage(UIImage(named: "correct2.png"), for: [])
-                        scorePoint = scorePoint + 7
-
-
                     }
                     else if selected == 2 {
 
                         cell.markOption2.setImage(UIImage(named: "correct2.png"), for: [])
-                        scorePoint = scorePoint + 7
-
                     }
                     else if selected == 3 {
-
                         cell.markOption3.setImage(UIImage(named: "correct2.png"), for: [])
-                        scorePoint = scorePoint + 7
-
                     }
                     else if selected == 4 {
 
                         cell.markOption4.setImage(UIImage(named: "correct2.png"), for: [])
-                        scorePoint = scorePoint + 7
-
                     }
-                
                 }
                 else if status == 0 {
 
@@ -868,6 +858,23 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             
         }
 
+    }
+    
+    func getQuizScore() {
+        for indx in 0 ..< questionNo.count{
+            let questionIndex = questionNo.index(of: indx)
+            if let correctAnsInt = Int(correctAnswer[indx]) {
+                let correctAnswerInt = correctAnsInt
+                mustBeSelected = correctAnswerInt
+                if let qIndex = questionIndex {
+                    selected = answer[qIndex]
+                    if answer[qIndex] == correctAnswerInt {
+                        scorePoint = scorePoint + 7
+                        userRecord[indx] = true
+                    }
+                }
+            }
+        }
     }
 
     /*
