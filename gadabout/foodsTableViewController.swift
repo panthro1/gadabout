@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import CoreData
 
-class foodsTableViewController: UITableViewController, foodsTableViewCellDelegate {
+class foodsTableViewController: UITableViewController, foodsTableViewCellDelegate, scorePopupDelegate {
 
     var option1 = [String]()
     var option2 = [String]()
@@ -47,6 +47,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
     var totalScoreAfterTest = 0
     var timeLabel = UILabel()
 
+    @IBOutlet weak var back: UIBarButtonItem!
     
     @IBAction func backTapped(_ sender: Any) {
         performSegue(withIdentifier: "foodsBackSegue", sender: self)
@@ -102,7 +103,6 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             var indx = 0
             getQuizScore()
             for question in questionCompleted {
-                
                 if userRecord[indx] == true {
                     let needToSaveData = PFObject(className: "foodsCoveredBefore")
                     needToSaveData["userId"] = PFUser.current()?.objectId
@@ -110,7 +110,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                     needToSaveData.saveInBackground(block: { (success, error) in
                         
                         if success {
-                            print("Current user is saved in place record")
+                            print("Current objects are saved in food record")
                         }
                         else {
                             print("Could not saved")
@@ -309,11 +309,17 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
         popOverVC.scoreWin = Score
         popOverVC.totalScore = totalScore
+        popOverVC.delegate = self
         self.addChildViewController(popOverVC)
         popOverVC.view.frame = self.view.bounds//self.view.frame
+        tableView.isScrollEnabled = false
+        complete.isEnabled = false
+        back.isEnabled = false
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParentViewController: self)
+
         
+
     }
     
     func quizCompleted() {
@@ -336,7 +342,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         for question in questionCompleted {
             
             if userRecord[indx] == true {
-                let needToSaveData = PFObject(className: "placesCoveredBefore")
+                let needToSaveData = PFObject(className: "foodsCoveredBefore")
                 needToSaveData["userId"] = PFUser.current()?.objectId
                 needToSaveData["questionId"] = question
                 needToSaveData.saveInBackground(block: { (success, error) in
@@ -477,7 +483,13 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             
             
             cell.detailsButton.isHidden = true
+            cell.toDoListButton.isHidden = true
             
+            cell.markOption1.isEnabled = true
+            cell.markOption2.isEnabled = true
+            cell.markOption3.isEnabled = true
+            cell.markOption4.isEnabled = true
+
             if (isCompleted == true) {
                 
                 
@@ -763,7 +775,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                             }
                         }
                     }
-                    let questionLimit = 4
+                    let questionLimit = 2
                     var randomIndexArr = [Int]()
                     for _ in 0 ..< questionLimit {
                         let foodsQuery = PFQuery(className: "Foods")
@@ -841,6 +853,13 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                 }
             }
         }
+    }
+    
+    func SendCloseInfo() {
+        print("Popup closed")
+        tableView.isScrollEnabled = true
+        complete.isEnabled = true
+        back.isEnabled = true
     }
 
     /*

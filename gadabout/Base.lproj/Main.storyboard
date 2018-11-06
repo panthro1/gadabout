@@ -959,6 +959,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="back" destination="deX-to-3oM" id="X4G-Mo-UFe"/>
                         <outlet property="complete" destination="2kL-zl-qjx" id="c9C-zC-QIe"/>
                         <segue destination="77F-Fn-Frx" kind="presentation" identifier="foodsBackSegue" id="E7f-hZ-Nwc"/>
                     </connections>

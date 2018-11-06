@@ -127,7 +127,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             var indx = 0
             getQuizScore()
             for question in questionCompleted {
-                
                 if userRecord[indx] == true {
                     let needToSaveData = PFObject(className: "placesCoveredBefore")
                     needToSaveData["userId"] = PFUser.current()?.objectId
