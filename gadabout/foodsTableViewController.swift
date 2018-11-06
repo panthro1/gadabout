@@ -39,8 +39,14 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
     var detailText: String = ""
     var userRecord = [Bool]()
 
+    @IBOutlet weak var complete: UIBarButtonItem!
     
-    
+    var timeRemaining = 15
+    var timer = Timer()
+    var scorePoint = 0
+    var totalScoreAfterTest = 0
+    var timeLabel = UILabel()
+
     
     @IBAction func backTapped(_ sender: Any) {
         performSegue(withIdentifier: "foodsBackSegue", sender: self)
@@ -51,7 +57,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
     @IBAction func didCompleteTapped(_ sender: Any) {
         let sectionNo = 0
         
-        if isCompleted == false {
+        /*if isCompleted == false {
             isCompleted = true
             let nofQuestions = correctAnswer.count
             
@@ -81,7 +87,69 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                 })
             }
             indx = indx + 1
+        }*/
+        if isCompleted == false {
+            isCompleted = true
+            complete.title = "Next"
+            let nofQuestions = correctAnswer.count
+            
+            
+            for rowNo in 0...nofQuestions-1 {
+                
+                let rowToSelect: IndexPath = IndexPath(row: rowNo, section: sectionNo)
+                self.tableView.reloadRows(at: [rowToSelect], with: .fade)
+            }
+            var indx = 0
+            getQuizScore()
+            for question in questionCompleted {
+                
+                if userRecord[indx] == true {
+                    let needToSaveData = PFObject(className: "foodsCoveredBefore")
+                    needToSaveData["userId"] = PFUser.current()?.objectId
+                    needToSaveData["questionId"] = question
+                    needToSaveData.saveInBackground(block: { (success, error) in
+                        
+                        if success {
+                            print("Current user is saved in place record")
+                        }
+                        else {
+                            print("Could not saved")
+                        }
+                        
+                    })
+                }
+                indx = indx + 1
+            }
+            
+            let userScoreQuery = PFQuery(className: "UserScore")
+            userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+            userScoreQuery.findObjectsInBackground { (objects, error) in
+                if let score = objects?.first {
+                    if let totalScore = Int(score["score"] as! String) {
+                        self.totalScoreAfterTest = totalScore + self.scorePoint
+                        self.showPopup(Score: self.scorePoint, totalScore: self.totalScoreAfterTest)
+                        
+                        score["userId"] = PFUser.current()?.objectId
+                        score["score"] = String(self.totalScoreAfterTest)
+                        score.saveInBackground()
+                        
+                    }
+                }
+            }
+            timer.invalidate()
         }
+        else {
+            complete.title = "Complete"
+            isCompleted = false
+            timeRemaining = 15
+            timeLabel.text = "\(timeRemaining)"
+            timeLabel.font = UIFont.boldSystemFont(ofSize: 25)
+            timeLabel.textColor = UIColor.black
+            
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
+            pullQuizItems()
+        }
+
     }
     
     
@@ -94,6 +162,20 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         
         self.tableView.rowHeight = 380
         
+        scorePoint = 0
+        
+        if let navigationBar = self.navigationController?.navigationBar {
+            let timeFrame = CGRect(x: 0, y: 0, width: navigationBar.frame.width, height: navigationBar.frame.height)
+            
+            timeLabel = UILabel(frame: timeFrame)
+            timeLabel.text = "\(timeRemaining)"
+            timeLabel.textAlignment = .center
+            timeLabel.font = UIFont.boldSystemFont(ofSize: 25)
+            
+            navigationBar.addSubview(timeLabel)
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
+        }
+
         let nofInstanceQuery = PFQuery(className: "Foods")
         nofInstanceQuery.countObjectsInBackground { (count, error) in
             
@@ -178,6 +260,99 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                 }
             }
         }
+    }
+    
+    @objc func timeCount() {
+        timeRemaining = timeRemaining - 1
+        
+        if timeRemaining <= 0 {
+            timer.invalidate()
+            timeLabel.text = "\(0)"
+            quizCompleted()
+            let userScoreQuery = PFQuery(className: "UserScore")
+            userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+            userScoreQuery.findObjectsInBackground { (objects, error) in
+                if let score = objects?.first {
+                    if let totalScore = Int(score["score"] as! String) {
+                        self.totalScoreAfterTest = totalScore + self.scorePoint
+                        self.showPopup(Score: self.scorePoint, totalScore: self.totalScoreAfterTest)
+                        
+                        score["userId"] = PFUser.current()?.objectId
+                        score["score"] = String(self.totalScoreAfterTest)
+                        score.saveInBackground()
+                        
+                    }
+                }
+            }
+            
+        }
+        else {
+            if timeRemaining > 5 {
+                timeLabel.textColor = UIColor.black
+                timeLabel.text = "\(timeRemaining)"
+            }
+            else {
+                timeLabel.textColor = UIColor.red
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.timeLabel.alpha = 0.0
+                }) { (bool) in
+                    self.timeLabel.alpha = 1.0
+                    self.timeLabel.text = "\(self.timeRemaining)"
+                }
+            }
+            
+        }
+    }
+    
+    func showPopup(Score: Int, totalScore: Int) {
+        
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
+        popOverVC.scoreWin = Score
+        popOverVC.totalScore = totalScore
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = self.view.bounds//self.view.frame
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
+        
+    }
+    
+    func quizCompleted() {
+        let sectionNo = 0
+        complete.title = "Next"
+        
+        if isCompleted == false {
+            isCompleted = true
+            let nofQuestions = correctAnswer.count
+            
+            
+            for rowNo in 0...nofQuestions-1 {
+                
+                let rowToSelect: IndexPath = IndexPath(row: rowNo, section: sectionNo)
+                self.tableView.reloadRows(at: [rowToSelect], with: .fade)
+            }
+        }
+        var indx = 0
+        getQuizScore()
+        for question in questionCompleted {
+            
+            if userRecord[indx] == true {
+                let needToSaveData = PFObject(className: "placesCoveredBefore")
+                needToSaveData["userId"] = PFUser.current()?.objectId
+                needToSaveData["questionId"] = question
+                needToSaveData.saveInBackground(block: { (success, error) in
+                    
+                    if success {
+                        print("Current user is saved in place record")
+                    }
+                    else {
+                        print("Could not saved")
+                    }
+                    
+                })
+            }
+            indx = indx + 1
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -329,7 +504,6 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                         print("Row No: \(indexPath.row) selected: \(selected)")
                         if answer[qIndex] == correctAnswerInt {
                             status = 1 // correct answer
-                            userRecord[indexPath.row] = true
                         }
                         else {
                             status = 0 // wrong answer
@@ -546,6 +720,127 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         
         UserDefaults.standard.set(itemsName, forKey: "toDoItem")
         UserDefaults.standard.set(itemsDescription, forKey: "toDoItemDescription")
+    }
+
+    func pullQuizItems() {
+        questionSeenBefore.removeAll()
+        option1.removeAll()
+        option2.removeAll()
+        option3.removeAll()
+        option4.removeAll()
+        imageFile.removeAll()
+        correctAnswer.removeAll()
+        descriptionEng.removeAll()
+        descriptionTr.removeAll()
+        showDetail.removeAll()
+        questionCompleted.removeAll()
+        userRecord.removeAll()
+        answer.removeAll()
+        questionNo.removeAll()
+        
+        
+        let nofInstanceQuery = PFQuery(className: "Foods")
+        nofInstanceQuery.countObjectsInBackground { (count, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                self.nofFoodInstances = count
+                print("Total food instances: \(count)")
+                let questionCoveredQuery = PFQuery(className: "foodsCoveredBefore")
+                questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+                questionCoveredQuery.findObjectsInBackground { (objects, error) in
+                    
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    else {
+                        if let foods = objects {
+                            for food in foods {
+                                //print("\(place["questionId"])")
+                                self.questionSeenBefore.append(food["questionId"] as! String)
+                            }
+                        }
+                    }
+                    let questionLimit = 4
+                    var randomIndexArr = [Int]()
+                    for _ in 0 ..< questionLimit {
+                        let foodsQuery = PFQuery(className: "Foods")
+                        
+                        var randomIndex = Int(arc4random_uniform(UInt32(self.nofFoodInstances)))
+                        print("Random Index: \(randomIndex)")
+                        
+                        while true {
+                            
+                            if let rIndex = randomIndexArr.index(of: randomIndex) {
+                                print("Same instance")
+                                randomIndex = Int(arc4random_uniform(UInt32(self.nofFoodInstances)))
+                                print("Random Index: \(randomIndex)")
+                            }
+                            else {
+                                randomIndexArr.append(randomIndex)
+                                break
+                            }
+                        }
+                        
+                        foodsQuery.skip = randomIndex
+                        
+                        foodsQuery.limit = 1
+                        foodsQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
+                        
+                        foodsQuery.findObjectsInBackground { (objects, error) in
+                            
+                            
+                            if let foods = objects {
+                                
+                                for food in foods {
+                                    
+                                    self.option1.append(food["alternative1"] as! String)
+                                    self.option2.append(food["alternative2"] as! String)
+                                    self.option3.append(food["alternative3"] as! String)
+                                    self.option4.append(food["alternative4"] as! String)
+                                    self.imageFile.append(food["imageFile"] as! PFFile)
+                                    self.correctAnswer.append(food["correctAlternative"] as! String)
+                                    self.descriptionEng.append(food["engDescription"] as! String)
+                                    self.descriptionTr.append(food["trDescription"] as! String)
+                                    self.showDetail.append(false)
+                                    
+                                    self.tableView.reloadData()
+                                    
+                                    
+                                    if let question = food.objectId {
+                                        self.questionCompleted.append(question)
+                                        self.userRecord.append(false)
+                                    }
+                                }
+                            }
+                            
+                        }
+                        
+                    }
+                }
+            }
+            
+        }
+        
+    }
+    
+    func getQuizScore() {
+        for indx in 0 ..< questionNo.count{
+            let questionIndex = questionNo.index(of: indx)
+            if let correctAnsInt = Int(correctAnswer[indx]) {
+                let correctAnswerInt = correctAnsInt
+                mustBeSelected = correctAnswerInt
+                if let qIndex = questionIndex {
+                    selected = answer[qIndex]
+                    if answer[qIndex] == correctAnswerInt {
+                        scorePoint = scorePoint + 7
+                        userRecord[indx] = true
+                    }
+                }
+            }
+        }
     }
 
     /*

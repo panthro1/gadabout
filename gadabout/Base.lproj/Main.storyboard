@@ -959,6 +959,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="complete" destination="2kL-zl-qjx" id="c9C-zC-QIe"/>
                         <segue destination="77F-Fn-Frx" kind="presentation" identifier="foodsBackSegue" id="E7f-hZ-Nwc"/>
                     </connections>
                 </tableViewController>
@@ -1149,6 +1150,6 @@
         <image name="united-states.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ERg-ar-XpG"/>
+        <segue reference="E7f-hZ-Nwc"/>
     </inferredMetricsTieBreakers>
 </document>

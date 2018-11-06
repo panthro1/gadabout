@@ -11,7 +11,7 @@ import Parse
 import CoreData
 
 
-class PlacesTableViewController: UITableViewController, placesTableViewCellDelegate {
+class PlacesTableViewController: UITableViewController, placesTableViewCellDelegate, scorePopupDelegate {
     
     
     var option1 = [String]()
@@ -112,6 +112,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             }
         }
         timer.invalidate()*/
+        
         if isCompleted == false {
             isCompleted = true
             complete.title = "Next"
@@ -187,8 +188,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         self.tableView.allowsSelection = true
         
         self.tableView.rowHeight = 380
-        scorePoint = 0
         
+        scorePoint = 0
         
         if let navigationBar = self.navigationController?.navigationBar {
             let timeFrame = CGRect(x: 0, y: 0, width: navigationBar.frame.width, height: navigationBar.frame.height)
@@ -339,10 +340,16 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
         popOverVC.scoreWin = Score
         popOverVC.totalScore = totalScore
+        popOverVC.delegate = self
         self.addChildViewController(popOverVC)
         popOverVC.view.frame = self.view.bounds//self.view.frame
+        tableView.isScrollEnabled = false
+        complete.isEnabled = false
+        back.isEnabled = false
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParentViewController: self)
+        
+
         
     }
     
@@ -876,7 +883,13 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             }
         }
     }
-
+    
+    func SendCloseInfo() {
+        print("Popup closed")
+        tableView.isScrollEnabled = true
+        complete.isEnabled = true
+        back.isEnabled = true
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

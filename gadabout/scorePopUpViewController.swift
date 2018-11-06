@@ -8,6 +8,13 @@
 
 import UIKit
 
+protocol scorePopupDelegate {
+    func SendCloseInfo()
+}
+
+
+
+
 class scorePopUpViewController: UIViewController {
     
     public var scoreWin = Int()
@@ -20,8 +27,11 @@ class scorePopUpViewController: UIViewController {
     
     @IBOutlet weak var closeButton: UIButton!
     
+    var delegate: scorePopupDelegate?
+
     @IBAction func closeTapped(_ sender: Any) {
         
+        delegate?.SendCloseInfo()
         self.removeAnimate()
     }
     
