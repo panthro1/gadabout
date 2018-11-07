@@ -108,6 +108,22 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             places.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: (places.imageView?.frame.width)!)
             places.imageEdgeInsets = UIEdgeInsets(top: 5, left: places.frame.width - 100, bottom: 5, right: 0)
         }*/
+        
+        if  PFUser.current() != nil {
+            
+            print("Username: \(PFUser.current()?.email), objectId: \(PFUser.current()?.objectId)")
+        }
+        else {
+            PFAnonymousUtils.logIn { (user, error) in
+                if error != nil || user == nil {
+                    print("Anonymous login failed")
+                }
+                else {
+                    print("Anoymous user logged in")
+                    print("Username: \(PFUser.current()?.email), objectId: \(PFUser.current()?.objectId)")
+                }
+            }
+        }
 
 
         // Do any additional setup after loading the view.

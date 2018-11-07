@@ -158,6 +158,23 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                         score.saveInBackground()
                         
                     }
+                    else {
+                        self.totalScoreAfterTest = self.scorePoint
+                        self.showPopup(Score: self.scorePoint, totalScore: self.totalScoreAfterTest)
+                        
+                        score["userId"] = PFUser.current()?.objectId
+                        score["score"] = String(self.totalScoreAfterTest)
+                        score.saveInBackground()
+                    }
+                }
+                else {
+                    self.totalScoreAfterTest = self.scorePoint
+                    self.showPopup(Score: self.scorePoint, totalScore: self.totalScoreAfterTest)
+                    
+                    let score = PFObject(className: "UserScore")
+                    score["userId"] = PFUser.current()?.objectId
+                    score["score"] = String(self.totalScoreAfterTest)
+                    score.saveInBackground()
                 }
             }
             timer.invalidate()
@@ -312,6 +329,23 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                         score.saveInBackground()
                         
                     }
+                    else {
+                        self.totalScoreAfterTest = self.scorePoint
+                        self.showPopup(Score: self.scorePoint, totalScore: self.totalScoreAfterTest)
+                        
+                        score["userId"] = PFUser.current()?.objectId
+                        score["score"] = String(self.totalScoreAfterTest)
+                        score.saveInBackground()
+                    }
+                }
+                else {
+                    self.totalScoreAfterTest = self.scorePoint
+                    self.showPopup(Score: self.scorePoint, totalScore: self.totalScoreAfterTest)
+                    
+                    let score = PFObject(className: "UserScore")
+                    score["userId"] = PFUser.current()?.objectId
+                    score["score"] = String(self.totalScoreAfterTest)
+                    score.saveInBackground()
                 }
             }
             
@@ -360,11 +394,12 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             isCompleted = true
             let nofQuestions = correctAnswer.count
             
-            
-            for rowNo in 0...nofQuestions-1 {
-                
-                let rowToSelect: IndexPath = IndexPath(row: rowNo, section: sectionNo)
-                self.tableView.reloadRows(at: [rowToSelect], with: .fade)
+            if nofQuestions > 0 {
+                for rowNo in 0...nofQuestions-1 {
+                    
+                    let rowToSelect: IndexPath = IndexPath(row: rowNo, section: sectionNo)
+                    self.tableView.reloadRows(at: [rowToSelect], with: .fade)
+                }
             }
         }
         var indx = 0
@@ -777,6 +812,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         userRecord.removeAll()
         answer.removeAll()
         questionNo.removeAll()
+        scorePoint = 0
         
         
         let nofInstanceQuery = PFQuery(className: "Places")

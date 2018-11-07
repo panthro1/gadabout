@@ -187,6 +187,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
             performSegue(withIdentifier: "loginSegue", sender: self)
             
         }
+        else {
+            PFAnonymousUtils.logIn { (user, error) in
+                if error != nil || user == nil {
+                    print("Anonymous login failed")
+                }
+                else {
+                    print("Anoymous user logged in")
+                    self.performSegue(withIdentifier: "loginSegue", sender: self)
+                }
+            }
+        }
     }
     
     @IBAction func SignInButtonTapped(_ sender: Any) {
