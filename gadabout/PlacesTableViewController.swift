@@ -51,7 +51,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     @IBOutlet weak var back: UIBarButtonItem!
     
     @IBAction func backTapped(_ sender: Any) {
-        
+        timer.invalidate()
         performSegue(withIdentifier: "placesBackSegue", sender: self)
 
     }
@@ -221,6 +221,24 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         
         
         //questionSeenBefore.removeAll()
+        
+        questionSeenBefore.removeAll()
+        option1.removeAll()
+        option2.removeAll()
+        option3.removeAll()
+        option4.removeAll()
+        imageFile.removeAll()
+        correctAnswer.removeAll()
+        descriptionEng.removeAll()
+        descriptionTr.removeAll()
+        showDetail.removeAll()
+        questionCompleted.removeAll()
+        userRecord.removeAll()
+        answer.removeAll()
+        questionNo.removeAll()
+        scorePoint = 0
+
+        
         
         let nofInstanceQuery = PFQuery(className: "Places")
         nofInstanceQuery.countObjectsInBackground { (count, error) in
@@ -404,9 +422,11 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         }
         var indx = 0
         getQuizScore()
+        print("Quiz Completed: \(userRecord)")
         for question in questionCompleted {
             
             if userRecord[indx] == true {
+                print("User Record is true, index: \(indx)")
                 let needToSaveData = PFObject(className: "placesCoveredBefore")
                 needToSaveData["userId"] = PFUser.current()?.objectId
                 needToSaveData["questionId"] = question
@@ -903,7 +923,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     }
     
     func getQuizScore() {
-        for indx in 0 ..< questionNo.count{
+        for indx in 0 ..< option1.count{
             let questionIndex = questionNo.index(of: indx)
             if let correctAnsInt = Int(correctAnswer[indx]) {
                 let correctAnswerInt = correctAnsInt
@@ -917,6 +937,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 }
             }
         }
+        print("Get Quiz Score: \(userRecord)")
     }
     
     func SendCloseInfo() {
