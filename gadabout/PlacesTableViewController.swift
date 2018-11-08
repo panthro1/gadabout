@@ -220,9 +220,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         }
         
         
-        //questionSeenBefore.removeAll()
         
-        questionSeenBefore.removeAll()
+        /*questionSeenBefore.removeAll()
         option1.removeAll()
         option2.removeAll()
         option3.removeAll()
@@ -236,7 +235,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         userRecord.removeAll()
         answer.removeAll()
         questionNo.removeAll()
-        scorePoint = 0
+        scorePoint = 0*/
 
         
         
@@ -422,7 +421,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         }
         var indx = 0
         getQuizScore()
-        print("Quiz Completed: \(userRecord)")
         for question in questionCompleted {
             
             if userRecord[indx] == true {
@@ -937,7 +935,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 }
             }
         }
-        print("Get Quiz Score: \(userRecord)")
     }
     
     func SendCloseInfo() {

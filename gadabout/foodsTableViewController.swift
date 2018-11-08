@@ -50,6 +50,8 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
     @IBOutlet weak var back: UIBarButtonItem!
     
     @IBAction func backTapped(_ sender: Any) {
+
+        timer.invalidate()
         performSegue(withIdentifier: "foodsBackSegue", sender: self)
         
     }
@@ -875,7 +877,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
     }
     
     func getQuizScore() {
-        for indx in 0 ..< questionNo.count{
+        for indx in 0 ..< option1.count{
             let questionIndex = questionNo.index(of: indx)
             if let correctAnsInt = Int(correctAnswer[indx]) {
                 let correctAnswerInt = correctAnsInt

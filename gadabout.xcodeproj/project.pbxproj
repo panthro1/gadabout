@@ -34,6 +34,7 @@
 		E36DA987212D71830031D337 /* wrong.gif in Resources */ = {isa = PBXBuildFile; fileRef = E36DA986212D71830031D337 /* wrong.gif */; };
 		E39D488E212EB87100A32212 /* correct2.png in Resources */ = {isa = PBXBuildFile; fileRef = E39D488D212EB87100A32212 /* correct2.png */; };
 		E3A38444215044A1003A0A8C /* puzzleMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A38443215044A1003A0A8C /* puzzleMapViewController.swift */; };
+		E3D21F352193E7BA002882EB /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D21F342193E7BA002882EB /* mail.png */; };
 		E3E1BEF12179133700C62595 /* luckyStrikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */; };
 		E3E5BD53213295610019BFBC /* keyboard-right-arrow-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E3E5BD52213295600019BFBC /* keyboard-right-arrow-button.png */; };
 		E3EB34A221751483000DB77A /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EB34A121751483000DB77A /* ToDoListViewController.swift */; };
@@ -95,6 +96,7 @@
 		E36DA986212D71830031D337 /* wrong.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = wrong.gif; sourceTree = SOURCE_ROOT; };
 		E39D488D212EB87100A32212 /* correct2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = correct2.png; sourceTree = SOURCE_ROOT; };
 		E3A38443215044A1003A0A8C /* puzzleMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = puzzleMapViewController.swift; sourceTree = "<group>"; };
+		E3D21F342193E7BA002882EB /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail.png; sourceTree = "<group>"; };
 		E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = luckyStrikeViewController.swift; sourceTree = "<group>"; };
 		E3E5BD52213295600019BFBC /* keyboard-right-arrow-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard-right-arrow-button.png"; sourceTree = SOURCE_ROOT; };
 		E3EB34A121751483000DB77A /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
@@ -187,15 +189,16 @@
 				E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */,
 				E3E5BD52213295600019BFBC /* keyboard-right-arrow-button.png */,
 				E3261AF020F098940056CE99 /* Assets.xcassets */,
+				E313DF602118D4AD00BAE4C6 /* uncheck.png */,
 				E3261AF220F098940056CE99 /* LaunchScreen.storyboard */,
 				E3F72E50217E40FD00487C72 /* GoogleService-Info.plist */,
-				E313DF602118D4AD00BAE4C6 /* uncheck.png */,
 				E36DA986212D71830031D337 /* wrong.gif */,
 				E313DF5E2118D4A500BAE4C6 /* check.png */,
 				E3687E8C2115D25800CC60E9 /* collesium.jpg */,
 				E3261AF520F098940056CE99 /* Info.plist */,
 				E33D52C22182BB170077E001 /* back.png */,
 				E3EF3A392188042000821C47 /* score-icon.png */,
+				E3D21F342193E7BA002882EB /* mail.png */,
 				E34AB2252186C46F0080A5C4 /* diamond.png */,
 				E3261B1720F0A72C0056CE99 /* turkey.png */,
 				E3261B1B20F0A7820056CE99 /* lovetravel.png */,
@@ -336,6 +339,7 @@
 				E33D52C32182BB180077E001 /* back.png in Resources */,
 				E313DF5F2118D4A500BAE4C6 /* check.png in Resources */,
 				E3E5BD53213295610019BFBC /* keyboard-right-arrow-button.png in Resources */,
+				E3D21F352193E7BA002882EB /* mail.png in Resources */,
 				E34AB2262186C46F0080A5C4 /* diamond.png in Resources */,
 				E3261B1C20F0A7820056CE99 /* lovetravel.png in Resources */,
 				E36DA987212D71830031D337 /* wrong.gif in Resources */,
