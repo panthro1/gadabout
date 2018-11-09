@@ -340,6 +340,33 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                 }
                             }
                         }
+                        
+                        let foodsCoveredQuery = PFQuery(className: "foodsCoveredBefore")
+                        foodsCoveredQuery.whereKey("userId", equalTo: self.oldUserID)
+                        foodsCoveredQuery.findObjectsInBackground { (objects, error) in
+                            
+                            if let error = error {
+                                print(error.localizedDescription)
+                            }
+                            else {
+                                if let foods = objects {
+                                    for food in foods {
+                                        food["userId"] = PFUser.current()?.objectId
+                                        food.saveInBackground()
+                                    }
+                                }
+                            }
+                        }
+                        
+                        let userScoreQuery = PFQuery(className: "UserScore")
+                        userScoreQuery.whereKey("userId", equalTo: self.oldUserID)
+                        userScoreQuery.findObjectsInBackground { (objects, error) in
+                            if let score = objects?.first {
+                                    score["userId"] = PFUser.current()?.objectId
+                                    score.saveInBackground()
+                            }
+                        }
+
                     }
 
                     print("Current user after login: \(PFUser.current()?.objectId)")
