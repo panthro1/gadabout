@@ -92,7 +92,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             usernameTextField.placeholder = "Email"
             passwordTextField.placeholder = "Password"
             logIn.setTitle("Login", for: [])
-            signIn.setTitle("Sign In", for: [])
+            signIn.setTitle("Sign Up", for: [])
             haveAnAccountLabel.text = "Do not have an account?"
             welcomeLabel.text = "Welcome to Gadabout"
             
@@ -260,21 +260,37 @@ class ViewController: UIViewController, UITextFieldDelegate {
             else {
                 
                 print("signed up")
-                let userScoreData = PFObject(className: "UserScore")
-                userScoreData["userId"] = PFUser.current()?.objectId
-                userScoreData["score"] = String(0)
-                userScoreData.saveInBackground(block: { (success, error) in
-                    
-                    if success {
-                        print("User score is initialized")
+                
+                let userScoreQuery = PFQuery(className: "UserScore")
+                userScoreQuery.whereKey("userId", equalTo: self.oldUserID)
+                userScoreQuery.findObjectsInBackground { (objects, error) in
+                    if let score = objects?.first {
+                        score["userId"] = PFUser.current()?.objectId
+                        score.saveInBackground()
                     }
                     else {
-                        print("User score COULD NOT be initialized")
+                        let userScoreData = PFObject(className: "UserScore")
+                        userScoreData["userId"] = PFUser.current()?.objectId
+                        userScoreData["score"] = String(0)
+                        userScoreData.saveInBackground(block: { (success, error) in
+                            
+                            if success {
+                                print("User score is initialized")
+                            }
+                            else {
+                                print("User score COULD NOT be initialized")
+                            }
+                            
+                        })
+                        
                     }
                     
-                })
+                }
+                
+                print("Current user after login: \(PFUser.current()?.objectId)")
+                self.removeAnimate()
 
-                self.performSegue(withIdentifier: "loginSegue", sender: self)
+                //self.performSegue(withIdentifier: "loginSegue", sender: self)
             }
         }
         
