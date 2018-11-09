@@ -220,25 +220,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         }
         
         
-        
-        /*questionSeenBefore.removeAll()
-        option1.removeAll()
-        option2.removeAll()
-        option3.removeAll()
-        option4.removeAll()
-        imageFile.removeAll()
-        correctAnswer.removeAll()
-        descriptionEng.removeAll()
-        descriptionTr.removeAll()
-        showDetail.removeAll()
-        questionCompleted.removeAll()
-        userRecord.removeAll()
-        answer.removeAll()
-        questionNo.removeAll()
-        scorePoint = 0*/
-
-        
-        
         let nofInstanceQuery = PFQuery(className: "Places")
         nofInstanceQuery.countObjectsInBackground { (count, error) in
             

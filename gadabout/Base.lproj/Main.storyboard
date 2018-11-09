@@ -15,7 +15,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="gadabout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginPopUpID" id="BYZ-38-t0r" customClass="ViewController" customModule="gadabout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -161,7 +161,11 @@
                                                 <action selector="logoutButtonTapped:" destination="77F-Fn-Frx" id="62y-PW-lCU"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Mail Login" id="tJe-U4-jJ6"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Mail Login" id="tJe-U4-jJ6">
+                                            <connections>
+                                                <action selector="mailLoginTapped:" destination="77F-Fn-Frx" id="5yP-U2-C78"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -1070,32 +1074,32 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="score-icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="x46-bF-dqk">
-                                <rect key="frame" x="100" y="70" width="100" height="100"/>
+                                <rect key="frame" x="100" y="70" width="175" height="175"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="x46-bF-dqk" secondAttribute="height" multiplier="1:1" id="Sec-qp-Wf2"/>
                                     <constraint firstAttribute="width" constant="100" id="rhd-MI-hB3"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Txo-Wd-qUV">
-                                <rect key="frame" x="10" y="242" width="280" height="24"/>
+                                <rect key="frame" x="10" y="317" width="355" height="24"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="20"/>
                                 <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OZY-vZ-1hv">
-                                <rect key="frame" x="47" y="190" width="206" height="32"/>
+                                <rect key="frame" x="84.5" y="265" width="206" height="32"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="26"/>
                                 <color key="textColor" red="0.58105844259999995" green="0.12855249639999999" blue="0.57453137639999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOH-5B-wt7">
-                                <rect key="frame" x="10" y="286" width="280" height="24"/>
+                                <rect key="frame" x="10" y="361" width="355" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YaW-Ib-2cy">
-                                <rect key="frame" x="120" y="330" width="60" height="25"/>
+                                <rect key="frame" x="120" y="405" width="135" height="56.5"/>
                                 <color key="backgroundColor" red="0.16118329763412476" green="0.46132254600524902" blue="0.71880263090133667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="YaW-Ib-2cy" secondAttribute="height" multiplier="164:69" id="O77-TB-P0a"/>

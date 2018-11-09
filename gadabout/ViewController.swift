@@ -32,6 +32,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     var isEnglish = true
     
+    var oldUserID = ""
+    var isAnonymous = true
+    
     
     func SaveLanguageSelection(English: Bool) {
         
@@ -130,6 +133,24 @@ class ViewController: UIViewController, UITextFieldDelegate {
         logIn.layer.borderWidth = 1
         logIn.layer.borderColor = UIColor.black.cgColor
 
+        self.view.backgroundColor = UIColor.white
+        
+        self.showAnimate()
+        
+        if let userID = PFUser.current()?.objectId {
+            oldUserID = userID
+        }
+        else {
+            oldUserID = ""
+        }
+        
+        if PFUser.current()?.email != nil {
+            isAnonymous = false
+        }
+        else {
+            isAnonymous = true
+        }
+
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
@@ -180,7 +201,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
     
         
-        if  PFUser.current() != nil {
+        /*if  PFUser.current() != nil {
             
             print("viewDidAppear")
             
@@ -197,7 +218,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     self.performSegue(withIdentifier: "loginSegue", sender: self)
                 }
             }
-        }
+        }*/
     }
     
     @IBAction func SignInButtonTapped(_ sender: Any) {
@@ -300,7 +321,29 @@ class ViewController: UIViewController, UITextFieldDelegate {
             else {
                 if user != nil
                 {
-                    self.performSegue(withIdentifier: "loginSegue", sender: self)
+                    //self.performSegue(withIdentifier: "loginSegue", sender: self)
+                    
+                    if self.isAnonymous == true {
+                        let questionCoveredQuery = PFQuery(className: "placesCoveredBefore")
+                        questionCoveredQuery.whereKey("userId", equalTo: self.oldUserID)
+                        questionCoveredQuery.findObjectsInBackground { (objects, error) in
+                            
+                            if let error = error {
+                                print(error.localizedDescription)
+                            }
+                            else {
+                                if let places = objects {
+                                    for place in places {
+                                        place["userId"] = PFUser.current()?.objectId
+                                        place.saveInBackground()
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    print("Current user after login: \(PFUser.current()?.objectId)")
+                    self.removeAnimate()
                 }
                 else {
                 
@@ -364,6 +407,23 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true
     }
 
+    func showAnimate() {
+        
+        self.view.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+        self.view.alpha = 0.0
+        UIView.animate(withDuration: 0.25) {
+            self.view.alpha = 1.0
+            self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        }
+    }
+    
+    func removeAnimate() {
+        UIView.animate(withDuration: 0.25) {
+            self.view.alpha = 1.0
+            self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        }
+        self.view.removeFromSuperview()
+    }
 
 
 }

@@ -20,6 +20,17 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var mainPageTableView: UITableView!
     
+    
+    @IBAction func mailLoginTapped(_ sender: Any) {
+        
+        let loginPopupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginPopUpID") as! ViewController
+        self.addChildViewController(loginPopupVC)
+        loginPopupVC.view.frame = self.view.bounds//self.view.frame
+        self.view.addSubview(loginPopupVC.view)
+        loginPopupVC.didMove(toParentViewController: self)
+        
+    }
+    
     @IBAction func logoutButtonTapped(_ sender: Any) {
         
         /*PFUser.logOutInBackground { (error) in
