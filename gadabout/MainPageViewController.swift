@@ -10,11 +10,19 @@ import UIKit
 import CoreData
 import Parse
 
-
+var glbImageFile = [PFFile]()
+var glbOption1 = [String]() 
+var glbOption2 = [String]()
+var glbOption3 = [String]()
+var glbOption4 = [String]()
+var glbCorrectAnswer = [String]()
+var glbDescriptionEng = [String]()
 
 class MainPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var isEnglish = true
+    var questionSeenBefore = [String]()
+
 
     @IBOutlet weak var logout: UIBarButtonItem!
     
@@ -114,12 +122,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         NotificationCenter.default.addObserver(self, selector: #selector(isRotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
-        /*if places.imageView != nil {
-            
-            places.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: (places.imageView?.frame.width)!)
-            places.imageEdgeInsets = UIEdgeInsets(top: 5, left: places.frame.width - 100, bottom: 5, right: 0)
-        }*/
-        
         if  PFUser.current() != nil {
             
             print("Username: \(PFUser.current()?.email), objectId: \(PFUser.current()?.objectId)")
@@ -135,6 +137,83 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             }
         }
+        
+        // New Code
+        questionSeenBefore.removeAll()
+        let questionCoveredQuery = PFQuery(className: "placesCoveredBefore")
+        questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+        questionCoveredQuery.findObjectsInBackground { (objects, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                if let places = objects {
+                    for place in places {
+                        //print("\(place["questionId"])")
+                        self.questionSeenBefore.append(place["questionId"] as! String)
+                    }
+                }
+            }
+            let placesQuery = PFQuery(className: "Places")
+            placesQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
+            placesQuery.findObjectsInBackground { (objects, error) in
+                if let places = objects {
+                    
+                    for place in places {
+                        
+                        glbOption1.append(place["alternative1"] as! String)
+                        glbOption2.append(place["alternative2"] as! String)
+                        glbOption3.append(place["alternative3"] as! String)
+                        glbOption4.append(place["alternative4"] as! String)
+                        glbImageFile.append(place["imageFile"] as! PFFile)
+                        glbCorrectAnswer.append(place["correctAlternative"] as! String)
+                        glbDescriptionEng.append(place["engDescription"] as! String)
+                    }
+                }
+                
+            }
+            
+        }
+        
+        questionSeenBefore.removeAll()
+        let foodsCoveredQuery = PFQuery(className: "foodsCoveredBefore")
+        foodsCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+        foodsCoveredQuery.findObjectsInBackground { (objects, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                if let places = objects {
+                    for place in places {
+                        //print("\(place["questionId"])")
+                        self.questionSeenBefore.append(place["questionId"] as! String)
+                    }
+                }
+            }
+            let foodsQuery = PFQuery(className: "Foods")
+            foodsQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
+            foodsQuery.findObjectsInBackground { (objects, error) in
+                if let foods = objects {
+                    
+                    for food in foods {
+                        
+                        glbOption1.append(food["alternative1"] as! String)
+                        glbOption2.append(food["alternative2"] as! String)
+                        glbOption3.append(food["alternative3"] as! String)
+                        glbOption4.append(food["alternative4"] as! String)
+                        glbImageFile.append(food["imageFile"] as! PFFile)
+                        glbCorrectAnswer.append(food["correctAlternative"] as! String)
+                        glbDescriptionEng.append(food["engDescription"] as! String)
+                    }
+                }
+                
+            }
+            
+        }
+
+        
 
 
         // Do any additional setup after loading the view.

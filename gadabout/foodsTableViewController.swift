@@ -60,37 +60,6 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
     @IBAction func didCompleteTapped(_ sender: Any) {
         let sectionNo = 0
         
-        /*if isCompleted == false {
-            isCompleted = true
-            let nofQuestions = correctAnswer.count
-            
-            
-            for rowNo in 0...nofQuestions-1 {
-                
-                let rowToSelect: IndexPath = IndexPath(row: rowNo, section: sectionNo)
-                self.tableView.reloadRows(at: [rowToSelect], with: .fade)
-            }
-        }
-        
-        var indx = 0
-        for question in questionCompleted {
-            if userRecord[indx] == true {
-                let needToSaveData = PFObject(className: "foodsCoveredBefore")
-                needToSaveData["userId"] = PFUser.current()?.objectId
-                needToSaveData["questionId"] = question
-                needToSaveData.saveInBackground(block: { (success, error) in
-                    
-                    if success {
-                        print("Current user is saved in place record")
-                    }
-                    else {
-                        print("Could not saved")
-                    }
-                    
-                })
-            }
-            indx = indx + 1
-        }*/
         if isCompleted == false {
             isCompleted = true
             complete.title = "Next"

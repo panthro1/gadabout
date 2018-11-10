@@ -64,55 +64,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         
         let sectionNo = 0
         
-        /*if isCompleted == false {
-            isCompleted = true
-            let nofQuestions = correctAnswer.count
-
-
-            for rowNo in 0...nofQuestions-1 {
-                
-                let rowToSelect: IndexPath = IndexPath(row: rowNo, section: sectionNo)
-                self.tableView.reloadRows(at: [rowToSelect], with: .fade)
-            }
-        }
-        var indx = 0
-        for question in questionCompleted {
-            
-            if userRecord[indx] == true {
-                let needToSaveData = PFObject(className: "placesCoveredBefore")
-                needToSaveData["userId"] = PFUser.current()?.objectId
-                needToSaveData["questionId"] = question
-                needToSaveData.saveInBackground(block: { (success, error) in
-                    
-                    if success {
-                        print("Current user is saved in place record")
-                    }
-                    else {
-                        print("Could not saved")
-                    }
-                    
-                })
-            }
-            indx = indx + 1
-        }
-        
-        let userScoreQuery = PFQuery(className: "UserScore")
-        userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
-        userScoreQuery.findObjectsInBackground { (objects, error) in
-            if let score = objects?.first {
-                if let totalScore = Int(score["score"] as! String) {
-                    self.totalScoreAfterTest = totalScore + self.score
-                    self.showPopup(Score: self.score, totalScore: self.totalScoreAfterTest)
-                    
-                    score["userId"] = PFUser.current()?.objectId
-                    score["score"] = String(self.totalScoreAfterTest)
-                    score.saveInBackground()
-                    
-                }
-            }
-        }
-        timer.invalidate()*/
-        
         if isCompleted == false {
             isCompleted = true
             complete.title = "Next"
