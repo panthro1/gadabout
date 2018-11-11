@@ -10,13 +10,24 @@ import UIKit
 import CoreData
 import Parse
 
-var glbImageFile = [PFFile]()
-var glbOption1 = [String]() 
-var glbOption2 = [String]()
-var glbOption3 = [String]()
-var glbOption4 = [String]()
-var glbCorrectAnswer = [String]()
-var glbDescriptionEng = [String]()
+var glbPlcImageFile = [PFFile]() // Global place variables
+var glbPlcOption1 = [String]()
+var glbPlcOption2 = [String]()
+var glbPlcOption3 = [String]()
+var glbPlcOption4 = [String]()
+var glbPlcCorrectAnswer = [String]()
+var glbPlcDescriptionEng = [String]()
+var glbPlcObjectId = [String]()
+
+var glbFdImageFile = [PFFile]() // Global food variables
+var glbFdOption1 = [String]()
+var glbFdOption2 = [String]()
+var glbFdOption3 = [String]()
+var glbFdOption4 = [String]()
+var glbFdCorrectAnswer = [String]()
+var glbFdDescriptionEng = [String]()
+var glbFdObjectId = [String]()
+
 
 class MainPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -139,78 +150,99 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         // New Code
-        questionSeenBefore.removeAll()
-        let questionCoveredQuery = PFQuery(className: "placesCoveredBefore")
-        questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
-        questionCoveredQuery.findObjectsInBackground { (objects, error) in
-            
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            else {
-                if let places = objects {
-                    for place in places {
-                        //print("\(place["questionId"])")
-                        self.questionSeenBefore.append(place["questionId"] as! String)
-                    }
+        if glbPlcObjectId.count < 5 {
+            questionSeenBefore.removeAll()
+            let questionCoveredQuery = PFQuery(className: "placesCoveredBefore")
+            questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+            questionCoveredQuery.findObjectsInBackground { (objects, error) in
+                
+                if let error = error {
+                    print(error.localizedDescription)
                 }
-            }
-            let placesQuery = PFQuery(className: "Places")
-            placesQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
-            placesQuery.findObjectsInBackground { (objects, error) in
-                if let places = objects {
-                    
-                    for place in places {
-                        
-                        glbOption1.append(place["alternative1"] as! String)
-                        glbOption2.append(place["alternative2"] as! String)
-                        glbOption3.append(place["alternative3"] as! String)
-                        glbOption4.append(place["alternative4"] as! String)
-                        glbImageFile.append(place["imageFile"] as! PFFile)
-                        glbCorrectAnswer.append(place["correctAlternative"] as! String)
-                        glbDescriptionEng.append(place["engDescription"] as! String)
+                else {
+                    if let places = objects {
+                        for place in places {
+                            //print("\(place["questionId"])")
+                            self.questionSeenBefore.append(place["questionId"] as! String)
+                        }
                     }
                 }
                 
+                if glbPlcObjectId.count > 0 {
+                    for indx in 0 ..< glbPlcObjectId.count {
+                        self.questionSeenBefore.append(glbPlcObjectId[indx])
+                    }
+                }
+                
+                let placesQuery = PFQuery(className: "Places")
+                placesQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
+                placesQuery.findObjectsInBackground { (objects, error) in
+                    if let places = objects {
+                        
+                        for place in places {
+                            
+                            glbPlcOption1.append(place["alternative1"] as! String)
+                            glbPlcOption2.append(place["alternative2"] as! String)
+                            glbPlcOption3.append(place["alternative3"] as! String)
+                            glbPlcOption4.append(place["alternative4"] as! String)
+                            glbPlcImageFile.append(place["imageFile"] as! PFFile)
+                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
+                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
+                            
+                            if let question = place.objectId {
+                                glbPlcObjectId.append(question)
+                            }
+                        }
+                    }
+                    
+                }
+                
             }
-            
         }
         
-        questionSeenBefore.removeAll()
-        let foodsCoveredQuery = PFQuery(className: "foodsCoveredBefore")
-        foodsCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
-        foodsCoveredQuery.findObjectsInBackground { (objects, error) in
+        if glbFdObjectId.count < 5 {
             
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            else {
-                if let places = objects {
-                    for place in places {
-                        //print("\(place["questionId"])")
-                        self.questionSeenBefore.append(place["questionId"] as! String)
+            questionSeenBefore.removeAll()
+            let foodsCoveredQuery = PFQuery(className: "foodsCoveredBefore")
+            foodsCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+            foodsCoveredQuery.findObjectsInBackground { (objects, error) in
+                
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                else {
+                    if let places = objects {
+                        for place in places {
+                            //print("\(place["questionId"])")
+                            self.questionSeenBefore.append(place["questionId"] as! String)
+                        }
                     }
                 }
-            }
-            let foodsQuery = PFQuery(className: "Foods")
-            foodsQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
-            foodsQuery.findObjectsInBackground { (objects, error) in
-                if let foods = objects {
-                    
-                    for food in foods {
+                let foodsQuery = PFQuery(className: "Foods")
+                foodsQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
+                foodsQuery.findObjectsInBackground { (objects, error) in
+                    if let foods = objects {
                         
-                        glbOption1.append(food["alternative1"] as! String)
-                        glbOption2.append(food["alternative2"] as! String)
-                        glbOption3.append(food["alternative3"] as! String)
-                        glbOption4.append(food["alternative4"] as! String)
-                        glbImageFile.append(food["imageFile"] as! PFFile)
-                        glbCorrectAnswer.append(food["correctAlternative"] as! String)
-                        glbDescriptionEng.append(food["engDescription"] as! String)
+                        for food in foods {
+                            
+                            glbFdOption1.append(food["alternative1"] as! String)
+                            glbFdOption2.append(food["alternative2"] as! String)
+                            glbFdOption3.append(food["alternative3"] as! String)
+                            glbFdOption4.append(food["alternative4"] as! String)
+                            glbFdImageFile.append(food["imageFile"] as! PFFile)
+                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
+                            glbFdDescriptionEng.append(food["engDescription"] as! String)
+                            
+                            if let question = food.objectId {
+                                glbFdObjectId.append(question)
+                            }
+                            
+                        }
                     }
+                    
                 }
                 
             }
-            
         }
 
         

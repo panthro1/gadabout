@@ -118,139 +118,6 @@ class luckyStrikeViewController: UIViewController {
         activityIndicator.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
         
-        /*placeFoodSelection = arc4random_uniform(2)
-         print("Random Index: \(placeFoodSelection)")
-         
-         if placeFoodSelection == 0 {
-         
-         let placesQuery = PFQuery(className: "Places")
-         
-         placesQuery.limit = 1000
-         self.imageFile.removeAll()
-         
-         placesQuery.findObjectsInBackground { (objects, error) in
-         
-         
-         if let places = objects {
-         
-         for place in places {
-         
-         self.option1 = place["alternative1"] as! String
-         self.option2 = place["alternative2"] as! String
-         self.option3 = place["alternative3"] as! String
-         self.option4 = place["alternative4"] as! String
-         self.imageFile.append(place["imageFile"] as! PFFile)
-         
-         self.imageFile[0].getDataInBackground { (data, error) in
-         
-         if let imageData = data {
-         
-         if let imageToDisplay = UIImage(data: imageData) {
-         
-         self.image.image = imageToDisplay
-         }
-         }
-         
-         }
-         
-         activityIndicator.stopAnimating()
-         UIApplication.shared.endIgnoringInteractionEvents()
-         
-         self.correctAnswer = place["correctAlternative"] as! String
-         self.descriptionEng = place["engDescription"] as! String
-         self.descriptionTr = place["trDescription"] as! String
-         
-         }
-         }
-         
-         if let correctAnsInt = Int(self.correctAnswer) {
-         
-         if correctAnsInt == 1 {
-         self.headerLabel.text = self.option1
-         }
-         else if correctAnsInt == 2 {
-         self.headerLabel.text = self.option2
-         }
-         else if correctAnsInt == 3 {
-         self.headerLabel.text = self.option3
-         }
-         else if correctAnsInt == 4 {
-         self.headerLabel.text = self.option4
-         }
-         }
-         self.descriptionText.text = self.descriptionEng
-         self.descriptionText.isHidden = false
-         self.headerLabel.isHidden = false
-         self.image.isHidden = false
-         }
-         }
-         else {
-         let randomIndex = Int(arc4random_uniform(UInt32(self.nofFoodInstances)))
-         print("Random Index: \(randomIndex)")
-         
-         let placesQuery = PFQuery(className: "Foods")
-         
-         placesQuery.limit = 1
-         placesQuery.skip = randomIndex
-         self.imageFile.removeAll()
-         
-         placesQuery.findObjectsInBackground { (objects, error) in
-         
-         
-         if let places = objects {
-         
-         for place in places {
-         
-         self.option1 = place["alternative1"] as! String
-         self.option2 = place["alternative2"] as! String
-         self.option3 = place["alternative3"] as! String
-         self.option4 = place["alternative4"] as! String
-         self.imageFile.append(place["imageFile"] as! PFFile)
-         
-         self.imageFile[0].getDataInBackground { (data, error) in
-         
-         if let imageData = data {
-         
-         if let imageToDisplay = UIImage(data: imageData) {
-         
-         self.image.image = imageToDisplay
-         
-         }
-         }
-         }
-         activityIndicator.stopAnimating()
-         UIApplication.shared.endIgnoringInteractionEvents()
-         
-         self.correctAnswer = place["correctAlternative"] as! String
-         self.descriptionEng = place["engDescription"] as! String
-         self.descriptionTr = place["trDescription"] as! String
-         
-         }
-         }
-         
-         if let correctAnsInt = Int(self.correctAnswer) {
-         
-         if correctAnsInt == 1 {
-         self.headerLabel.text = self.option1
-         }
-         else if correctAnsInt == 2 {
-         self.headerLabel.text = self.option2
-         }
-         else if correctAnsInt == 3 {
-         self.headerLabel.text = self.option3
-         }
-         else if correctAnsInt == 4 {
-         self.headerLabel.text = self.option4
-         }
-         }
-         self.descriptionText.text = self.descriptionEng
-         self.descriptionText.isHidden = false
-         self.headerLabel.isHidden = false
-         self.image.isHidden = false
-         }
-         
-         }*/
-        
         // New code
         
         if imageFile.count < 2 {
@@ -295,57 +162,58 @@ class luckyStrikeViewController: UIViewController {
                             self.descriptionEng.append(food["engDescription"] as! String)
                         }
                     }
-                }
-                
-                let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count - 1)))
-                print("Random Index: \(randomIndex)")
-                
-                self.imageFile[randomIndex].getDataInBackground { (data, error) in
+                    let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count - 1)))
+                    print("Random Index: \(randomIndex)")
                     
-                    if let imageData = data {
+                    self.imageFile[randomIndex].getDataInBackground { (data, error) in
                         
-                        if let imageToDisplay = UIImage(data: imageData) {
+                        if let imageData = data {
                             
-                            self.image.image = imageToDisplay
-                            
+                            if let imageToDisplay = UIImage(data: imageData) {
+                                
+                                self.image.image = imageToDisplay
+                                
+                            }
+                        }
+                        
+                    }
+                    if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
+                        
+                        if correctAnsInt == 1 {
+                            self.headerLabel.text = self.option1[randomIndex]
+                        }
+                        else if correctAnsInt == 2 {
+                            self.headerLabel.text = self.option2[randomIndex]
+                        }
+                        else if correctAnsInt == 3 {
+                            self.headerLabel.text = self.option3[randomIndex]
+                        }
+                        else if correctAnsInt == 4 {
+                            self.headerLabel.text = self.option4[randomIndex]
                         }
                     }
                     
-                }
-                if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
+                    activityIndicator.stopAnimating()
+                    UIApplication.shared.endIgnoringInteractionEvents()
                     
-                    if correctAnsInt == 1 {
-                        self.headerLabel.text = self.option1[randomIndex]
-                    }
-                    else if correctAnsInt == 2 {
-                        self.headerLabel.text = self.option2[randomIndex]
-                    }
-                    else if correctAnsInt == 3 {
-                        self.headerLabel.text = self.option3[randomIndex]
-                    }
-                    else if correctAnsInt == 4 {
-                        self.headerLabel.text = self.option4[randomIndex]
-                    }
+                    self.descriptionText.text = self.descriptionEng[randomIndex]
+                    self.descriptionText.isHidden = false
+                    self.headerLabel.isHidden = false
+                    self.image.isHidden = false
+                    
+                    self.option1.remove(at: randomIndex)
+                    self.option2.remove(at: randomIndex)
+                    self.option3.remove(at: randomIndex)
+                    self.option4.remove(at: randomIndex)
+                    self.imageFile.remove(at: randomIndex)
+                    self.correctAnswer.remove(at: randomIndex)
+                    self.descriptionEng.remove(at: randomIndex)
+
                 }
                 
-                activityIndicator.stopAnimating()
-                UIApplication.shared.endIgnoringInteractionEvents()
-                
-                self.descriptionText.text = self.descriptionEng[randomIndex]
-                self.descriptionText.isHidden = false
-                self.headerLabel.isHidden = false
-                self.image.isHidden = false
-                
-                self.option1.remove(at: randomIndex)
-                self.option2.remove(at: randomIndex)
-                self.option3.remove(at: randomIndex)
-                self.option4.remove(at: randomIndex)
-                self.imageFile.remove(at: randomIndex)
-                self.correctAnswer.remove(at: randomIndex)
-                self.descriptionEng.remove(at: randomIndex)
             }
         }
-        else {
+        else{
             
             let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count - 1)))
             print("Random Index: \(randomIndex)")
@@ -424,20 +292,35 @@ class luckyStrikeViewController: UIViewController {
         
         // New code starts from here
         
-        for indx in 0 ..< glbImageFile.count {
+        for indx in 0 ..< glbPlcImageFile.count {
             
-            self.option1.append(glbOption1[indx])
-            self.option2.append(glbOption2[indx])
-            self.option3.append(glbOption3[indx])
-            self.option4.append(glbOption4[indx])
-            self.imageFile.append(glbImageFile[indx])
-            self.correctAnswer.append(glbCorrectAnswer[indx])
-            self.descriptionEng.append(glbDescriptionEng[indx])
+            option1.append(glbPlcOption1[indx])
+            option2.append(glbPlcOption2[indx])
+            option3.append(glbPlcOption3[indx])
+            option4.append(glbPlcOption4[indx])
+            imageFile.append(glbPlcImageFile[indx])
+            correctAnswer.append(glbPlcCorrectAnswer[indx])
+            descriptionEng.append(glbPlcDescriptionEng[indx])
+        }
+
+        for indx in 0 ..< glbFdImageFile.count {
             
-            let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count - 1)))
+            option1.append(glbFdOption1[indx])
+            option2.append(glbFdOption2[indx])
+            option3.append(glbFdOption3[indx])
+            option4.append(glbFdOption4[indx])
+            imageFile.append(glbFdImageFile[indx])
+            correctAnswer.append(glbFdCorrectAnswer[indx])
+            descriptionEng.append(glbFdDescriptionEng[indx])
+        }
+        
+        if imageFile.count > 5 {
+
+            
+            let randomIndex = Int(arc4random_uniform(UInt32(imageFile.count - 1)))
             print("Random Index: \(randomIndex)")
             
-            self.imageFile[randomIndex].getDataInBackground { (data, error) in
+            imageFile[randomIndex].getDataInBackground { (data, error) in
                 
                 if let imageData = data {
                     
@@ -449,37 +332,37 @@ class luckyStrikeViewController: UIViewController {
                 }
                 
             }
-            if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
+            if let correctAnsInt = Int(correctAnswer[randomIndex]) {
                 
                 if correctAnsInt == 1 {
-                    self.headerLabel.text = self.option1[randomIndex]
+                    headerLabel.text = option1[randomIndex]
                 }
                 else if correctAnsInt == 2 {
-                    self.headerLabel.text = self.option2[randomIndex]
+                    headerLabel.text = option2[randomIndex]
                 }
                 else if correctAnsInt == 3 {
-                    self.headerLabel.text = self.option3[randomIndex]
+                    headerLabel.text = option3[randomIndex]
                 }
                 else if correctAnsInt == 4 {
-                    self.headerLabel.text = self.option4[randomIndex]
+                    headerLabel.text = option4[randomIndex]
                 }
             }
-            self.descriptionText.text = self.descriptionEng[randomIndex]
-            self.descriptionText.isHidden = false
-            self.headerLabel.isHidden = false
-            self.image.isHidden = false
+            descriptionText.text = descriptionEng[randomIndex]
+            descriptionText.isHidden = false
+            headerLabel.isHidden = false
+            image.isHidden = false
             
-            self.option1.remove(at: randomIndex)
-            self.option2.remove(at: randomIndex)
-            self.option3.remove(at: randomIndex)
-            self.option4.remove(at: randomIndex)
-            self.imageFile.remove(at: randomIndex)
-            self.correctAnswer.remove(at: randomIndex)
-            self.descriptionEng.remove(at: randomIndex)
+            option1.remove(at: randomIndex)
+            option2.remove(at: randomIndex)
+            option3.remove(at: randomIndex)
+            option4.remove(at: randomIndex)
+            imageFile.remove(at: randomIndex)
+            correctAnswer.remove(at: randomIndex)
+            descriptionEng.remove(at: randomIndex)
 
         }
         
-        if glbImageFile.count < 5 {
+        else {
             let placesQuery = PFQuery(className: "Places")
             
             placesQuery.limit = 1000
@@ -520,50 +403,50 @@ class luckyStrikeViewController: UIViewController {
                             self.descriptionEng.append(food["engDescription"] as! String)
                         }
                     }
-                }
-                
-                let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count - 1)))
-                print("Random Index: \(randomIndex)")
-                
-                self.imageFile[randomIndex].getDataInBackground { (data, error) in
+                    let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count - 1)))
+                    print("Random Index: \(randomIndex)")
                     
-                    if let imageData = data {
+                    self.imageFile[randomIndex].getDataInBackground { (data, error) in
                         
-                        if let imageToDisplay = UIImage(data: imageData) {
+                        if let imageData = data {
                             
-                            self.image.image = imageToDisplay
-                            
+                            if let imageToDisplay = UIImage(data: imageData) {
+                                
+                                self.image.image = imageToDisplay
+                                
+                            }
+                        }
+                        
+                    }
+                    if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
+                        
+                        if correctAnsInt == 1 {
+                            self.headerLabel.text = self.option1[randomIndex]
+                        }
+                        else if correctAnsInt == 2 {
+                            self.headerLabel.text = self.option2[randomIndex]
+                        }
+                        else if correctAnsInt == 3 {
+                            self.headerLabel.text = self.option3[randomIndex]
+                        }
+                        else if correctAnsInt == 4 {
+                            self.headerLabel.text = self.option4[randomIndex]
                         }
                     }
+                    self.descriptionText.text = self.descriptionEng[randomIndex]
+                    self.descriptionText.isHidden = false
+                    self.headerLabel.isHidden = false
+                    self.image.isHidden = false
                     
+                    self.option1.remove(at: randomIndex)
+                    self.option2.remove(at: randomIndex)
+                    self.option3.remove(at: randomIndex)
+                    self.option4.remove(at: randomIndex)
+                    self.imageFile.remove(at: randomIndex)
+                    self.correctAnswer.remove(at: randomIndex)
+                    self.descriptionEng.remove(at: randomIndex)
+
                 }
-                if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
-                    
-                    if correctAnsInt == 1 {
-                        self.headerLabel.text = self.option1[randomIndex]
-                    }
-                    else if correctAnsInt == 2 {
-                        self.headerLabel.text = self.option2[randomIndex]
-                    }
-                    else if correctAnsInt == 3 {
-                        self.headerLabel.text = self.option3[randomIndex]
-                    }
-                    else if correctAnsInt == 4 {
-                        self.headerLabel.text = self.option4[randomIndex]
-                    }
-                }
-                self.descriptionText.text = self.descriptionEng[randomIndex]
-                self.descriptionText.isHidden = false
-                self.headerLabel.isHidden = false
-                self.image.isHidden = false
-                
-                self.option1.remove(at: randomIndex)
-                self.option2.remove(at: randomIndex)
-                self.option3.remove(at: randomIndex)
-                self.option4.remove(at: randomIndex)
-                self.imageFile.remove(at: randomIndex)
-                self.correctAnswer.remove(at: randomIndex)
-                self.descriptionEng.remove(at: randomIndex)
                 
             }
             
@@ -634,64 +517,62 @@ class luckyStrikeViewController: UIViewController {
                                     self.descriptionEng.append(food["engDescription"] as! String)
                                 }
                             }
-                        }
-                        
-                        let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count - 1)))
-                        print("Random Index: \(randomIndex)")
-                        
-                        self.imageFile[randomIndex].getDataInBackground { (data, error) in
+                            let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count - 1)))
+                            print("Random Index: \(randomIndex)")
                             
-                            if let imageData = data {
+                            self.imageFile[randomIndex].getDataInBackground { (data, error) in
                                 
-                                if let imageToDisplay = UIImage(data: imageData) {
+                                if let imageData = data {
                                     
-                                    self.image.image = imageToDisplay
-                                    
+                                    if let imageToDisplay = UIImage(data: imageData) {
+                                        
+                                        self.image.image = imageToDisplay
+                                        
+                                    }
+                                }
+                                
+                            }
+                            if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
+                                
+                                if correctAnsInt == 1 {
+                                    self.headerLabel.text = self.option1[randomIndex]
+                                }
+                                else if correctAnsInt == 2 {
+                                    self.headerLabel.text = self.option2[randomIndex]
+                                }
+                                else if correctAnsInt == 3 {
+                                    self.headerLabel.text = self.option3[randomIndex]
+                                }
+                                else if correctAnsInt == 4 {
+                                    self.headerLabel.text = self.option4[randomIndex]
                                 }
                             }
                             
-                        }
-                        if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
+                            activityIndicator.stopAnimating()
+                            UIApplication.shared.endIgnoringInteractionEvents()
                             
-                            if correctAnsInt == 1 {
-                                self.headerLabel.text = self.option1[randomIndex]
-                            }
-                            else if correctAnsInt == 2 {
-                                self.headerLabel.text = self.option2[randomIndex]
-                            }
-                            else if correctAnsInt == 3 {
-                                self.headerLabel.text = self.option3[randomIndex]
-                            }
-                            else if correctAnsInt == 4 {
-                                self.headerLabel.text = self.option4[randomIndex]
-                            }
+                            self.descriptionText.text = self.descriptionEng[randomIndex]
+                            self.descriptionText.isHidden = false
+                            self.headerLabel.isHidden = false
+                            self.image.isHidden = false
+                            
+                            self.option1.remove(at: randomIndex)
+                            self.option2.remove(at: randomIndex)
+                            self.option3.remove(at: randomIndex)
+                            self.option4.remove(at: randomIndex)
+                            self.imageFile.remove(at: randomIndex)
+                            self.correctAnswer.remove(at: randomIndex)
+                            self.descriptionEng.remove(at: randomIndex)
+
                         }
-                        
-                        activityIndicator.stopAnimating()
-                        UIApplication.shared.endIgnoringInteractionEvents()
-                        
-                        self.descriptionText.text = self.descriptionEng[randomIndex]
-                        self.descriptionText.isHidden = false
-                        self.headerLabel.isHidden = false
-                        self.image.isHidden = false
-                        
-                        self.option1.remove(at: randomIndex)
-                        self.option2.remove(at: randomIndex)
-                        self.option3.remove(at: randomIndex)
-                        self.option4.remove(at: randomIndex)
-                        self.imageFile.remove(at: randomIndex)
-                        self.correctAnswer.remove(at: randomIndex)
-                        self.descriptionEng.remove(at: randomIndex)
-                        
-                        
                     }
                 }
                 else {
                     
-                    let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count - 1)))
+                    let randomIndex = Int(arc4random_uniform(UInt32(imageFile.count - 1)))
                     print("Random Index: \(randomIndex)")
                     
-                    self.imageFile[randomIndex].getDataInBackground { (data, error) in
+                    imageFile[randomIndex].getDataInBackground { (data, error) in
                         
                         if let imageData = data {
                             
@@ -703,37 +584,37 @@ class luckyStrikeViewController: UIViewController {
                         }
                         
                     }
-                    if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
+                    if let correctAnsInt = Int(correctAnswer[randomIndex]) {
                         
                         if correctAnsInt == 1 {
-                            self.headerLabel.text = self.option1[randomIndex]
+                            headerLabel.text = option1[randomIndex]
                         }
                         else if correctAnsInt == 2 {
-                            self.headerLabel.text = self.option2[randomIndex]
+                            headerLabel.text = option2[randomIndex]
                         }
                         else if correctAnsInt == 3 {
-                            self.headerLabel.text = self.option3[randomIndex]
+                            headerLabel.text = option3[randomIndex]
                         }
                         else if correctAnsInt == 4 {
-                            self.headerLabel.text = self.option4[randomIndex]
+                            headerLabel.text = option4[randomIndex]
                         }
                     }
                     activityIndicator.stopAnimating()
                     UIApplication.shared.endIgnoringInteractionEvents()
                     
                     
-                    self.descriptionText.text = self.descriptionEng[randomIndex]
-                    self.descriptionText.isHidden = false
-                    self.headerLabel.isHidden = false
-                    self.image.isHidden = false
+                    descriptionText.text = descriptionEng[randomIndex]
+                    descriptionText.isHidden = false
+                    headerLabel.isHidden = false
+                    image.isHidden = false
                     
-                    self.option1.remove(at: randomIndex)
-                    self.option2.remove(at: randomIndex)
-                    self.option3.remove(at: randomIndex)
-                    self.option4.remove(at: randomIndex)
-                    self.imageFile.remove(at: randomIndex)
-                    self.correctAnswer.remove(at: randomIndex)
-                    self.descriptionEng.remove(at: randomIndex)
+                    option1.remove(at: randomIndex)
+                    option2.remove(at: randomIndex)
+                    option3.remove(at: randomIndex)
+                    option4.remove(at: randomIndex)
+                    imageFile.remove(at: randomIndex)
+                    correctAnswer.remove(at: randomIndex)
+                    descriptionEng.remove(at: randomIndex)
                     
                     
                 }
