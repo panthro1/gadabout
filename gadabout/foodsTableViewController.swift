@@ -164,7 +164,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
         }
 
-        let nofInstanceQuery = PFQuery(className: "Foods")
+        /*let nofInstanceQuery = PFQuery(className: "Foods")
         nofInstanceQuery.countObjectsInBackground { (count, error) in
             
             if let error = error {
@@ -247,7 +247,127 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                     }
                 }
             }
+        }*/
+        
+        // New code
+        if glbFdObjectId.count < 10 {
+            questionSeenBefore.removeAll()
+            let questionCoveredQuery = PFQuery(className: "foodsCoveredBefore")
+            questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+            questionCoveredQuery.findObjectsInBackground { (objects, error) in
+                
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                else {
+                    if let foods = objects {
+                        for food in foods {
+                            //print("\(place["questionId"])")
+                            self.questionSeenBefore.append(food["questionId"] as! String)
+                        }
+                    }
+                }
+                
+                if glbFdObjectId.count > 0 {
+                    for indx in 0 ..< glbFdObjectId.count {
+                        self.questionSeenBefore.append(glbFdObjectId[indx])
+                    }
+                }
+                print("Question Seen Before: \(self.questionSeenBefore)")
+                
+                let foodsQuery = PFQuery(className: "Foods")
+                foodsQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
+                foodsQuery.findObjectsInBackground { (objects, error) in
+                    if let foods = objects {
+                        
+                        for food in foods {
+                            
+                            glbFdOption1.append(food["alternative1"] as! String)
+                            glbFdOption2.append(food["alternative2"] as! String)
+                            glbFdOption3.append(food["alternative3"] as! String)
+                            glbFdOption4.append(food["alternative4"] as! String)
+                            glbFdImageFile.append(food["imageFile"] as! PFFile)
+                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
+                            glbFdDescriptionEng.append(food["engDescription"] as! String)
+                            
+                            if let question = food.objectId {
+                                glbFdObjectId.append(question)
+                            }
+                        }
+                    }
+                    print("Pulled objects: \(glbFdObjectId)")
+                    var questionLimit = 4
+                    
+                    if glbFdObjectId.count < questionLimit {
+                        questionLimit = glbFdObjectId.count
+                    }
+                    
+                    for _ in 0 ..< questionLimit {
+                        
+                        let randomIndex = Int(arc4random_uniform(UInt32(glbFdObjectId.count - 1)))
+                        
+                        self.option1.append(glbFdOption1[randomIndex])
+                        self.option2.append(glbFdOption2[randomIndex])
+                        self.option3.append(glbFdOption3[randomIndex])
+                        self.option4.append(glbFdOption4[randomIndex])
+                        self.imageFile.append(glbFdImageFile[randomIndex])
+                        self.correctAnswer.append(glbFdCorrectAnswer[randomIndex])
+                        self.descriptionEng.append(glbFdDescriptionEng[randomIndex])
+                        self.questionCompleted.append(glbFdObjectId[randomIndex])
+                        
+                        self.showDetail.append(false)
+                        self.userRecord.append(false)
+                        
+                        glbFdOption1.remove(at: randomIndex)
+                        glbFdOption2.remove(at: randomIndex)
+                        glbFdOption3.remove(at: randomIndex)
+                        glbFdOption4.remove(at: randomIndex)
+                        glbFdImageFile.remove(at: randomIndex)
+                        glbFdCorrectAnswer.remove(at: randomIndex)
+                        glbFdDescriptionEng.remove(at: randomIndex)
+                        glbFdObjectId.remove(at: randomIndex)
+                    }
+                    self.tableView.reloadData()
+                }
+                
+            }
+            
         }
+        else {
+            var questionLimit = 4
+            
+            if glbFdObjectId.count < questionLimit {
+                questionLimit = glbFdObjectId.count
+            }
+            
+            for _ in 0 ..< questionLimit {
+                
+                let randomIndex = Int(arc4random_uniform(UInt32(glbFdObjectId.count - 1)))
+                
+                option1.append(glbFdOption1[randomIndex])
+                option2.append(glbFdOption2[randomIndex])
+                option3.append(glbFdOption3[randomIndex])
+                option4.append(glbFdOption4[randomIndex])
+                imageFile.append(glbFdImageFile[randomIndex])
+                correctAnswer.append(glbFdCorrectAnswer[randomIndex])
+                descriptionEng.append(glbFdDescriptionEng[randomIndex])
+                questionCompleted.append(glbFdObjectId[randomIndex])
+                
+                showDetail.append(false)
+                userRecord.append(false)
+                
+                glbFdOption1.remove(at: randomIndex)
+                glbFdOption2.remove(at: randomIndex)
+                glbFdOption3.remove(at: randomIndex)
+                glbFdOption4.remove(at: randomIndex)
+                glbFdImageFile.remove(at: randomIndex)
+                glbFdCorrectAnswer.remove(at: randomIndex)
+                glbFdDescriptionEng.remove(at: randomIndex)
+                glbFdObjectId.remove(at: randomIndex)
+            }
+            tableView.reloadData()
+        }
+
     }
     
     @objc func timeCount() {
@@ -354,7 +474,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                 needToSaveData.saveInBackground(block: { (success, error) in
                     
                     if success {
-                        print("Current user is saved in place record")
+                        print("Current user is saved in food record")
                     }
                     else {
                         print("Could not saved")
@@ -758,7 +878,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         scorePoint = 0
         
         
-        let nofInstanceQuery = PFQuery(className: "Foods")
+        /*let nofInstanceQuery = PFQuery(className: "Foods")
         nofInstanceQuery.countObjectsInBackground { (count, error) in
             
             if let error = error {
@@ -841,7 +961,127 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                 }
             }
             
+        }*/
+        
+        // New code
+        if glbFdObjectId.count < 10 {
+            questionSeenBefore.removeAll()
+            let questionCoveredQuery = PFQuery(className: "foodsCoveredBefore")
+            questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+            questionCoveredQuery.findObjectsInBackground { (objects, error) in
+                
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                else {
+                    if let foods = objects {
+                        for food in foods {
+                            //print("\(place["questionId"])")
+                            self.questionSeenBefore.append(food["questionId"] as! String)
+                        }
+                    }
+                }
+                
+                if glbFdObjectId.count > 0 {
+                    for indx in 0 ..< glbFdObjectId.count {
+                        self.questionSeenBefore.append(glbFdObjectId[indx])
+                    }
+                }
+                print("Question Seen Before: \(self.questionSeenBefore)")
+                
+                let foodsQuery = PFQuery(className: "Foods")
+                foodsQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
+                foodsQuery.findObjectsInBackground { (objects, error) in
+                    if let foods = objects {
+                        
+                        for food in foods {
+                            
+                            glbFdOption1.append(food["alternative1"] as! String)
+                            glbFdOption2.append(food["alternative2"] as! String)
+                            glbFdOption3.append(food["alternative3"] as! String)
+                            glbFdOption4.append(food["alternative4"] as! String)
+                            glbFdImageFile.append(food["imageFile"] as! PFFile)
+                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
+                            glbFdDescriptionEng.append(food["engDescription"] as! String)
+                            
+                            if let question = food.objectId {
+                                glbFdObjectId.append(question)
+                            }
+                        }
+                    }
+                    print("Pulled objects: \(glbFdObjectId)")
+                    var questionLimit = 4
+                    
+                    if glbFdObjectId.count < questionLimit {
+                        questionLimit = glbFdObjectId.count
+                    }
+                    
+                    for _ in 0 ..< questionLimit {
+                        
+                        let randomIndex = Int(arc4random_uniform(UInt32(glbFdObjectId.count - 1)))
+                        
+                        self.option1.append(glbFdOption1[randomIndex])
+                        self.option2.append(glbFdOption2[randomIndex])
+                        self.option3.append(glbFdOption3[randomIndex])
+                        self.option4.append(glbFdOption4[randomIndex])
+                        self.imageFile.append(glbFdImageFile[randomIndex])
+                        self.correctAnswer.append(glbFdCorrectAnswer[randomIndex])
+                        self.descriptionEng.append(glbFdDescriptionEng[randomIndex])
+                        self.questionCompleted.append(glbFdObjectId[randomIndex])
+                        
+                        self.showDetail.append(false)
+                        self.userRecord.append(false)
+                        
+                        glbFdOption1.remove(at: randomIndex)
+                        glbFdOption2.remove(at: randomIndex)
+                        glbFdOption3.remove(at: randomIndex)
+                        glbFdOption4.remove(at: randomIndex)
+                        glbFdImageFile.remove(at: randomIndex)
+                        glbFdCorrectAnswer.remove(at: randomIndex)
+                        glbFdDescriptionEng.remove(at: randomIndex)
+                        glbFdObjectId.remove(at: randomIndex)
+                    }
+                    self.tableView.reloadData()
+                }
+                
+            }
+            
         }
+        else {
+            var questionLimit = 4
+            
+            if glbFdObjectId.count < questionLimit {
+                questionLimit = glbFdObjectId.count
+            }
+            
+            for _ in 0 ..< questionLimit {
+                
+                let randomIndex = Int(arc4random_uniform(UInt32(glbFdObjectId.count - 1)))
+                
+                option1.append(glbFdOption1[randomIndex])
+                option2.append(glbFdOption2[randomIndex])
+                option3.append(glbFdOption3[randomIndex])
+                option4.append(glbFdOption4[randomIndex])
+                imageFile.append(glbFdImageFile[randomIndex])
+                correctAnswer.append(glbFdCorrectAnswer[randomIndex])
+                descriptionEng.append(glbFdDescriptionEng[randomIndex])
+                questionCompleted.append(glbFdObjectId[randomIndex])
+                
+                showDetail.append(false)
+                userRecord.append(false)
+                
+                glbFdOption1.remove(at: randomIndex)
+                glbFdOption2.remove(at: randomIndex)
+                glbFdOption3.remove(at: randomIndex)
+                glbFdOption4.remove(at: randomIndex)
+                glbFdImageFile.remove(at: randomIndex)
+                glbFdCorrectAnswer.remove(at: randomIndex)
+                glbFdDescriptionEng.remove(at: randomIndex)
+                glbFdObjectId.remove(at: randomIndex)
+            }
+            tableView.reloadData()
+        }
+
         
     }
     
