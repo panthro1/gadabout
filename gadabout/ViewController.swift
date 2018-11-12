@@ -29,11 +29,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     var interstitial: GADInterstitial!
 
-        
+    @IBOutlet weak var cancelButton: UIButton!
+    
     var isEnglish = true
     
     var oldUserID = ""
     var isAnonymous = true
+    
+    
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        self.removeAnimate()
+    }
     
     
     func SaveLanguageSelection(English: Bool) {
@@ -133,9 +139,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
         logIn.layer.borderWidth = 1
         logIn.layer.borderColor = UIColor.black.cgColor
 
+        cancelButton.layer.cornerRadius = 10
+        cancelButton.layer.borderWidth = 1
+        var color = UIColor()
+        color = cancelButton.titleColor(for: [])!
+        cancelButton.layer.borderColor = UIColor.black.cgColor//UIColor(cgColor: CGColor(color))
+
+        
         self.view.backgroundColor = UIColor.white
         
         self.showAnimate()
+        
+        usernameTextField.leftViewMode = UITextFieldViewMode.always
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        let image = UIImage(named: "mail.png")
+        imageView.image = image
+        usernameTextField.leftView = imageView
         
         if let userID = PFUser.current()?.objectId {
             oldUserID = userID
