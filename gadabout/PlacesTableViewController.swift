@@ -46,6 +46,9 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var timer = Timer()
     var scorePoint = 0
     var totalScoreAfterTest = 0
+    
+    var shapeLayer: CAShapeLayer!
+    var progressLayer: CAShapeLayer!
 
 
     @IBOutlet weak var back: UIBarButtonItem!
@@ -169,6 +172,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             navigationBar.addSubview(timeLabel)
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
         }
+        
+        createProgressBar()
         
         
         /*let nofInstanceQuery = PFQuery(className: "Places")
@@ -417,7 +422,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     score.saveInBackground()
                 }
             }
-            
+            progressLayer.strokeEnd = CGFloat.pi*2
         }
         else {
             if timeRemaining > 5 {
@@ -1115,6 +1120,31 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         tableView.isScrollEnabled = true
         complete.isEnabled = true
         back.isEnabled = true
+    }
+    
+    func createProgressBar() {
+        
+        let shapeLayer = CAShapeLayer()
+
+        if let navigationBar = self.navigationController?.navigationBar {
+            let circularPath = UIBezierPath(arcCenter: navigationBar.center, radius: navigationBar.frame.height*0.4, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
+            
+            shapeLayer.path = circularPath.cgPath
+            shapeLayer.strokeColor = UIColor.lightGray.cgColor
+            shapeLayer.lineWidth = 5
+            shapeLayer.fillColor = nil
+            
+            progressLayer = CAShapeLayer()
+            progressLayer.path = circularPath.cgPath
+            progressLayer.lineWidth = 5
+            progressLayer.lineCap = kCALineCapRound
+            progressLayer.fillColor = nil
+            progressLayer.strokeColor = UIColor.red.cgColor
+            progressLayer.strokeEnd = 0.0
+            
+            navigationBar.layer.addSublayer(shapeLayer)
+            navigationBar.layer.addSublayer(progressLayer)
+        }
     }
     /*
     // Override to support conditional editing of the table view.
