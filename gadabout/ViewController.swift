@@ -13,9 +13,6 @@ import GoogleMobileAds
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var welcomeLabel: UILabel!
-    
-    @IBOutlet weak var enterPassLabel: UILabel!
 
     @IBOutlet weak var usernameTextField: UITextField!
     
@@ -42,79 +39,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    func SaveLanguageSelection(English: Bool) {
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserLanguageSelection")
-        
-        request.returnsObjectsAsFaults = false
-        
-        do {
-            let results = try context.fetch(request)
-            
-            if results.count > 0 {
-                
-                for result in results as! [NSManagedObject] {
-                    result.setValue(English, forKey: "isEnglish")
-                    
-                    do {
-                        try context.save()
-                        print("Saved")
-                    } catch {
-                        print("There was error in Core Data save")
-                    }
-                    
-                }
-            }
-            else {
-                let newUser = NSEntityDescription.insertNewObject(forEntityName: "UserLanguageSelection", into: context)
-                
-                newUser.setValue(English, forKey: "isEnglish")
-                
-                do {
-                    try context.save()
-                    print("Saved")
-                } catch {
-                    print("There was error in Core Data save")
-                }
-            }
-        } catch {
-            
-         // Catch code
-            
-        }
-    }
-    
-    func SetLabelLanguages(English: Bool) {
-        
-        
-        if English {
-            
-            
-            enterPassLabel.text = "Enter your email and password!"
-            usernameTextField.placeholder = "Email"
-            passwordTextField.placeholder = "Password"
-            logIn.setTitle("Login", for: [])
-            signIn.setTitle("Sign Up", for: [])
-            haveAnAccountLabel.text = "Do not have an account?"
-            welcomeLabel.text = "Welcome to Gadabout"
-            
-        } else {
-            
-            enterPassLabel.text = "Email ve şifrenizi giriniz!"
-            usernameTextField.placeholder = "Email"
-            passwordTextField.placeholder = "Şifre"
-            logIn.setTitle("Giriş", for: [])
-            signIn.setTitle("Kaydol", for: [])
-            haveAnAccountLabel.text = "Kaydolmadınız mı?"
-            welcomeLabel.text = "Gadabout'a Hoşgeldiniz"
-
-        }
-    }
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,28 +54,54 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         print("Hello World")
         
-        signIn.backgroundColor = .clear
-        signIn.layer.cornerRadius = 5
-        signIn.layer.borderWidth = 1
-        signIn.layer.borderColor = UIColor.black.cgColor
         
-        logIn.layer.cornerRadius = 5
+        logIn.layer.cornerRadius = 10
         logIn.layer.borderWidth = 1
         logIn.layer.borderColor = UIColor.black.cgColor
 
         cancelButton.layer.cornerRadius = 10
         cancelButton.layer.borderWidth = 1
         var color = UIColor()
-        color = cancelButton.titleColor(for: [])!
-        cancelButton.layer.borderColor = UIColor.black.cgColor//UIColor(cgColor: CGColor(color))
+        color = signIn.titleColor(for: [])!
+        cancelButton.layer.borderColor = color.cgColor//UIColor.black.cgColor//UIColor(cgColor: CGColor(color))
 
+        /*usernameTextField.layer.cornerRadius = 10
+        usernameTextField.layer.borderWidth = 2
+        usernameTextField.layer.borderColor = color.cgColor*/
         
+        
+        usernameTextField.layer.backgroundColor = UIColor.white.cgColor
+        usernameTextField.layer.borderColor = color.cgColor
+        usernameTextField.layer.borderWidth = 0.0
+        usernameTextField.layer.cornerRadius = 10
+        usernameTextField.layer.masksToBounds = false
+        usernameTextField.layer.shadowRadius = 5.0
+        usernameTextField.layer.shadowColor = color.cgColor
+        usernameTextField.layer.shadowOffset = CGSize.init(width: 1.0, height: 1.0)
+        usernameTextField.layer.shadowOpacity = 1.0
+        usernameTextField.layer.shadowRadius = 1.0
+
+        /*passwordTextField.layer.cornerRadius = 10
+        passwordTextField.layer.borderWidth = 2
+        passwordTextField.layer.borderColor = color.cgColor*/
+        
+        passwordTextField.layer.backgroundColor = UIColor.white.cgColor
+        passwordTextField.layer.borderColor = UIColor.white.cgColor
+        passwordTextField.layer.borderWidth = 0.0
+        passwordTextField.layer.cornerRadius = 10
+        passwordTextField.layer.masksToBounds = false
+        passwordTextField.layer.shadowRadius = 5.0
+        passwordTextField.layer.shadowColor = color.cgColor
+        passwordTextField.layer.shadowOffset = CGSize.init(width: 1.0, height: 1.0)
+        passwordTextField.layer.shadowOpacity = 1.0
+        passwordTextField.layer.shadowRadius = 1.0
+
         self.view.backgroundColor = UIColor.white
         
         self.showAnimate()
         
         usernameTextField.leftViewMode = UITextFieldViewMode.always
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         let image = UIImage(named: "mail.png")
         imageView.image = image
         usernameTextField.leftView = imageView
@@ -170,50 +120,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             isAnonymous = true
         }
 
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserLanguageSelection")
-        
-        request.returnsObjectsAsFaults = false
-        
-        do {
-            let results = try context.fetch(request)
-            
-            if results.count > 0 {
-                
-                for result in results as! [NSManagedObject] {
-                    
-                    if let isEnglishBool = result.value(forKey: "isEnglish") as? Bool {
-                        SetLabelLanguages(English: isEnglishBool)
-                        isEnglish = isEnglishBool
-                        
-                    }
-                    /*context.delete(result)
-                     
-                     do {
-                     try context.save()
-                     print("Saved")
-                     } catch {
-                     print("There was error in Core Data save")
-                     }*/
-                    
-                }
-            }
-            else {
-                print("No results")
-            }
-        } catch {
-            
-            print("Couldn't fetch the results")
-        }
-        
-
-        
-        
-        
 
     }
     
@@ -437,23 +343,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     
-    
-    @IBAction func SetTurkish(_ sender: Any) {
-        isEnglish = false
-        
-        SetLabelLanguages(English: isEnglish)
-        SaveLanguageSelection(English: isEnglish)
-
-    }
-    
-    
-    @IBAction func SetEnglish(_ sender: Any) {
-        
-        isEnglish = true
-        
-        SetLabelLanguages(English: isEnglish)
-        SaveLanguageSelection(English: isEnglish)
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

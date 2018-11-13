@@ -100,36 +100,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         self.mainPageTableView.allowsSelection = true
         
         self.mainPageTableView.rowHeight = 100
-
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        let context = appDelegate.persistentContainer.viewContext
-        
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserLanguageSelection")
-        
-        request.returnsObjectsAsFaults = false
-        
-        do {
-            let results = try context.fetch(request)
-            
-            if results.count > 0 {
-                
-                for result in results as! [NSManagedObject] {
-                    
-                    if let isEnglishBool = result.value(forKey: "isEnglish") as? Bool {
-                        isEnglish = isEnglishBool
-                        print("After login isEnglish: \(isEnglish)")
-                        
-                    }
-                }
-            }
-            else {
-                print("No results")
-            }
-        } catch {
-            
-            print("Couldn't fetch the results")
-        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(isRotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
