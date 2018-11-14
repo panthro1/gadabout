@@ -51,8 +51,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ovh-NS-QPo">
-                                <rect key="frame" x="20" y="258" width="335" height="48"/>
-                                <color key="backgroundColor" red="0.69231492280960083" green="0.12338867038488388" blue="0.87512266635894775" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="50" y="258" width="275" height="48"/>
+                                <color key="backgroundColor" red="0.6769755482673645" green="0.1526108980178833" blue="0.71082264184951782" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Log In">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -65,7 +66,7 @@
                                 <rect key="frame" x="215" y="316.5" width="110" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Sign Up">
-                                    <color key="titleColor" red="0.67655229568481445" green="0.069669224321842194" blue="0.87137585878372192" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.65738725662231445" green="0.08453049510717392" blue="0.69122380018234253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="SignInButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dUO-bP-ia3"/>
@@ -87,6 +88,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ovh-NS-QPo" secondAttribute="trailing" constant="50" id="3OB-2U-Jd4"/>
                             <constraint firstItem="pIv-5d-vVT" firstAttribute="top" secondItem="bfL-sq-cO4" secondAttribute="bottom" constant="8" id="4su-yz-1nS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pIv-5d-vVT" secondAttribute="trailing" constant="5" id="7Uh-KE-eLH"/>
                             <constraint firstItem="pIv-5d-vVT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AOK-3N-2CQ"/>
@@ -95,8 +97,6 @@
                             <constraint firstItem="Ovh-NS-QPo" firstAttribute="top" secondItem="pIv-5d-vVT" secondAttribute="bottom" constant="8" id="H2z-0u-Y3Z"/>
                             <constraint firstItem="bfL-sq-cO4" firstAttribute="top" secondItem="R3z-Bn-ull" secondAttribute="bottom" constant="80" id="KZY-g2-8Wc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="R3z-Bn-ull" secondAttribute="trailing" constant="10" id="Nc1-3u-waa"/>
-                            <constraint firstItem="Ovh-NS-QPo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="QHE-uw-YGk"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ovh-NS-QPo" secondAttribute="trailing" constant="20" id="baA-Ae-dQL"/>
                             <constraint firstItem="QH7-qF-S9v" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="dmU-f5-Ekl"/>
                             <constraint firstItem="pIv-5d-vVT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="gdM-08-F6B"/>
                             <constraint firstItem="bfL-sq-cO4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hvb-tV-hSf"/>
@@ -106,6 +106,7 @@
                             <constraint firstItem="bfL-sq-cO4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="tCM-hA-MXq"/>
                             <constraint firstItem="R3z-Bn-ull" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="vSd-OX-9tL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="v4n-eG-oCn" secondAttribute="trailing" constant="50" id="wkN-qy-2T6"/>
+                            <constraint firstItem="Ovh-NS-QPo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="yZY-j2-D0y"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -139,12 +140,13 @@
                                 <items>
                                     <navigationItem id="36Q-er-9bH">
                                         <barButtonItem key="leftBarButtonItem" title="Logout" id="X9e-YW-YYo">
-                                            <color key="tintColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="tintColor" red="0.66914349794387817" green="0.12803938984870911" blue="0.70298713445663452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="logoutButtonTapped:" destination="77F-Fn-Frx" id="62y-PW-lCU"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Mail Login" id="tJe-U4-jJ6">
+                                            <color key="tintColor" red="0.67308825254440308" green="0.13269695639610291" blue="0.70693856477737427" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="mailLoginTapped:" destination="77F-Fn-Frx" id="5yP-U2-C78"/>
                                             </connections>
@@ -399,11 +401,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="3lS-s2-JCE">
                         <barButtonItem key="leftBarButtonItem" title="Back" image="back.png" id="oEG-da-ERF">
+                            <color key="tintColor" red="0.67697554829999995" green="0.15261089799999999" blue="0.71082264179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="backTapped:" destination="puX-zQ-xb1" id="ut5-FD-LHx"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Complete" id="pKr-8r-BhV">
+                            <color key="tintColor" red="0.6848415732383728" green="0.16641205549240112" blue="0.71869808435440063" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="didCompleteTapped:" destination="puX-zQ-xb1" id="9fL-jW-1En"/>
                             </connections>
@@ -1138,6 +1142,6 @@
         <image name="uncheck.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="y30-Zv-P8M"/>
+        <segue reference="ERg-ar-XpG"/>
     </inferredMetricsTieBreakers>
 </document>

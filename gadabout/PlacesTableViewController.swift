@@ -42,6 +42,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var userRecord = [Bool]()
     
     var timeRemaining = 15
+    let totalTime = 15
     var timeLabel = UILabel()
     var timer = Timer()
     var scorePoint = 0
@@ -160,18 +161,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         self.tableView.rowHeight = 380
         
         scorePoint = 0
-        
-        if let navigationBar = self.navigationController?.navigationBar {
-            let timeFrame = CGRect(x: 0, y: 0, width: navigationBar.frame.width, height: navigationBar.frame.height)
-            
-            timeLabel = UILabel(frame: timeFrame)
-            timeLabel.text = "\(timeRemaining)"
-            timeLabel.textAlignment = .center
-            timeLabel.font = UIFont.boldSystemFont(ofSize: 25)
-            
-            navigationBar.addSubview(timeLabel)
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
-        }
         
         createProgressBar()
         
@@ -422,7 +411,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     score.saveInBackground()
                 }
             }
-            progressLayer.strokeEnd = CGFloat.pi*2
+
+            progressLayer.strokeEnd = 1
         }
         else {
             if timeRemaining > 5 {
@@ -438,7 +428,11 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     self.timeLabel.text = "\(self.timeRemaining)"
                 }
             }
-
+            UIView.animate(withDuration: 1) {
+                self.progressLayer.strokeEnd = (CGFloat(self.totalTime) - CGFloat(self.timeRemaining))/CGFloat(self.totalTime)
+            }
+            //progressLayer.strokeEnd = (CGFloat(totalTime) - CGFloat(timeRemaining))/CGFloat(totalTime)
+        
         }
     }
     
@@ -1127,7 +1121,18 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         let shapeLayer = CAShapeLayer()
 
         if let navigationBar = self.navigationController?.navigationBar {
-            let circularPath = UIBezierPath(arcCenter: navigationBar.center, radius: navigationBar.frame.height*0.4, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
+            let timeFrame = CGRect(x: 0, y: 0, width: navigationBar.frame.width, height: navigationBar.frame.height)
+            
+            timeLabel = UILabel(frame: timeFrame)
+            timeLabel.text = "\(timeRemaining)"
+            timeLabel.textAlignment = .center
+            timeLabel.font = UIFont.boldSystemFont(ofSize: 25)
+            
+            navigationBar.addSubview(timeLabel)
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
+
+            
+            let circularPath = UIBezierPath(arcCenter: navigationBar.center, radius: navigationBar.frame.height*0.4, startAngle: -CGFloat.pi/2, endAngle: CGFloat.pi/2*3, clockwise: true)
             
             shapeLayer.path = circularPath.cgPath
             shapeLayer.strokeColor = UIColor.lightGray.cgColor
