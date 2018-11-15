@@ -524,6 +524,10 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         cell.detailsButton.layer.borderWidth = 1
         cell.detailsButton.layer.borderColor = UIColor.black.cgColor
         
+        cell.layer.cornerRadius=10 //set corner radius here
+        cell.layer.borderColor = UIColor.lightGray.cgColor  // set cell border color here
+        cell.layer.borderWidth = 2 // set border width here
+        
         //print("Row: \(indexPath.row) showDetail: \(showDetail) Completed: \(isCompleted)")
         
         if (showDetail[indexPath.row] == true)/* && (detailCellRow == indexPath.row)*/ {
@@ -1135,7 +1139,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             progressLayer.lineWidth = 5
             progressLayer.lineCap = kCALineCapRound
             progressLayer.fillColor = nil
-            progressLayer.strokeColor = complete.tintColor?.cgColor //UIColor.red.cgColor
+            progressLayer.strokeColor = complete.tintColor?.cgColor
             progressLayer.strokeEnd = 0.0
             
             navigationBar.layer.addSublayer(progressLayer)

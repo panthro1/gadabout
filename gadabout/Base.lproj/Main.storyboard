@@ -140,7 +140,7 @@
                                 <items>
                                     <navigationItem id="36Q-er-9bH">
                                         <barButtonItem key="leftBarButtonItem" title="Logout" id="X9e-YW-YYo">
-                                            <color key="tintColor" red="0.66914349794387817" green="0.12803938984870911" blue="0.70298713445663452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="tintColor" white="0.8708738955368559" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="logoutButtonTapped:" destination="77F-Fn-Frx" id="62y-PW-lCU"/>
                                             </connections>
@@ -189,6 +189,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="logout" destination="X9e-YW-YYo" id="Eqt-Y6-5nH"/>
+                        <outlet property="mailLogin" destination="tJe-U4-jJ6" id="FD7-aQ-PcL"/>
                         <outlet property="mainPageTableView" destination="WhE-j5-Xzq" id="84f-vZ-Y7t"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="sUt-K6-2Q9"/>
                         <segue destination="SdN-Tf-nhA" kind="presentation" identifier="placesSegue" id="kvK-Dz-cGm"/>
@@ -1144,6 +1145,6 @@
         <image name="uncheck.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="E7f-hZ-Nwc"/>
+        <segue reference="ERg-ar-XpG"/>
     </inferredMetricsTieBreakers>
 </document>

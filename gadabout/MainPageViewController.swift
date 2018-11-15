@@ -39,6 +39,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var mainPageTableView: UITableView!
     
+    @IBOutlet weak var mailLogin: UIBarButtonItem!
     
     @IBAction func mailLoginTapped(_ sender: Any) {
         
@@ -237,6 +238,10 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "mainPageCell")
+        
+        cell.layer.cornerRadius=10 //set corner radius here
+        cell.layer.borderColor = logout.tintColor?.cgColor//UIColor.lightGray.cgColor  // set cell border color here
+        cell.layer.borderWidth = 2 // set border width here
         
         cell.textLabel?.font = UIFont(name: "Avenir", size: 32)
         
