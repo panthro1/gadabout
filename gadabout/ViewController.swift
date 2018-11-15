@@ -103,9 +103,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         usernameTextField.leftViewMode = UITextFieldViewMode.always
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        let image = UIImage(named: "mail.png")
+        let image = UIImage(named: "email.png")
         imageView.image = image
         usernameTextField.leftView = imageView
+
+        passwordTextField.leftViewMode = UITextFieldViewMode.always
+        let imageView2 = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        let image2 = UIImage(named: "lock.png")
+        imageView2.image = image2
+        passwordTextField.leftView = imageView2
+
         
         if let userID = PFUser.current()?.objectId {
             oldUserID = userID
