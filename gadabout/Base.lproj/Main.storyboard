@@ -940,11 +940,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="Wr9-PH-hl4">
                         <barButtonItem key="leftBarButtonItem" title="Back" image="back.png" id="deX-to-3oM">
+                            <color key="tintColor" red="0.67697554829999995" green="0.15261089799999999" blue="0.71082264179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="backTapped:" destination="qOe-HN-aI2" id="LoW-Qr-bzE"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Complete" id="2kL-zl-qjx">
+                            <color key="tintColor" red="0.67697554829999995" green="0.15261089799999999" blue="0.71082264179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="didCompleteTapped:" destination="qOe-HN-aI2" id="KmG-ln-oeT"/>
                             </connections>
@@ -1142,6 +1144,6 @@
         <image name="uncheck.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ERg-ar-XpG"/>
+        <segue reference="E7f-hZ-Nwc"/>
     </inferredMetricsTieBreakers>
 </document>

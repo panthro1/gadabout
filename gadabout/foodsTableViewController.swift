@@ -42,6 +42,9 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
     @IBOutlet weak var complete: UIBarButtonItem!
     
     var timeRemaining = 15
+    let totalTime = 15
+    
+    var progressLayer: CAShapeLayer!
     var timer = Timer()
     var scorePoint = 0
     var totalScoreAfterTest = 0
@@ -152,7 +155,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         
         scorePoint = 0
         
-        if let navigationBar = self.navigationController?.navigationBar {
+        /*if let navigationBar = self.navigationController?.navigationBar {
             let timeFrame = CGRect(x: 0, y: 0, width: navigationBar.frame.width, height: navigationBar.frame.height)
             
             timeLabel = UILabel(frame: timeFrame)
@@ -162,7 +165,9 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             
             navigationBar.addSubview(timeLabel)
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
-        }
+        }*/
+        
+        createProgressBar()
 
         /*let nofInstanceQuery = PFQuery(className: "Foods")
         nofInstanceQuery.countObjectsInBackground { (count, error) in
@@ -409,6 +414,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                     score.saveInBackground()
                 }
             }
+            progressLayer.strokeEnd = 1
             
         }
         else {
@@ -425,7 +431,9 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                     self.timeLabel.text = "\(self.timeRemaining)"
                 }
             }
-            
+            UIView.animate(withDuration: 1) {
+                self.progressLayer.strokeEnd = (CGFloat(self.totalTime) - CGFloat(self.timeRemaining))/CGFloat(self.totalTime)
+            }
         }
     }
     
@@ -1107,6 +1115,34 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         tableView.isScrollEnabled = true
         complete.isEnabled = true
         back.isEnabled = true
+    }
+    
+    func createProgressBar() {
+        
+        if let navigationBar = self.navigationController?.navigationBar {
+            let timeFrame = CGRect(x: 0, y: 0, width: navigationBar.frame.width, height: navigationBar.frame.height)
+            
+            timeLabel = UILabel(frame: timeFrame)
+            timeLabel.text = "\(timeRemaining)"
+            timeLabel.textAlignment = .center
+            timeLabel.font = UIFont.boldSystemFont(ofSize: 25)
+            
+            navigationBar.addSubview(timeLabel)
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
+            
+            
+            let circularPath = UIBezierPath(arcCenter: navigationBar.center, radius: navigationBar.frame.height*0.4, startAngle: -CGFloat.pi/2, endAngle: CGFloat.pi/2*3, clockwise: true)
+            
+            progressLayer = CAShapeLayer()
+            progressLayer.path = circularPath.cgPath
+            progressLayer.lineWidth = 5
+            progressLayer.lineCap = kCALineCapRound
+            progressLayer.fillColor = nil
+            progressLayer.strokeColor = complete.tintColor?.cgColor //UIColor.red.cgColor
+            progressLayer.strokeEnd = 0.0
+            
+            navigationBar.layer.addSublayer(progressLayer)
+        }
     }
 
     /*

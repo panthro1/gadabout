@@ -48,7 +48,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var scorePoint = 0
     var totalScoreAfterTest = 0
     
-    var shapeLayer: CAShapeLayer!
     var progressLayer: CAShapeLayer!
 
 
@@ -431,7 +430,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             UIView.animate(withDuration: 1) {
                 self.progressLayer.strokeEnd = (CGFloat(self.totalTime) - CGFloat(self.timeRemaining))/CGFloat(self.totalTime)
             }
-            //progressLayer.strokeEnd = (CGFloat(totalTime) - CGFloat(timeRemaining))/CGFloat(totalTime)
         
         }
     }
@@ -1117,8 +1115,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     }
     
     func createProgressBar() {
-        
-        let shapeLayer = CAShapeLayer()
 
         if let navigationBar = self.navigationController?.navigationBar {
             let timeFrame = CGRect(x: 0, y: 0, width: navigationBar.frame.width, height: navigationBar.frame.height)
@@ -1134,20 +1130,14 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             
             let circularPath = UIBezierPath(arcCenter: navigationBar.center, radius: navigationBar.frame.height*0.4, startAngle: -CGFloat.pi/2, endAngle: CGFloat.pi/2*3, clockwise: true)
             
-            shapeLayer.path = circularPath.cgPath
-            shapeLayer.strokeColor = UIColor.lightGray.cgColor
-            shapeLayer.lineWidth = 5
-            shapeLayer.fillColor = nil
-            
             progressLayer = CAShapeLayer()
             progressLayer.path = circularPath.cgPath
             progressLayer.lineWidth = 5
             progressLayer.lineCap = kCALineCapRound
             progressLayer.fillColor = nil
-            progressLayer.strokeColor = UIColor.red.cgColor
+            progressLayer.strokeColor = complete.tintColor?.cgColor //UIColor.red.cgColor
             progressLayer.strokeEnd = 0.0
             
-            navigationBar.layer.addSublayer(shapeLayer)
             navigationBar.layer.addSublayer(progressLayer)
         }
     }

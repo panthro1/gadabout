@@ -63,7 +63,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         cancelButton.layer.borderWidth = 1
         var color = UIColor()
         color = signIn.titleColor(for: [])!
-        cancelButton.layer.borderColor = color.cgColor//UIColor.black.cgColor//UIColor(cgColor: CGColor(color))
+        cancelButton.layer.borderColor = color.cgColor
 
         /*usernameTextField.layer.cornerRadius = 10
         usernameTextField.layer.borderWidth = 2
