@@ -41,6 +41,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var mailLogin: UIBarButtonItem!
     
+    
     @IBAction func mailLoginTapped(_ sender: Any) {
         
         let loginPopupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginPopUpID") as! ViewController
@@ -296,6 +297,21 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             performSegue(withIdentifier: "luckyStrikeSegue", sender: self)
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        let src = self
+        let transition: CATransition = CATransition()
+        let timeFunc : CAMediaTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.duration = 0.3
+        transition.timingFunction = timeFunc
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromRight
+        
+        src.view.window?.layer.add(transition, forKey: nil)
+    }
+    
+
     
     
     
