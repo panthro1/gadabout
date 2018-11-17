@@ -36,6 +36,7 @@
 		E3A38444215044A1003A0A8C /* puzzleMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A38443215044A1003A0A8C /* puzzleMapViewController.swift */; };
 		E3BA747C219A769800095B1B /* remove.png in Resources */ = {isa = PBXBuildFile; fileRef = E3BA747B219A769700095B1B /* remove.png */; };
 		E3CBDEDF21A04DB1002664B4 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CBDEDE21A04DB1002664B4 /* checked.png */; };
+		E3CBDEE121A05C8B002664B4 /* undo-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CBDEE021A05C8A002664B4 /* undo-arrow.png */; };
 		E3CF250B219D1C8100D5EA9F /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CF250A219D1C8000D5EA9F /* lock.png */; };
 		E3CF250D219D1D5E00D5EA9F /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CF250C219D1D5E00D5EA9F /* email.png */; };
 		E3E1BEF12179133700C62595 /* luckyStrikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */; };
@@ -101,6 +102,7 @@
 		E3A38443215044A1003A0A8C /* puzzleMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = puzzleMapViewController.swift; sourceTree = "<group>"; };
 		E3BA747B219A769700095B1B /* remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remove.png; sourceTree = "<group>"; };
 		E3CBDEDE21A04DB1002664B4 /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
+		E3CBDEE021A05C8A002664B4 /* undo-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undo-arrow.png"; sourceTree = "<group>"; };
 		E3CF250A219D1C8000D5EA9F /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
 		E3CF250C219D1D5E00D5EA9F /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email.png; sourceTree = "<group>"; };
 		E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = luckyStrikeViewController.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				E3BA747B219A769700095B1B /* remove.png */,
 				E3CBDEDE21A04DB1002664B4 /* checked.png */,
 				E3CF250A219D1C8000D5EA9F /* lock.png */,
+				E3CBDEE021A05C8A002664B4 /* undo-arrow.png */,
 				E3261AF520F098940056CE99 /* Info.plist */,
 				E33D52C22182BB170077E001 /* back.png */,
 				E3CF250C219D1D5E00D5EA9F /* email.png */,
@@ -353,6 +356,7 @@
 				E34AB2262186C46F0080A5C4 /* diamond.png in Resources */,
 				E3261B1C20F0A7820056CE99 /* lovetravel.png in Resources */,
 				E3BA747C219A769800095B1B /* remove.png in Resources */,
+				E3CBDEE121A05C8B002664B4 /* undo-arrow.png in Resources */,
 				E36DA987212D71830031D337 /* wrong.gif in Resources */,
 				E3261B1820F0A72C0056CE99 /* turkey.png in Resources */,
 				E3CF250B219D1C8100D5EA9F /* lock.png in Resources */,

@@ -164,8 +164,14 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         
             success(true)
         })
-        closeAction.image = UIImage(named: "checked.png")
-        closeAction.backgroundColor = .purple
+        if completed[indexPath.row] == true {
+            closeAction.image = UIImage(named: "undo-arrow.png")
+            closeAction.backgroundColor = .red
+        }
+        else {
+            closeAction.image = UIImage(named: "checked.png")
+            closeAction.backgroundColor = .purple
+        }
         
         return UISwipeActionsConfiguration(actions: [closeAction])
     }
