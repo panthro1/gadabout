@@ -140,7 +140,7 @@
                                 <items>
                                     <navigationItem id="36Q-er-9bH">
                                         <barButtonItem key="leftBarButtonItem" title="Logout" id="X9e-YW-YYo">
-                                            <color key="tintColor" white="0.8708738955368559" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="tintColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="logoutButtonTapped:" destination="77F-Fn-Frx" id="62y-PW-lCU"/>
                                             </connections>
@@ -192,12 +192,12 @@
                         <outlet property="mailLogin" destination="tJe-U4-jJ6" id="FD7-aQ-PcL"/>
                         <outlet property="mainPageTableView" destination="WhE-j5-Xzq" id="84f-vZ-Y7t"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="sUt-K6-2Q9"/>
-                        <segue destination="SdN-Tf-nhA" kind="presentation" identifier="placesSegue" id="kvK-Dz-cGm"/>
-                        <segue destination="Tzn-P9-zBi" kind="presentation" identifier="postSegue" id="2nL-Lu-Kco"/>
-                        <segue destination="pLG-OL-dPP" kind="presentation" identifier="puzzleMapSegue" id="7Bz-LV-gHu"/>
-                        <segue destination="uew-mE-85R" kind="presentation" identifier="toDoListSegue" id="YWg-Dm-YHW"/>
-                        <segue destination="xHi-hW-sEe" kind="presentation" identifier="foodsSegue" id="MrJ-V2-FWZ"/>
-                        <segue destination="Mu3-9O-FyB" kind="presentation" identifier="luckyStrikeSegue" id="XWg-ht-3jw"/>
+                        <segue destination="SdN-Tf-nhA" kind="presentation" identifier="placesSegue" animates="NO" id="kvK-Dz-cGm"/>
+                        <segue destination="Tzn-P9-zBi" kind="presentation" identifier="postSegue" animates="NO" id="2nL-Lu-Kco"/>
+                        <segue destination="pLG-OL-dPP" kind="presentation" identifier="puzzleMapSegue" animates="NO" id="7Bz-LV-gHu"/>
+                        <segue destination="uew-mE-85R" kind="presentation" identifier="toDoListSegue" animates="NO" id="YWg-Dm-YHW"/>
+                        <segue destination="xHi-hW-sEe" kind="presentation" identifier="foodsSegue" animates="NO" id="MrJ-V2-FWZ"/>
+                        <segue destination="Mu3-9O-FyB" kind="presentation" identifier="luckyStrikeSegue" animates="NO" id="XWg-ht-3jw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0XW-Pd-7Op" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -419,7 +419,7 @@
                     <connections>
                         <outlet property="back" destination="oEG-da-ERF" id="RQy-pX-8Kq"/>
                         <outlet property="complete" destination="pKr-8r-BhV" id="yOh-E1-rN0"/>
-                        <segue destination="77F-Fn-Frx" kind="presentation" identifier="placesBackSegue" id="ERg-ar-XpG"/>
+                        <segue destination="77F-Fn-Frx" kind="presentation" identifier="placesBackSegue" animates="NO" id="ERg-ar-XpG"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YB9-FD-mhb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -552,7 +552,7 @@
                         <outlet property="image" destination="xrk-5S-5Fk" id="oGw-fh-W1h"/>
                         <outlet property="nextButton" destination="0Py-TE-VEr" id="1vP-QI-rWy"/>
                         <outlet property="toDoListButton" destination="Lmc-la-YMg" id="zTo-aP-SbG"/>
-                        <segue destination="77F-Fn-Frx" kind="presentation" identifier="luckyStrikeBackSegue" id="e9z-7M-9hq"/>
+                        <segue destination="77F-Fn-Frx" kind="presentation" identifier="luckyStrikeBackSegue" animates="NO" id="e9z-7M-9hq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="idu-PV-1Bs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -752,7 +752,7 @@
                     <connections>
                         <outlet property="harderSimpleButton" destination="CBz-ZL-mbw" id="Rwc-fX-RyK"/>
                         <outlet property="hintButton" destination="SOU-iJ-iWi" id="zSd-SG-cah"/>
-                        <segue destination="77F-Fn-Frx" kind="presentation" identifier="mapPuzzleBackSegue" id="FcB-5h-H0o"/>
+                        <segue destination="77F-Fn-Frx" kind="presentation" identifier="mapPuzzleBackSegue" animates="NO" id="FcB-5h-H0o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="taM-3Q-yxH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -966,7 +966,7 @@
                     <connections>
                         <outlet property="back" destination="deX-to-3oM" id="X4G-Mo-UFe"/>
                         <outlet property="complete" destination="2kL-zl-qjx" id="c9C-zC-QIe"/>
-                        <segue destination="77F-Fn-Frx" kind="presentation" identifier="foodsBackSegue" id="E7f-hZ-Nwc"/>
+                        <segue destination="77F-Fn-Frx" kind="presentation" identifier="foodsBackSegue" animates="NO" id="E7f-hZ-Nwc"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FbS-cP-ixg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1059,7 +1059,7 @@
                     </view>
                     <connections>
                         <outlet property="table" destination="knA-Tt-rNr" id="6cB-V0-JDu"/>
-                        <segue destination="77F-Fn-Frx" kind="presentation" identifier="toDoBackSegue" id="oEp-Lf-uRp"/>
+                        <segue destination="77F-Fn-Frx" kind="presentation" identifier="toDoBackSegue" animates="NO" id="oEp-Lf-uRp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4er-OO-PYn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1156,6 +1156,6 @@
         <image name="uncheck.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ERg-ar-XpG"/>
+        <segue reference="oEp-Lf-uRp"/>
     </inferredMetricsTieBreakers>
 </document>

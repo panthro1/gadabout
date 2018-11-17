@@ -634,6 +634,23 @@ class luckyStrikeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "luckyStrikeBackSegue" {
+            let src = self
+            let transition: CATransition = CATransition()
+            let timeFunc : CAMediaTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            transition.duration = 0.3
+            transition.timingFunction = timeFunc
+            transition.type = kCATransitionPush
+            transition.subtype = kCATransitionFromLeft
+            
+            
+            src.view.window?.layer.add(transition, forKey: nil)
+        }
+        
+    }
+    
     
     /*
      // MARK: - Navigation
