@@ -241,7 +241,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "mainPageCell")
         
         cell.layer.cornerRadius=10 //set corner radius here
-        cell.layer.borderColor = logout.tintColor?.cgColor//UIColor.lightGray.cgColor  // set cell border color here
+        cell.layer.borderColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 100).cgColor //logout.tintColor?.cgColor//UIColor.lightGray.cgColor  // set cell border color here
         cell.layer.borderWidth = 2 // set border width here
         
         cell.textLabel?.font = UIFont(name: "Avenir", size: 32)

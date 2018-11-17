@@ -23,6 +23,8 @@ class luckyStrikeViewController: UIViewController {
     var nofPlaceInstances: Int32 = 0
     var nofFoodInstances: Int32 = 0
     var placeFoodSelection: UInt32 = 0
+    var currentObjectId = String()
+    var isPlace = Bool()
     
     
     @IBOutlet weak var image: UIImageView!
@@ -101,6 +103,37 @@ class luckyStrikeViewController: UIViewController {
         
         UserDefaults.standard.set(itemsName, forKey: "toDoItem")
         UserDefaults.standard.set(itemsDescription, forKey: "toDoItemDescription")
+        
+        
+        // New code
+        /*if let header = headerLabel.text  {
+            if let description = descriptionText.text {
+                if let image = image.image {
+                    let toDoItem = PFObject(className: "ToDoList")
+                    if let imageData = UIImagePNGRepresentation(image) {
+                        
+                        let imageFile = PFFile(name: "image.png", data: imageData)
+                        
+                        toDoItem["objectId"] = objectId
+                        toDoItem["userId"] = PFUser.current()?.objectId
+                        toDoItem["imageFile"] = imageFile
+                        
+                        toDoItem.saveInBackground { (success, error) in
+                            
+                            if success {
+                                print("Entity saved successfully")
+                            }
+                            else { // success
+                                
+                                print("Entity could not be saved")
+                            }
+                        }
+                    } // imageData
+
+                }
+            }
+        }*/
+
         
     }
     

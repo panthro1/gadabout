@@ -144,15 +144,6 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let closeAction = UIContextualAction(style: .normal, title:  "Close", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            /*let toDoNameAttributeString: NSMutableAttributedString =  NSMutableAttributedString(string: toDoName)
-            toDoNameAttributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 1, range: NSMakeRange(0, toDoNameAttributeString.length))
-            
-            cell.textLabel?.attributedText = toDoNameAttributeString*/
-            
-            /*let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
-            let toDoNameAttributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "Test")
-            toDoNameAttributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 1, range: NSMakeRange(0, toDoNameAttributeString.length))
-            cell.textLabel?.attributedText = toDoNameAttributeString*/
             if self.completed[indexPath.row] == true {
                 self.completed[indexPath.row] = false
             }
@@ -166,13 +157,11 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         })
         if completed[indexPath.row] == true {
             closeAction.image = UIImage(named: "undo-arrow.png")
-            closeAction.backgroundColor = .red
         }
         else {
             closeAction.image = UIImage(named: "checked.png")
-            closeAction.backgroundColor = .purple
         }
-        
+        closeAction.backgroundColor = .purple
         return UISwipeActionsConfiguration(actions: [closeAction])
     }
     

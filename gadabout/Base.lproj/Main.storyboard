@@ -140,13 +140,13 @@
                                 <items>
                                     <navigationItem id="36Q-er-9bH">
                                         <barButtonItem key="leftBarButtonItem" title="Logout" id="X9e-YW-YYo">
-                                            <color key="tintColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" white="0.92000000000000004" alpha="1" colorSpace="calibratedWhite"/>
                                             <connections>
                                                 <action selector="logoutButtonTapped:" destination="77F-Fn-Frx" id="62y-PW-lCU"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Mail Login" id="tJe-U4-jJ6">
-                                            <color key="tintColor" red="0.67308825254440308" green="0.13269695639610291" blue="0.70693856477737427" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="tintColor" red="0.67450980392156867" green="0.13269695639610291" blue="0.70693856477737427" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="mailLoginTapped:" destination="77F-Fn-Frx" id="5yP-U2-C78"/>
                                             </connections>
