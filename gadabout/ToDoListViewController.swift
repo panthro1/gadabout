@@ -153,9 +153,14 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
             let toDoNameAttributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "Test")
             toDoNameAttributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 1, range: NSMakeRange(0, toDoNameAttributeString.length))
             cell.textLabel?.attributedText = toDoNameAttributeString*/
-            
+            if self.completed[indexPath.row] == true {
+                self.completed[indexPath.row] = false
+            }
+            else {
+                self.completed[indexPath.row] = true
+            }
             tableView.reloadData()
-            self.completed[indexPath.row] = true
+            
         
             success(true)
         })
