@@ -24,8 +24,9 @@ class luckyStrikeViewController: UIViewController {
     var nofFoodInstances: Int32 = 0
     var placeFoodSelection: UInt32 = 0
     var currentObjectId = String()
-    var isPlace = Bool()
-    
+    var isCurrentItemPlace = Bool()
+    var isPlace = [Bool]()
+    var objectId = [String]()
     
     @IBOutlet weak var image: UIImageView!
     
@@ -104,7 +105,7 @@ class luckyStrikeViewController: UIViewController {
         UserDefaults.standard.set(itemsName, forKey: "toDoItem")
         UserDefaults.standard.set(itemsDescription, forKey: "toDoItemDescription")
         
-        
+        print("Current object: \(currentObjectId) isPlace: \(isCurrentItemPlace)")
         // New code
         /*if let header = headerLabel.text  {
             if let description = descriptionText.text {
@@ -172,6 +173,10 @@ class luckyStrikeViewController: UIViewController {
                         self.imageFile.append(place["imageFile"] as! PFFile)
                         self.correctAnswer.append(place["correctAlternative"] as! String)
                         self.descriptionEng.append(place["engDescription"] as! String)
+                        self.isPlace.append(true)
+                        if let question = place.objectId {
+                            self.objectId.append(question)
+                        }
                         
                     }
                 }
@@ -193,6 +198,10 @@ class luckyStrikeViewController: UIViewController {
                             self.imageFile.append(food["imageFile"] as! PFFile)
                             self.correctAnswer.append(food["correctAlternative"] as! String)
                             self.descriptionEng.append(food["engDescription"] as! String)
+                            self.isPlace.append(false)
+                            if let question = food.objectId {
+                                self.objectId.append(question)
+                            }
                         }
                     }
                     let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count - 1)))
@@ -229,6 +238,9 @@ class luckyStrikeViewController: UIViewController {
                     activityIndicator.stopAnimating()
                     UIApplication.shared.endIgnoringInteractionEvents()
                     
+                    self.currentObjectId = self.objectId[randomIndex]
+                    self.isCurrentItemPlace = self.isPlace[randomIndex]
+                    
                     self.descriptionText.text = self.descriptionEng[randomIndex]
                     self.descriptionText.isHidden = false
                     self.headerLabel.isHidden = false
@@ -241,6 +253,8 @@ class luckyStrikeViewController: UIViewController {
                     self.imageFile.remove(at: randomIndex)
                     self.correctAnswer.remove(at: randomIndex)
                     self.descriptionEng.remove(at: randomIndex)
+                    self.isPlace.remove(at: randomIndex)
+                    self.objectId.remove(at: randomIndex)
 
                 }
                 
@@ -281,6 +295,8 @@ class luckyStrikeViewController: UIViewController {
             activityIndicator.stopAnimating()
             UIApplication.shared.endIgnoringInteractionEvents()
             
+            currentObjectId = objectId[randomIndex]
+            isCurrentItemPlace = isPlace[randomIndex]
             
             self.descriptionText.text = self.descriptionEng[randomIndex]
             self.descriptionText.isHidden = false
@@ -294,6 +310,8 @@ class luckyStrikeViewController: UIViewController {
             self.imageFile.remove(at: randomIndex)
             self.correctAnswer.remove(at: randomIndex)
             self.descriptionEng.remove(at: randomIndex)
+            self.isPlace.remove(at: randomIndex)
+            self.objectId.remove(at: randomIndex)
             
         }
         
@@ -334,6 +352,8 @@ class luckyStrikeViewController: UIViewController {
             imageFile.append(glbPlcImageFile[indx])
             correctAnswer.append(glbPlcCorrectAnswer[indx])
             descriptionEng.append(glbPlcDescriptionEng[indx])
+            objectId.append(glbPlcObjectId[indx])
+            isPlace.append(true)
         }
 
         for indx in 0 ..< glbFdImageFile.count {
@@ -345,6 +365,8 @@ class luckyStrikeViewController: UIViewController {
             imageFile.append(glbFdImageFile[indx])
             correctAnswer.append(glbFdCorrectAnswer[indx])
             descriptionEng.append(glbFdDescriptionEng[indx])
+            objectId.append(glbFdObjectId[indx])
+            isPlace.append(false)
         }
         
         if imageFile.count > 5 {
@@ -380,6 +402,9 @@ class luckyStrikeViewController: UIViewController {
                     headerLabel.text = option4[randomIndex]
                 }
             }
+            currentObjectId = objectId[randomIndex]
+            isCurrentItemPlace = isPlace[randomIndex]
+            
             descriptionText.text = descriptionEng[randomIndex]
             descriptionText.isHidden = false
             headerLabel.isHidden = false
@@ -392,6 +417,8 @@ class luckyStrikeViewController: UIViewController {
             imageFile.remove(at: randomIndex)
             correctAnswer.remove(at: randomIndex)
             descriptionEng.remove(at: randomIndex)
+            isPlace.remove(at: randomIndex)
+            objectId.remove(at: randomIndex)
 
         }
         
@@ -413,6 +440,10 @@ class luckyStrikeViewController: UIViewController {
                         self.imageFile.append(place["imageFile"] as! PFFile)
                         self.correctAnswer.append(place["correctAlternative"] as! String)
                         self.descriptionEng.append(place["engDescription"] as! String)
+                        self.isPlace.append(true)
+                        if let question = place.objectId {
+                            self.objectId.append(question)
+                        }
                         
                     }
                 }
@@ -434,6 +465,10 @@ class luckyStrikeViewController: UIViewController {
                             self.imageFile.append(food["imageFile"] as! PFFile)
                             self.correctAnswer.append(food["correctAlternative"] as! String)
                             self.descriptionEng.append(food["engDescription"] as! String)
+                            self.isPlace.append(false)
+                            if let question = food.objectId {
+                                self.objectId.append(question)
+                            }
                         }
                     }
                     let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count - 1)))
@@ -466,6 +501,9 @@ class luckyStrikeViewController: UIViewController {
                             self.headerLabel.text = self.option4[randomIndex]
                         }
                     }
+                    self.currentObjectId = self.objectId[randomIndex]
+                    self.isCurrentItemPlace = self.isPlace[randomIndex]
+                    
                     self.descriptionText.text = self.descriptionEng[randomIndex]
                     self.descriptionText.isHidden = false
                     self.headerLabel.isHidden = false
@@ -478,6 +516,8 @@ class luckyStrikeViewController: UIViewController {
                     self.imageFile.remove(at: randomIndex)
                     self.correctAnswer.remove(at: randomIndex)
                     self.descriptionEng.remove(at: randomIndex)
+                    self.isPlace.remove(at: randomIndex)
+                    self.objectId.remove(at: randomIndex)
 
                 }
                 
@@ -584,6 +624,9 @@ class luckyStrikeViewController: UIViewController {
                             activityIndicator.stopAnimating()
                             UIApplication.shared.endIgnoringInteractionEvents()
                             
+                            self.currentObjectId = self.objectId[randomIndex]
+                            self.isCurrentItemPlace = self.isPlace[randomIndex]
+                            
                             self.descriptionText.text = self.descriptionEng[randomIndex]
                             self.descriptionText.isHidden = false
                             self.headerLabel.isHidden = false
@@ -596,6 +639,8 @@ class luckyStrikeViewController: UIViewController {
                             self.imageFile.remove(at: randomIndex)
                             self.correctAnswer.remove(at: randomIndex)
                             self.descriptionEng.remove(at: randomIndex)
+                            self.isPlace.remove(at: randomIndex)
+                            self.objectId.remove(at: randomIndex)
 
                         }
                     }
@@ -635,7 +680,9 @@ class luckyStrikeViewController: UIViewController {
                     activityIndicator.stopAnimating()
                     UIApplication.shared.endIgnoringInteractionEvents()
                     
-                    
+                    currentObjectId = objectId[randomIndex]
+                    isCurrentItemPlace = isPlace[randomIndex]
+
                     descriptionText.text = descriptionEng[randomIndex]
                     descriptionText.isHidden = false
                     headerLabel.isHidden = false
@@ -648,6 +695,8 @@ class luckyStrikeViewController: UIViewController {
                     imageFile.remove(at: randomIndex)
                     correctAnswer.remove(at: randomIndex)
                     descriptionEng.remove(at: randomIndex)
+                    isPlace.remove(at: randomIndex)
+                    objectId.remove(at: randomIndex)
                     
                     
                 }
