@@ -13,6 +13,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var itemNames = [String]()
     var itemDescriptions = [String]()
+    var completed = [Bool]()
 
     @IBOutlet weak var table: UITableView!
     
@@ -38,6 +39,13 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
             itemDescriptions = tempDescriptions
         }
         print(itemNames)
+        
+        if let items = itemsObject{
+            for _ in 0 ..< items.count {
+                completed.append(false)
+            }
+        }
+        
         table.reloadData()
     }
 
@@ -74,10 +82,18 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.textLabel?.sizeToFit()
         cell.textLabel?.numberOfLines = 0*/
         
+        
         cell.textLabel?.text = toDoName
         cell.textLabel?.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)
         cell.textLabel?.sizeToFit()
         cell.textLabel?.numberOfLines = 0
+        
+        
+        if completed[indexPath.row] == true {
+            let toDoNameAttributeString: NSMutableAttributedString =  NSMutableAttributedString(string: toDoName)
+            toDoNameAttributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 1, range: NSMakeRange(0, toDoNameAttributeString.length))
+            cell.textLabel?.attributedText = toDoNameAttributeString
+        }
         
         cell.detailTextLabel?.text = toDoDesc
         cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.thin)
@@ -124,6 +140,29 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
             src.view.window?.layer.add(transition, forKey: nil)
         }
         
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let closeAction = UIContextualAction(style: .normal, title:  "Close", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
+            /*let toDoNameAttributeString: NSMutableAttributedString =  NSMutableAttributedString(string: toDoName)
+            toDoNameAttributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 1, range: NSMakeRange(0, toDoNameAttributeString.length))
+            
+            cell.textLabel?.attributedText = toDoNameAttributeString*/
+            
+            /*let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
+            let toDoNameAttributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "Test")
+            toDoNameAttributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 1, range: NSMakeRange(0, toDoNameAttributeString.length))
+            cell.textLabel?.attributedText = toDoNameAttributeString*/
+            
+            tableView.reloadData()
+            self.completed[indexPath.row] = true
+        
+            success(true)
+        })
+        closeAction.image = UIImage(named: "checked.png")
+        closeAction.backgroundColor = .purple
+        
+        return UISwipeActionsConfiguration(actions: [closeAction])
     }
     
     /*
