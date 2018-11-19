@@ -60,7 +60,7 @@ class luckyStrikeViewController: UIViewController {
                             })
         })
         
-        let itemsObjectDescription = UserDefaults.standard.object(forKey: "toDoItemDescription")
+        /*let itemsObjectDescription = UserDefaults.standard.object(forKey: "toDoItemDescription")
         
         let itemsObjectName = UserDefaults.standard.object(forKey: "toDoItem")
         
@@ -103,37 +103,35 @@ class luckyStrikeViewController: UIViewController {
         print("itemsDescription: \(itemsDescription)")
         
         UserDefaults.standard.set(itemsName, forKey: "toDoItem")
-        UserDefaults.standard.set(itemsDescription, forKey: "toDoItemDescription")
+        UserDefaults.standard.set(itemsDescription, forKey: "toDoItemDescription")*/
         
-        print("Current object: \(currentObjectId) isPlace: \(isCurrentItemPlace)")
         // New code
-        /*if let header = headerLabel.text  {
-            if let description = descriptionText.text {
-                if let image = image.image {
-                    let toDoItem = PFObject(className: "ToDoList")
-                    if let imageData = UIImagePNGRepresentation(image) {
-                        
-                        let imageFile = PFFile(name: "image.png", data: imageData)
-                        
-                        toDoItem["objectId"] = objectId
-                        toDoItem["userId"] = PFUser.current()?.objectId
-                        toDoItem["imageFile"] = imageFile
-                        
-                        toDoItem.saveInBackground { (success, error) in
-                            
-                            if success {
-                                print("Entity saved successfully")
-                            }
-                            else { // success
-                                
-                                print("Entity could not be saved")
-                            }
-                        }
-                    } // imageData
-
+        print("Current object: \(currentObjectId) isPlace: \(isCurrentItemPlace)")
+        if currentObjectId.count > 0  {
+            let toDoItem = PFObject(className: "ToDoList")
+            
+            toDoItem["item"] = currentObjectId
+            toDoItem["userId"] = PFUser.current()?.objectId
+            if isCurrentItemPlace == true {
+                toDoItem["PlaceOrFood"] = "Place"
+            }
+            else {
+                toDoItem["PlaceOrFood"] = "Food"
+            }
+            toDoItem["Completed"] = "No"
+            
+            toDoItem.saveInBackground { (success, error) in
+                
+                if success {
+                    print("Entity saved successfully")
+                }
+                else { // success
+                    
+                    print("Entity could not be saved")
+                    print(error?.localizedDescription)
                 }
             }
-        }*/
+        }
 
         
     }

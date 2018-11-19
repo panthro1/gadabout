@@ -8,12 +8,18 @@
 
 import UIKit
 import CoreData
+import Parse
 
 class ToDoListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var itemNames = [String]()
     var itemDescriptions = [String]()
     var completed = [Bool]()
+    var itemIDs = [String]()
+    var placeOrFood = [String]()
+    var completedDB = [String]()
+    var imageFile = [PFFile]()
+    
 
     @IBOutlet weak var table: UITableView!
     
@@ -26,7 +32,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let itemsObject = UserDefaults.standard.object(forKey: "toDoItem") as? [String]
+        /*let itemsObject = UserDefaults.standard.object(forKey: "toDoItem") as? [String]
         print("itemsObject: \(itemsObject)")
         let itemDescription = UserDefaults.standard.object(forKey: "toDoItemDescription") as? [String]
         print("itemsDescription: \(itemDescription)")
@@ -44,7 +50,113 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
             for _ in 0 ..< items.count {
                 completed.append(false)
             }
+        }*/
+        
+        // New code
+        
+        let toDoListItemQuery = PFQuery(className: "ToDoList")
+        toDoListItemQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+        
+        toDoListItemQuery.getFirstObjectInBackground { (<#PFObject?#>, <#Error?#>) in
+            <#code#>
         }
+        
+        
+        toDoListItemQuery.findObjectsInBackground { (objects, error) in
+            
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                if let items = objects {
+                    for item in items {
+                        self.itemIDs.append(item["item"] as! String)
+                        self.placeOrFood.append(item["PlaceOrFood"] as! String)
+                        self.completedDB.append(item["Completed"] as! String)
+                    }
+                }
+            }
+            var indx = 0
+            var placeItems = [String]()
+            var foodItems = [String]()
+            for itemId in self.itemIDs {
+                if self.placeOrFood[indx] == "Place" {
+                    placeItems.append(itemId)
+                }
+                else {
+                    foodItems.append(itemId)
+                }
+                indx = indx + 1
+            }
+            
+            if placeItems.count > 0 {
+                print(placeItems)
+                let placeQuery = PFQuery(className: "Places")
+                placeQuery.whereKey("objectId", containedIn: placeItems)
+                placeQuery.findObjectsInBackground(block: { (objects, error) in
+                    
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    else {
+                        if let places = objects {
+                            for place in places {
+                                if let correctAnsInt = Int(place["correctAlternative"] as! String) {
+                                    if correctAnsInt == 1 {
+                                        self.itemNames.append(place["alternative1"] as! String)
+                                    }
+                                    else if correctAnsInt == 2 {
+                                        self.itemNames.append(place["alternative2"] as! String)
+                                    }
+                                    else if correctAnsInt == 3 {
+                                        self.itemNames.append(place["alternative3"] as! String)
+                                    }
+                                    else if correctAnsInt == 4 {
+                                        self.itemNames.append(place["alternative4"] as! String)
+                                    }
+                                }
+                                self.itemDescriptions.append(place["engDescription"] as! String)
+                                self.imageFile.append(place["imageFile"] as! PFFile)
+                            }
+                        }
+                    }
+                })
+            }
+            
+            if foodItems.count > 0 {
+                let foodQuery = PFQuery(className: "Places")
+                foodQuery.whereKey("objectId", containedIn: foodItems)
+                foodQuery.findObjectsInBackground(block: { (objects, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    else {
+                        if let foods = objects {
+                            for food in foods {
+                                if let correctAnsInt = Int(food["correctAlternative"] as! String) {
+                                    if correctAnsInt == 1 {
+                                        self.itemNames.append(food["alternative1"] as! String)
+                                    }
+                                    else if correctAnsInt == 2 {
+                                        self.itemNames.append(food["alternative2"] as! String)
+                                    }
+                                    else if correctAnsInt == 3 {
+                                        self.itemNames.append(food["alternative3"] as! String)
+                                    }
+                                    else if correctAnsInt == 4 {
+                                        self.itemNames.append(food["alternative4"] as! String)
+                                    }
+                                }
+                                self.itemDescriptions.append(food["engDescription"] as! String)
+                                self.imageFile.append(food["imageFile"] as! PFFile)
+                            }
+                        }
+                    }
+                })
+            }
+        }
+        
+
         
         table.reloadData()
     }
