@@ -32,7 +32,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        /*let itemsObject = UserDefaults.standard.object(forKey: "toDoItem") as? [String]
+        let itemsObject = UserDefaults.standard.object(forKey: "toDoItem") as? [String]
         print("itemsObject: \(itemsObject)")
         let itemDescription = UserDefaults.standard.object(forKey: "toDoItemDescription") as? [String]
         print("itemsDescription: \(itemDescription)")
@@ -50,20 +50,13 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
             for _ in 0 ..< items.count {
                 completed.append(false)
             }
-        }*/
+        }
         
         // New code
         
-        let toDoListItemQuery = PFQuery(className: "ToDoList")
+        /*let toDoListItemQuery = PFQuery(className: "ToDoList")
         toDoListItemQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
-        
-        toDoListItemQuery.getFirstObjectInBackground { (<#PFObject?#>, <#Error?#>) in
-            <#code#>
-        }
-        
-        
         toDoListItemQuery.findObjectsInBackground { (objects, error) in
-            
             if let error = error {
                 print(error.localizedDescription)
             }
@@ -90,11 +83,10 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             
             if placeItems.count > 0 {
-                print(placeItems)
+                print("place items count : \(placeItems.count)")
                 let placeQuery = PFQuery(className: "Places")
                 placeQuery.whereKey("objectId", containedIn: placeItems)
                 placeQuery.findObjectsInBackground(block: { (objects, error) in
-                    
                     if let error = error {
                         print(error.localizedDescription)
                     }
@@ -117,13 +109,79 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
                                 }
                                 self.itemDescriptions.append(place["engDescription"] as! String)
                                 self.imageFile.append(place["imageFile"] as! PFFile)
+                                if let plcObjId = place.objectId {
+                                    let arrIndx = self.itemIDs.firstIndex(of: plcObjId)
+                                    if let indx = arrIndx {
+                                        if self.itemIDs[indx] == "YES" {
+                                            self.completed.append(true)
+                                        }
+                                        else {
+                                            self.completed.append(false)
+                                        }
+                                    }
+                                    else {
+                                        self.completed.append(false)
+                                    }
+                                }
+                                
                             }
                         }
+                    }
+                    if foodItems.count > 0 {
+                        let foodQuery = PFQuery(className: "Places")
+                        foodQuery.whereKey("objectId", containedIn: foodItems)
+                        foodQuery.findObjectsInBackground(block: { (objects, error) in
+                            if let error = error {
+                                print(error.localizedDescription)
+                            }
+                            else {
+                                if let foods = objects {
+                                    for food in foods {
+                                        if let correctAnsInt = Int(food["correctAlternative"] as! String) {
+                                            if correctAnsInt == 1 {
+                                                self.itemNames.append(food["alternative1"] as! String)
+                                            }
+                                            else if correctAnsInt == 2 {
+                                                self.itemNames.append(food["alternative2"] as! String)
+                                            }
+                                            else if correctAnsInt == 3 {
+                                                self.itemNames.append(food["alternative3"] as! String)
+                                            }
+                                            else if correctAnsInt == 4 {
+                                                self.itemNames.append(food["alternative4"] as! String)
+                                            }
+                                        }
+                                        self.itemDescriptions.append(food["engDescription"] as! String)
+                                        self.imageFile.append(food["imageFile"] as! PFFile)
+
+                                        if let plcObjId = food.objectId {
+                                            let arrIndx = self.itemIDs.firstIndex(of: plcObjId)
+                                            if let indx = arrIndx {
+                                                if self.itemIDs[indx] == "YES" {
+                                                    self.completed.append(true)
+                                                }
+                                                else {
+                                                    self.completed.append(false)
+                                                }
+                                            }
+                                            else {
+                                                self.completed.append(false)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            self.table.reloadData()
+                        })
+
+                    }
+                    else {
+                        self.table.reloadData()
                     }
                 })
             }
             
-            if foodItems.count > 0 {
+            else if foodItems.count > 0 {
                 let foodQuery = PFQuery(className: "Places")
                 foodQuery.whereKey("objectId", containedIn: foodItems)
                 foodQuery.findObjectsInBackground(block: { (objects, error) in
@@ -149,16 +207,30 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
                                 }
                                 self.itemDescriptions.append(food["engDescription"] as! String)
                                 self.imageFile.append(food["imageFile"] as! PFFile)
+
+                                if let plcObjId = food.objectId {
+                                    let arrIndx = self.itemIDs.firstIndex(of: plcObjId)
+                                    if let indx = arrIndx {
+                                        if self.itemIDs[indx] == "YES" {
+                                            self.completed.append(true)
+                                        }
+                                        else {
+                                            self.completed.append(false)
+                                        }
+                                    }
+                                    else {
+                                        self.completed.append(false)
+                                    }
+                                }
                             }
                         }
                     }
+                    self.table.reloadData()
                 })
             }
-        }
-        
-
-        
+        }*/
         table.reloadData()
+        
     }
 
     override func didReceiveMemoryWarning() {

@@ -60,13 +60,16 @@ class luckyStrikeViewController: UIViewController {
                             })
         })
         
-        /*let itemsObjectDescription = UserDefaults.standard.object(forKey: "toDoItemDescription")
+        let itemsObjectDescription = UserDefaults.standard.object(forKey: "toDoItemDescription")
         
         let itemsObjectName = UserDefaults.standard.object(forKey: "toDoItem")
+        
+        let itemsImage = UserDefaults.standard.object(forKey: "toDoImage")
         
         var itemsDescription = [String]()
         
         var itemsName = [String]()
+        
         
         if let tempItemsDescription = itemsObjectDescription {
             if let tempItemsName = itemsObjectName {
@@ -103,10 +106,15 @@ class luckyStrikeViewController: UIViewController {
         print("itemsDescription: \(itemsDescription)")
         
         UserDefaults.standard.set(itemsName, forKey: "toDoItem")
-        UserDefaults.standard.set(itemsDescription, forKey: "toDoItemDescription")*/
+        UserDefaults.standard.set(itemsDescription, forKey: "toDoItemDescription")
+        // New code
+        if let imageTobeSaved = image.image {
+            let imageData = UIImageJPEGRepresentation(imageTobeSaved, 1.0)
+
+        }
         
         // New code
-        print("Current object: \(currentObjectId) isPlace: \(isCurrentItemPlace)")
+        /*print("Current object: \(currentObjectId) isPlace: \(isCurrentItemPlace)")
         if currentObjectId.count > 0  {
             let toDoItem = PFObject(className: "ToDoList")
             
@@ -131,7 +139,7 @@ class luckyStrikeViewController: UIViewController {
                     print(error?.localizedDescription)
                 }
             }
-        }
+        }*/
 
         
     }
