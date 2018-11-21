@@ -162,9 +162,27 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             else {
                 glbToDoItemCompleted[indexPath.row] = true
+                // New code
+                let toDoItemQuery = PFQuery(className: "ToDoList")
+                toDoItemQuery.whereKey("item", equalTo: glbToDoItemIDs[indexPath.row])
+                toDoItemQuery.findObjectsInBackground(block: { (objects, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    else {
+                        if let item = objects?.first {
+                            item["Completed"] = "YES"
+                            item.saveInBackground()
+                        }
+                    }
+                })
             }
             tableView.reloadData()
             
+
+
+
+
         
             success(true)
         })
