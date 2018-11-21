@@ -25,6 +25,7 @@ class luckyStrikeViewController: UIViewController {
     var placeFoodSelection: UInt32 = 0
     var currentObjectId = String()
     var isCurrentItemPlace = Bool()
+    var currentImage = [PFFile]()
     var isPlace = [Bool]()
     var objectId = [String]()
     
@@ -60,7 +61,7 @@ class luckyStrikeViewController: UIViewController {
                             })
         })
         
-        let itemsObjectDescription = UserDefaults.standard.object(forKey: "toDoItemDescription")
+        /*let itemsObjectDescription = UserDefaults.standard.object(forKey: "toDoItemDescription")
         
         let itemsObjectName = UserDefaults.standard.object(forKey: "toDoItem")
         
@@ -111,10 +112,10 @@ class luckyStrikeViewController: UIViewController {
         if let imageTobeSaved = image.image {
             let imageData = UIImageJPEGRepresentation(imageTobeSaved, 1.0)
 
-        }
+        }*/
         
         // New code
-        /*print("Current object: \(currentObjectId) isPlace: \(isCurrentItemPlace)")
+        print("Current object: \(currentObjectId) isPlace: \(isCurrentItemPlace)")
         if currentObjectId.count > 0  {
             let toDoItem = PFObject(className: "ToDoList")
             
@@ -139,7 +140,21 @@ class luckyStrikeViewController: UIViewController {
                     print(error?.localizedDescription)
                 }
             }
-        }*/
+            if let header = headerLabel.text {
+                if let description = descriptionText.text {
+                    if let imgFile = currentImage.first {
+                     
+                        glbToDoItemIDs.append(currentObjectId)
+                        glbToDoItemNames.append(header)
+                        glbToDoItemDescriptions.append(description)
+                        glbToDoItemCompleted.append(false)
+                        glbToDoItemPlaceOrFood.append("Place")
+                        glbToDoItemImageFile.append(imgFile)
+
+                    }
+                }
+            }
+        }
 
         
     }
@@ -246,6 +261,8 @@ class luckyStrikeViewController: UIViewController {
                     
                     self.currentObjectId = self.objectId[randomIndex]
                     self.isCurrentItemPlace = self.isPlace[randomIndex]
+                    self.currentImage.removeAll()
+                    self.currentImage.append(self.imageFile[randomIndex])
                     
                     self.descriptionText.text = self.descriptionEng[randomIndex]
                     self.descriptionText.isHidden = false
@@ -303,7 +320,9 @@ class luckyStrikeViewController: UIViewController {
             
             currentObjectId = objectId[randomIndex]
             isCurrentItemPlace = isPlace[randomIndex]
-            
+            currentImage.removeAll()
+            currentImage.append(imageFile[randomIndex])
+
             self.descriptionText.text = self.descriptionEng[randomIndex]
             self.descriptionText.isHidden = false
             self.headerLabel.isHidden = false
@@ -410,7 +429,9 @@ class luckyStrikeViewController: UIViewController {
             }
             currentObjectId = objectId[randomIndex]
             isCurrentItemPlace = isPlace[randomIndex]
-            
+            currentImage.removeAll()
+            currentImage.append(imageFile[randomIndex])
+
             descriptionText.text = descriptionEng[randomIndex]
             descriptionText.isHidden = false
             headerLabel.isHidden = false
@@ -509,7 +530,9 @@ class luckyStrikeViewController: UIViewController {
                     }
                     self.currentObjectId = self.objectId[randomIndex]
                     self.isCurrentItemPlace = self.isPlace[randomIndex]
-                    
+                    self.currentImage.removeAll()
+                    self.currentImage.append(self.imageFile[randomIndex])
+
                     self.descriptionText.text = self.descriptionEng[randomIndex]
                     self.descriptionText.isHidden = false
                     self.headerLabel.isHidden = false
@@ -632,7 +655,9 @@ class luckyStrikeViewController: UIViewController {
                             
                             self.currentObjectId = self.objectId[randomIndex]
                             self.isCurrentItemPlace = self.isPlace[randomIndex]
-                            
+                            self.currentImage.removeAll()
+                            self.currentImage.append(self.imageFile[randomIndex])
+
                             self.descriptionText.text = self.descriptionEng[randomIndex]
                             self.descriptionText.isHidden = false
                             self.headerLabel.isHidden = false
@@ -688,6 +713,8 @@ class luckyStrikeViewController: UIViewController {
                     
                     currentObjectId = objectId[randomIndex]
                     isCurrentItemPlace = isPlace[randomIndex]
+                    currentImage.removeAll()
+                    currentImage.append(imageFile[randomIndex])
 
                     descriptionText.text = descriptionEng[randomIndex]
                     descriptionText.isHidden = false

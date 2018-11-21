@@ -32,7 +32,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let itemsObject = UserDefaults.standard.object(forKey: "toDoItem") as? [String]
+        /*let itemsObject = UserDefaults.standard.object(forKey: "toDoItem") as? [String]
         print("itemsObject: \(itemsObject)")
         let itemDescription = UserDefaults.standard.object(forKey: "toDoItemDescription") as? [String]
         print("itemsDescription: \(itemDescription)")
@@ -50,185 +50,13 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
             for _ in 0 ..< items.count {
                 completed.append(false)
             }
-        }
+        }*/
         
         // New code
+        itemNames = glbToDoItemNames
+        itemDescriptions = glbToDoItemDescriptions
+        completed = glbToDoItemCompleted
         
-        /*let toDoListItemQuery = PFQuery(className: "ToDoList")
-        toDoListItemQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
-        toDoListItemQuery.findObjectsInBackground { (objects, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            else {
-                if let items = objects {
-                    for item in items {
-                        self.itemIDs.append(item["item"] as! String)
-                        self.placeOrFood.append(item["PlaceOrFood"] as! String)
-                        self.completedDB.append(item["Completed"] as! String)
-                    }
-                }
-            }
-            var indx = 0
-            var placeItems = [String]()
-            var foodItems = [String]()
-            for itemId in self.itemIDs {
-                if self.placeOrFood[indx] == "Place" {
-                    placeItems.append(itemId)
-                }
-                else {
-                    foodItems.append(itemId)
-                }
-                indx = indx + 1
-            }
-            
-            if placeItems.count > 0 {
-                print("place items count : \(placeItems.count)")
-                let placeQuery = PFQuery(className: "Places")
-                placeQuery.whereKey("objectId", containedIn: placeItems)
-                placeQuery.findObjectsInBackground(block: { (objects, error) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    }
-                    else {
-                        if let places = objects {
-                            for place in places {
-                                if let correctAnsInt = Int(place["correctAlternative"] as! String) {
-                                    if correctAnsInt == 1 {
-                                        self.itemNames.append(place["alternative1"] as! String)
-                                    }
-                                    else if correctAnsInt == 2 {
-                                        self.itemNames.append(place["alternative2"] as! String)
-                                    }
-                                    else if correctAnsInt == 3 {
-                                        self.itemNames.append(place["alternative3"] as! String)
-                                    }
-                                    else if correctAnsInt == 4 {
-                                        self.itemNames.append(place["alternative4"] as! String)
-                                    }
-                                }
-                                self.itemDescriptions.append(place["engDescription"] as! String)
-                                self.imageFile.append(place["imageFile"] as! PFFile)
-                                if let plcObjId = place.objectId {
-                                    let arrIndx = self.itemIDs.firstIndex(of: plcObjId)
-                                    if let indx = arrIndx {
-                                        if self.itemIDs[indx] == "YES" {
-                                            self.completed.append(true)
-                                        }
-                                        else {
-                                            self.completed.append(false)
-                                        }
-                                    }
-                                    else {
-                                        self.completed.append(false)
-                                    }
-                                }
-                                
-                            }
-                        }
-                    }
-                    if foodItems.count > 0 {
-                        let foodQuery = PFQuery(className: "Places")
-                        foodQuery.whereKey("objectId", containedIn: foodItems)
-                        foodQuery.findObjectsInBackground(block: { (objects, error) in
-                            if let error = error {
-                                print(error.localizedDescription)
-                            }
-                            else {
-                                if let foods = objects {
-                                    for food in foods {
-                                        if let correctAnsInt = Int(food["correctAlternative"] as! String) {
-                                            if correctAnsInt == 1 {
-                                                self.itemNames.append(food["alternative1"] as! String)
-                                            }
-                                            else if correctAnsInt == 2 {
-                                                self.itemNames.append(food["alternative2"] as! String)
-                                            }
-                                            else if correctAnsInt == 3 {
-                                                self.itemNames.append(food["alternative3"] as! String)
-                                            }
-                                            else if correctAnsInt == 4 {
-                                                self.itemNames.append(food["alternative4"] as! String)
-                                            }
-                                        }
-                                        self.itemDescriptions.append(food["engDescription"] as! String)
-                                        self.imageFile.append(food["imageFile"] as! PFFile)
-
-                                        if let plcObjId = food.objectId {
-                                            let arrIndx = self.itemIDs.firstIndex(of: plcObjId)
-                                            if let indx = arrIndx {
-                                                if self.itemIDs[indx] == "YES" {
-                                                    self.completed.append(true)
-                                                }
-                                                else {
-                                                    self.completed.append(false)
-                                                }
-                                            }
-                                            else {
-                                                self.completed.append(false)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            self.table.reloadData()
-                        })
-
-                    }
-                    else {
-                        self.table.reloadData()
-                    }
-                })
-            }
-            
-            else if foodItems.count > 0 {
-                let foodQuery = PFQuery(className: "Places")
-                foodQuery.whereKey("objectId", containedIn: foodItems)
-                foodQuery.findObjectsInBackground(block: { (objects, error) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    }
-                    else {
-                        if let foods = objects {
-                            for food in foods {
-                                if let correctAnsInt = Int(food["correctAlternative"] as! String) {
-                                    if correctAnsInt == 1 {
-                                        self.itemNames.append(food["alternative1"] as! String)
-                                    }
-                                    else if correctAnsInt == 2 {
-                                        self.itemNames.append(food["alternative2"] as! String)
-                                    }
-                                    else if correctAnsInt == 3 {
-                                        self.itemNames.append(food["alternative3"] as! String)
-                                    }
-                                    else if correctAnsInt == 4 {
-                                        self.itemNames.append(food["alternative4"] as! String)
-                                    }
-                                }
-                                self.itemDescriptions.append(food["engDescription"] as! String)
-                                self.imageFile.append(food["imageFile"] as! PFFile)
-
-                                if let plcObjId = food.objectId {
-                                    let arrIndx = self.itemIDs.firstIndex(of: plcObjId)
-                                    if let indx = arrIndx {
-                                        if self.itemIDs[indx] == "YES" {
-                                            self.completed.append(true)
-                                        }
-                                        else {
-                                            self.completed.append(false)
-                                        }
-                                    }
-                                    else {
-                                        self.completed.append(false)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    self.table.reloadData()
-                })
-            }
-        }*/
         table.reloadData()
         
     }
@@ -251,21 +79,22 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         var toDoName = ""
         var toDoDesc = ""
         
-        if itemNames.count >= indexPath.row {
+        /*if itemNames.count >= indexPath.row {
             toDoName = itemNames[indexPath.row]
         }
         
         if itemDescriptions.count >= indexPath.row {
             toDoDesc = itemDescriptions[indexPath.row]
-        }
+        }*/
         
-        //let str = attributedText(withString: toDoName, boldString: toDoDesc, font: UIFont(name: "Helvetica Neue", size: 15)!)
-        
-        /*cell.textLabel?.text = toDoName + toDoDesc
-        //cell.textLabel?.text = str.string
-        cell.textLabel?.sizeToFit()
-        cell.textLabel?.numberOfLines = 0*/
-        
+       // New code
+        if glbToDoItemNames.count >= indexPath.row {
+         toDoName = itemNames[indexPath.row]
+         }
+         
+         if glbToDoItemDescriptions.count >= indexPath.row {
+         toDoDesc = itemDescriptions[indexPath.row]
+         }
         
         cell.textLabel?.text = toDoName
         cell.textLabel?.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)
@@ -273,7 +102,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.textLabel?.numberOfLines = 0
         
         
-        if completed[indexPath.row] == true {
+        if glbToDoItemCompleted[indexPath.row] == true {
             let toDoNameAttributeString: NSMutableAttributedString =  NSMutableAttributedString(string: toDoName)
             toDoNameAttributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 1, range: NSMakeRange(0, toDoNameAttributeString.length))
             cell.textLabel?.attributedText = toDoNameAttributeString
@@ -328,11 +157,11 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let closeAction = UIContextualAction(style: .normal, title:  "Close", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            if self.completed[indexPath.row] == true {
-                self.completed[indexPath.row] = false
+            if glbToDoItemCompleted[indexPath.row] == true {
+                glbToDoItemCompleted[indexPath.row] = false
             }
             else {
-                self.completed[indexPath.row] = true
+                glbToDoItemCompleted[indexPath.row] = true
             }
             tableView.reloadData()
             

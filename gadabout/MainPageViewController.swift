@@ -28,6 +28,13 @@ var glbFdCorrectAnswer = [String]()
 var glbFdDescriptionEng = [String]()
 var glbFdObjectId = [String]()
 
+var glbToDoItemNames = [String]()
+var glbToDoItemDescriptions = [String]()
+var glbToDoItemImageFile = [PFFile]()
+var glbToDoItemIDs = [String]()
+var glbToDoItemCompleted = [Bool]()
+var glbToDoItemPlaceOrFood = [String]()
+
 
 class MainPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -121,7 +128,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
         
-        // New Code
         if glbPlcObjectId.count < 5 {
             questionSeenBefore.removeAll()
             let questionCoveredQuery = PFQuery(className: "placesCoveredBefore")
@@ -216,8 +222,184 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                 
             }
         }
-
         
+        // New code
+        if glbToDoItemIDs.count == 0 {
+            var completed = [String]()
+            let toDoListItemQuery = PFQuery(className: "ToDoList")
+            toDoListItemQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+            toDoListItemQuery.findObjectsInBackground { (objects, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                else {
+                    if let items = objects {
+                        for item in items {
+                            glbToDoItemIDs.append(item["item"] as! String)
+                            glbToDoItemPlaceOrFood.append(item["PlaceOrFood"] as! String)
+                            completed.append(item["Completed"] as! String)
+                            
+                        }
+                    }
+                }
+                
+                var indx = 0
+                var placeItems = [String]()
+                var foodItems = [String]()
+                for itemId in glbToDoItemIDs {
+                    if glbToDoItemPlaceOrFood[indx] == "Place" {
+                        placeItems.append(itemId)
+                    }
+                    else {
+                        foodItems.append(itemId)
+                    }
+                    indx = indx + 1
+                }
+                print("Place IDs: \(placeItems)")
+                print("Food IDs: \(foodItems)")
+                
+                if placeItems.count > 0 {
+                    print("place items count : \(placeItems.count)")
+                    let placeQuery = PFQuery(className: "Places")
+                    placeQuery.whereKey("objectId", containedIn: placeItems)
+                    placeQuery.findObjectsInBackground(block: { (objects, error) in
+                        if let error = error {
+                            print(error.localizedDescription)
+                        }
+                        else {
+                            if let places = objects {
+                                for place in places {
+                                    if let correctAnsInt = Int(place["correctAlternative"] as! String) {
+                                        if correctAnsInt == 1 {
+                                            glbToDoItemNames.append(place["alternative1"] as! String)
+                                        }
+                                        else if correctAnsInt == 2 {
+                                            glbToDoItemNames.append(place["alternative2"] as! String)
+                                        }
+                                        else if correctAnsInt == 3 {
+                                            glbToDoItemNames.append(place["alternative3"] as! String)
+                                        }
+                                        else if correctAnsInt == 4 {
+                                            glbToDoItemNames.append(place["alternative4"] as! String)
+                                        }
+                                    }
+                                    glbToDoItemDescriptions.append(place["engDescription"] as! String)
+                                    glbToDoItemImageFile.append(place["imageFile"] as! PFFile)
+                                    if let plcObjId = place.objectId {
+                                        let arrIndx = glbToDoItemIDs.firstIndex(of: plcObjId)
+                                        if let indx = arrIndx {
+                                            if completed[indx] == "YES" {
+                                                glbToDoItemCompleted.append(true)
+                                            }
+                                            else {
+                                                glbToDoItemCompleted.append(false)
+                                            }
+                                        }
+                                        else {
+                                            glbToDoItemCompleted.append(false)
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                        }
+                        if foodItems.count > 0 {
+                            let foodQuery = PFQuery(className: "Foods")
+                            foodQuery.whereKey("objectId", containedIn: foodItems)
+                            foodQuery.findObjectsInBackground(block: { (objects, error) in
+                                if let error = error {
+                                    print(error.localizedDescription)
+                                }
+                                else {
+                                    if let foods = objects {
+                                        for food in foods {
+                                            if let correctAnsInt = Int(food["correctAlternative"] as! String) {
+                                                if correctAnsInt == 1 {
+                                                    glbToDoItemNames.append(food["alternative1"] as! String)
+                                                }
+                                                else if correctAnsInt == 2 {
+                                                    glbToDoItemNames.append(food["alternative2"] as! String)
+                                                }
+                                                else if correctAnsInt == 3 {
+                                                    glbToDoItemNames.append(food["alternative3"] as! String)
+                                                }
+                                                else if correctAnsInt == 4 {
+                                                    glbToDoItemNames.append(food["alternative4"] as! String)
+                                                }
+                                            }
+                                            glbToDoItemDescriptions.append(food["engDescription"] as! String)
+                                            glbToDoItemImageFile.append(food["imageFile"] as! PFFile)
+                                            
+                                            if let plcObjId = food.objectId {
+                                                let arrIndx = glbToDoItemIDs.firstIndex(of: plcObjId)
+                                                if let indx = arrIndx {
+                                                    if completed[indx] == "YES" {
+                                                        glbToDoItemCompleted.append(true)
+                                                    }
+                                                    else {
+                                                        glbToDoItemCompleted.append(false)
+                                                    }
+                                                }
+                                                else {
+                                                    glbToDoItemCompleted.append(false)
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            })
+                            
+                        }
+                    })
+                }
+                else if foodItems.count > 0 {
+                    let foodQuery = PFQuery(className: "Foods")
+                    foodQuery.whereKey("objectId", containedIn: foodItems)
+                    foodQuery.findObjectsInBackground(block: { (objects, error) in
+                        if let error = error {
+                            print(error.localizedDescription)
+                        }
+                        else {
+                            if let foods = objects {
+                                for food in foods {
+                                    if let correctAnsInt = Int(food["correctAlternative"] as! String) {
+                                        if correctAnsInt == 1 {
+                                            glbToDoItemNames.append(food["alternative1"] as! String)
+                                        }
+                                        else if correctAnsInt == 2 {
+                                            glbToDoItemNames.append(food["alternative2"] as! String)
+                                        }
+                                        else if correctAnsInt == 3 {
+                                            glbToDoItemNames.append(food["alternative3"] as! String)
+                                        }
+                                        else if correctAnsInt == 4 {
+                                            glbToDoItemNames.append(food["alternative4"] as! String)
+                                        }
+                                    }
+                                    glbToDoItemDescriptions.append(food["engDescription"] as! String)
+                                    glbToDoItemImageFile.append(food["imageFile"] as! PFFile)
+                                    
+                                    if let plcObjId = food.objectId {
+                                        let arrIndx = glbToDoItemIDs.firstIndex(of: plcObjId)
+                                        if let indx = arrIndx {
+                                            if completed[indx] == "YES" {
+                                                glbToDoItemCompleted.append(true)
+                                            }
+                                            else {
+                                                glbToDoItemCompleted.append(false)
+                                            }
+                                        }
+                                        else {
+                                            glbToDoItemCompleted.append(false)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    })
+                }
+            }
+        }
 
 
         // Do any additional setup after loading the view.
