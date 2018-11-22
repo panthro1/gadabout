@@ -226,6 +226,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         // New code
         if glbToDoItemIDs.count == 0 {
             var completed = [String]()
+            var localItemIDs = [String]()
             let toDoListItemQuery = PFQuery(className: "ToDoList")
             toDoListItemQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
             toDoListItemQuery.findObjectsInBackground { (objects, error) in
@@ -235,7 +236,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                 else {
                     if let items = objects {
                         for item in items {
-                            glbToDoItemIDs.append(item["item"] as! String)
+                            localItemIDs.append(item["item"] as! String)
                             glbToDoItemPlaceOrFood.append(item["PlaceOrFood"] as! String)
                             completed.append(item["Completed"] as! String)
                             
@@ -246,7 +247,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                 var indx = 0
                 var placeItems = [String]()
                 var foodItems = [String]()
-                for itemId in glbToDoItemIDs {
+                
+                for itemId in localItemIDs {
                     if glbToDoItemPlaceOrFood[indx] == "Place" {
                         placeItems.append(itemId)
                     }
@@ -285,8 +287,10 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                                     }
                                     glbToDoItemDescriptions.append(place["engDescription"] as! String)
                                     glbToDoItemImageFile.append(place["imageFile"] as! PFFile)
+                                    
+                                    
                                     if let plcObjId = place.objectId {
-                                        let arrIndx = glbToDoItemIDs.firstIndex(of: plcObjId)
+                                        let arrIndx = localItemIDs.firstIndex(of: plcObjId)
                                         if let indx = arrIndx {
                                             if completed[indx] == "YES" {
                                                 glbToDoItemCompleted.append(true)
@@ -298,6 +302,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                                         else {
                                             glbToDoItemCompleted.append(false)
                                         }
+                                        glbToDoItemIDs.append(plcObjId)
                                     }
                                     
                                 }
@@ -330,8 +335,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                                             glbToDoItemDescriptions.append(food["engDescription"] as! String)
                                             glbToDoItemImageFile.append(food["imageFile"] as! PFFile)
                                             
-                                            if let plcObjId = food.objectId {
-                                                let arrIndx = glbToDoItemIDs.firstIndex(of: plcObjId)
+                                            if let fdObjId = food.objectId {
+                                                let arrIndx = localItemIDs.firstIndex(of: fdObjId)
                                                 if let indx = arrIndx {
                                                     if completed[indx] == "YES" {
                                                         glbToDoItemCompleted.append(true)
@@ -343,6 +348,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                                                 else {
                                                     glbToDoItemCompleted.append(false)
                                                 }
+                                                glbToDoItemIDs.append(fdObjId)
                                             }
                                         }
                                     }
@@ -379,8 +385,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                                     glbToDoItemDescriptions.append(food["engDescription"] as! String)
                                     glbToDoItemImageFile.append(food["imageFile"] as! PFFile)
                                     
-                                    if let plcObjId = food.objectId {
-                                        let arrIndx = glbToDoItemIDs.firstIndex(of: plcObjId)
+                                    if let fdObjId = food.objectId {
+                                        let arrIndx = localItemIDs.firstIndex(of: fdObjId)
                                         if let indx = arrIndx {
                                             if completed[indx] == "YES" {
                                                 glbToDoItemCompleted.append(true)
@@ -392,6 +398,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                                         else {
                                             glbToDoItemCompleted.append(false)
                                         }
+                                        glbToDoItemIDs.append(fdObjId)
                                     }
                                 }
                             }
