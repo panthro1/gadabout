@@ -126,6 +126,26 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
             UserDefaults.standard.set(itemNames, forKey: "toDoItem")
             UserDefaults.standard.set(itemDescriptions, forKey: "toDoItemDescription")
             tableView.deleteRows(at: [indexPath], with: .bottom)
+            
+            let toDoItemQuery = PFQuery(className: "ToDoList")
+            toDoItemQuery.whereKey("item", equalTo: glbToDoItemIDs[indexPath.row])
+            toDoItemQuery.findObjectsInBackground(block: { (objects, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                else {
+                    if let item = objects?.first {
+                        item.deleteInBackground()
+                    }
+                }
+            })
+            
+            glbToDoItemNames.remove(at: indexPath.row)
+            glbToDoItemDescriptions.remove(at: indexPath.row)
+            glbToDoItemImageFile.remove(at: indexPath.row)
+            glbToDoItemIDs.remove(at: indexPath.row)
+            glbToDoItemCompleted.remove(at: indexPath.row)
+            glbToDoItemPlaceOrFood.remove(at: indexPath.row)
         }
     }
 
