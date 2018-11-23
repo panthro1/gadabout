@@ -12,14 +12,12 @@ import Parse
 
 class ToDoListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var itemNames = [String]()
-    var itemDescriptions = [String]()
-    var completed = [Bool]()
     var itemIDs = [String]()
     var placeOrFood = [String]()
     var completedDB = [String]()
     var imageFile = [PFFile]()
-    
+    var itemNames = [String]()
+    var itemDescriptions = [String]()
 
     @IBOutlet weak var table: UITableView!
     
@@ -32,30 +30,9 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        /*let itemsObject = UserDefaults.standard.object(forKey: "toDoItem") as? [String]
-        print("itemsObject: \(itemsObject)")
-        let itemDescription = UserDefaults.standard.object(forKey: "toDoItemDescription") as? [String]
-        print("itemsDescription: \(itemDescription)")
         
-        if let tempItems = itemsObject as? [String] {
-            itemNames = tempItems
-        }
-        
-        if let tempDescriptions = itemDescription  as? [String] {
-            itemDescriptions = tempDescriptions
-        }
-        print(itemNames)
-        
-        if let items = itemsObject{
-            for _ in 0 ..< items.count {
-                completed.append(false)
-            }
-        }*/
-        
-        // New code
         itemNames = glbToDoItemNames
         itemDescriptions = glbToDoItemDescriptions
-        completed = glbToDoItemCompleted
         
         table.reloadData()
         
@@ -123,8 +100,8 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         if editingStyle == UITableViewCellEditingStyle.delete {
             itemNames.remove(at: indexPath.row)
             itemDescriptions.remove(at: indexPath.row)
-            UserDefaults.standard.set(itemNames, forKey: "toDoItem")
-            UserDefaults.standard.set(itemDescriptions, forKey: "toDoItemDescription")
+            
+            
             tableView.deleteRows(at: [indexPath], with: .bottom)
             
             let toDoItemQuery = PFQuery(className: "ToDoList")
@@ -179,6 +156,20 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         let closeAction = UIContextualAction(style: .normal, title:  "Close", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
             if glbToDoItemCompleted[indexPath.row] == true {
                 glbToDoItemCompleted[indexPath.row] = false
+                
+                let toDoItemQuery = PFQuery(className: "ToDoList")
+                toDoItemQuery.whereKey("item", equalTo: glbToDoItemIDs[indexPath.row])
+                toDoItemQuery.findObjectsInBackground(block: { (objects, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    else {
+                        if let item = objects?.first {
+                            item["Completed"] = "NO"
+                            item.saveInBackground()
+                        }
+                    }
+                })
             }
             else {
                 glbToDoItemCompleted[indexPath.row] = true
@@ -206,7 +197,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         
             success(true)
         })
-        if completed[indexPath.row] == true {
+        if glbToDoItemCompleted[indexPath.row] == true {
             closeAction.image = UIImage(named: "undo-arrow.png")
         }
         else {
@@ -214,6 +205,44 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         closeAction.backgroundColor = .purple
         return UISwipeActionsConfiguration(actions: [closeAction])
+    }
+    
+    func showPopup(indx: Int) {
+        
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "toDoImagePopupID") as! ToDoImageDisplayViewController
+        
+        glbToDoItemImageFile[indx].getDataInBackground { (data, error) in
+            if let imageData = data {
+                if let imageToDisplay = UIImage(data: imageData) {
+
+                    popOverVC.toDoImage.image = imageToDisplay
+
+                }
+            }
+        }
+        //let header = glbToDoItemNames[indx]
+        
+        /*if glbToDoItemNames[indx].count > 0 {
+            popOverVC.toDoHeader.text = glbToDoItemNames[indx]
+        }*/
+        
+        
+        
+            
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = self.view.bounds
+        /*tableView.isScrollEnabled = false
+        complete.isEnabled = false
+        back.isEnabled = false*/
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
+        
+        
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        showPopup(indx: indexPath.row)
     }
     
     /*
