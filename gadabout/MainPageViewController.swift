@@ -472,8 +472,27 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         cell.textLabel?.font = UIFont(name: "Avenir", size: 32)
         
-        cell.accessoryView = UIImageView(image: UIImage(named: "world.png"))
-        cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+        if indexPath.row == 0 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "balloon.png"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+        }
+        else if indexPath.row == 1 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "egg.png"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+        }
+        else if indexPath.row == 2 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "JPHeader.jpg"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+
+        }
+        else if indexPath.row == 3 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "slot.png"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+        }
+        else if indexPath.row == 4 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "list.png"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+        }
         
         //cell.righ.image = UIImage(named: "world.png")
         
