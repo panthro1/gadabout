@@ -18,7 +18,7 @@ class ToDoImageDisplayViewController: UIViewController {
     
     @IBOutlet weak var closeButton: UIButton!
     
-    var header = "Test"
+    var header = ""
     var desc = ""
     
     override func viewDidLoad() {
@@ -32,6 +32,7 @@ class ToDoImageDisplayViewController: UIViewController {
         closeButton.layer.borderColor = UIColor.black.cgColor
         
         toDoHeader.text = header
+        toDoText.text = desc
         
         
         self.view.backgroundColor = UIColor.white

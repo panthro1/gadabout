@@ -41,8 +41,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     var isEnglish = true
     var questionSeenBefore = [String]()
 
-
-    @IBOutlet weak var logout: UIBarButtonItem!
     
     @IBOutlet weak var mainPageTableView: UITableView!
     
@@ -59,26 +57,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-    @IBAction func logoutButtonTapped(_ sender: Any) {
-        
-        /*PFUser.logOutInBackground { (error) in
-            
-            if error != nil {
-                print("logout fail")
-                print(error) }
-            else {
-                print("logout success")
-            }
-        }*/
-        
-        PFUser.logOut()
-        
-        //dismiss(animated: true, completion: nil)
-
-        performSegue(withIdentifier: "logoutSegue", sender: self)
-        
-
-    }
     
     @objc func isRotated() {
         switch UIDevice.current.orientation {
@@ -110,6 +88,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.mainPageTableView.rowHeight = 100
         
+
+        
         NotificationCenter.default.addObserver(self, selector: #selector(isRotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
         if  PFUser.current() != nil {
@@ -129,6 +109,16 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         if glbPlcObjectId.count < 5 {
+            let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
+            activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+            activityIndicator.center = self.view.center
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+            view.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+            UIApplication.shared.beginIgnoringInteractionEvents()
+
+            
             questionSeenBefore.removeAll()
             let questionCoveredQuery = PFQuery(className: "placesCoveredBefore")
             questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
@@ -172,6 +162,9 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                             }
                         }
                     }
+                    activityIndicator.stopAnimating()
+                    UIApplication.shared.endIgnoringInteractionEvents()
+
                     
                 }
                 
@@ -179,6 +172,16 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         if glbFdObjectId.count < 5 {
+            
+            let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
+            activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+            activityIndicator.center = self.view.center
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+            view.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+            UIApplication.shared.beginIgnoringInteractionEvents()
+
             
             questionSeenBefore.removeAll()
             let foodsCoveredQuery = PFQuery(className: "foodsCoveredBefore")
@@ -189,10 +192,10 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                     print(error.localizedDescription)
                 }
                 else {
-                    if let places = objects {
-                        for place in places {
+                    if let foods = objects {
+                        for food in foods {
                             //print("\(place["questionId"])")
-                            self.questionSeenBefore.append(place["questionId"] as! String)
+                            self.questionSeenBefore.append(food["questionId"] as! String)
                         }
                     }
                 }
@@ -217,6 +220,9 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                             
                         }
                     }
+                    activityIndicator.stopAnimating()
+                    UIApplication.shared.endIgnoringInteractionEvents()
+
                     
                 }
                 
@@ -225,6 +231,16 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         // New code
         if glbToDoItemIDs.count == 0 {
+            let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
+            activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+            activityIndicator.center = self.view.center
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+            view.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+            UIApplication.shared.beginIgnoringInteractionEvents()
+
+            
             var completed = [String]()
             var localItemIDs = [String]()
             let toDoListItemQuery = PFQuery(className: "ToDoList")
@@ -353,8 +369,15 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                                         }
                                     }
                                 }
+                                activityIndicator.stopAnimating()
+                                UIApplication.shared.endIgnoringInteractionEvents()
+
                             })
                             
+                        }
+                        else {
+                            activityIndicator.stopAnimating()
+                            UIApplication.shared.endIgnoringInteractionEvents()
                         }
                     })
                 }
@@ -403,7 +426,15 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                                 }
                             }
                         }
+                        activityIndicator.stopAnimating()
+                        UIApplication.shared.endIgnoringInteractionEvents()
+
                     })
+                }
+                else {
+                    activityIndicator.stopAnimating()
+                    UIApplication.shared.endIgnoringInteractionEvents()
+
                 }
             }
         }

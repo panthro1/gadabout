@@ -220,6 +220,8 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
         }
+        popOverVC.header = glbToDoItemNames[indx]
+        popOverVC.desc = glbToDoItemDescriptions[indx]
         //let header = glbToDoItemNames[indx]
         
         /*if glbToDoItemNames[indx].count > 0 {
