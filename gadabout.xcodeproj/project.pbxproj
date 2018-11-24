@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		469C627A0D02DD7767E4FDA1 /* Pods_gadabout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F48E22C09028D3F9283040 /* Pods_gadabout.framework */; };
+		E309426D21A9A619000A0A52 /* puzzle.png in Resources */ = {isa = PBXBuildFile; fileRef = E309426C21A9A619000A0A52 /* puzzle.png */; };
 		E313DF5F2118D4A500BAE4C6 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = E313DF5E2118D4A500BAE4C6 /* check.png */; };
 		E313DF612118D4AD00BAE4C6 /* uncheck.png in Resources */ = {isa = PBXBuildFile; fileRef = E313DF602118D4AD00BAE4C6 /* uncheck.png */; };
 		E3261AE720F098920056CE99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3261AE620F098920056CE99 /* AppDelegate.swift */; };
@@ -38,7 +39,6 @@
 		E3A3DDEA21A93A7B0070FB85 /* balloon.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A3DDE921A93A7B0070FB85 /* balloon.png */; };
 		E3A3DDEC21A93B050070FB85 /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A3DDEB21A93B050070FB85 /* list.png */; };
 		E3A3DDEE21A93BFD0070FB85 /* egg.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A3DDED21A93BFD0070FB85 /* egg.png */; };
-		E3A3DDF021A93DB50070FB85 /* JPHeader.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3A3DDEF21A93DB50070FB85 /* JPHeader.jpg */; };
 		E3A3DDF221A940050070FB85 /* slot.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A3DDF121A940050070FB85 /* slot.png */; };
 		E3BA747C219A769800095B1B /* remove.png in Resources */ = {isa = PBXBuildFile; fileRef = E3BA747B219A769700095B1B /* remove.png */; };
 		E3CBDEDF21A04DB1002664B4 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CBDEDE21A04DB1002664B4 /* checked.png */; };
@@ -75,6 +75,7 @@
 		304B1BEC845C003FCF6E1992 /* Pods-gadabout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gadabout.release.xcconfig"; path = "Pods/Target Support Files/Pods-gadabout/Pods-gadabout.release.xcconfig"; sourceTree = "<group>"; };
 		37596C782F7F1EEECE83BA6C /* Pods-gadabout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gadabout.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gadabout/Pods-gadabout.debug.xcconfig"; sourceTree = "<group>"; };
 		79F48E22C09028D3F9283040 /* Pods_gadabout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gadabout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E309426C21A9A619000A0A52 /* puzzle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = puzzle.png; sourceTree = "<group>"; };
 		E313DF5E2118D4A500BAE4C6 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
 		E313DF602118D4AD00BAE4C6 /* uncheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uncheck.png; sourceTree = "<group>"; };
 		E3261AE320F098920056CE99 /* gadabout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gadabout.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,7 +112,6 @@
 		E3A3DDE921A93A7B0070FB85 /* balloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = balloon.png; sourceTree = "<group>"; };
 		E3A3DDEB21A93B050070FB85 /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = "<group>"; };
 		E3A3DDED21A93BFD0070FB85 /* egg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = egg.png; sourceTree = "<group>"; };
-		E3A3DDEF21A93DB50070FB85 /* JPHeader.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = JPHeader.jpg; sourceTree = "<group>"; };
 		E3A3DDF121A940050070FB85 /* slot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slot.png; sourceTree = "<group>"; };
 		E3BA747B219A769700095B1B /* remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remove.png; sourceTree = "<group>"; };
 		E3CBDEDE21A04DB1002664B4 /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
@@ -256,11 +256,11 @@
 				E3CF250A219D1C8000D5EA9F /* lock.png */,
 				E3A3DDE921A93A7B0070FB85 /* balloon.png */,
 				E3A3DDF121A940050070FB85 /* slot.png */,
+				E309426C21A9A619000A0A52 /* puzzle.png */,
 				E3A3DDED21A93BFD0070FB85 /* egg.png */,
 				E3CBDEDE21A04DB1002664B4 /* checked.png */,
 				E3CBDEE021A05C8A002664B4 /* undo-arrow.png */,
 				E3A3DDEB21A93B050070FB85 /* list.png */,
-				E3A3DDEF21A93DB50070FB85 /* JPHeader.jpg */,
 				E33D52C22182BB170077E001 /* back.png */,
 				E3EF3A392188042000821C47 /* score-icon.png */,
 				E3CF250C219D1D5E00D5EA9F /* email.png */,
@@ -387,7 +387,6 @@
 				E3261B1C20F0A7820056CE99 /* lovetravel.png in Resources */,
 				E3A3DDE621A923D10070FB85 /* world.png in Resources */,
 				E3BA747C219A769800095B1B /* remove.png in Resources */,
-				E3A3DDF021A93DB50070FB85 /* JPHeader.jpg in Resources */,
 				E3CBDEE121A05C8B002664B4 /* undo-arrow.png in Resources */,
 				E36DA987212D71830031D337 /* wrong.gif in Resources */,
 				E3261B1820F0A72C0056CE99 /* turkey.png in Resources */,
@@ -398,6 +397,7 @@
 				E3261AF120F098940056CE99 /* Assets.xcassets in Resources */,
 				E3261AEC20F098920056CE99 /* Main.storyboard in Resources */,
 				E3A3DDEA21A93A7B0070FB85 /* balloon.png in Resources */,
+				E309426D21A9A619000A0A52 /* puzzle.png in Resources */,
 				E313DF612118D4AD00BAE4C6 /* uncheck.png in Resources */,
 				E39D488E212EB87100A32212 /* correct2.png in Resources */,
 				E3A3DDEC21A93B050070FB85 /* list.png in Resources */,

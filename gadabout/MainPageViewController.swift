@@ -481,7 +481,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
         }
         else if indexPath.row == 2 {
-            cell.accessoryView = UIImageView(image: UIImage(named: "JPHeader.jpg"))
+            cell.accessoryView = UIImageView(image: UIImage(named: "puzzle.png"))
             cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
 
         }
