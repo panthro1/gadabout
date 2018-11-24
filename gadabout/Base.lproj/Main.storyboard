@@ -147,7 +147,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WhE-j5-Xzq">
-                                <rect key="frame" x="0.0" y="70" width="375" height="519"/>
+                                <rect key="frame" x="0.0" y="70" width="375" height="453"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mainPageCell" rowHeight="104" id="Vha-kk-gev">
@@ -164,15 +164,25 @@
                                     <outlet property="delegate" destination="77F-Fn-Frx" id="2ij-jv-Jdu"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O8c-nx-LZO" customClass="GADBannerView">
+                                <rect key="frame" x="0.0" y="573" width="375" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="MiS-Uy-bIg"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="0za-ce-opn" firstAttribute="leading" secondItem="ZDo-MM-aax" secondAttribute="leading" id="57W-f6-8R6"/>
+                            <constraint firstItem="O8c-nx-LZO" firstAttribute="bottom" secondItem="ZDo-MM-aax" secondAttribute="bottom" id="6of-Qi-3Ly"/>
                             <constraint firstItem="WhE-j5-Xzq" firstAttribute="top" secondItem="0za-ce-opn" secondAttribute="bottom" id="FA0-eH-lLX"/>
                             <constraint firstItem="0za-ce-opn" firstAttribute="trailing" secondItem="ZDo-MM-aax" secondAttribute="trailing" id="NFB-wb-xK7"/>
                             <constraint firstItem="WhE-j5-Xzq" firstAttribute="trailing" secondItem="ZDo-MM-aax" secondAttribute="trailing" id="VaC-fF-rw4"/>
                             <constraint firstItem="0za-ce-opn" firstAttribute="top" secondItem="Asc-Pw-HXp" secondAttribute="topMargin" id="bOG-WS-JEk"/>
-                            <constraint firstItem="ZDo-MM-aax" firstAttribute="bottom" secondItem="WhE-j5-Xzq" secondAttribute="bottom" constant="34" id="d5I-1R-l3b"/>
+                            <constraint firstItem="ZDo-MM-aax" firstAttribute="trailing" secondItem="O8c-nx-LZO" secondAttribute="trailing" id="bTx-O4-NZu"/>
+                            <constraint firstItem="ZDo-MM-aax" firstAttribute="bottom" secondItem="WhE-j5-Xzq" secondAttribute="bottom" constant="100" id="d5I-1R-l3b"/>
+                            <constraint firstItem="O8c-nx-LZO" firstAttribute="leading" secondItem="ZDo-MM-aax" secondAttribute="leading" id="hhc-Po-meu"/>
                             <constraint firstItem="WhE-j5-Xzq" firstAttribute="leading" secondItem="ZDo-MM-aax" secondAttribute="leading" id="ohe-Z1-5bx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZDo-MM-aax"/>
@@ -180,6 +190,7 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="bannerView" destination="O8c-nx-LZO" id="o2Y-Ds-FT7"/>
                         <outlet property="mailLogin" destination="tJe-U4-jJ6" id="FD7-aQ-PcL"/>
                         <outlet property="mainPageTableView" destination="WhE-j5-Xzq" id="84f-vZ-Y7t"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="sUt-K6-2Q9"/>
@@ -1222,6 +1233,6 @@
         <image name="uncheck.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="y30-Zv-P8M"/>
+        <segue reference="e9z-7M-9hq"/>
     </inferredMetricsTieBreakers>
 </document>

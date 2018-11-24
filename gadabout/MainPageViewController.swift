@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Parse
+import GoogleMobileAds
 
 var glbPlcImageFile = [PFFile]() // Global place variables
 var glbPlcOption1 = [String]()
@@ -46,6 +47,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var mailLogin: UIBarButtonItem!
     
+    @IBOutlet weak var bannerView: GADBannerView!
+    
     @IBAction func mailLoginTapped(_ sender: Any) {
         
         let loginPopupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginPopUpID") as! ViewController
@@ -55,6 +58,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         loginPopupVC.didMove(toParentViewController: self)
         
     }
+
     
     
     @objc func isRotated() {
@@ -86,6 +90,15 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         self.mainPageTableView.allowsSelection = true
         
         self.mainPageTableView.rowHeight = 100
+        
+        // Account ad
+        //bannerView.adUnitID = "ca-app-pub-5745243428784846~5277829027"
+        
+        // Test add
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
         
 
         
