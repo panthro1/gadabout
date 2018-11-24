@@ -34,6 +34,7 @@
 		E36DA987212D71830031D337 /* wrong.gif in Resources */ = {isa = PBXBuildFile; fileRef = E36DA986212D71830031D337 /* wrong.gif */; };
 		E39D488E212EB87100A32212 /* correct2.png in Resources */ = {isa = PBXBuildFile; fileRef = E39D488D212EB87100A32212 /* correct2.png */; };
 		E3A38444215044A1003A0A8C /* puzzleMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A38443215044A1003A0A8C /* puzzleMapViewController.swift */; };
+		E3A3DDE621A923D10070FB85 /* world.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A3DDE521A923D00070FB85 /* world.png */; };
 		E3BA747C219A769800095B1B /* remove.png in Resources */ = {isa = PBXBuildFile; fileRef = E3BA747B219A769700095B1B /* remove.png */; };
 		E3CBDEDF21A04DB1002664B4 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CBDEDE21A04DB1002664B4 /* checked.png */; };
 		E3CBDEE121A05C8B002664B4 /* undo-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CBDEE021A05C8A002664B4 /* undo-arrow.png */; };
@@ -98,9 +99,10 @@
 		E34AB2272186CACF0080A5C4 /* scorePopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = scorePopUpViewController.swift; sourceTree = "<group>"; };
 		E3687E8A2115CE8000CC60E9 /* PlacesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewCell.swift; sourceTree = "<group>"; };
 		E3687E8C2115D25800CC60E9 /* collesium.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = collesium.jpg; sourceTree = SOURCE_ROOT; };
-		E36DA986212D71830031D337 /* wrong.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = wrong.gif; sourceTree = SOURCE_ROOT; };
+		E36DA986212D71830031D337 /* wrong.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = wrong.gif; path = gadabout/images/wrong.gif; sourceTree = SOURCE_ROOT; };
 		E39D488D212EB87100A32212 /* correct2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = correct2.png; sourceTree = SOURCE_ROOT; };
 		E3A38443215044A1003A0A8C /* puzzleMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = puzzleMapViewController.swift; sourceTree = "<group>"; };
+		E3A3DDE521A923D00070FB85 /* world.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = world.png; sourceTree = "<group>"; };
 		E3BA747B219A769700095B1B /* remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remove.png; sourceTree = "<group>"; };
 		E3CBDEDE21A04DB1002664B4 /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
 		E3CBDEE021A05C8A002664B4 /* undo-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undo-arrow.png"; sourceTree = "<group>"; };
@@ -200,24 +202,18 @@
 				E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */,
 				E3E5BD52213295600019BFBC /* keyboard-right-arrow-button.png */,
 				E3261AF020F098940056CE99 /* Assets.xcassets */,
+				E3687E8C2115D25800CC60E9 /* collesium.jpg */,
 				E313DF602118D4AD00BAE4C6 /* uncheck.png */,
 				E3261AF220F098940056CE99 /* LaunchScreen.storyboard */,
 				E3F72E50217E40FD00487C72 /* GoogleService-Info.plist */,
-				E36DA986212D71830031D337 /* wrong.gif */,
 				E313DF5E2118D4A500BAE4C6 /* check.png */,
-				E3687E8C2115D25800CC60E9 /* collesium.jpg */,
-				E3BA747B219A769700095B1B /* remove.png */,
-				E3CBDEDE21A04DB1002664B4 /* checked.png */,
-				E3CF250A219D1C8000D5EA9F /* lock.png */,
-				E3CBDEE021A05C8A002664B4 /* undo-arrow.png */,
 				E3261AF520F098940056CE99 /* Info.plist */,
-				E33D52C22182BB170077E001 /* back.png */,
-				E3CF250C219D1D5E00D5EA9F /* email.png */,
-				E3EF3A392188042000821C47 /* score-icon.png */,
+				E3A3DDE421A91C110070FB85 /* images */,
 				E34AB2252186C46F0080A5C4 /* diamond.png */,
 				E3261B1720F0A72C0056CE99 /* turkey.png */,
 				E3261B1B20F0A7820056CE99 /* lovetravel.png */,
 				E3261B1920F0A73D0056CE99 /* united-states.png */,
+				E3A3DDE521A923D00070FB85 /* world.png */,
 				E3261AED20F098920056CE99 /* gadabout.xcdatamodeld */,
 				E32D30822177A5860016D7EC /* UIButtonExtension.swift */,
 			);
@@ -240,6 +236,21 @@
 				E3261B0B20F098940056CE99 /* Info.plist */,
 			);
 			path = gadaboutUITests;
+			sourceTree = "<group>";
+		};
+		E3A3DDE421A91C110070FB85 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				E3BA747B219A769700095B1B /* remove.png */,
+				E36DA986212D71830031D337 /* wrong.gif */,
+				E3CF250A219D1C8000D5EA9F /* lock.png */,
+				E3CBDEDE21A04DB1002664B4 /* checked.png */,
+				E3CBDEE021A05C8A002664B4 /* undo-arrow.png */,
+				E33D52C22182BB170077E001 /* back.png */,
+				E3EF3A392188042000821C47 /* score-icon.png */,
+				E3CF250C219D1D5E00D5EA9F /* email.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -358,6 +369,7 @@
 				E3E5BD53213295610019BFBC /* keyboard-right-arrow-button.png in Resources */,
 				E34AB2262186C46F0080A5C4 /* diamond.png in Resources */,
 				E3261B1C20F0A7820056CE99 /* lovetravel.png in Resources */,
+				E3A3DDE621A923D10070FB85 /* world.png in Resources */,
 				E3BA747C219A769800095B1B /* remove.png in Resources */,
 				E3CBDEE121A05C8B002664B4 /* undo-arrow.png in Resources */,
 				E36DA987212D71830031D337 /* wrong.gif in Resources */,

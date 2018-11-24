@@ -46,7 +46,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var mailLogin: UIBarButtonItem!
     
-    
     @IBAction func mailLoginTapped(_ sender: Any) {
         
         let loginPopupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginPopUpID") as! ViewController
@@ -199,6 +198,13 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                         }
                     }
                 }
+                
+                if glbFdObjectId.count > 0 {
+                    for indx in 0 ..< glbFdObjectId.count {
+                        self.questionSeenBefore.append(glbFdObjectId[indx])
+                    }
+                }
+                
                 let foodsQuery = PFQuery(className: "Foods")
                 foodsQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
                 foodsQuery.findObjectsInBackground { (objects, error) in
@@ -465,6 +471,11 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         cell.layer.borderWidth = 2 // set border width here
         
         cell.textLabel?.font = UIFont(name: "Avenir", size: 32)
+        
+        cell.accessoryView = UIImageView(image: UIImage(named: "world.png"))
+        cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+        
+        //cell.righ.image = UIImage(named: "world.png")
         
         if indexPath.row == 0 {
             cell.textLabel?.text = "    Places"
