@@ -48,6 +48,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var scorePoint = 0
     var totalScoreAfterTest = 0
     
+    
     var progressLayer: CAShapeLayer!
 
 
@@ -457,9 +458,13 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             cell.detailsButton.isHidden = false
             cell.detailsButton.setTitle("Back", for: [])
             
-            cell.detailTextInfo.isHidden = false
-            cell.detailTextInfo.text = descriptionEng[indexPath.row]
-
+            cell.detailText.isHidden = false
+            cell.detailText.text = descriptionEng[indexPath.row]
+            cell.detailText.sizeToFit()
+            cell.detailText.numberOfLines = 0
+            print(cell.detailText.text)
+            print(descriptionEng[indexPath.row])
+            
             imageFile[indexPath.row].getDataInBackground { (data, error) in
                 
                 if let imageData = data {
@@ -499,7 +504,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             cell.markOption3.isHidden = false
             cell.markOption4.isHidden = false
         
-            cell.detailTextInfo.isHidden = true
+            cell.detailText.isHidden = true
             cell.option1.text = option1[indexPath.row]
             cell.option2.text = option2[indexPath.row]
             cell.option3.text = option3[indexPath.row]

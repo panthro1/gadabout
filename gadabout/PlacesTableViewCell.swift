@@ -50,7 +50,7 @@ class PlacesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var detailsButton: UIButton!
     
-    @IBOutlet weak var detailTextInfo: UITextView!
+    @IBOutlet weak var detailText: UILabel!
     
     @IBOutlet weak var toDoListButton: UIButton!
     
