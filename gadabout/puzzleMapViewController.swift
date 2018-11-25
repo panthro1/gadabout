@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import GoogleMobileAds
 
 
 class puzzleMapViewController: UIViewController {
@@ -44,6 +45,7 @@ class puzzleMapViewController: UIViewController {
     var myPicture = UIImage()
 
     
+    @IBOutlet weak var bannerView: GADBannerView!
     
     @IBOutlet weak var hintButton: UIButton!
     
@@ -263,7 +265,14 @@ class puzzleMapViewController: UIViewController {
         hintButton.layer.borderWidth = 1
         hintButton.layer.borderColor = UIColor.black.cgColor
 
+        // Account ad
+        //bannerView.adUnitID = "ca-app-pub-5745243428784846~5277829027"
         
+        // Test add
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
 
         
         /*placeFoodSelection = arc4random_uniform(2)
@@ -693,12 +702,48 @@ class puzzleMapViewController: UIViewController {
                         break
                     }
                 }
+                
+                //completed = true // For only test purpose
                 if completed == true {
                     let endTime = Date()
                     let seconds = endTime.timeIntervalSince(self.startTime)
-                    let formatted = String(format: "%.1f", seconds)
-                    self.displayAlert(title: "Puzzle completed", message: " You have completed in \(formatted) seconds.")
-                    showPopup(Score: 3, totalScore: 5)
+                    //let formatted = String(format: "%.1f", seconds)
+                    //self.displayAlert(title: "Puzzle completed", message: " You have completed in \(formatted) seconds.")
+                    let userScoreQuery = PFQuery(className: "UserScore")
+                    userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+                    userScoreQuery.findObjectsInBackground { (objects, error) in
+                        if let score = objects?.first {
+                            if let totalScore = Int(score["score"] as! String) {
+                                let scorePoint = 20
+                                let totalScoreAfterTest = totalScore + scorePoint
+                                self.showPopup(Score: scorePoint, totalScore: totalScoreAfterTest)
+                                
+                                score["userId"] = PFUser.current()?.objectId
+                                score["score"] = String(totalScoreAfterTest)
+                                score.saveInBackground()
+                                
+                            }
+                            else {
+                                let scorePoint = 20
+                                let totalScoreAfterTest = scorePoint
+                                self.showPopup(Score: scorePoint, totalScore: totalScoreAfterTest)
+                                
+                                score["userId"] = PFUser.current()?.objectId
+                                score["score"] = String(totalScoreAfterTest)
+                                score.saveInBackground()
+                            }
+                        }
+                        else {
+                            let scorePoint = 20
+                            let totalScoreAfterTest = scorePoint
+                            self.showPopup(Score: scorePoint, totalScore: totalScoreAfterTest)
+                            
+                            let score = PFObject(className: "UserScore")
+                            score["userId"] = PFUser.current()?.objectId
+                            score["score"] = String(totalScoreAfterTest)
+                            score.saveInBackground()
+                        }
+                    }
                     print("Puzzle Completed")
                 }
             }
