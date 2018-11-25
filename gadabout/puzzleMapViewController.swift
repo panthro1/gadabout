@@ -203,8 +203,8 @@ class puzzleMapViewController: UIViewController {
                 hintButton.setTitle("Hint", for: [])
             }
         }
-        showPopup(Score: 3, totalScore: 5)
     }
+    
     func slice(image: UIImage, into howMany: Int) -> [UIImage] {
         let width: CGFloat
         let height: CGFloat
@@ -263,9 +263,10 @@ class puzzleMapViewController: UIViewController {
         hintButton.layer.borderWidth = 1
         hintButton.layer.borderColor = UIColor.black.cgColor
 
+        
 
         
-        placeFoodSelection = arc4random_uniform(2)
+        /*placeFoodSelection = arc4random_uniform(2)
         print("Random Index: \(placeFoodSelection)")
         
         let nofInstancePlaceQuery = PFQuery(className: "Places")
@@ -355,32 +356,6 @@ class puzzleMapViewController: UIViewController {
                         }
                         
                     }
-                    
-                    
-                        
-
-                    if let correctAnsInt = Int(self.correctAnswer) {
-                        
-                        /*if correctAnsInt == 1 {
-                            self.headerLabel.text = self.option1
-                        }
-                        else if correctAnsInt == 2 {
-                            self.headerLabel.text = self.option2
-                        }
-                        else if correctAnsInt == 3 {
-                            self.headerLabel.text = self.option3
-                        }
-                        else if correctAnsInt == 4 {
-                            self.headerLabel.text = self.option4
-                        }*/
-                    }
-                    /*self.descriptionText.text = self.descriptionEng
-                    self.descriptionText.isHidden = false
-                    self.headerLabel.isHidden = false
-                    self.image.isHidden = false*/
-                    
-                    
-                    
                     
                 }
                 
@@ -498,7 +473,86 @@ class puzzleMapViewController: UIViewController {
                 }
                 
             }
+        }*/
+        
+        // New code
+        for indx in 0 ..< glbPlcImageFile.count {
+            
+            option1.append(glbPlcOption1[indx])
+            option2.append(glbPlcOption2[indx])
+            option3.append(glbPlcOption3[indx])
+            option4.append(glbPlcOption4[indx])
+            imageFile.append(glbPlcImageFile[indx])
+            correctAnswer.append(glbPlcCorrectAnswer[indx])
+            descriptionEng.append(glbPlcDescriptionEng[indx])
+            //objectId.append(glbPlcObjectId[indx])
+            //isPlace.append(true)
         }
+        
+        for indx in 0 ..< glbFdImageFile.count {
+            
+            option1.append(glbFdOption1[indx])
+            option2.append(glbFdOption2[indx])
+            option3.append(glbFdOption3[indx])
+            option4.append(glbFdOption4[indx])
+            imageFile.append(glbFdImageFile[indx])
+            correctAnswer.append(glbFdCorrectAnswer[indx])
+            descriptionEng.append(glbFdDescriptionEng[indx])
+            //objectId.append(glbFdObjectId[indx])
+            //isPlace.append(false)
+        }
+        let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
+        
+        self.imageFile[randomIndex].getDataInBackground { (data, error) in
+            
+            if let imageData = data {
+                
+                if let imageToDisplay = UIImage(data: imageData) {
+                    
+                    self.myPicture = imageToDisplay
+                    
+                    let images = self.slice(image: self.myPicture, into: 3)
+                    
+                    var xCent: Int = 10+48/3*4
+                    var yCent: Int = 100+48/3*4
+                    
+                    let nofRows = 3
+                    let nofColumns = 3
+                    
+                    for row in 0 ..< nofRows {
+                        for col in 0 ..< nofColumns {
+                            let myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96/3*4, height: 96/3*4))
+                            let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
+                            self.allCenters.append(currCent)
+                            myImgView.center = currCent
+                            myImgView.image = images[row*3+col]
+                            myImgView.isUserInteractionEnabled = true
+                            myImgView.tag = 10+row*3+col
+                            self.allImgViews.append(myImgView)
+                            self.view.addSubview(myImgView)
+                            xCent += 96/3*4
+                            
+                        }
+                        xCent = 10+48/3*4
+                        yCent += 96/3*4
+                    }
+                    
+                    self.randomizeBlocks()
+                    self.allImgViews[0].removeFromSuperview()
+                    
+                    self.leftIsEmpty = false
+                    self.rightIsEmpty = false
+                    self.topIsEmpty = false
+                    self.bottomIsEmpty = false
+                    self.startTime = Date()
+                    
+                    
+                }
+            }
+            
+        }
+
+
     }
     
     
@@ -538,18 +592,26 @@ class puzzleMapViewController: UIViewController {
                 top = CGPoint(x: tapCenter.x, y: tapCenter.y + 96)
                 bottom = CGPoint(x: tapCenter.x, y: tapCenter.y - 96)
             }
+            let beforeRow = (emptySpot.x - 74)/128
+            let beforeCol = (emptySpot.y - 164)/128
+
+            print("BEFORE Empty spot Row: \(beforeRow), Col: \(beforeCol)")
             
             if emptySpot.equalTo(left) {
                 leftIsEmpty = true
+                print("Left is empty")
             }
             if emptySpot.equalTo(right) {
                 rightIsEmpty = true
+                print("Right is empty")
             }
             if emptySpot.equalTo(top) {
                 topIsEmpty = true
+                print("Top is empty")
             }
             if emptySpot.equalTo(bottom) {
                 bottomIsEmpty = true
+                print("Bottom is empty")
             }
             
             if leftIsEmpty || rightIsEmpty || topIsEmpty || bottomIsEmpty {
@@ -564,6 +626,13 @@ class puzzleMapViewController: UIViewController {
                 rightIsEmpty = false
                 topIsEmpty = false
                 bottomIsEmpty = false
+                
+                
+                let afterRow = (emptySpot.x - 74)/128
+                let afterCol = (emptySpot.y - 164)/128
+                
+                print("AFTER Empty spot Row: \(afterRow), Col: \(afterCol)")
+
                 
                 var xCent: Int = 10+48/3*4
                 var yCent: Int = 100+48/3*4
@@ -631,7 +700,8 @@ class puzzleMapViewController: UIViewController {
                     self.displayAlert(title: "Puzzle completed", message: " You have completed in \(formatted) seconds.")
                     showPopup(Score: 3, totalScore: 5)
                     print("Puzzle Completed")
-                }            }
+                }
+            }
         }
         
     }

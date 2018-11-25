@@ -559,6 +559,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             print("Lucky Strike selected")
             performSegue(withIdentifier: "luckyStrikeSegue", sender: self)
         }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
