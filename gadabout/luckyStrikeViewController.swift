@@ -596,6 +596,11 @@ class luckyStrikeViewController: UIViewController {
                                 self.imageFile.append(place["imageFile"] as! PFFile)
                                 self.correctAnswer.append(place["correctAlternative"] as! String)
                                 self.descriptionEng.append(place["engDescription"] as! String)
+                                self.isPlace.append(true)
+                                if let question = place.objectId {
+                                    self.objectId.append(question)
+                                }
+
                                 
                             }
                         }
@@ -617,6 +622,11 @@ class luckyStrikeViewController: UIViewController {
                                     self.imageFile.append(food["imageFile"] as! PFFile)
                                     self.correctAnswer.append(food["correctAlternative"] as! String)
                                     self.descriptionEng.append(food["engDescription"] as! String)
+                                    self.isPlace.append(false)
+                                    if let question = food.objectId {
+                                        self.objectId.append(question)
+                                    }
+
                                 }
                             }
                             let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count - 1)))
