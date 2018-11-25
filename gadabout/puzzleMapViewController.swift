@@ -51,6 +51,89 @@ class puzzleMapViewController: UIViewController {
     
     @IBOutlet weak var harderSimpleButton: UIButton!
     
+    @IBAction func refreshTapped(_ sender: Any) {
+        
+        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
+        activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+
+        
+        let nofRows = 3
+        let nofColumns = 3
+        
+        if harder == true {
+            let nofRows = 4
+            let nofColumns = 4
+        }
+        
+        for row in 0 ..< nofRows {
+            for col in 0 ..< nofColumns {
+                
+                if let viewWithTag = self.view.viewWithTag(10+row*3+col) {
+                    viewWithTag.removeFromSuperview()
+                }
+                
+            }
+        }
+        allImgViews.removeAll()
+        allCenters.removeAll()
+        
+        let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
+        
+        self.imageFile[randomIndex].getDataInBackground { (data, error) in
+            
+            if let imageData = data {
+                
+                if let imageToDisplay = UIImage(data: imageData) {
+                    
+                    self.myPicture = imageToDisplay
+                    
+                    let images = self.slice(image: self.myPicture, into: 3)
+                    
+                    var xCent: Int = 10+48/3*4
+                    var yCent: Int = 100+48/3*4
+                    
+                    for row in 0 ..< nofRows {
+                        for col in 0 ..< nofColumns {
+                            let myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96/3*4, height: 96/3*4))
+                            let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
+                            self.allCenters.append(currCent)
+                            myImgView.center = currCent
+                            myImgView.image = images[row*3+col]
+                            myImgView.isUserInteractionEnabled = true
+                            myImgView.tag = 10+row*3+col
+                            self.allImgViews.append(myImgView)
+                            self.view.addSubview(myImgView)
+                            xCent += 96/3*4
+                            
+                        }
+                        xCent = 10+48/3*4
+                        yCent += 96/3*4
+                    }
+                    
+                    self.randomizeBlocks()
+                    self.allImgViews[0].removeFromSuperview()
+                    
+                    self.leftIsEmpty = false
+                    self.rightIsEmpty = false
+                    self.topIsEmpty = false
+                    self.bottomIsEmpty = false
+                    self.startTime = Date()
+                    
+                    
+                }
+            }
+            activityIndicator.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
+        }
+    }
+    
+    
     func displayAlert(title: String, message: String) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)

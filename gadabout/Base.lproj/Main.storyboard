@@ -708,6 +708,12 @@
                                                 <action selector="backTapped:" destination="pLG-OL-dPP" id="AKN-Al-GqL"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="cj4-Dc-l0w">
+                                            <color key="tintColor" red="0.60106390714645386" green="0.26032719016075134" blue="0.62250882387161255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="refreshTapped:" destination="pLG-OL-dPP" id="Y5G-7C-ChM"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
