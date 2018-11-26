@@ -158,6 +158,15 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         self.tableView.dataSource = self
         self.tableView.allowsSelection = true
         
+        let screenSize = UIScreen.main.bounds
+        
+        print("Screen width: \(screenSize.width), height: \(screenSize.height)")
+        
+        if screenSize.width < 350 {
+            
+        }
+        
+        
         self.tableView.rowHeight = 380
         
         scorePoint = 0
@@ -433,10 +442,22 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         cell.toDoListButton.layer.borderWidth = 1
         cell.toDoListButton.layer.borderColor = UIColor.black.cgColor
         
+        
         cell.detailsButton.backgroundColor = .clear
         cell.detailsButton.layer.cornerRadius = 5
         cell.detailsButton.layer.borderWidth = 1
         cell.detailsButton.layer.borderColor = UIColor.black.cgColor
+        
+        /*let screenSize = UIScreen.main.bounds
+        
+        if screenSize.width < 350 {
+            cell.toDoListButton.titleLabel?.font = .systemFont(ofSize: 14)
+            cell.detailsButton.titleLabel?.font = .systemFont(ofSize: 14)
+        }
+        else {
+            cell.toDoListButton.titleLabel?.font = .systemFont(ofSize: 15)
+            cell.detailsButton.titleLabel?.font = .systemFont(ofSize: 15)
+        }*/
         
         cell.layer.cornerRadius=10 //set corner radius here
         cell.layer.borderColor = UIColor.lightGray.cgColor  // set cell border color here
