@@ -37,7 +37,11 @@ class foodsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var detailsButton: UIButton!
     
+    @IBOutlet weak var detailText: UILabel!
+    
     @IBOutlet weak var detailTextInfo: UITextView!
+    
+    
     
     @IBOutlet weak var foodImage: UIImageView!
     

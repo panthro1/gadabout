@@ -444,6 +444,11 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         cell.detailsButton.layer.borderWidth = 1
         cell.detailsButton.layer.borderColor = UIColor.black.cgColor
         
+        cell.layer.cornerRadius=10 //set corner radius here
+        cell.layer.borderColor = UIColor.lightGray.cgColor  // set cell border color here
+        cell.layer.borderWidth = 2 // set border width here
+
+        
         //print("Row: \(indexPath.row) showDetail: \(showDetail) Completed: \(isCompleted)")
         
         if (showDetail[indexPath.row] == true)/* && (detailCellRow == indexPath.row)*/ {
@@ -460,8 +465,10 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             cell.detailsButton.isHidden = false
             cell.detailsButton.setTitle("Back", for: [])
             
-            cell.detailTextInfo.isHidden = false
-            cell.detailTextInfo.text = descriptionEng[indexPath.row]
+            cell.detailText.isHidden = false
+            cell.detailText.text = descriptionEng[indexPath.row]
+            cell.detailText.sizeToFit()
+            cell.detailText.numberOfLines = 0
             
             imageFile[indexPath.row].getDataInBackground { (data, error) in
                 
@@ -502,7 +509,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             cell.markOption3.isHidden = false
             cell.markOption4.isHidden = false
             
-            cell.detailTextInfo.isHidden = true
+            cell.detailText.isHidden = true
             cell.option1.text = option1[indexPath.row]
             cell.option2.text = option2[indexPath.row]
             cell.option3.text = option3[indexPath.row]

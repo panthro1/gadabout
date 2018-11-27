@@ -483,8 +483,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             cell.detailText.text = descriptionEng[indexPath.row]
             cell.detailText.sizeToFit()
             cell.detailText.numberOfLines = 0
-            print(cell.detailText.text)
-            print(descriptionEng[indexPath.row])
             
             imageFile[indexPath.row].getDataInBackground { (data, error) in
                 
