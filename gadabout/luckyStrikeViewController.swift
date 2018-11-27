@@ -33,13 +33,13 @@ class luckyStrikeViewController: UIViewController {
     
     @IBOutlet weak var headerLabel: UILabel!
     
-    @IBOutlet weak var descriptionText: UITextView!
-    
     @IBOutlet weak var bannerView: GADBannerView!
     
     @IBOutlet weak var nextButton: UIButton!
     
     @IBOutlet weak var toDoListButton: UIButton!
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     @IBAction func backTapped(_ sender: Any) {
         
@@ -141,7 +141,7 @@ class luckyStrikeViewController: UIViewController {
                 }
             }
             if let header = headerLabel.text {
-                if let description = descriptionText.text {
+                if let description = descriptionLabel.text {
                     if let imgFile = currentImage.first {
                      
                         glbToDoItemIDs.append(currentObjectId)
@@ -264,8 +264,13 @@ class luckyStrikeViewController: UIViewController {
                     self.currentImage.removeAll()
                     self.currentImage.append(self.imageFile[randomIndex])
                     
-                    self.descriptionText.text = self.descriptionEng[randomIndex]
-                    self.descriptionText.isHidden = false
+                    //self.descriptionText.text = self.descriptionEng[randomIndex]
+                    //self.descriptionText.isHidden = false
+                    self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                    self.descriptionLabel.isHidden = false
+                    self.descriptionLabel.sizeToFit()
+                    self.descriptionLabel.numberOfLines = 0
+                    
                     self.headerLabel.isHidden = false
                     self.image.isHidden = false
                     
@@ -322,9 +327,12 @@ class luckyStrikeViewController: UIViewController {
             isCurrentItemPlace = isPlace[randomIndex]
             currentImage.removeAll()
             currentImage.append(imageFile[randomIndex])
-
-            self.descriptionText.text = self.descriptionEng[randomIndex]
-            self.descriptionText.isHidden = false
+            
+            self.descriptionLabel.text = self.descriptionEng[randomIndex]
+            self.descriptionLabel.isHidden = false
+            self.descriptionLabel.sizeToFit()
+            self.descriptionLabel.numberOfLines = 0
+            
             self.headerLabel.isHidden = false
             self.image.isHidden = false
             
@@ -431,9 +439,12 @@ class luckyStrikeViewController: UIViewController {
             isCurrentItemPlace = isPlace[randomIndex]
             currentImage.removeAll()
             currentImage.append(imageFile[randomIndex])
+            
+            descriptionLabel.text = descriptionEng[randomIndex]
+            descriptionLabel.isHidden = false
+            self.descriptionLabel.sizeToFit()
+            self.descriptionLabel.numberOfLines = 0
 
-            descriptionText.text = descriptionEng[randomIndex]
-            descriptionText.isHidden = false
             headerLabel.isHidden = false
             image.isHidden = false
             
@@ -533,8 +544,11 @@ class luckyStrikeViewController: UIViewController {
                     self.currentImage.removeAll()
                     self.currentImage.append(self.imageFile[randomIndex])
 
-                    self.descriptionText.text = self.descriptionEng[randomIndex]
-                    self.descriptionText.isHidden = false
+                    self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                    self.descriptionLabel.isHidden = false
+                    self.descriptionLabel.sizeToFit()
+                    self.descriptionLabel.numberOfLines = 0
+                    
                     self.headerLabel.isHidden = false
                     self.image.isHidden = false
                     
@@ -668,8 +682,11 @@ class luckyStrikeViewController: UIViewController {
                             self.currentImage.removeAll()
                             self.currentImage.append(self.imageFile[randomIndex])
 
-                            self.descriptionText.text = self.descriptionEng[randomIndex]
-                            self.descriptionText.isHidden = false
+                            self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                            self.descriptionLabel.isHidden = false
+                            self.descriptionLabel.sizeToFit()
+                            self.descriptionLabel.numberOfLines = 0
+                            
                             self.headerLabel.isHidden = false
                             self.image.isHidden = false
                             
@@ -726,8 +743,11 @@ class luckyStrikeViewController: UIViewController {
                     currentImage.removeAll()
                     currentImage.append(imageFile[randomIndex])
 
-                    descriptionText.text = descriptionEng[randomIndex]
-                    descriptionText.isHidden = false
+                    descriptionLabel.text = self.descriptionEng[randomIndex]
+                    descriptionLabel.isHidden = false
+                    descriptionLabel.sizeToFit()
+                    descriptionLabel.numberOfLines = 0
+                    
                     headerLabel.isHidden = false
                     image.isHidden = false
                     
