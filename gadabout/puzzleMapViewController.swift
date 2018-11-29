@@ -568,6 +568,8 @@ class puzzleMapViewController: UIViewController {
         }*/
         
         // New code
+        NotificationCenter.default.addObserver(self, selector: #selector(isRotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        
         for indx in 0 ..< glbPlcImageFile.count {
             
             option1.append(glbPlcOption1[indx])
@@ -593,6 +595,9 @@ class puzzleMapViewController: UIViewController {
             //objectId.append(glbFdObjectId[indx])
             //isPlace.append(false)
         }
+
+        
+        
         let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
         
         self.imageFile[randomIndex].getDataInBackground { (data, error) in
@@ -605,15 +610,18 @@ class puzzleMapViewController: UIViewController {
                     
                     let images = self.slice(image: self.myPicture, into: 3)
                     
-                    var xCent: Int = 10+48/3*4
-                    var yCent: Int = 100+48/3*4
+                    /*var xCent: Int = 10 + Int(floor((screenSize.width-20)/6)) //10+48/3*4
+                    var yCent: Int = 100 + Int(floor((screenSize.width-20)/6)) //100+48/3*4
                     
                     let nofRows = 3
                     let nofColumns = 3
                     
                     for row in 0 ..< nofRows {
                         for col in 0 ..< nofColumns {
-                            let myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96/3*4, height: 96/3*4))
+                            let height = Int(floor((screenSize.width-20)/3))
+                            let width = Int(floor((screenSize.width-20)/3))
+                            let myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: width, height: height))
+                            //let myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96/3*4, height: 96/3*4))
                             let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
                             self.allCenters.append(currCent)
                             myImgView.center = currCent
@@ -622,21 +630,71 @@ class puzzleMapViewController: UIViewController {
                             myImgView.tag = 10+row*3+col
                             self.allImgViews.append(myImgView)
                             self.view.addSubview(myImgView)
-                            xCent += 96/3*4
+                            xCent += Int(floor((screenSize.width-20)/3))//96/3*4
                             
                         }
-                        xCent = 10+48/3*4
-                        yCent += 96/3*4
+                        xCent = 10 + Int(floor((screenSize.width-20)/6))//10+48/3*4
+                        yCent += Int(floor((screenSize.width-20)/3))//96/3*4
+                    }*/
+                    
+                    // New code
+                    let screenSize = UIScreen.main.bounds
+                    
+                    
+                    if UIDevice.current.orientation.isLandscape {
+                        print("Landscape, height: \(screenSize.height), width: \(screenSize.width)")
+                        let imageHeightAndWeight = Int(floor((screenSize.height*0.96)/3))
+                        print("Image Height: \(imageHeightAndWeight)")
+                        
+                        let upperOffset = Int(screenSize.height*0.02)
+                        
+                        let centerPointX = Int(screenSize.width/2)
+                        let centerPointY = upperOffset + imageHeightAndWeight + imageHeightAndWeight / 2
+                        
+                        let nofRows = 3
+                        let nofColumns = 3
+                        
+                        for row in 0 ..< nofRows {
+                            for col in 0 ..< nofColumns {
+                                let myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96/3*4, height: 96/3*4))
+                                
+                                let diffRow = row - 1
+                                let diffCol = col - 1
+                                
+                                let xCent = centerPointX + diffRow * imageHeightAndWeight
+                                let yCent = centerPointY + diffCol * imageHeightAndWeight
+                                let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
+                                self.allCenters.append(currCent)
+                                myImgView.center = currCent
+                                myImgView.image = images[row*3+col]
+                                myImgView.isUserInteractionEnabled = true
+                                myImgView.tag = 10+row*3+col
+                                self.allImgViews.append(myImgView)
+                                self.view.addSubview(myImgView)
+
+                            }
+                        }
+
+                    }
+                    else {
+                        print("Portrait height: \(screenSize.height), width: \(screenSize.width)")
+                        let imageHeightAndWeight = Int(floor((screenSize.width*0.96)/3))
+                        print("Image Height: \(imageHeightAndWeight)")
                     }
                     
-                    self.randomizeBlocks()
+                    
+                    
+                    
+                    ////////////
+                    
+                    /*self.randomizeBlocks()
                     self.allImgViews[0].removeFromSuperview()
                     
                     self.leftIsEmpty = false
                     self.rightIsEmpty = false
                     self.topIsEmpty = false
                     self.bottomIsEmpty = false
-                    self.startTime = Date()
+                    self.startTime = Date()*/
                     
                     
                 }
@@ -842,6 +900,25 @@ class puzzleMapViewController: UIViewController {
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParentViewController: self)
         
+    }
+    
+    @objc func isRotated() {
+        switch UIDevice.current.orientation {
+        case .landscapeLeft:
+            print("Landscape left")
+        case .landscapeRight:
+            print("Landscape right")
+        case .portrait:
+            print("Portrait")
+        case .portraitUpsideDown:
+            print("Portrait upside down")
+        case .unknown:
+            print("unknown")
+        case .faceUp:
+            print("face up")
+        case .faceDown:
+            print("face down")
+        }
     }
     
     
