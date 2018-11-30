@@ -54,6 +54,14 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
 
     @IBOutlet weak var back: UIBarButtonItem!
     
+    override var shouldAutorotate: Bool {
+        return false
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
     @IBAction func backTapped(_ sender: Any) {
         timer.invalidate()
         performSegue(withIdentifier: "placesBackSegue", sender: self)
@@ -153,6 +161,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         self.tableView.delegate = self
         self.tableView.dataSource = self

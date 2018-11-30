@@ -49,6 +49,16 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var bannerView: GADBannerView!
     
+    /*override var shouldAutorotate: Bool {
+        return false
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }*/
+    
+    
+    
     @IBAction func mailLoginTapped(_ sender: Any) {
         
         let loginPopupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginPopUpID") as! ViewController
@@ -82,6 +92,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        AppDelegate.AppUtility.lockOrientation(.portrait)
         
         //super.viewDidLoad()
         
