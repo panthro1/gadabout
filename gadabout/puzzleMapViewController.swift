@@ -44,12 +44,15 @@ class puzzleMapViewController: UIViewController {
     var placeFoodSelection: UInt32 = 0
     var myPicture = UIImage()
 
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     @IBOutlet weak var bannerView: GADBannerView!
     
     @IBOutlet weak var hintButton: UIButton!
     
     @IBOutlet weak var harderSimpleButton: UIButton!
+    
+    
     
     @IBAction func refreshTapped(_ sender: Any) {
         
@@ -63,12 +66,12 @@ class puzzleMapViewController: UIViewController {
         UIApplication.shared.beginIgnoringInteractionEvents()
 
         
-        let nofRows = 3
-        let nofColumns = 3
+        var nofRows = 3
+        var nofColumns = 3
         
         if harder == true {
-            let nofRows = 4
-            let nofColumns = 4
+            nofRows = 4
+            nofColumns = 4
         }
         
         for row in 0 ..< nofRows {
@@ -93,9 +96,51 @@ class puzzleMapViewController: UIViewController {
                     
                     self.myPicture = imageToDisplay
                     
-                    let images = self.slice(image: self.myPicture, into: 3)
+                    let images = self.slice(image: self.myPicture, into: nofRows)
                     
-                    var xCent: Int = 10+48/3*4
+                    let screenSize = UIScreen.main.bounds
+                    
+                    var imageHeightAndWeight = Int(floor((screenSize.width*0.96)/3))
+                    let navBarHeight = self.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
+                    let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
+                    
+                    if self.harder == true {
+                        imageHeightAndWeight = Int(floor((screenSize.width*0.96)/4))
+                    }
+                    
+                    var xCent: Int = Int(0.02*screenSize.width) + imageHeightAndWeight/2
+                    var yCent: Int = upperOffset + imageHeightAndWeight/2
+                    
+                    
+                    for row in 0 ..< nofRows {
+                        for col in 0 ..< nofColumns {
+                            let myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: imageHeightAndWeight, height: imageHeightAndWeight))
+                            let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
+                            self.allCenters.append(currCent)
+                            myImgView.center = currCent
+                            myImgView.image = images[row*nofRows+col]
+                            myImgView.isUserInteractionEnabled = true
+                            myImgView.tag = 10+row*nofRows+col
+                            self.allImgViews.append(myImgView)
+                            self.view.addSubview(myImgView)
+                            xCent += imageHeightAndWeight
+                            
+                        }
+                        xCent = Int(0.02*screenSize.width) + imageHeightAndWeight/2
+                        yCent += imageHeightAndWeight
+                    }
+                    
+                    self.randomizeBlocks()
+                    self.allImgViews[0].removeFromSuperview()
+                    
+                    self.leftIsEmpty = false
+                    self.rightIsEmpty = false
+                    self.topIsEmpty = false
+                    self.bottomIsEmpty = false
+                    self.startTime = Date()
+
+                    
+                    /*var xCent: Int = 10+48/3*4
                     var yCent: Int = 100+48/3*4
                     
                     for row in 0 ..< nofRows {
@@ -123,7 +168,8 @@ class puzzleMapViewController: UIViewController {
                     self.rightIsEmpty = false
                     self.topIsEmpty = false
                     self.bottomIsEmpty = false
-                    self.startTime = Date()
+                    self.startTime = Date()*/
+                    
                     
                     
                 }
@@ -357,217 +403,6 @@ class puzzleMapViewController: UIViewController {
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
 
-        
-        /*placeFoodSelection = arc4random_uniform(2)
-        print("Random Index: \(placeFoodSelection)")
-        
-        let nofInstancePlaceQuery = PFQuery(className: "Places")
-        nofInstancePlaceQuery.countObjectsInBackground { (count, error) in
-            
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            else {
-                self.nofPlaceInstances = count
-                print("Total place instances: \(count)")
-            }
-            
-            if self.placeFoodSelection == 0 {
-                
-                let randomIndex = Int(arc4random_uniform(UInt32(self.nofPlaceInstances)))
-                print("Random Index for Places: \(randomIndex)")
-                
-                let placesQuery = PFQuery(className: "Places")
-                
-                placesQuery.limit = 1
-                placesQuery.skip = randomIndex
-                self.imageFile.removeAll()
-                
-                placesQuery.findObjectsInBackground { (objects, error) in
-                    
-                    
-                    if let places = objects {
-                        
-                        for place in places {
-                            
-                            self.option1 = place["alternative1"] as! String
-                            self.option2 = place["alternative2"] as! String
-                            self.option3 = place["alternative3"] as! String
-                            self.option4 = place["alternative4"] as! String
-                            self.imageFile.append(place["imageFile"] as! PFFile)
-                            self.correctAnswer = place["correctAlternative"] as! String
-                            self.descriptionEng = place["engDescription"] as! String
-                            self.descriptionTr = place["trDescription"] as! String
-                            
-                        }
-                    }
-                    
-                    self.imageFile[0].getDataInBackground { (data, error) in
-                        
-                        if let imageData = data {
-                            
-                            if let imageToDisplay = UIImage(data: imageData) {
-                                
-                                self.myPicture = imageToDisplay
-                                
-                                let images = self.slice(image: self.myPicture, into: 3)
-                                
-                                var xCent: Int = 10+48/3*4
-                                var yCent: Int = 100+48/3*4
-                                
-                                let nofRows = 3
-                                let nofColumns = 3
-                                
-                                for row in 0 ..< nofRows {
-                                    for col in 0 ..< nofColumns {
-                                        let myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96/3*4, height: 96/3*4))
-                                        let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
-                                        self.allCenters.append(currCent)
-                                        myImgView.center = currCent
-                                        myImgView.image = images[row*3+col]
-                                        myImgView.isUserInteractionEnabled = true
-                                        myImgView.tag = 10+row*3+col
-                                        self.allImgViews.append(myImgView)
-                                        self.view.addSubview(myImgView)
-                                        xCent += 96/3*4
-                                        
-                                    }
-                                    xCent = 10+48/3*4
-                                    yCent += 96/3*4
-                                }
-                                self.randomizeBlocks()
-                                self.allImgViews[0].removeFromSuperview()
-                                
-                                self.leftIsEmpty = false
-                                self.rightIsEmpty = false
-                                self.topIsEmpty = false
-                                self.bottomIsEmpty = false
-                                self.startTime = Date()
-
-                            }
-                        }
-                        
-                    }
-                    
-                }
-                
-            }
-        }
-        
-        let nofInstanceFoodQuery = PFQuery(className: "Foods")
-        nofInstanceFoodQuery.countObjectsInBackground { (count, error) in
-            
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            else {
-                self.nofFoodInstances = count
-                print("Total place instances: \(count)")
-            }
-            
-            if self.placeFoodSelection == 1 {
-                
-                let randomIndex = Int(arc4random_uniform(UInt32(self.nofFoodInstances)))
-                print("Random Index for Foods: \(randomIndex)")
-                
-                let placesQuery = PFQuery(className: "Foods")
-                
-                placesQuery.limit = 1
-                placesQuery.skip = randomIndex
-                self.imageFile.removeAll()
-                
-                placesQuery.findObjectsInBackground { (objects, error) in
-                    
-                    
-                    if let places = objects {
-                        
-                        for place in places {
-                            
-                            self.option1 = place["alternative1"] as! String
-                            self.option2 = place["alternative2"] as! String
-                            self.option3 = place["alternative3"] as! String
-                            self.option4 = place["alternative4"] as! String
-                            self.imageFile.append(place["imageFile"] as! PFFile)
-                            self.correctAnswer = place["correctAlternative"] as! String
-                            self.descriptionEng = place["engDescription"] as! String
-                            self.descriptionTr = place["trDescription"] as! String
-                            
-                        }
-                    }
-                    
-                    self.imageFile[0].getDataInBackground { (data, error) in
-                        
-                        if let imageData = data {
-                            
-                            if let imageToDisplay = UIImage(data: imageData) {
-                                
-                                self.myPicture = imageToDisplay
-                                
-                                let images = self.slice(image: self.myPicture, into: 3)
-                                
-                                var xCent: Int = 10+48/3*4
-                                var yCent: Int = 100+48/3*4
-                                
-                                let nofRows = 3
-                                let nofColumns = 3
-                                
-                                for row in 0 ..< nofRows {
-                                    for col in 0 ..< nofColumns {
-                                        var myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96/3*4, height: 96/3*4))
-                                        let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
-                                        self.allCenters.append(currCent)
-                                        myImgView.center = currCent
-                                        myImgView.image = images[row*3+col]
-                                        myImgView.isUserInteractionEnabled = true
-                                        myImgView.tag = 10+row*3+col
-                                        self.allImgViews.append(myImgView)
-                                        self.view.addSubview(myImgView)
-                                        xCent += 96/3*4
-                                        
-                                    }
-                                    xCent = 10+48/3*4
-                                    yCent += 96/3*4
-                                }
-                                
-                                self.randomizeBlocks()
-                                self.allImgViews[0].removeFromSuperview()
-                                
-                                self.leftIsEmpty = false
-                                self.rightIsEmpty = false
-                                self.topIsEmpty = false
-                                self.bottomIsEmpty = false
-                                self.startTime = Date()
-
-                                
-                            }
-                        }
-                        
-                    }
-                    if let correctAnsInt = Int(self.correctAnswer) {
-                        
-                        /*if correctAnsInt == 1 {
-                            self.headerLabel.text = self.option1
-                        }
-                        else if correctAnsInt == 2 {
-                            self.headerLabel.text = self.option2
-                        }
-                        else if correctAnsInt == 3 {
-                            self.headerLabel.text = self.option3
-                        }
-                        else if correctAnsInt == 4 {
-                            self.headerLabel.text = self.option4
-                        }*/
-                    }
-                    /*self.descriptionText.text = self.descriptionEng
-                    self.descriptionText.isHidden = false
-                    self.headerLabel.isHidden = false
-                    self.image.isHidden = false*/
-                }
-                
-            }
-        }*/
-        
-        // New code
         NotificationCenter.default.addObserver(self, selector: #selector(isRotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
         for indx in 0 ..< glbPlcImageFile.count {
@@ -640,61 +475,49 @@ class puzzleMapViewController: UIViewController {
                     // New code
                     let screenSize = UIScreen.main.bounds
                     
+                    let imageHeightAndWeight = Int(floor((screenSize.width*0.96)/3))
+                    let navBarHeight = self.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
+                    let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
                     
-                    if UIDevice.current.orientation.isLandscape {
-                        print("Landscape, height: \(screenSize.height), width: \(screenSize.width)")
-                        let imageHeightAndWeight = Int(floor((screenSize.height*0.96)/3))
-                        print("Image Height: \(imageHeightAndWeight)")
-                        
-                        let upperOffset = Int(screenSize.height*0.02)
-                        
-                        let centerPointX = Int(screenSize.width/2)
-                        let centerPointY = upperOffset + imageHeightAndWeight + imageHeightAndWeight / 2
-                        
-                        let nofRows = 3
-                        let nofColumns = 3
-                        
-                        for row in 0 ..< nofRows {
-                            for col in 0 ..< nofColumns {
-                                let myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96/3*4, height: 96/3*4))
-                                
-                                let diffRow = row - 1
-                                let diffCol = col - 1
-                                
-                                let xCent = centerPointX + diffRow * imageHeightAndWeight
-                                let yCent = centerPointY + diffCol * imageHeightAndWeight
-                                let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
-                                self.allCenters.append(currCent)
-                                myImgView.center = currCent
-                                myImgView.image = images[row*3+col]
-                                myImgView.isUserInteractionEnabled = true
-                                myImgView.tag = 10+row*3+col
-                                self.allImgViews.append(myImgView)
-                                self.view.addSubview(myImgView)
-
-                            }
+                    print("Navigation bar height: \(navBarHeight)")
+                    
+                    print("Screen width: \(screenSize.width)")
+                    print("Image Height and Width: \(imageHeightAndWeight)")
+                    print("Upper offset: \(upperOffset)")
+                    
+                    
+                    var xCent: Int = Int(0.02*screenSize.width) + imageHeightAndWeight/2
+                    var yCent: Int = upperOffset + imageHeightAndWeight/2
+                    
+                    let nofRows = 3
+                    let nofColumns = 3
+                    
+                    for row in 0 ..< nofRows {
+                        for col in 0 ..< nofColumns {
+                            let myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: imageHeightAndWeight, height: imageHeightAndWeight))
+                            let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
+                            self.allCenters.append(currCent)
+                            myImgView.center = currCent
+                            myImgView.image = images[row*3+col]
+                            myImgView.isUserInteractionEnabled = true
+                            myImgView.tag = 10+row*nofRows+col
+                            self.allImgViews.append(myImgView)
+                            self.view.addSubview(myImgView)
+                            xCent += imageHeightAndWeight
+                            
                         }
-
-                    }
-                    else {
-                        print("Portrait height: \(screenSize.height), width: \(screenSize.width)")
-                        let imageHeightAndWeight = Int(floor((screenSize.width*0.96)/3))
-                        print("Image Height: \(imageHeightAndWeight)")
+                        xCent = Int(0.02*screenSize.width) + imageHeightAndWeight/2
+                        yCent += imageHeightAndWeight
                     }
                     
-                    
-                    
-                    
-                    ////////////
-                    
-                    /*self.randomizeBlocks()
+                    self.randomizeBlocks()
                     self.allImgViews[0].removeFromSuperview()
                     
                     self.leftIsEmpty = false
                     self.rightIsEmpty = false
                     self.topIsEmpty = false
                     self.bottomIsEmpty = false
-                    self.startTime = Date()*/
+                    self.startTime = Date()
                     
                     
                 }
@@ -727,25 +550,24 @@ class puzzleMapViewController: UIViewController {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let myTouch: UITouch = touches.first as! UITouch
         
+        let screenSize = UIScreen.main.bounds
+        
+        var imageHeightAndWeight = floor((screenSize.width*0.96)/3)
+        let navBarHeight = self.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
+        let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
+        
+        if harder == true {
+            imageHeightAndWeight = floor((screenSize.width*0.96)/4)
+        }
+        
         if myTouch.view != self.view {
             tapCenter = (myTouch.view?.center)!
             
-            if harder == false {
-                left = CGPoint(x: tapCenter.x - 96/3*4, y: tapCenter.y)
-                right = CGPoint(x: tapCenter.x + 96/3*4, y: tapCenter.y)
-                top = CGPoint(x: tapCenter.x, y: tapCenter.y + 96/3*4)
-                bottom = CGPoint(x: tapCenter.x, y: tapCenter.y - 96/3*4)
-            }
-            else {
-                left = CGPoint(x: tapCenter.x - 96, y: tapCenter.y)
-                right = CGPoint(x: tapCenter.x + 96, y: tapCenter.y)
-                top = CGPoint(x: tapCenter.x, y: tapCenter.y + 96)
-                bottom = CGPoint(x: tapCenter.x, y: tapCenter.y - 96)
-            }
-            let beforeRow = (emptySpot.x - 74)/128
-            let beforeCol = (emptySpot.y - 164)/128
 
-            print("BEFORE Empty spot Row: \(beforeRow), Col: \(beforeCol)")
+            left = CGPoint(x: tapCenter.x - imageHeightAndWeight, y: tapCenter.y)
+            right = CGPoint(x: tapCenter.x + imageHeightAndWeight, y: tapCenter.y)
+            top = CGPoint(x: tapCenter.x, y: tapCenter.y + imageHeightAndWeight)
+            bottom = CGPoint(x: tapCenter.x, y: tapCenter.y - imageHeightAndWeight)
             
             if emptySpot.equalTo(left) {
                 leftIsEmpty = true
@@ -777,20 +599,8 @@ class puzzleMapViewController: UIViewController {
                 topIsEmpty = false
                 bottomIsEmpty = false
                 
-                
-                let afterRow = (emptySpot.x - 74)/128
-                let afterCol = (emptySpot.y - 164)/128
-                
-                print("AFTER Empty spot Row: \(afterRow), Col: \(afterCol)")
-
-                
-                var xCent: Int = 10+48/3*4
-                var yCent: Int = 100+48/3*4
-                
-                if harder {
-                    xCent = 10+48
-                    yCent = 100+48
-                }
+                var xCent: Int = Int(0.02*screenSize.width) + Int(imageHeightAndWeight)/2
+                var yCent: Int = upperOffset + Int(imageHeightAndWeight)/2
                 
                 var nofRows: UInt8 = 3
                 var nofColumns: UInt8 = 3
@@ -822,22 +632,10 @@ class puzzleMapViewController: UIViewController {
                                 break
                             }
                         }
-                        if harder == false {
-                            xCent += 96/3*4
-                        }
-                        else {
-                            xCent += 96
-                        }
+                        xCent += Int(imageHeightAndWeight)
                     }
-                    if harder == false {
-                        xCent = 10+48/3*4
-                        yCent += 96/3*4
-                    }
-                    else {
-                        xCent = 10+48
-                        yCent += 96
-
-                    }
+                    xCent = Int(0.02*screenSize.width) + Int(imageHeightAndWeight)/2
+                    yCent += Int(imageHeightAndWeight)
                     
                     if completed == false {
                         break

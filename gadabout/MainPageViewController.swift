@@ -588,6 +588,9 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         src.view.window?.layer.add(transition, forKey: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        AppDelegate.AppUtility.lockOrientation(.portrait)
+    }
 
     
     

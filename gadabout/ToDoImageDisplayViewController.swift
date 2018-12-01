@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class ToDoImageDisplayViewController: UIViewController {
 
@@ -14,15 +15,26 @@ class ToDoImageDisplayViewController: UIViewController {
     
     @IBOutlet weak var toDoHeader: UILabel!
     
-    @IBOutlet weak var toDoText: UITextView!
-    
     @IBOutlet weak var closeButton: UIButton!
+    
+    @IBOutlet weak var toDoDescription: UILabel!
+    
+    @IBOutlet weak var bannerView: GADBannerView!
     
     var header = ""
     var desc = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Account ad
+        //bannerView.adUnitID = "ca-app-pub-5745243428784846~5277829027"
+        
+        // Test add
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
         
 
         // Do any additional setup after loading the view.
@@ -32,7 +44,9 @@ class ToDoImageDisplayViewController: UIViewController {
         closeButton.layer.borderColor = UIColor.black.cgColor
         
         toDoHeader.text = header
-        toDoText.text = desc
+        toDoDescription.text = desc
+        toDoDescription.sizeToFit()
+        toDoDescription.numberOfLines = 0
         
         
         self.view.backgroundColor = UIColor.white
