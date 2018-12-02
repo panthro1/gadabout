@@ -362,6 +362,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     
     func showPopup(Score: Int, totalScore: Int) {
         
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
         popOverVC.scoreWin = Score
         popOverVC.totalScore = totalScore
@@ -369,8 +371,9 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         self.addChildViewController(popOverVC)
         popOverVC.view.frame = self.view.bounds//self.view.frame
         tableView.isScrollEnabled = false
-        complete.isEnabled = false
-        back.isEnabled = false
+        //complete.isEnabled = false
+        //back.isEnabled = false
+        
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParentViewController: self)
         
@@ -445,6 +448,9 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         cell.toDoListButton.layer.borderWidth = 1
         cell.toDoListButton.layer.borderColor = UIColor.black.cgColor
         
+        cell.placeImage.layer.cornerRadius = 20
+        cell.placeImage.layer.masksToBounds = true
+        
         
         /*cell.detailsButton.backgroundColor = .clear
         cell.detailsButton.layer.cornerRadius = 5
@@ -496,6 +502,25 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                         
                         cell.placeImage.image = imageToDisplay
                         
+                        // test
+                        
+                        let boundsScale = cell.placeImage.bounds.size.width / cell.placeImage.bounds.size.height
+                        let imageScale = imageToDisplay.size.width / imageToDisplay.size.height
+                        
+                        var drawingRect: CGRect = cell.placeImage.bounds
+                        
+                        if boundsScale > imageScale {
+                            drawingRect.size.width =  drawingRect.size.height * imageScale
+                            drawingRect.origin.x = (cell.placeImage.bounds.size.width - drawingRect.size.width) / 2
+                        } else {
+                            drawingRect.size.height = drawingRect.size.width / imageScale
+                            drawingRect.origin.y = (cell.placeImage.bounds.size.height - drawingRect.size.height) / 2
+                        }
+                        let path = UIBezierPath(roundedRect: drawingRect, cornerRadius: 20)
+                        let mask = CAShapeLayer()
+                        mask.path = path.cgPath
+                        cell.placeImage.layer.mask = mask
+                        
                     }
                 }
             }
@@ -512,6 +537,26 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     if let imageToDisplay = UIImage(data: imageData) {
                     
                         cell.placeImage.image = imageToDisplay
+                        
+                        // test
+                        
+                        let boundsScale = cell.placeImage.bounds.size.width / cell.placeImage.bounds.size.height
+                        let imageScale = imageToDisplay.size.width / imageToDisplay.size.height
+                        
+                        var drawingRect: CGRect = cell.placeImage.bounds
+                        
+                        if boundsScale > imageScale {
+                            drawingRect.size.width =  drawingRect.size.height * imageScale
+                            drawingRect.origin.x = (cell.placeImage.bounds.size.width - drawingRect.size.width) / 2
+                        } else {
+                            drawingRect.size.height = drawingRect.size.width / imageScale
+                            drawingRect.origin.y = (cell.placeImage.bounds.size.height - drawingRect.size.height) / 2
+                        }
+                        let path = UIBezierPath(roundedRect: drawingRect, cornerRadius: 20)
+                        let mask = CAShapeLayer()
+                        mask.path = path.cgPath
+                        cell.placeImage.layer.mask = mask
+                        
                     
                     }
                 }
@@ -939,9 +984,10 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     
     func SendCloseInfo() {
         print("Popup closed")
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         tableView.isScrollEnabled = true
-        complete.isEnabled = true
-        back.isEnabled = true
+        //complete.isEnabled = true
+        //back.isEnabled = true
     }
     
     func createProgressBar() {
@@ -988,6 +1034,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         }
         
     }
+    
+    
     
     /*
     // Override to support conditional editing of the table view.

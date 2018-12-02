@@ -419,6 +419,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         cell.toDoListButton.layer.cornerRadius = 5
         cell.toDoListButton.layer.borderWidth = 1
         cell.toDoListButton.layer.borderColor = UIColor.black.cgColor
+    
         
         /*cell.detailsButton.backgroundColor = .clear
         cell.detailsButton.layer.cornerRadius = 5
@@ -460,6 +461,25 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                         
                         cell.foodImage.image = imageToDisplay
                         
+                        // test
+                        
+                        let boundsScale = cell.foodImage.bounds.size.width / cell.foodImage.bounds.size.height
+                        let imageScale = imageToDisplay.size.width / imageToDisplay.size.height
+                        
+                        var drawingRect: CGRect = cell.foodImage.bounds
+                        
+                        if boundsScale > imageScale {
+                            drawingRect.size.width =  drawingRect.size.height * imageScale
+                            drawingRect.origin.x = (cell.foodImage.bounds.size.width - drawingRect.size.width) / 2
+                        } else {
+                            drawingRect.size.height = drawingRect.size.width / imageScale
+                            drawingRect.origin.y = (cell.foodImage.bounds.size.height - drawingRect.size.height) / 2
+                        }
+                        let path = UIBezierPath(roundedRect: drawingRect, cornerRadius: 20)
+                        let mask = CAShapeLayer()
+                        mask.path = path.cgPath
+                        cell.foodImage.layer.mask = mask
+                        
                     }
                 }
             }
@@ -476,6 +496,25 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                     if let imageToDisplay = UIImage(data: imageData) {
                         
                         cell.foodImage.image = imageToDisplay
+                        
+                        // test
+                        
+                        let boundsScale = cell.foodImage.bounds.size.width / cell.foodImage.bounds.size.height
+                        let imageScale = imageToDisplay.size.width / imageToDisplay.size.height
+                        
+                        var drawingRect: CGRect = cell.foodImage.bounds
+                        
+                        if boundsScale > imageScale {
+                            drawingRect.size.width =  drawingRect.size.height * imageScale
+                            drawingRect.origin.x = (cell.foodImage.bounds.size.width - drawingRect.size.width) / 2
+                        } else {
+                            drawingRect.size.height = drawingRect.size.width / imageScale
+                            drawingRect.origin.y = (cell.foodImage.bounds.size.height - drawingRect.size.height) / 2
+                        }
+                        let path = UIBezierPath(roundedRect: drawingRect, cornerRadius: 20)
+                        let mask = CAShapeLayer()
+                        mask.path = path.cgPath
+                        cell.foodImage.layer.mask = mask
                         
                     }
                 }
