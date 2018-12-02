@@ -320,7 +320,14 @@ class puzzleMapViewController: UIViewController {
         
         if isHintDisplayed == false {
             var imageView : UIImageView
-            imageView = UIImageView(frame: CGRect(x: 10, y: 100, width: 96*4, height: 96*4))
+            
+            let screenSize = UIScreen.main.bounds
+            let imageHeightAndWeight = Int(floor(screenSize.width*0.96))
+            let navBarHeight = self.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
+            let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
+            let leftOffset = Int(0.02*screenSize.width)
+            
+            imageView = UIImageView(frame: CGRect(x: leftOffset, y: upperOffset, width: imageHeightAndWeight, height: imageHeightAndWeight))
             imageView.tag = 100
             imageView.image = myPicture
             self.view.addSubview(imageView)
