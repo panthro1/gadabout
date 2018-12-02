@@ -61,19 +61,13 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
     
     
     @IBAction func didCompleteTapped(_ sender: Any) {
-        let sectionNo = 0
         
         if isCompleted == false {
             isCompleted = true
             complete.title = "Next"
-            let nofQuestions = correctAnswer.count
             
+            tableView.reloadData()
             
-            for rowNo in 0...nofQuestions-1 {
-                
-                let rowToSelect: IndexPath = IndexPath(row: rowNo, section: sectionNo)
-                self.tableView.reloadRows(at: [rowToSelect], with: .fade)
-            }
             var indx = 0
             getQuizScore()
             for question in questionCompleted {
@@ -154,19 +148,6 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         self.tableView.rowHeight = 380
         
         scorePoint = 0
-        
-        /*if let navigationBar = self.navigationController?.navigationBar {
-            let timeFrame = CGRect(x: 0, y: 0, width: navigationBar.frame.width, height: navigationBar.frame.height)
-            
-            timeLabel = UILabel(frame: timeFrame)
-            timeLabel.text = "\(timeRemaining)"
-            timeLabel.textAlignment = .center
-            timeLabel.font = UIFont.boldSystemFont(ofSize: 25)
-            
-            navigationBar.addSubview(timeLabel)
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
-        }*/
-        
         createProgressBar()
 
 
@@ -439,12 +420,12 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         cell.toDoListButton.layer.borderWidth = 1
         cell.toDoListButton.layer.borderColor = UIColor.black.cgColor
         
-        cell.detailsButton.backgroundColor = .clear
+        /*cell.detailsButton.backgroundColor = .clear
         cell.detailsButton.layer.cornerRadius = 5
         cell.detailsButton.layer.borderWidth = 1
-        cell.detailsButton.layer.borderColor = UIColor.black.cgColor
+        cell.detailsButton.layer.borderColor = UIColor.black.cgColor*/
         
-        cell.layer.cornerRadius=10 //set corner radius here
+        cell.layer.cornerRadius = 20 //set corner radius here
         cell.layer.borderColor = UIColor.lightGray.cgColor  // set cell border color here
         cell.layer.borderWidth = 2 // set border width here
 
@@ -463,6 +444,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             cell.markOption3.isHidden = true
             cell.markOption4.isHidden = true
             cell.detailsButton.isHidden = false
+            cell.toDoListButton.isHidden = false
             cell.detailsButton.setTitle("Back", for: [])
             
             cell.detailText.isHidden = false

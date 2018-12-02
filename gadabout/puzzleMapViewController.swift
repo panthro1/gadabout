@@ -195,6 +195,13 @@ class puzzleMapViewController: UIViewController {
         let button = sender as? UIButton
         button?.shake()
         
+        // New code
+        let screenSize = UIScreen.main.bounds
+        let navBarHeight = self.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
+        var xCent: Int = 0
+        var yCent: Int = 0
+        
+        
         if harder == false {
             harder = true
             
@@ -221,13 +228,17 @@ class puzzleMapViewController: UIViewController {
             let nofRowsHard = 4
             let nofColumnsHard = 4
             
-            var xCent: Int = 10+48
-            var yCent: Int = 100+48
+            
+            let imageHeightAndWeight = Int(floor((screenSize.width*0.96)/4))
+            let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
+            
+            xCent = Int(0.02*screenSize.width) + imageHeightAndWeight/2
+            yCent = upperOffset + imageHeightAndWeight/2
             
             for row in 0 ..< nofRowsHard {
                 for col in 0 ..< nofColumnsHard {
                     
-                    var myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96, height: 96))
+                    var myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: imageHeightAndWeight, height: imageHeightAndWeight))
                     let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
                     allCenters.append(currCent)
                     myImgView.center = currCent
@@ -236,13 +247,13 @@ class puzzleMapViewController: UIViewController {
                     myImgView.tag = 10+row*4+col
                     allImgViews.append(myImgView)
                     self.view.addSubview(myImgView)
-                    xCent += 96
+                    xCent += imageHeightAndWeight
                     
                 }
-                xCent = 10+48
-                yCent += 96
+                xCent = Int(0.02*screenSize.width) + imageHeightAndWeight/2
+                yCent += imageHeightAndWeight
             }
-            harderSimpleButton.setTitle("Back to simple", for: .normal)
+            harderSimpleButton.setTitle("Back to simple ?", for: .normal)
         }
         else {
             harder = false
@@ -270,13 +281,16 @@ class puzzleMapViewController: UIViewController {
             let nofRowsHard = 3
             let nofColumnsHard = 3
             
-            var xCent: Int = 10+48/3*4
-            var yCent: Int = 100+48/3*4
+            let imageHeightAndWeight = Int(floor((screenSize.width*0.96)/3))
+            let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
             
+            xCent = Int(0.02*screenSize.width) + imageHeightAndWeight/2
+            yCent = upperOffset + imageHeightAndWeight/2
+
             for row in 0 ..< nofRowsHard {
                 for col in 0 ..< nofColumnsHard {
                     
-                    var myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96/3*4, height: 96/3*4))
+                    var myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: imageHeightAndWeight, height: imageHeightAndWeight))
                     let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
                     allCenters.append(currCent)
                     myImgView.center = currCent
@@ -285,13 +299,13 @@ class puzzleMapViewController: UIViewController {
                     myImgView.tag = 10+row*3+col
                     allImgViews.append(myImgView)
                     self.view.addSubview(myImgView)
-                    xCent += 96/3*4
+                    xCent += imageHeightAndWeight
                     
                 }
-                xCent = 10+48/3*4
-                yCent += 96/3*4
+                xCent = Int(0.02*screenSize.width) + imageHeightAndWeight/2
+                yCent += imageHeightAndWeight
             }
-            harderSimpleButton.setTitle("Make it harder", for: .normal)
+            harderSimpleButton.setTitle("Make it harder ?", for: .normal)
         }
         self.randomizeBlocks()
         allImgViews[0].removeFromSuperview()
@@ -391,15 +405,29 @@ class puzzleMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        let screenSize = UIScreen.main.bounds
         
-        harderSimpleButton.backgroundColor = .clear
+        /*harderSimpleButton.backgroundColor = .clear
         harderSimpleButton.layer.cornerRadius = 5
         harderSimpleButton.layer.borderWidth = 1
-        harderSimpleButton.layer.borderColor = UIColor.black.cgColor
+        harderSimpleButton.layer.borderColor = UIColor.black.cgColor*/
         
         hintButton.layer.cornerRadius = 5
         hintButton.layer.borderWidth = 1
         hintButton.layer.borderColor = UIColor.black.cgColor
+        
+        if screenSize.width < 350 {
+            hintButton.titleLabel?.font = .systemFont(ofSize: 18)
+            harderSimpleButton.titleLabel?.font = .systemFont(ofSize: 18)
+        }
+        else if screenSize.width < 400 {
+            hintButton.titleLabel?.font = .systemFont(ofSize: 20)
+            harderSimpleButton.titleLabel?.font = .systemFont(ofSize: 20)
+        }
+        else {
+            hintButton.titleLabel?.font = .systemFont(ofSize: 22)
+            harderSimpleButton.titleLabel?.font = .systemFont(ofSize: 22)
+        }
 
         // Account ad
         //bannerView.adUnitID = "ca-app-pub-5745243428784846~5277829027"
@@ -451,36 +479,6 @@ class puzzleMapViewController: UIViewController {
                     self.myPicture = imageToDisplay
                     
                     let images = self.slice(image: self.myPicture, into: 3)
-                    
-                    /*var xCent: Int = 10 + Int(floor((screenSize.width-20)/6)) //10+48/3*4
-                    var yCent: Int = 100 + Int(floor((screenSize.width-20)/6)) //100+48/3*4
-                    
-                    let nofRows = 3
-                    let nofColumns = 3
-                    
-                    for row in 0 ..< nofRows {
-                        for col in 0 ..< nofColumns {
-                            let height = Int(floor((screenSize.width-20)/3))
-                            let width = Int(floor((screenSize.width-20)/3))
-                            let myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: width, height: height))
-                            //let myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96/3*4, height: 96/3*4))
-                            let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
-                            self.allCenters.append(currCent)
-                            myImgView.center = currCent
-                            myImgView.image = images[row*3+col]
-                            myImgView.isUserInteractionEnabled = true
-                            myImgView.tag = 10+row*3+col
-                            self.allImgViews.append(myImgView)
-                            self.view.addSubview(myImgView)
-                            xCent += Int(floor((screenSize.width-20)/3))//96/3*4
-                            
-                        }
-                        xCent = 10 + Int(floor((screenSize.width-20)/6))//10+48/3*4
-                        yCent += Int(floor((screenSize.width-20)/3))//96/3*4
-                    }*/
-                    
-                    // New code
-                    let screenSize = UIScreen.main.bounds
                     
                     let imageHeightAndWeight = Int(floor((screenSize.width*0.96)/3))
                     let navBarHeight = self.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
@@ -660,7 +658,10 @@ class puzzleMapViewController: UIViewController {
                     userScoreQuery.findObjectsInBackground { (objects, error) in
                         if let score = objects?.first {
                             if let totalScore = Int(score["score"] as! String) {
-                                let scorePoint = 20
+                                var scorePoint = 20
+                                if self.harder == true {
+                                    scorePoint = 120
+                                }
                                 let totalScoreAfterTest = totalScore + scorePoint
                                 self.showPopup(Score: scorePoint, totalScore: totalScoreAfterTest)
                                 
@@ -670,7 +671,10 @@ class puzzleMapViewController: UIViewController {
                                 
                             }
                             else {
-                                let scorePoint = 20
+                                var scorePoint = 20
+                                if self.harder == true {
+                                    scorePoint = 120
+                                }
                                 let totalScoreAfterTest = scorePoint
                                 self.showPopup(Score: scorePoint, totalScore: totalScoreAfterTest)
                                 
@@ -680,7 +684,10 @@ class puzzleMapViewController: UIViewController {
                             }
                         }
                         else {
-                            let scorePoint = 20
+                            var scorePoint = 20
+                            if self.harder == true {
+                                scorePoint = 120
+                            }
                             let totalScoreAfterTest = scorePoint
                             self.showPopup(Score: scorePoint, totalScore: totalScoreAfterTest)
                             

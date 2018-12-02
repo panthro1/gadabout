@@ -73,20 +73,14 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     
     
     @IBAction func didCompleteTapped(_ sender: Any) {
-        
-        let sectionNo = 0
+
         
         if isCompleted == false {
             isCompleted = true
             complete.title = "Next"
-            let nofQuestions = correctAnswer.count
+
+            tableView.reloadData()
             
-            
-            for rowNo in 0...nofQuestions-1 {
-                
-                let rowToSelect: IndexPath = IndexPath(row: rowNo, section: sectionNo)
-                self.tableView.reloadRows(at: [rowToSelect], with: .fade)
-            }
             var indx = 0
             getQuizScore()
             for question in questionCompleted {
@@ -452,10 +446,10 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         cell.toDoListButton.layer.borderColor = UIColor.black.cgColor
         
         
-        cell.detailsButton.backgroundColor = .clear
+        /*cell.detailsButton.backgroundColor = .clear
         cell.detailsButton.layer.cornerRadius = 5
         cell.detailsButton.layer.borderWidth = 1
-        cell.detailsButton.layer.borderColor = UIColor.black.cgColor
+        cell.detailsButton.layer.borderColor = UIColor.black.cgColor*/
         
         /*let screenSize = UIScreen.main.bounds
         
@@ -468,7 +462,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             cell.detailsButton.titleLabel?.font = .systemFont(ofSize: 15)
         }*/
         
-        cell.layer.cornerRadius=10 //set corner radius here
+        cell.layer.cornerRadius=20 //set corner radius here
         cell.layer.borderColor = UIColor.lightGray.cgColor  // set cell border color here
         cell.layer.borderWidth = 2 // set border width here
         
@@ -486,6 +480,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             cell.markOption3.isHidden = true
             cell.markOption4.isHidden = true
             cell.detailsButton.isHidden = false
+            cell.toDoListButton.isHidden = false
             cell.detailsButton.setTitle("Back", for: [])
             
             cell.detailText.isHidden = false

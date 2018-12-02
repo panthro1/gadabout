@@ -807,30 +807,13 @@
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBz-ZL-mbw">
-                                <rect key="frame" x="137" y="577" width="140" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="140" id="36u-fx-P1z"/>
-                                </constraints>
+                                <rect key="frame" x="103.66666666666669" y="568.33333333333337" width="207" height="51.333333333333371"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" title="Make it harder?">
+                                <state key="normal" title="Make it harder ?">
                                     <color key="titleColor" red="0.60106390714645386" green="0.26032719016075134" blue="0.62250882387161255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="harderTapped:" destination="pLG-OL-dPP" eventType="touchUpInside" id="GIf-nc-TmP"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOU-iJ-iWi">
-                                <rect key="frame" x="137" y="621" width="140" height="35"/>
-                                <color key="backgroundColor" red="0.60106390714645386" green="0.26032719016075134" blue="0.62250882387161255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="140" id="JPN-0q-CAt"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" title="Hint">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="hintTapped:" destination="pLG-OL-dPP" eventType="touchUpInside" id="kYh-nW-Fgq"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C9o-fz-mKS" customClass="GADBannerView">
@@ -840,19 +823,50 @@
                                     <constraint firstAttribute="height" constant="50" id="kKX-41-jVK"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ks8-Py-xDG" userLabel="ViewAboveBanner">
+                                <rect key="frame" x="0.0" y="678.66666666666663" width="414" height="7.3333333333333712"/>
+                                <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pMw-fm-zIU" userLabel="ViewAboveHintButton">
+                                <rect key="frame" x="0.0" y="619.66666666666663" width="414" height="7.3333333333333712"/>
+                                <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOU-iJ-iWi">
+                                <rect key="frame" x="124.33333333333333" y="627" width="165.33333333333337" height="51.666666666666629"/>
+                                <color key="backgroundColor" red="0.60106390714645386" green="0.26032719016075134" blue="0.62250882387161255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Hint">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="hintTapped:" destination="pLG-OL-dPP" eventType="touchUpInside" id="kYh-nW-Fgq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="ks8-Py-xDG" firstAttribute="trailing" secondItem="BbH-2J-5Xy" secondAttribute="trailing" id="4bb-8N-Bv2"/>
                             <constraint firstItem="CBz-ZL-mbw" firstAttribute="centerX" secondItem="P7J-iu-hkg" secondAttribute="centerX" id="4zQ-Zb-Cyu"/>
+                            <constraint firstItem="SOU-iJ-iWi" firstAttribute="top" secondItem="pMw-fm-zIU" secondAttribute="bottom" id="7kT-mf-XHx"/>
                             <constraint firstAttribute="bottom" secondItem="C9o-fz-mKS" secondAttribute="bottom" id="Beg-jl-feP"/>
+                            <constraint firstItem="ks8-Py-xDG" firstAttribute="leading" secondItem="BbH-2J-5Xy" secondAttribute="leading" id="Eka-BZ-HGr"/>
+                            <constraint firstItem="SOU-iJ-iWi" firstAttribute="width" secondItem="P7J-iu-hkg" secondAttribute="width" multiplier="0.4" id="HgS-mM-Ppj"/>
                             <constraint firstItem="SOU-iJ-iWi" firstAttribute="centerX" secondItem="P7J-iu-hkg" secondAttribute="centerX" id="I4Q-5R-9Lz"/>
+                            <constraint firstItem="C9o-fz-mKS" firstAttribute="top" secondItem="ks8-Py-xDG" secondAttribute="bottom" id="OYo-iS-Cnt"/>
                             <constraint firstItem="JQx-Bo-aVE" firstAttribute="trailing" secondItem="BbH-2J-5Xy" secondAttribute="trailing" id="Pj1-vZ-gov"/>
-                            <constraint firstItem="SOU-iJ-iWi" firstAttribute="top" secondItem="CBz-ZL-mbw" secondAttribute="bottom" constant="9" id="TGF-DO-F49"/>
+                            <constraint firstItem="pMw-fm-zIU" firstAttribute="height" secondItem="P7J-iu-hkg" secondAttribute="height" multiplier="0.01" id="UTj-AU-KuR"/>
+                            <constraint firstItem="pMw-fm-zIU" firstAttribute="trailing" secondItem="BbH-2J-5Xy" secondAttribute="trailing" id="W6m-f4-3jS"/>
                             <constraint firstItem="C9o-fz-mKS" firstAttribute="leading" secondItem="BbH-2J-5Xy" secondAttribute="leading" id="Xwv-HS-cEu"/>
-                            <constraint firstItem="BbH-2J-5Xy" firstAttribute="bottom" secondItem="SOU-iJ-iWi" secondAttribute="bottom" constant="80" id="amA-vp-XlG"/>
+                            <constraint firstItem="SOU-iJ-iWi" firstAttribute="height" secondItem="P7J-iu-hkg" secondAttribute="height" multiplier="0.07" id="a5W-fx-Mzd"/>
                             <constraint firstItem="JQx-Bo-aVE" firstAttribute="top" secondItem="BbH-2J-5Xy" secondAttribute="top" id="cUy-Yi-vnr"/>
                             <constraint firstItem="BbH-2J-5Xy" firstAttribute="trailing" secondItem="C9o-fz-mKS" secondAttribute="trailing" id="cxh-DG-kzC"/>
+                            <constraint firstItem="pMw-fm-zIU" firstAttribute="leading" secondItem="BbH-2J-5Xy" secondAttribute="leading" id="dOJ-JG-Or3"/>
+                            <constraint firstItem="CBz-ZL-mbw" firstAttribute="height" secondItem="P7J-iu-hkg" secondAttribute="height" multiplier="0.07" id="gQS-dz-iOd"/>
                             <constraint firstItem="JQx-Bo-aVE" firstAttribute="leading" secondItem="BbH-2J-5Xy" secondAttribute="leading" id="gax-eu-U5c"/>
+                            <constraint firstItem="pMw-fm-zIU" firstAttribute="top" secondItem="CBz-ZL-mbw" secondAttribute="bottom" id="ha8-sz-G5E"/>
+                            <constraint firstItem="ks8-Py-xDG" firstAttribute="top" secondItem="SOU-iJ-iWi" secondAttribute="bottom" id="hzV-ys-bIn"/>
+                            <constraint firstItem="ks8-Py-xDG" firstAttribute="height" secondItem="P7J-iu-hkg" secondAttribute="height" multiplier="0.01" id="k0r-qU-EXl"/>
+                            <constraint firstItem="CBz-ZL-mbw" firstAttribute="width" secondItem="P7J-iu-hkg" secondAttribute="width" multiplier="0.5" id="zrz-n9-KKz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BbH-2J-5Xy"/>
                     </view>
@@ -866,7 +880,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="taM-3Q-yxH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2749.5999999999999" y="875.71214392803608"/>
+            <point key="canvasLocation" x="2749.275362318841" y="875.54347826086962"/>
         </scene>
         <!--Foods Table View Controller-->
         <scene sceneID="tPI-JD-bQx">
