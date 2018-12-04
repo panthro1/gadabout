@@ -1046,6 +1046,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             
             navigationBar.addSubview(timeLabel)
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
+            RunLoop.main.add(timer, forMode: .commonModes)
             
             
             let circularPath = UIBezierPath(arcCenter: navigationBar.center, radius: navigationBar.frame.height*0.4, startAngle: -CGFloat.pi/2, endAngle: CGFloat.pi/2*3, clockwise: true)
