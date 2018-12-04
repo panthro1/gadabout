@@ -76,6 +76,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
 
         
         if isCompleted == false {
+            
             isCompleted = true
             complete.title = "Next"
 
@@ -140,12 +141,13 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             complete.title = "Complete"
             isCompleted = false
             timeRemaining = 15
+            progressLayer.strokeEnd = 0
             timeLabel.text = "\(timeRemaining)"
             timeLabel.font = UIFont.boldSystemFont(ofSize: 25)
             timeLabel.textColor = UIColor.black
 
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
             pullQuizItems()
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
         }
         
     }
@@ -168,8 +170,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         self.tableView.rowHeight = 380
         
         scorePoint = 0
-        
-        createProgressBar()
         
         if glbPlcObjectId.count < 10 {
             questionSeenBefore.removeAll()
@@ -288,7 +288,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             }
             tableView.reloadData()
         }
-
+        createProgressBar()
         
     }
     

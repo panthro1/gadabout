@@ -127,12 +127,13 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             complete.title = "Complete"
             isCompleted = false
             timeRemaining = 15
+            progressLayer.strokeEnd = 0
             timeLabel.text = "\(timeRemaining)"
             timeLabel.font = UIFont.boldSystemFont(ofSize: 25)
             timeLabel.textColor = UIColor.black
             
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
             pullQuizItems()
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
         }
 
     }
@@ -148,8 +149,6 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         self.tableView.rowHeight = 380
         
         scorePoint = 0
-        createProgressBar()
-
 
         
         // New code
@@ -270,6 +269,8 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             }
             tableView.reloadData()
         }
+        createProgressBar()
+
 
     }
     
@@ -1029,9 +1030,8 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
     
     func SendCloseInfo() {
         print("Popup closed")
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         tableView.isScrollEnabled = true
-        complete.isEnabled = true
-        back.isEnabled = true
     }
     
     func createProgressBar() {
