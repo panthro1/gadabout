@@ -235,7 +235,7 @@ class luckyStrikeViewController: UIViewController {
                             if let imageToDisplay = UIImage(data: imageData) {
                                 
                                 self.image.image = imageToDisplay
-                                
+
                             }
                         }
                         
@@ -415,7 +415,6 @@ class luckyStrikeViewController: UIViewController {
                     if let imageToDisplay = UIImage(data: imageData) {
                         
                         self.image.image = imageToDisplay
-                        
                     }
                 }
                 
@@ -519,7 +518,6 @@ class luckyStrikeViewController: UIViewController {
                             if let imageToDisplay = UIImage(data: imageData) {
                                 
                                 self.image.image = imageToDisplay
-                                
                             }
                         }
                         
@@ -550,7 +548,7 @@ class luckyStrikeViewController: UIViewController {
                     self.descriptionLabel.numberOfLines = 0
                     
                     self.headerLabel.isHidden = false
-                    self.image.isHidden = false
+                    //self.image.isHidden = false
                     
                     self.option1.remove(at: randomIndex)
                     self.option2.remove(at: randomIndex)
@@ -653,7 +651,6 @@ class luckyStrikeViewController: UIViewController {
                                     if let imageToDisplay = UIImage(data: imageData) {
                                         
                                         self.image.image = imageToDisplay
-                                        
                                     }
                                 }
                                 

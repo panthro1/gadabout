@@ -298,6 +298,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     }
     
     @objc func timeCount() {
+        
         timeRemaining = timeRemaining - 1
         
         if timeRemaining <= 0 {
@@ -352,7 +353,9 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     self.timeLabel.alpha = 1.0
                     self.timeLabel.text = "\(self.timeRemaining)"
                 }
+
             }
+            
             UIView.animate(withDuration: 1) {
                 self.progressLayer.strokeEnd = (CGFloat(self.totalTime) - CGFloat(self.timeRemaining))/CGFloat(self.totalTime)
             }
@@ -363,14 +366,18 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     func showPopup(Score: Int, totalScore: Int) {
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.tableView.isScrollEnabled = false
+        let rowToSelect: IndexPath = IndexPath(row: 0, section: 0)
+        self.tableView.scrollToRow(at: rowToSelect, at: .top, animated: false)
+
 
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
         popOverVC.scoreWin = Score
         popOverVC.totalScore = totalScore
         popOverVC.delegate = self
+        
         self.addChildViewController(popOverVC)
         popOverVC.view.frame = self.view.bounds//self.view.frame
-        tableView.isScrollEnabled = false
         //complete.isEnabled = false
         //back.isEnabled = false
         
@@ -387,7 +394,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
 
         if isCompleted == false {
             isCompleted = true
-            let nofQuestions = correctAnswer.count
+            /*let nofQuestions = correctAnswer.count
             
             if nofQuestions > 0 {
                 for rowNo in 0...nofQuestions-1 {
@@ -395,7 +402,9 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     let rowToSelect: IndexPath = IndexPath(row: rowNo, section: sectionNo)
                     self.tableView.reloadRows(at: [rowToSelect], with: .fade)
                 }
-            }
+            }*/
+            
+            tableView.reloadData()
         }
         var indx = 0
         getQuizScore()
@@ -447,10 +456,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         cell.toDoListButton.layer.cornerRadius = 5
         cell.toDoListButton.layer.borderWidth = 1
         cell.toDoListButton.layer.borderColor = UIColor.black.cgColor
-        
-        cell.placeImage.layer.cornerRadius = 20
-        cell.placeImage.layer.masksToBounds = true
-        
+                
         
         /*cell.detailsButton.backgroundColor = .clear
         cell.detailsButton.layer.cornerRadius = 5
@@ -504,7 +510,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                         
                         // test
                         
-                        let boundsScale = cell.placeImage.bounds.size.width / cell.placeImage.bounds.size.height
+                        /*let boundsScale = cell.placeImage.bounds.size.width / cell.placeImage.bounds.size.height
                         let imageScale = imageToDisplay.size.width / imageToDisplay.size.height
                         
                         var drawingRect: CGRect = cell.placeImage.bounds
@@ -516,10 +522,10 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                             drawingRect.size.height = drawingRect.size.width / imageScale
                             drawingRect.origin.y = (cell.placeImage.bounds.size.height - drawingRect.size.height) / 2
                         }
-                        let path = UIBezierPath(roundedRect: drawingRect, cornerRadius: 20)
+                        let path = UIBezierPath(roundedRect: drawingRect, cornerRadius: 10)
                         let mask = CAShapeLayer()
                         mask.path = path.cgPath
-                        cell.placeImage.layer.mask = mask
+                        cell.placeImage.layer.mask = mask*/
                         
                     }
                 }
@@ -540,7 +546,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                         
                         // test
                         
-                        let boundsScale = cell.placeImage.bounds.size.width / cell.placeImage.bounds.size.height
+                        /*let boundsScale = cell.placeImage.bounds.size.width / cell.placeImage.bounds.size.height
                         let imageScale = imageToDisplay.size.width / imageToDisplay.size.height
                         
                         var drawingRect: CGRect = cell.placeImage.bounds
@@ -552,10 +558,10 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                             drawingRect.size.height = drawingRect.size.width / imageScale
                             drawingRect.origin.y = (cell.placeImage.bounds.size.height - drawingRect.size.height) / 2
                         }
-                        let path = UIBezierPath(roundedRect: drawingRect, cornerRadius: 20)
+                        let path = UIBezierPath(roundedRect: drawingRect, cornerRadius: 10)
                         let mask = CAShapeLayer()
                         mask.path = path.cgPath
-                        cell.placeImage.layer.mask = mask
+                        cell.placeImage.layer.mask = mask*/
                         
                     
                     }
@@ -1034,7 +1040,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         }
         
     }
-    
     
     
     /*

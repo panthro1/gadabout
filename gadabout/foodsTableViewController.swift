@@ -274,6 +274,10 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
     }
     
     @objc func timeCount() {
+        
+        if timeRemaining == 1 {
+            self.tableView.isScrollEnabled = false
+        }
         timeRemaining = timeRemaining - 1
         
         if timeRemaining <= 0 {
@@ -337,15 +341,19 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
     
     func showPopup(Score: Int, totalScore: Int) {
         
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.tableView.isScrollEnabled = false
+        let rowToSelect: IndexPath = IndexPath(row: 0, section: 0)
+        self.tableView.scrollToRow(at: rowToSelect, at: .top, animated: false)
+        
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
         popOverVC.scoreWin = Score
         popOverVC.totalScore = totalScore
         popOverVC.delegate = self
         self.addChildViewController(popOverVC)
         popOverVC.view.frame = self.view.bounds//self.view.frame
-        tableView.isScrollEnabled = false
-        complete.isEnabled = false
-        back.isEnabled = false
+        //complete.isEnabled = false
+        //back.isEnabled = false
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParentViewController: self)
 
@@ -463,7 +471,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                         
                         // test
                         
-                        let boundsScale = cell.foodImage.bounds.size.width / cell.foodImage.bounds.size.height
+                        /*let boundsScale = cell.foodImage.bounds.size.width / cell.foodImage.bounds.size.height
                         let imageScale = imageToDisplay.size.width / imageToDisplay.size.height
                         
                         var drawingRect: CGRect = cell.foodImage.bounds
@@ -478,7 +486,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                         let path = UIBezierPath(roundedRect: drawingRect, cornerRadius: 20)
                         let mask = CAShapeLayer()
                         mask.path = path.cgPath
-                        cell.foodImage.layer.mask = mask
+                        cell.foodImage.layer.mask = mask*/
                         
                     }
                 }
@@ -499,7 +507,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                         
                         // test
                         
-                        let boundsScale = cell.foodImage.bounds.size.width / cell.foodImage.bounds.size.height
+                        /*let boundsScale = cell.foodImage.bounds.size.width / cell.foodImage.bounds.size.height
                         let imageScale = imageToDisplay.size.width / imageToDisplay.size.height
                         
                         var drawingRect: CGRect = cell.foodImage.bounds
@@ -514,7 +522,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                         let path = UIBezierPath(roundedRect: drawingRect, cornerRadius: 20)
                         let mask = CAShapeLayer()
                         mask.path = path.cgPath
-                        cell.foodImage.layer.mask = mask
+                        cell.foodImage.layer.mask = mask*/
                         
                     }
                 }

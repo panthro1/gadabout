@@ -537,7 +537,7 @@
                                 <rect key="frame" x="393.33333333333331" y="64" width="20.666666666666686" height="622"/>
                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <imageView hidden="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xrk-5S-5Fk">
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xrk-5S-5Fk">
                                 <rect key="frame" x="20.666666666666657" y="63.999999999999986" width="372.66666666666674" height="209.66666666666663"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xrk-5S-5Fk" secondAttribute="height" multiplier="16:9" id="cGX-XZ-Pf8"/>
@@ -1498,6 +1498,6 @@
         <image name="uncheck.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ERg-ar-XpG"/>
+        <segue reference="e9z-7M-9hq"/>
     </inferredMetricsTieBreakers>
 </document>
