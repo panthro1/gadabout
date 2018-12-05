@@ -146,7 +146,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             questionSeenBefore.removeAll()
             let questionCoveredQuery = PFQuery(className: "placesCoveredBefore")
             questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
-            questionCoveredQuery.findObjectsInBackground { (objects, error) in
+            questionCoveredQuery.findObjectsInBackground { [unowned self] (objects, error) in
                 
                 if let error = error {
                     print(error.localizedDescription)
@@ -210,7 +210,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             questionSeenBefore.removeAll()
             let foodsCoveredQuery = PFQuery(className: "foodsCoveredBefore")
             foodsCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
-            foodsCoveredQuery.findObjectsInBackground { (objects, error) in
+            foodsCoveredQuery.findObjectsInBackground { [unowned self] (objects, error) in
                 
                 if let error = error {
                     print(error.localizedDescription)

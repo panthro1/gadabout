@@ -363,7 +363,17 @@ class luckyStrikeViewController: UIViewController {
         toDoListButton.layer.borderWidth = 1
         toDoListButton.layer.borderColor = UIColor.black.cgColor
         
+        let screenSize = UIScreen.main.bounds
         
+        if screenSize.width < 350 {
+            toDoListButton.titleLabel?.font = .systemFont(ofSize: 15)
+        }
+        else if screenSize.width < 400 {
+            toDoListButton.titleLabel?.font = .systemFont(ofSize: 16)
+        }
+        else {
+            toDoListButton.titleLabel?.font = .systemFont(ofSize: 17)
+        }
         // Account ad
         //bannerView.adUnitID = "ca-app-pub-5745243428784846~5277829027"
         

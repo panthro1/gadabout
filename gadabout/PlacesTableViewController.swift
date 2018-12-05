@@ -105,7 +105,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             
             let userScoreQuery = PFQuery(className: "UserScore")
             userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
-            userScoreQuery.findObjectsInBackground { (objects, error) in
+            userScoreQuery.findObjectsInBackground { [unowned self] (objects, error) in
                 if let score = objects?.first {
                     if let totalScore = Int(score["score"] as! String) {
                         self.totalScoreAfterTest = totalScore + self.scorePoint
@@ -159,14 +159,9 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.allowsSelection = true
-        
-        let screenSize = UIScreen.main.bounds
-        
-        print("Screen width: \(screenSize.width), height: \(screenSize.height)")
         
         self.tableView.rowHeight = 380
         
@@ -176,7 +171,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             questionSeenBefore.removeAll()
             let questionCoveredQuery = PFQuery(className: "placesCoveredBefore")
             questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
-            questionCoveredQuery.findObjectsInBackground { (objects, error) in
+            questionCoveredQuery.findObjectsInBackground { [unowned self] (objects, error) in
                 
                 if let error = error {
                     print(error.localizedDescription)
@@ -199,7 +194,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 
                 let placesQuery = PFQuery(className: "Places")
                 placesQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
-                placesQuery.findObjectsInBackground { (objects, error) in
+                placesQuery.findObjectsInBackground { [unowned self] (objects, error) in
                     if let places = objects {
                         
                         for place in places {
@@ -303,7 +298,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             quizCompleted()
             let userScoreQuery = PFQuery(className: "UserScore")
             userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
-            userScoreQuery.findObjectsInBackground { (objects, error) in
+            userScoreQuery.findObjectsInBackground { [unowned self] (objects, error) in
                 if let score = objects?.first {
                     if let totalScore = Int(score["score"] as! String) {
                         self.totalScoreAfterTest = totalScore + self.scorePoint
@@ -343,16 +338,16 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             }
             else {
                 timeLabel.textColor = UIColor.red
-                UIView.animate(withDuration: 0.2, animations: {
+                UIView.animate(withDuration: 0.2, animations: { [unowned self] in
                     self.timeLabel.alpha = 0.0
-                }) { (bool) in
+                }) { [unowned self] (bool) in
                     self.timeLabel.alpha = 1.0
                     self.timeLabel.text = "\(self.timeRemaining)"
                 }
 
             }
             
-            UIView.animate(withDuration: 1) {
+            UIView.animate(withDuration: 1) { [unowned self] in
                 self.progressLayer.strokeEnd = (CGFloat(self.totalTime) - CGFloat(self.timeRemaining))/CGFloat(self.totalTime)
             }
         
@@ -453,6 +448,18 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         cell.toDoListButton.layer.borderWidth = 1
         cell.toDoListButton.layer.borderColor = UIColor.black.cgColor
                 
+        let screenSize = UIScreen.main.bounds
+        
+        if screenSize.width < 350 {
+            cell.toDoListButton.titleLabel?.font = .systemFont(ofSize: 15)
+        }
+        else if screenSize.width < 400 {
+            cell.toDoListButton.titleLabel?.font = .systemFont(ofSize: 16)
+        }
+        else {
+            cell.toDoListButton.titleLabel?.font = .systemFont(ofSize: 17)
+        }
+        
         
         /*cell.detailsButton.backgroundColor = .clear
         cell.detailsButton.layer.cornerRadius = 5
@@ -850,7 +857,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             questionSeenBefore.removeAll()
             let questionCoveredQuery = PFQuery(className: "placesCoveredBefore")
             questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
-            questionCoveredQuery.findObjectsInBackground { (objects, error) in
+            questionCoveredQuery.findObjectsInBackground { [unowned self] (objects, error) in
                 
                 if let error = error {
                     print(error.localizedDescription)
@@ -873,7 +880,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
 
                 let placesQuery = PFQuery(className: "Places")
                 placesQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
-                placesQuery.findObjectsInBackground { (objects, error) in
+                placesQuery.findObjectsInBackground { [unowned self] (objects, error) in
                     if let places = objects {
                         
                         for place in places {
@@ -1036,6 +1043,10 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             src.view.window?.layer.add(transition, forKey: nil)
         }
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        timer.invalidate()
     }
     
     
