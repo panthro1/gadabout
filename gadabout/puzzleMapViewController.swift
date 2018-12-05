@@ -77,7 +77,7 @@ class puzzleMapViewController: UIViewController {
         for row in 0 ..< nofRows {
             for col in 0 ..< nofColumns {
                 
-                if let viewWithTag = self.view.viewWithTag(10+row*3+col) {
+                if let viewWithTag = self.view.viewWithTag(10+row*nofRows+col) {
                     viewWithTag.removeFromSuperview()
                 }
                 

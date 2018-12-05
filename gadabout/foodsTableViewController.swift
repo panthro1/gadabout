@@ -134,6 +134,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             
             pullQuizItems()
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
+            RunLoop.main.add(timer, forMode: .commonModes)
         }
 
     }
