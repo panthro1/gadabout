@@ -275,7 +275,7 @@ class puzzleMapViewController: UIViewController {
             allCenters.removeAll()
             
             
-            let images = slice(image: myPicture, into: 4)
+            let images = slice(image: myPicture, into: 3)
             
             
             let nofRowsHard = 3
