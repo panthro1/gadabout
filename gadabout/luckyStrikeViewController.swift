@@ -162,7 +162,7 @@ class luckyStrikeViewController: UIViewController {
     
     @IBAction func nextTapped(_ sender: Any) {
         let button = sender as? UIButton
-        button?.shake()
+        button?.pulsate()
         
         let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
         activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)

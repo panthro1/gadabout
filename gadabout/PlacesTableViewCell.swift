@@ -32,14 +32,6 @@ class PlacesTableViewCell: UITableViewCell {
 
     @IBOutlet weak var placeImage: UIImageView!
     
-    @IBOutlet weak var option1: UILabel!
-    
-    @IBOutlet weak var option2: UILabel!
-
-    @IBOutlet weak var option3: UILabel!
-    
-    @IBOutlet weak var option4: UILabel!
-    
     @IBOutlet weak var markOption1: UIButton!
     
     @IBOutlet weak var markOption2: UIButton!
