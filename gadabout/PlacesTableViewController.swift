@@ -616,7 +616,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             if let qIndex = questionIndex {
                 let answerIndex = answer[qIndex]
                 if answerIndex == 1 {
-                    cell.markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
+                    cell.markOption1.setImage(UIImage(named: "check.png"), for: [])
                 }
                 else if answerIndex == 2 {
                     cell.markOption2.setImage(UIImage(named: "check.png"), for: [])
@@ -776,7 +776,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                         cell.markOption3.setImage(tintedImage, for: .normal)
                         cell.markOption3.tintColor = UIColor(rgb: 0xC20F16)
-
                     
                     }
                     else if selected == 4 {
@@ -787,7 +786,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                         cell.markOption4.setImage(tintedImage, for: .normal)
                         cell.markOption4.tintColor = UIColor(rgb: 0xC20F16)
-
                     
                     }
                 }

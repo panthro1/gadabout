@@ -27,14 +27,6 @@ class foodsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var markOption4: UIButton!
     
-    @IBOutlet weak var option1: UILabel!
-    
-    @IBOutlet weak var option2: UILabel!
-    
-    @IBOutlet weak var option3: UILabel!
-    
-    @IBOutlet weak var option4: UILabel!
-    
     @IBOutlet weak var detailsButton: UIButton!
     
     @IBOutlet weak var detailText: UILabel!

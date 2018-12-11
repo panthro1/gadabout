@@ -430,6 +430,31 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         cell.toDoListButton.layer.borderWidth = 1
         cell.toDoListButton.layer.borderColor = UIColor.black.cgColor
         
+        let spacing: CGFloat = 5 // the amount of spacing to appear between image and title
+        cell.markOption1.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
+        cell.markOption1.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
+        cell.markOption1.imageView?.contentMode = .scaleAspectFit
+        cell.markOption1.setTitleColor(UIColor.black, for: .normal)
+        cell.markOption1.layer.borderWidth = 0
+        
+        cell.markOption2.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
+        cell.markOption2.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
+        cell.markOption2.imageView?.contentMode = .scaleAspectFit
+        cell.markOption2.setTitleColor(UIColor.black, for: .normal)
+        cell.markOption2.layer.borderWidth = 0
+        
+        cell.markOption3.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
+        cell.markOption3.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
+        cell.markOption3.imageView?.contentMode = .scaleAspectFit
+        cell.markOption3.setTitleColor(UIColor.black, for: .normal)
+        cell.markOption3.layer.borderWidth = 0
+        
+        cell.markOption4.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
+        cell.markOption4.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
+        cell.markOption4.imageView?.contentMode = .scaleAspectFit
+        cell.markOption4.setTitleColor(UIColor.black, for: .normal)
+        cell.markOption4.layer.borderWidth = 0
+        
         let screenSize = UIScreen.main.bounds
         
         if screenSize.width < 350 {
@@ -457,10 +482,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         if (showDetail[indexPath.row] == true)/* && (detailCellRow == indexPath.row)*/ {
             
             //cell.placeImage.isHidden = true
-            cell.option1.isHidden = true
-            cell.option2.isHidden = true
-            cell.option3.isHidden = true
-            cell.option4.isHidden = true
+
             cell.markOption1.isHidden = true
             cell.markOption2.isHidden = true
             cell.markOption3.isHidden = true
@@ -542,21 +564,17 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                 
             }
             
-            cell.option1.isHidden = false
-            cell.option2.isHidden = false
-            cell.option3.isHidden = false
-            cell.option4.isHidden = false
             cell.markOption1.isHidden = false
             cell.markOption2.isHidden = false
             cell.markOption3.isHidden = false
             cell.markOption4.isHidden = false
             
             cell.detailText.isHidden = true
-            cell.option1.text = option1[indexPath.row]
-            cell.option2.text = option2[indexPath.row]
-            cell.option3.text = option3[indexPath.row]
-            cell.option4.text = option4[indexPath.row]
             
+            cell.markOption1.setTitle(option1[indexPath.row], for: [])
+            cell.markOption2.setTitle(option2[indexPath.row], for: [])
+            cell.markOption3.setTitle(option3[indexPath.row], for: [])
+            cell.markOption4.setTitle(option4[indexPath.row], for: [])
             
             cell.markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
             cell.markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
@@ -568,7 +586,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             if let qIndex = questionIndex {
                 let answerIndex = answer[qIndex]
                 if answerIndex == 1 {
-                    cell.markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
+                    cell.markOption1.setImage(UIImage(named: "check.png"), for: [])
                 }
                 else if answerIndex == 2 {
                     cell.markOption2.setImage(UIImage(named: "check.png"), for: [])
@@ -596,6 +614,11 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                 cell.detailsButton.isHidden = false
                 cell.toDoListButton.isHidden = false
                 
+                cell.markOption1.setTitle(option1[indexPath.row], for: [])
+                cell.markOption2.setTitle(option2[indexPath.row], for: [])
+                cell.markOption3.setTitle(option3[indexPath.row], for: [])
+                cell.markOption4.setTitle(option4[indexPath.row], for: [])
+                
                 cell.markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
                 cell.markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
                 cell.markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
@@ -620,6 +643,35 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                         else {
                             status = 0 // wrong answer
                             
+                            if correctAnswerInt == 1 {
+                                
+                                cell.markOption1.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                                cell.markOption1.layer.borderWidth = 2
+                                cell.markOption1.layer.cornerRadius = 10
+                                
+                            }
+                            else if correctAnswerInt == 2 {
+                                
+                                cell.markOption2.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                                cell.markOption2.layer.borderWidth = 2
+                                cell.markOption2.layer.cornerRadius = 10
+                                
+                            }
+                            else if correctAnswerInt == 3 {
+                                
+                                cell.markOption3.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                                cell.markOption3.layer.borderWidth = 2
+                                cell.markOption3.layer.cornerRadius = 10
+                                
+                            }
+                            else {
+                                
+                                cell.markOption4.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                                cell.markOption4.layer.borderWidth = 2
+                                cell.markOption4.layer.cornerRadius = 10
+                                
+                            }
+                            
                         }
                     }
                     else {
@@ -635,23 +687,38 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                     
                     if selected == 1 {
                         
-                        cell.markOption1.setImage(UIImage(named: "correct2.png"), for: [])
-                        
+                        //cell.markOption1.setImage(UIImage(named: "correct2.png"), for: [])
+                        cell.markOption1.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
+                        let origImage = UIImage(named: "check.png");
+                        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+                        cell.markOption1.setImage(tintedImage, for: .normal)
+                        cell.markOption1.tintColor = UIColor(rgb: 0x039D18)//UIColor.green
                     }
                     else if selected == 2 {
                         
-                        cell.markOption2.setImage(UIImage(named: "correct2.png"), for: [])
-                        
+                        //cell.markOption2.setImage(UIImage(named: "correct2.png"), for: [])
+                        cell.markOption2.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
+                        let origImage = UIImage(named: "check.png");
+                        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+                        cell.markOption2.setImage(tintedImage, for: .normal)
+                        cell.markOption2.tintColor = UIColor(rgb: 0x039D18)//UIColor.green
                     }
                     else if selected == 3 {
-                        
-                        cell.markOption3.setImage(UIImage(named: "correct2.png"), for: [])
-                        
+                        //cell.markOption3.setImage(UIImage(named: "correct2.png"), for: [])
+                        cell.markOption3.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
+                        let origImage = UIImage(named: "check.png");
+                        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+                        cell.markOption3.setImage(tintedImage, for: .normal)
+                        cell.markOption3.tintColor = UIColor(rgb: 0x039D18)//UIColor.green
                     }
                     else if selected == 4 {
                         
-                        cell.markOption4.setImage(UIImage(named: "correct2.png"), for: [])
-                        
+                        //cell.markOption4.setImage(UIImage(named: "correct2.png"), for: [])
+                        cell.markOption4.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
+                        let origImage = UIImage(named: "check.png");
+                        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+                        cell.markOption4.setImage(tintedImage, for: .normal)
+                        cell.markOption4.tintColor = UIColor(rgb: 0x039D18)//UIColor.green
                     }
                     
                 }
@@ -659,22 +726,43 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                     
                     if selected == 1 {
                         
-                        cell.markOption1.setImage(UIImage(named: "wrong.gif"), for: [])
+                        //cell.markOption1.setImage(UIImage(named: "wrong.gif"), for: .normal)
+                        cell.markOption1.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
+                        let origImage = UIImage(named: "check.png");
+                        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+                        cell.markOption1.setImage(tintedImage, for: .normal)
+                        cell.markOption1.tintColor = UIColor(rgb: 0xC20F16)
                         
                     }
                     else if selected == 2 {
                         
-                        cell.markOption2.setImage(UIImage(named: "wrong.gif"), for: [])
+                        //cell.markOption2.setImage(UIImage(named: "wrong.gif"), for: [])
+                        cell.markOption2.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
+                        let origImage = UIImage(named: "check.png");
+                        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+                        cell.markOption2.setImage(tintedImage, for: .normal)
+                        cell.markOption2.tintColor = UIColor(rgb: 0xC20F16)
+                        
                         
                     }
                     else if selected == 3 {
                         
-                        cell.markOption3.setImage(UIImage(named: "wrong.gif"), for: [])
+                        //cell.markOption3.setImage(UIImage(named: "wrong.gif"), for: [])
+                        cell.markOption3.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
+                        let origImage = UIImage(named: "check.png");
+                        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+                        cell.markOption3.setImage(tintedImage, for: .normal)
+                        cell.markOption3.tintColor = UIColor(rgb: 0xC20F16)
                         
                     }
                     else if selected == 4 {
                         
-                        cell.markOption4.setImage(UIImage(named: "wrong.gif"), for: [])
+                        //cell.markOption4.setImage(UIImage(named: "wrong.gif"), for: [])
+                        cell.markOption4.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
+                        let origImage = UIImage(named: "check.png");
+                        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+                        cell.markOption4.setImage(tintedImage, for: .normal)
+                        cell.markOption4.tintColor = UIColor(rgb: 0xC20F16)
                         
                     }
                 }
