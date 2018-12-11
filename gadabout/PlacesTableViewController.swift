@@ -449,25 +449,29 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         cell.toDoListButton.layer.borderColor = UIColor.black.cgColor
         
         let spacing: CGFloat = 5 // the amount of spacing to appear between image and title
-        cell.markOption1.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, spacing);
+        cell.markOption1.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
         cell.markOption1.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
         cell.markOption1.imageView?.contentMode = .scaleAspectFit
         cell.markOption1.setTitleColor(UIColor.black, for: .normal)
+        cell.markOption1.layer.borderWidth = 0
 
-        cell.markOption2.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, spacing);
+        cell.markOption2.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
         cell.markOption2.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
         cell.markOption2.imageView?.contentMode = .scaleAspectFit
         cell.markOption2.setTitleColor(UIColor.black, for: .normal)
+        cell.markOption2.layer.borderWidth = 0
 
-        cell.markOption3.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, spacing);
+        cell.markOption3.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
         cell.markOption3.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
         cell.markOption3.imageView?.contentMode = .scaleAspectFit
         cell.markOption3.setTitleColor(UIColor.black, for: .normal)
+        cell.markOption3.layer.borderWidth = 0
         
-        cell.markOption4.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, spacing);
+        cell.markOption4.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
         cell.markOption4.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
         cell.markOption4.imageView?.contentMode = .scaleAspectFit
         cell.markOption4.setTitleColor(UIColor.black, for: .normal)
+        cell.markOption4.layer.borderWidth = 0
         
         let screenSize = UIScreen.main.bounds
         
@@ -663,6 +667,35 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                         }
                         else {
                             status = 0 // wrong answer
+                            
+                            if correctAnswerInt == 1 {
+                                
+                                cell.markOption1.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                                cell.markOption1.layer.borderWidth = 2
+                                cell.markOption1.layer.cornerRadius = 10
+                                
+                            }
+                            else if correctAnswerInt == 2 {
+
+                                cell.markOption2.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                                cell.markOption2.layer.borderWidth = 2
+                                cell.markOption2.layer.cornerRadius = 10
+
+                            }
+                            else if correctAnswerInt == 3 {
+
+                                cell.markOption3.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                                cell.markOption3.layer.borderWidth = 2
+                                cell.markOption3.layer.cornerRadius = 10
+
+                            }
+                            else {
+
+                                cell.markOption4.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                                cell.markOption4.layer.borderWidth = 2
+                                cell.markOption4.layer.cornerRadius = 10
+
+                            }
                         }
                     }
                     else {
@@ -679,37 +712,37 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     if selected == 1 {
 
                         //cell.markOption1.setImage(UIImage(named: "correct2.png"), for: [])
-                        cell.markOption1.setTitleColor(UIColor.green, for: .normal)
+                        cell.markOption1.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
                         let origImage = UIImage(named: "check.png");
                         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                         cell.markOption1.setImage(tintedImage, for: .normal)
-                        cell.markOption1.tintColor = UIColor.green
+                        cell.markOption1.tintColor = UIColor(rgb: 0x039D18)//UIColor.green
                     }
                     else if selected == 2 {
 
                         //cell.markOption2.setImage(UIImage(named: "correct2.png"), for: [])
-                        cell.markOption2.setTitleColor(UIColor.green, for: .normal)
+                        cell.markOption2.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
                         let origImage = UIImage(named: "check.png");
                         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                         cell.markOption2.setImage(tintedImage, for: .normal)
-                        cell.markOption2.tintColor = UIColor.green
+                        cell.markOption2.tintColor = UIColor(rgb: 0x039D18)//UIColor.green
                     }
                     else if selected == 3 {
                         //cell.markOption3.setImage(UIImage(named: "correct2.png"), for: [])
-                        cell.markOption3.setTitleColor(UIColor.green, for: .normal)
+                        cell.markOption3.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
                         let origImage = UIImage(named: "check.png");
                         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                         cell.markOption3.setImage(tintedImage, for: .normal)
-                        cell.markOption3.tintColor = UIColor.green
+                        cell.markOption3.tintColor = UIColor(rgb: 0x039D18)//UIColor.green
                     }
                     else if selected == 4 {
 
                         //cell.markOption4.setImage(UIImage(named: "correct2.png"), for: [])
-                        cell.markOption4.setTitleColor(UIColor.green, for: .normal)
+                        cell.markOption4.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
                         let origImage = UIImage(named: "check.png");
                         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                         cell.markOption4.setImage(tintedImage, for: .normal)
-                        cell.markOption4.tintColor = UIColor.green
+                        cell.markOption4.tintColor = UIColor(rgb: 0x039D18)//UIColor.green
                     }
                 }
                 else if status == 0 {
@@ -717,45 +750,43 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     if selected == 1 {
                     
                        //cell.markOption1.setImage(UIImage(named: "wrong.gif"), for: .normal)
-                        //cell.markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
-                        cell.markOption1.setTitleColor(UIColor.red, for: .normal)
+                        cell.markOption1.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
                         let origImage = UIImage(named: "check.png");
                         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                         cell.markOption1.setImage(tintedImage, for: .normal)
-                        cell.markOption1.tintColor = UIColor.red
-                        
+                        cell.markOption1.tintColor = UIColor(rgb: 0xC20F16)
                     
                     }
                     else if selected == 2 {
                     
                         //cell.markOption2.setImage(UIImage(named: "wrong.gif"), for: [])
-                        cell.markOption2.setTitleColor(UIColor.red, for: .normal)
+                        cell.markOption2.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
                         let origImage = UIImage(named: "check.png");
                         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                         cell.markOption2.setImage(tintedImage, for: .normal)
-                        cell.markOption2.tintColor = UIColor.red
+                        cell.markOption2.tintColor = UIColor(rgb: 0xC20F16)
 
                     
                     }
                     else if selected == 3 {
                     
                         //cell.markOption3.setImage(UIImage(named: "wrong.gif"), for: [])
-                        cell.markOption3.setTitleColor(UIColor.red, for: .normal)
+                        cell.markOption3.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
                         let origImage = UIImage(named: "check.png");
                         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                         cell.markOption3.setImage(tintedImage, for: .normal)
-                        cell.markOption3.tintColor = UIColor.red
+                        cell.markOption3.tintColor = UIColor(rgb: 0xC20F16)
 
                     
                     }
                     else if selected == 4 {
                     
                         //cell.markOption4.setImage(UIImage(named: "wrong.gif"), for: [])
-                        cell.markOption4.setTitleColor(UIColor.red, for: .normal)
+                        cell.markOption4.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
                         let origImage = UIImage(named: "check.png");
                         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                         cell.markOption4.setImage(tintedImage, for: .normal)
-                        cell.markOption4.tintColor = UIColor.red
+                        cell.markOption4.tintColor = UIColor(rgb: 0xC20F16)
 
                     
                     }
