@@ -468,9 +468,9 @@ class puzzleMapViewController: UIViewController {
 
         
         
-        let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
+        let randomIndex = Int(arc4random_uniform(UInt32(imageFile.count)))
         
-        self.imageFile[randomIndex].getDataInBackground { (data, error) in
+        self.imageFile[randomIndex].getDataInBackground { [unowned self] (data, error) in
             
             if let imageData = data {
                 
@@ -517,6 +517,9 @@ class puzzleMapViewController: UIViewController {
                     
                     self.randomizeBlocks()
                     self.allImgViews[0].removeFromSuperview()
+                    let test: Int = self.getInversionCount()
+                    
+                    
                     
                     self.leftIsEmpty = false
                     self.rightIsEmpty = false
@@ -549,6 +552,8 @@ class puzzleMapViewController: UIViewController {
             centersCopied.remove(at: randomIndex)
         }
         emptySpot = allImgViews[0].center
+        
+        
         
     }
     
@@ -755,6 +760,53 @@ class puzzleMapViewController: UIViewController {
             src.view.window?.layer.add(transition, forKey: nil)
         }
         
+    }
+    
+    func getInversionCount() -> Int {
+        
+        let screenSize = UIScreen.main.bounds
+        
+        var imageHeightAndWeight = floor((screenSize.width*0.96)/3)
+        let navBarHeight = self.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
+        let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
+        
+        var nofRows = 3
+        var nofColumns = 3
+        
+        if harder == true {
+            imageHeightAndWeight = floor((screenSize.width*0.96)/4)
+            nofRows = 4
+            nofColumns = 4
+        }
+        
+        
+        var allImgIndexes = [Int]()
+        var imgIndxRowNo : Int = 0
+        var imgIndxColNo : Int = 0
+        
+        for row in 0 ..< nofRows {
+            for col in 0 ..< nofColumns {
+                if row != 0 || col != 0 {
+                    var currCent:CGPoint = allImgViews[Int(row)*3+Int(col)].center
+                    if harder {
+                        currCent = allImgViews[Int(row)*4+Int(col)].center
+                    }
+                    imgIndxColNo = (Int(currCent.x) - Int(0.02*screenSize.width) - Int(imageHeightAndWeight)/2) / Int(imageHeightAndWeight)
+                    imgIndxRowNo = (Int(currCent.y) - upperOffset - Int(imageHeightAndWeight)/2) / Int(imageHeightAndWeight)
+                    
+                    allImgIndexes.append(imgIndxRowNo*nofRows + imgIndxColNo + 1)
+                    //print("All image center X : \(currCent.x) center y: \(currCent.y)")
+                }
+            }
+        }
+        
+        let emptySpotColNo = (Int(emptySpot.x) - Int(0.02*screenSize.width) - Int(imageHeightAndWeight)/2) / Int(imageHeightAndWeight)
+        let emptySpotRowNo = (Int(emptySpot.y) - upperOffset - Int(imageHeightAndWeight)/2) / Int(imageHeightAndWeight)
+        allImgIndexes.insert(0, at: emptySpotRowNo * nofRows + emptySpotColNo)
+        
+        print(allImgIndexes)
+
+        return 3
     }
     
 
