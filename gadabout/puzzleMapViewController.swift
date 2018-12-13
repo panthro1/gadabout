@@ -254,6 +254,7 @@ class puzzleMapViewController: UIViewController {
                 yCent += imageHeightAndWeight
             }
             harderSimpleButton.setTitle("Back to simple ?", for: .normal)
+           
         }
         else {
             harder = false
@@ -309,6 +310,7 @@ class puzzleMapViewController: UIViewController {
         }
         self.randomizeBlocks()
         allImgViews[0].removeFromSuperview()
+        let test = getInversionCount()
         
         leftIsEmpty = false
         rightIsEmpty = false
@@ -805,6 +807,75 @@ class puzzleMapViewController: UIViewController {
         allImgIndexes.insert(0, at: emptySpotRowNo * nofRows + emptySpotColNo)
         
         print(allImgIndexes)
+        
+        var invCount = 0
+        
+        for ind_i in 0 ..< (nofRows*nofColumns - 1){
+            for ind_j in ind_i + 1 ..< (nofRows*nofColumns) {
+                if allImgIndexes[ind_i] != 0 && allImgIndexes[ind_j] != 0 && allImgIndexes[ind_i] > allImgIndexes[ind_j] {
+                    invCount = invCount + 1
+                }
+            }
+        }
+        
+        print("Inversion count: \(invCount)")
+        
+        var solvable = false
+        
+        if nofRows == 3 {
+            // Grid is odd
+            if invCount % 2 == 0 {
+                solvable = true
+            }
+            else {
+                solvable = false
+                
+                if allImgIndexes[0] != 0 && allImgIndexes[1] != 0 {
+                    let tempCent:CGPoint = allImgViews[1].center
+                    
+                    allImgViews[1].center = allImgViews[2].center
+                    allImgViews[2].center = tempCent
+                    
+                }
+                else {
+                    let tempCent:CGPoint = allImgViews[7].center
+                    
+                    allImgViews[7].center = allImgViews[8].center
+                    allImgViews[8].center = tempCent
+                    
+                }
+                print("Made solvable")
+            }
+        }
+        else {
+            // Grid is even
+            if let blankPos = allImgIndexes.firstIndex(of: 0) {
+                let blankPosIndx: Int = (15 - blankPos) / 4 + 1
+                print("Blank position: \(blankPosIndx)")
+                
+                if blankPosIndx % 2 == 0 {
+                    // blank is on an even row
+                    if invCount % 2 == 0 {
+                        solvable = false
+                    }
+                    else {
+                        solvable = true
+                    }
+                }
+                else {
+                    // blank is on odd row
+                    if invCount % 2 == 0 {
+                        solvable = true
+                    }
+                    else {
+                        solvable = false
+                    }
+
+                }
+            }
+        }
+        
+        print("Solvable: \(solvable)")
 
         return 3
     }
