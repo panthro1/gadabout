@@ -29,6 +29,7 @@ class puzzleMapViewController: UIViewController {
     var isHintDisplayed: Bool = false
     var startTime = Date()
     var harder: Bool = false
+    var puzzleCompeted: Bool = false
     
     
     var option1: String = ""
@@ -133,6 +134,7 @@ class puzzleMapViewController: UIViewController {
                     self.randomizeBlocks()
                     self.allImgViews[0].removeFromSuperview()
                     self.ensureSolvable()
+                    self.puzzleCompeted = false
                     
                     self.leftIsEmpty = false
                     self.rightIsEmpty = false
@@ -312,6 +314,7 @@ class puzzleMapViewController: UIViewController {
         self.randomizeBlocks()
         allImgViews[0].removeFromSuperview()
         ensureSolvable()
+        puzzleCompeted = false
         
         leftIsEmpty = false
         rightIsEmpty = false
@@ -521,6 +524,7 @@ class puzzleMapViewController: UIViewController {
                     self.randomizeBlocks()
                     self.allImgViews[0].removeFromSuperview()
                     self.ensureSolvable()
+                    self.puzzleCompeted = false
                     
                     
                     
@@ -561,122 +565,139 @@ class puzzleMapViewController: UIViewController {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let myTouch: UITouch = touches.first as! UITouch
         
-        let screenSize = UIScreen.main.bounds
         
-        var imageHeightAndWeight = floor((screenSize.width*0.96)/3)
-        let navBarHeight = self.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
-        let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
-        
-        if harder == true {
-            imageHeightAndWeight = floor((screenSize.width*0.96)/4)
-        }
-        
-        if myTouch.view != self.view {
-            tapCenter = (myTouch.view?.center)!
+        if puzzleCompeted == false {
+            let myTouch: UITouch = touches.first as! UITouch
             
-
-            left = CGPoint(x: tapCenter.x - imageHeightAndWeight, y: tapCenter.y)
-            right = CGPoint(x: tapCenter.x + imageHeightAndWeight, y: tapCenter.y)
-            top = CGPoint(x: tapCenter.x, y: tapCenter.y + imageHeightAndWeight)
-            bottom = CGPoint(x: tapCenter.x, y: tapCenter.y - imageHeightAndWeight)
+            let screenSize = UIScreen.main.bounds
             
-            if emptySpot.equalTo(left) {
-                leftIsEmpty = true
-                print("Left is empty")
-            }
-            if emptySpot.equalTo(right) {
-                rightIsEmpty = true
-                print("Right is empty")
-            }
-            if emptySpot.equalTo(top) {
-                topIsEmpty = true
-                print("Top is empty")
-            }
-            if emptySpot.equalTo(bottom) {
-                bottomIsEmpty = true
-                print("Bottom is empty")
+            var imageHeightAndWeight = floor((screenSize.width*0.96)/3)
+            let navBarHeight = self.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
+            let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
+            
+            if harder == true {
+                imageHeightAndWeight = floor((screenSize.width*0.96)/4)
             }
             
-            if leftIsEmpty || rightIsEmpty || topIsEmpty || bottomIsEmpty {
-                UIView.beginAnimations(nil, context: nil)
-                UIView.setAnimationDuration(0.3)
+            if myTouch.view != self.view {
+                tapCenter = (myTouch.view?.center)!
                 
-                myTouch.view?.center = emptySpot
-                UIView.commitAnimations()
                 
-                emptySpot = tapCenter
-                leftIsEmpty = false
-                rightIsEmpty = false
-                topIsEmpty = false
-                bottomIsEmpty = false
+                left = CGPoint(x: tapCenter.x - imageHeightAndWeight, y: tapCenter.y)
+                right = CGPoint(x: tapCenter.x + imageHeightAndWeight, y: tapCenter.y)
+                top = CGPoint(x: tapCenter.x, y: tapCenter.y + imageHeightAndWeight)
+                bottom = CGPoint(x: tapCenter.x, y: tapCenter.y - imageHeightAndWeight)
                 
-                var xCent: Int = Int(0.02*screenSize.width) + Int(imageHeightAndWeight)/2
-                var yCent: Int = upperOffset + Int(imageHeightAndWeight)/2
-                
-                var nofRows: UInt8 = 3
-                var nofColumns: UInt8 = 3
-                
-                if harder {
-                    nofRows = 4
-                    nofColumns = 4
+                if emptySpot.equalTo(left) {
+                    leftIsEmpty = true
+                    print("Left is empty")
+                }
+                if emptySpot.equalTo(right) {
+                    rightIsEmpty = true
+                    print("Right is empty")
+                }
+                if emptySpot.equalTo(top) {
+                    topIsEmpty = true
+                    print("Top is empty")
+                }
+                if emptySpot.equalTo(bottom) {
+                    bottomIsEmpty = true
+                    print("Bottom is empty")
                 }
                 
-                
-                var completed: Bool = true
-                
-                for row in 0 ..< nofRows {
-                    for col in 0 ..< nofColumns {
-                        if row == 0 && col == 0 {
-                            completed = true
-                        }
-                        else {
-                            var currCent:CGPoint = allImgViews[Int(row)*3+Int(col)].center
-                            if harder {
-                                currCent = allImgViews[Int(row)*4+Int(col)].center
-                            }
-                            let mustBe = CGPoint(x: xCent, y: yCent)
-                            if currCent.equalTo(mustBe) {
+                if leftIsEmpty || rightIsEmpty || topIsEmpty || bottomIsEmpty {
+                    UIView.beginAnimations(nil, context: nil)
+                    UIView.setAnimationDuration(0.3)
+                    
+                    myTouch.view?.center = emptySpot
+                    UIView.commitAnimations()
+                    
+                    emptySpot = tapCenter
+                    leftIsEmpty = false
+                    rightIsEmpty = false
+                    topIsEmpty = false
+                    bottomIsEmpty = false
+                    
+                    var xCent: Int = Int(0.02*screenSize.width) + Int(imageHeightAndWeight)/2
+                    var yCent: Int = upperOffset + Int(imageHeightAndWeight)/2
+                    
+                    var nofRows: UInt8 = 3
+                    var nofColumns: UInt8 = 3
+                    
+                    if harder {
+                        nofRows = 4
+                        nofColumns = 4
+                    }
+                    
+                    
+                    var completed: Bool = true
+                    
+                    for row in 0 ..< nofRows {
+                        for col in 0 ..< nofColumns {
+                            if row == 0 && col == 0 {
                                 completed = true
                             }
                             else {
-                                completed = false
-                                break
-                            }
-                        }
-                        xCent += Int(imageHeightAndWeight)
-                    }
-                    xCent = Int(0.02*screenSize.width) + Int(imageHeightAndWeight)/2
-                    yCent += Int(imageHeightAndWeight)
-                    
-                    if completed == false {
-                        break
-                    }
-                }
-                
-                //completed = true // For only test purpose
-                if completed == true {
-                    let endTime = Date()
-                    let seconds = endTime.timeIntervalSince(self.startTime)
-                    //let formatted = String(format: "%.1f", seconds)
-                    //self.displayAlert(title: "Puzzle completed", message: " You have completed in \(formatted) seconds.")
-                    let userScoreQuery = PFQuery(className: "UserScore")
-                    userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
-                    userScoreQuery.findObjectsInBackground { (objects, error) in
-                        if let score = objects?.first {
-                            if let totalScore = Int(score["score"] as! String) {
-                                var scorePoint = 20
-                                if self.harder == true {
-                                    scorePoint = 120
+                                var currCent:CGPoint = allImgViews[Int(row)*3+Int(col)].center
+                                if harder {
+                                    currCent = allImgViews[Int(row)*4+Int(col)].center
                                 }
-                                let totalScoreAfterTest = totalScore + scorePoint
-                                self.showPopup(Score: scorePoint, totalScore: totalScoreAfterTest)
-                                
-                                score["userId"] = PFUser.current()?.objectId
-                                score["score"] = String(totalScoreAfterTest)
-                                score.saveInBackground()
-                                
+                                let mustBe = CGPoint(x: xCent, y: yCent)
+                                if currCent.equalTo(mustBe) {
+                                    completed = true
+                                }
+                                else {
+                                    completed = false
+                                    break
+                                }
+                            }
+                            xCent += Int(imageHeightAndWeight)
+                        }
+                        xCent = Int(0.02*screenSize.width) + Int(imageHeightAndWeight)/2
+                        yCent += Int(imageHeightAndWeight)
+                        
+                        if completed == false {
+                            break
+                        }
+                    }
+                    
+                    //completed = true // For only test purpose
+                    if completed == true {
+                        puzzleCompeted = true
+                        let endTime = Date()
+                        let seconds = endTime.timeIntervalSince(self.startTime)
+                        //let formatted = String(format: "%.1f", seconds)
+                        //self.displayAlert(title: "Puzzle completed", message: " You have completed in \(formatted) seconds.")
+                        let userScoreQuery = PFQuery(className: "UserScore")
+                        userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+                        userScoreQuery.findObjectsInBackground { (objects, error) in
+                            if let score = objects?.first {
+                                if let totalScore = Int(score["score"] as! String) {
+                                    var scorePoint = 20
+                                    if self.harder == true {
+                                        scorePoint = 120
+                                    }
+                                    let totalScoreAfterTest = totalScore + scorePoint
+                                    self.showPopup(Score: scorePoint, totalScore: totalScoreAfterTest)
+                                    
+                                    score["userId"] = PFUser.current()?.objectId
+                                    score["score"] = String(totalScoreAfterTest)
+                                    score.saveInBackground()
+                                    
+                                }
+                                else {
+                                    var scorePoint = 20
+                                    if self.harder == true {
+                                        scorePoint = 120
+                                    }
+                                    let totalScoreAfterTest = scorePoint
+                                    self.showPopup(Score: scorePoint, totalScore: totalScoreAfterTest)
+                                    
+                                    score["userId"] = PFUser.current()?.objectId
+                                    score["score"] = String(totalScoreAfterTest)
+                                    score.saveInBackground()
+                                }
                             }
                             else {
                                 var scorePoint = 20
@@ -686,26 +707,14 @@ class puzzleMapViewController: UIViewController {
                                 let totalScoreAfterTest = scorePoint
                                 self.showPopup(Score: scorePoint, totalScore: totalScoreAfterTest)
                                 
+                                let score = PFObject(className: "UserScore")
                                 score["userId"] = PFUser.current()?.objectId
                                 score["score"] = String(totalScoreAfterTest)
                                 score.saveInBackground()
                             }
                         }
-                        else {
-                            var scorePoint = 20
-                            if self.harder == true {
-                                scorePoint = 120
-                            }
-                            let totalScoreAfterTest = scorePoint
-                            self.showPopup(Score: scorePoint, totalScore: totalScoreAfterTest)
-                            
-                            let score = PFObject(className: "UserScore")
-                            score["userId"] = PFUser.current()?.objectId
-                            score["score"] = String(totalScoreAfterTest)
-                            score.saveInBackground()
-                        }
+                        print("Puzzle Completed")
                     }
-                    print("Puzzle Completed")
                 }
             }
         }
