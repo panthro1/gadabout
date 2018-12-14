@@ -88,7 +88,7 @@ class puzzleMapViewController: UIViewController {
         
         let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
         
-        self.imageFile[randomIndex].getDataInBackground { (data, error) in
+        self.imageFile[randomIndex].getDataInBackground { [unowned self] (data, error) in
             
             if let imageData = data {
                 
@@ -132,6 +132,7 @@ class puzzleMapViewController: UIViewController {
                     
                     self.randomizeBlocks()
                     self.allImgViews[0].removeFromSuperview()
+                    self.ensureSolvable()
                     
                     self.leftIsEmpty = false
                     self.rightIsEmpty = false
@@ -310,7 +311,7 @@ class puzzleMapViewController: UIViewController {
         }
         self.randomizeBlocks()
         allImgViews[0].removeFromSuperview()
-        let test = getInversionCount()
+        ensureSolvable()
         
         leftIsEmpty = false
         rightIsEmpty = false
@@ -519,7 +520,7 @@ class puzzleMapViewController: UIViewController {
                     
                     self.randomizeBlocks()
                     self.allImgViews[0].removeFromSuperview()
-                    let test: Int = self.getInversionCount()
+                    self.ensureSolvable()
                     
                     
                     
@@ -764,7 +765,7 @@ class puzzleMapViewController: UIViewController {
         
     }
     
-    func getInversionCount() -> Int {
+    func ensureSolvable() {
         
         let screenSize = UIScreen.main.bounds
         
@@ -830,7 +831,7 @@ class puzzleMapViewController: UIViewController {
             else {
                 solvable = false
                 
-                if allImgIndexes[0] != 0 && allImgIndexes[1] != 0 {
+                if allImgIndexes[1] != 0 && allImgIndexes[2] != 0 {
                     let tempCent:CGPoint = allImgViews[1].center
                     
                     allImgViews[1].center = allImgViews[2].center
@@ -857,6 +858,23 @@ class puzzleMapViewController: UIViewController {
                     // blank is on an even row
                     if invCount % 2 == 0 {
                         solvable = false
+
+                        if allImgIndexes[1] != 0 && allImgIndexes[2] != 0 {
+                            let tempCent:CGPoint = allImgViews[1].center
+                            
+                            allImgViews[1].center = allImgViews[2].center
+                            allImgViews[2].center = tempCent
+                            
+                        }
+                        else {
+                            let tempCent:CGPoint = allImgViews[14].center
+                            
+                            allImgViews[14].center = allImgViews[15].center
+                            allImgViews[15].center = tempCent
+                            
+                        }
+
+                        print("Made solvable")
                     }
                     else {
                         solvable = true
@@ -869,6 +887,22 @@ class puzzleMapViewController: UIViewController {
                     }
                     else {
                         solvable = false
+                        
+                        if allImgIndexes[0] != 0 && allImgIndexes[1] != 0 {
+                            let tempCent:CGPoint = allImgViews[1].center
+                            
+                            allImgViews[1].center = allImgViews[2].center
+                            allImgViews[2].center = tempCent
+                            
+                        }
+                        else {
+                            let tempCent:CGPoint = allImgViews[14].center
+                            
+                            allImgViews[14].center = allImgViews[15].center
+                            allImgViews[15].center = tempCent
+                            
+                        }
+                        print("Made solvable")
                     }
 
                 }
@@ -877,7 +911,6 @@ class puzzleMapViewController: UIViewController {
         
         print("Solvable: \(solvable)")
 
-        return 3
     }
     
 
