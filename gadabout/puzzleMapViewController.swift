@@ -673,7 +673,7 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
                         }
                     }
                     
-                    completed = true // For only test purpose
+                    //completed = true // For only test purpose
                     if completed == true {
                         puzzleCompeted = true
                         let endTime = Date()
