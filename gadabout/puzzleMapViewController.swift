@@ -11,7 +11,7 @@ import Parse
 import GoogleMobileAds
 
 
-class puzzleMapViewController: UIViewController {
+class puzzleMapViewController: UIViewController, scorePopupDelegate {
 
     
     var allImgViews = [UIImageView]()
@@ -52,6 +52,8 @@ class puzzleMapViewController: UIViewController {
     @IBOutlet weak var hintButton: UIButton!
     
     @IBOutlet weak var harderSimpleButton: UIButton!
+    
+    var interstitial: GADInterstitial!
     
     
     
@@ -413,6 +415,15 @@ class puzzleMapViewController: UIViewController {
         // Do any additional setup after loading the view.
         let screenSize = UIScreen.main.bounds
         
+        
+        // Ad id
+        // interstitial = GADInterstitial(adUnitID: "ca-app-pub-5745243428784846~5277829027")
+        
+        // Test ad
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        let adRequest = GADRequest()
+        interstitial.load(adRequest)
+        
         /*harderSimpleButton.backgroundColor = .clear
         harderSimpleButton.layer.cornerRadius = 5
         harderSimpleButton.layer.borderWidth = 1
@@ -662,7 +673,7 @@ class puzzleMapViewController: UIViewController {
                         }
                     }
                     
-                    //completed = true // For only test purpose
+                    completed = true // For only test purpose
                     if completed == true {
                         puzzleCompeted = true
                         let endTime = Date()
@@ -724,6 +735,8 @@ class puzzleMapViewController: UIViewController {
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
         popOverVC.scoreWin = Score
         popOverVC.totalScore = totalScore
+        popOverVC.delegate = self
+        
         self.addChildViewController(popOverVC)
         popOverVC.view.frame = self.view.frame
         self.view.addSubview(popOverVC.view)
@@ -920,6 +933,15 @@ class puzzleMapViewController: UIViewController {
         
         print("Solvable: \(solvable)")
 
+    }
+    
+    func SendCloseInfo() {
+        
+        if interstitial.isReady {
+            interstitial.present(fromRootViewController: self)
+        } else {
+            print("Ad wasn't ready")
+        }
     }
     
 

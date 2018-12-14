@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import CoreData
+import GoogleMobileAds
 
 class foodsTableViewController: UITableViewController, foodsTableViewCellDelegate, scorePopupDelegate {
 
@@ -52,12 +53,15 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
 
     @IBOutlet weak var back: UIBarButtonItem!
     
+    var interstitial: GADInterstitial!
+    
     @IBAction func backTapped(_ sender: Any) {
 
         timer.invalidate()
         performSegue(withIdentifier: "foodsBackSegue", sender: self)
         
     }
+    
     
     
     @IBAction func didCompleteTapped(_ sender: Any) {
@@ -148,6 +152,14 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         self.tableView.allowsSelection = true
         
         self.tableView.rowHeight = 380
+        
+        // Ad id
+        // interstitial = GADInterstitial(adUnitID: "ca-app-pub-5745243428784846~5277829027")
+        
+        // Test ad
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        let adRequest = GADRequest()
+        interstitial.load(adRequest)
         
         scorePoint = 0
 
@@ -1132,6 +1144,12 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         print("Popup closed")
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         tableView.isScrollEnabled = true
+        
+        if interstitial.isReady {
+            interstitial.present(fromRootViewController: self)
+        } else {
+            print("Ad wasn't ready")
+        }
     }
     
     func createProgressBar() {
