@@ -29,7 +29,8 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
     var isHintDisplayed: Bool = false
     var startTime = Date()
     var harder: Bool = false
-    var puzzleCompeted: Bool = false
+    var puzzleCompleted: Bool = false
+    var scorePoint = 20
     
     
     var option1: String = ""
@@ -71,10 +72,12 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
         
         var nofRows = 3
         var nofColumns = 3
+        scorePoint = 20
         
         if harder == true {
             nofRows = 4
             nofColumns = 4
+            scorePoint += 100
         }
         
         for row in 0 ..< nofRows {
@@ -136,7 +139,7 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
                     self.randomizeBlocks()
                     self.allImgViews[0].removeFromSuperview()
                     self.ensureSolvable()
-                    self.puzzleCompeted = false
+                    self.puzzleCompleted = false
                     
                     self.leftIsEmpty = false
                     self.rightIsEmpty = false
@@ -197,132 +200,140 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
     }
 
     @IBAction func harderTapped(_ sender: Any) {
-        let button = sender as? UIButton
-        button?.shake()
-        
-        // New code
-        let screenSize = UIScreen.main.bounds
-        let navBarHeight = self.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
-        var xCent: Int = 0
-        var yCent: Int = 0
-        
-        
-        if harder == false {
-            harder = true
+        if puzzleCompleted == false {
+            let button = sender as? UIButton
+            button?.pulsate()
+            
+            // New code
+            let screenSize = UIScreen.main.bounds
+            let navBarHeight = self.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
+            var xCent: Int = 0
+            var yCent: Int = 0
             
             
-            let nofRows = 3
-            let nofColumns = 3
-            
-            for row in 0 ..< nofRows {
-                for col in 0 ..< nofColumns {
-                    
-                    if let viewWithTag = self.view.viewWithTag(10+row*3+col) {
-                        viewWithTag.removeFromSuperview()
+            if harder == false {
+                harder = true
+                scorePoint += 100
+                
+                
+                let nofRows = 3
+                let nofColumns = 3
+                
+                for row in 0 ..< nofRows {
+                    for col in 0 ..< nofColumns {
+                        
+                        if let viewWithTag = self.view.viewWithTag(10+row*3+col) {
+                            viewWithTag.removeFromSuperview()
+                        }
+                        
                     }
-                    
                 }
-            }
-            allImgViews.removeAll()
-            allCenters.removeAll()
-            
-            
-            let images = slice(image: myPicture, into: 4)
-            
-            
-            let nofRowsHard = 4
-            let nofColumnsHard = 4
-            
-            
-            let imageHeightAndWeight = Int(floor((screenSize.width*0.96)/4))
-            let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
-            
-            xCent = Int(0.02*screenSize.width) + imageHeightAndWeight/2
-            yCent = upperOffset + imageHeightAndWeight/2
-            
-            for row in 0 ..< nofRowsHard {
-                for col in 0 ..< nofColumnsHard {
-                    
-                    var myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: imageHeightAndWeight, height: imageHeightAndWeight))
-                    let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
-                    allCenters.append(currCent)
-                    myImgView.center = currCent
-                    myImgView.image = images[row*4+col]
-                    myImgView.isUserInteractionEnabled = true
-                    myImgView.tag = 10+row*4+col
-                    allImgViews.append(myImgView)
-                    self.view.addSubview(myImgView)
-                    xCent += imageHeightAndWeight
-                    
-                }
+                allImgViews.removeAll()
+                allCenters.removeAll()
+                
+                
+                let images = slice(image: myPicture, into: 4)
+                
+                
+                let nofRowsHard = 4
+                let nofColumnsHard = 4
+                
+                
+                let imageHeightAndWeight = Int(floor((screenSize.width*0.96)/4))
+                let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
+                
                 xCent = Int(0.02*screenSize.width) + imageHeightAndWeight/2
-                yCent += imageHeightAndWeight
+                yCent = upperOffset + imageHeightAndWeight/2
+                
+                for row in 0 ..< nofRowsHard {
+                    for col in 0 ..< nofColumnsHard {
+                        
+                        var myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: imageHeightAndWeight, height: imageHeightAndWeight))
+                        let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
+                        allCenters.append(currCent)
+                        myImgView.center = currCent
+                        myImgView.image = images[row*4+col]
+                        myImgView.isUserInteractionEnabled = true
+                        myImgView.tag = 10+row*4+col
+                        allImgViews.append(myImgView)
+                        self.view.addSubview(myImgView)
+                        xCent += imageHeightAndWeight
+                        
+                    }
+                    xCent = Int(0.02*screenSize.width) + imageHeightAndWeight/2
+                    yCent += imageHeightAndWeight
+                }
+                harderSimpleButton.setTitle("Back to simple ?", for: .normal)
+                
             }
-            harderSimpleButton.setTitle("Back to simple ?", for: .normal)
-           
+            else {
+                harder = false
+                scorePoint -= 100
+                
+                
+                let nofRows = 4
+                let nofColumns = 4
+                
+                for row in 0 ..< nofRows {
+                    for col in 0 ..< nofColumns {
+                        
+                        if let viewWithTag = self.view.viewWithTag(10+row*4+col) {
+                            viewWithTag.removeFromSuperview()
+                        }
+                        
+                    }
+                }
+                allImgViews.removeAll()
+                allCenters.removeAll()
+                
+                
+                let images = slice(image: myPicture, into: 3)
+                
+                
+                let nofRowsHard = 3
+                let nofColumnsHard = 3
+                
+                let imageHeightAndWeight = Int(floor((screenSize.width*0.96)/3))
+                let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
+                
+                xCent = Int(0.02*screenSize.width) + imageHeightAndWeight/2
+                yCent = upperOffset + imageHeightAndWeight/2
+                
+                for row in 0 ..< nofRowsHard {
+                    for col in 0 ..< nofColumnsHard {
+                        
+                        var myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: imageHeightAndWeight, height: imageHeightAndWeight))
+                        let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
+                        allCenters.append(currCent)
+                        myImgView.center = currCent
+                        myImgView.image = images[row*3+col]
+                        myImgView.isUserInteractionEnabled = true
+                        myImgView.tag = 10+row*3+col
+                        allImgViews.append(myImgView)
+                        self.view.addSubview(myImgView)
+                        xCent += imageHeightAndWeight
+                        
+                    }
+                    xCent = Int(0.02*screenSize.width) + imageHeightAndWeight/2
+                    yCent += imageHeightAndWeight
+                }
+                harderSimpleButton.setTitle("Make it harder ?", for: .normal)
+            }
+            self.randomizeBlocks()
+            allImgViews[0].removeFromSuperview()
+            ensureSolvable()
+            puzzleCompleted = false
+            
+            leftIsEmpty = false
+            rightIsEmpty = false
+            topIsEmpty = false
+            bottomIsEmpty = false
+            startTime = Date()
         }
         else {
-            harder = false
-            
-            
-            let nofRows = 4
-            let nofColumns = 4
-            
-            for row in 0 ..< nofRows {
-                for col in 0 ..< nofColumns {
-                    
-                    if let viewWithTag = self.view.viewWithTag(10+row*4+col) {
-                        viewWithTag.removeFromSuperview()
-                    }
-                    
-                }
-            }
-            allImgViews.removeAll()
-            allCenters.removeAll()
-            
-            
-            let images = slice(image: myPicture, into: 3)
-            
-            
-            let nofRowsHard = 3
-            let nofColumnsHard = 3
-            
-            let imageHeightAndWeight = Int(floor((screenSize.width*0.96)/3))
-            let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
-            
-            xCent = Int(0.02*screenSize.width) + imageHeightAndWeight/2
-            yCent = upperOffset + imageHeightAndWeight/2
-
-            for row in 0 ..< nofRowsHard {
-                for col in 0 ..< nofColumnsHard {
-                    
-                    var myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: imageHeightAndWeight, height: imageHeightAndWeight))
-                    let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
-                    allCenters.append(currCent)
-                    myImgView.center = currCent
-                    myImgView.image = images[row*3+col]
-                    myImgView.isUserInteractionEnabled = true
-                    myImgView.tag = 10+row*3+col
-                    allImgViews.append(myImgView)
-                    self.view.addSubview(myImgView)
-                    xCent += imageHeightAndWeight
-                    
-                }
-                xCent = Int(0.02*screenSize.width) + imageHeightAndWeight/2
-                yCent += imageHeightAndWeight
-            }
-            harderSimpleButton.setTitle("Make it harder ?", for: .normal)
+            let button = sender as? UIButton
+            button?.shake()
         }
-        self.randomizeBlocks()
-        allImgViews[0].removeFromSuperview()
-        ensureSolvable()
-        puzzleCompeted = false
-        
-        leftIsEmpty = false
-        rightIsEmpty = false
-        topIsEmpty = false
-        bottomIsEmpty = false
-        startTime = Date()
 
         
     }
@@ -336,32 +347,64 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
     }
     
     @IBAction func hintTapped(_ sender: Any) {
-        
-        let button = sender as? UIButton
-        button?.flash()
-        
-        if isHintDisplayed == false {
-            var imageView : UIImageView
+        if puzzleCompleted == false {
             
-            let screenSize = UIScreen.main.bounds
-            let imageHeightAndWeight = Int(floor(screenSize.width*0.96))
-            let navBarHeight = self.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
-            let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
-            let leftOffset = Int(0.02*screenSize.width)
+            let button = sender as? UIButton
+            button?.pulsate()
             
-            imageView = UIImageView(frame: CGRect(x: leftOffset, y: upperOffset, width: imageHeightAndWeight, height: imageHeightAndWeight))
-            imageView.tag = 100
-            imageView.image = myPicture
-            self.view.addSubview(imageView)
-            isHintDisplayed = true
-            hintButton.setTitle("Back to Puzzle", for: [])
+
+            
+            if isHintDisplayed == false {
+                var scoreLowerLimit = 5
+                if harder == true {
+                    scoreLowerLimit = 105
+                }
+                if scorePoint > scoreLowerLimit {
+                    let scoreFrame = CGRect(x: hintButton.center.x - hintButton.frame.width/4, y: hintButton.center.y - hintButton.frame.height, width: navigationBar.frame.width, height: navigationBar.frame.height)
+                    
+                    var lostPoint = UILabel()
+                    
+                    lostPoint = UILabel(frame: scoreFrame)
+                    lostPoint.text = ""
+                    lostPoint.textColor = UIColor.red
+                    self.view.addSubview(lostPoint)
+                    
+                    UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+                        lostPoint.center.y -= self.hintButton.frame.height*2
+                        lostPoint.text = "-1 Points"
+                    }) { _ in
+                        lostPoint.removeFromSuperview()
+                    }
+                    scorePoint -= 1
+                }
+                
+                
+                var imageView : UIImageView
+                
+                let screenSize = UIScreen.main.bounds
+                let imageHeightAndWeight = Int(floor(screenSize.width*0.96))
+                let navBarHeight = self.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
+                let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
+                let leftOffset = Int(0.02*screenSize.width)
+                
+                imageView = UIImageView(frame: CGRect(x: leftOffset, y: upperOffset, width: imageHeightAndWeight, height: imageHeightAndWeight))
+                imageView.tag = 100
+                imageView.image = myPicture
+                self.view.addSubview(imageView)
+                isHintDisplayed = true
+                hintButton.setTitle("Back to Puzzle", for: [])
+            }
+            else {
+                if let viewWithTag = self.view.viewWithTag(100) {
+                    viewWithTag.removeFromSuperview()
+                    isHintDisplayed = false
+                    hintButton.setTitle("Hint", for: [])
+                }
+            }
         }
         else {
-            if let viewWithTag = self.view.viewWithTag(100) {
-                viewWithTag.removeFromSuperview()
-                isHintDisplayed = false
-                hintButton.setTitle("Hint", for: [])
-            }
+            let button = sender as? UIButton
+            button?.shake()
         }
     }
     
@@ -535,7 +578,7 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
                     self.randomizeBlocks()
                     self.allImgViews[0].removeFromSuperview()
                     self.ensureSolvable()
-                    self.puzzleCompeted = false
+                    self.puzzleCompleted = false
                     
                     
                     
@@ -578,7 +621,7 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         
-        if puzzleCompeted == false {
+        if puzzleCompleted == false {
             let myTouch: UITouch = touches.first as! UITouch
             
             let screenSize = UIScreen.main.bounds
@@ -675,22 +718,23 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
                     
                     //completed = true // For only test purpose
                     if completed == true {
-                        puzzleCompeted = true
+                        puzzleCompleted = true
                         let endTime = Date()
                         let seconds = endTime.timeIntervalSince(self.startTime)
                         //let formatted = String(format: "%.1f", seconds)
                         //self.displayAlert(title: "Puzzle completed", message: " You have completed in \(formatted) seconds.")
                         let userScoreQuery = PFQuery(className: "UserScore")
                         userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
-                        userScoreQuery.findObjectsInBackground { (objects, error) in
+                        userScoreQuery.findObjectsInBackground { [unowned self] (objects, error) in
                             if let score = objects?.first {
                                 if let totalScore = Int(score["score"] as! String) {
-                                    var scorePoint = 20
+                                    /*var scorePoint = 20
                                     if self.harder == true {
                                         scorePoint = 120
-                                    }
-                                    let totalScoreAfterTest = totalScore + scorePoint
-                                    self.showPopup(Score: scorePoint, totalScore: totalScoreAfterTest)
+                                    }*/
+                                    
+                                    let totalScoreAfterTest = totalScore + self.scorePoint
+                                    self.showPopup(Score: self.scorePoint, totalScore: totalScoreAfterTest)
                                     
                                     score["userId"] = PFUser.current()?.objectId
                                     score["score"] = String(totalScoreAfterTest)
@@ -698,12 +742,12 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
                                     
                                 }
                                 else {
-                                    var scorePoint = 20
+                                    /*var scorePoint = 20
                                     if self.harder == true {
                                         scorePoint = 120
-                                    }
-                                    let totalScoreAfterTest = scorePoint
-                                    self.showPopup(Score: scorePoint, totalScore: totalScoreAfterTest)
+                                    }*/
+                                    let totalScoreAfterTest = self.scorePoint
+                                    self.showPopup(Score: self.scorePoint, totalScore: totalScoreAfterTest)
                                     
                                     score["userId"] = PFUser.current()?.objectId
                                     score["score"] = String(totalScoreAfterTest)
@@ -711,12 +755,12 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
                                 }
                             }
                             else {
-                                var scorePoint = 20
+                                /*var scorePoint = 20
                                 if self.harder == true {
                                     scorePoint = 120
-                                }
-                                let totalScoreAfterTest = scorePoint
-                                self.showPopup(Score: scorePoint, totalScore: totalScoreAfterTest)
+                                }*/
+                                let totalScoreAfterTest = self.scorePoint
+                                self.showPopup(Score: self.scorePoint, totalScore: totalScoreAfterTest)
                                 
                                 let score = PFObject(className: "UserScore")
                                 score["userId"] = PFUser.current()?.objectId
