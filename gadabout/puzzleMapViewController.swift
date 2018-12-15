@@ -877,11 +877,13 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
                 print("Blank position: \(blankPosIndx)")
                 
                 if blankPosIndx % 2 == 0 {
+                    print("Blank is on even row")
                     // blank is on an even row
                     if invCount % 2 == 0 {
+                        print("Number of inversions are even")
                         solvable = false
 
-                        if allImgIndexes[1] != 0 && allImgIndexes[2] != 0 {
+                        /*if allImgIndexes[1] != 0 && allImgIndexes[2] != 0 {
                             let tempCent:CGPoint = allImgViews[1].center
                             
                             allImgViews[1].center = allImgViews[2].center
@@ -896,21 +898,58 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
                             
                         }
 
-                        print("Made solvable")
+                        print("Made solvable")*/
                     }
                     else {
+                        print("Number of inversions are odd")
                         solvable = true
+
+                        if allImgIndexes[1] != 0 && allImgIndexes[2] != 0 {
+                         let tempCent:CGPoint = allImgViews[1].center
+                         
+                         allImgViews[1].center = allImgViews[2].center
+                         allImgViews[2].center = tempCent
+                         
+                         }
+                         else {
+                         let tempCent:CGPoint = allImgViews[14].center
+                         
+                         allImgViews[14].center = allImgViews[15].center
+                         allImgViews[15].center = tempCent
+                         
+                         }
+                         
+                         print("Made solvable")
                     }
                 }
                 else {
                     // blank is on odd row
+                    print("Blank is on odd row")
                     if invCount % 2 == 0 {
+                        print("Number od inversions are even")
                         solvable = true
-                    }
-                    else {
-                        solvable = false
                         
                         if allImgIndexes[0] != 0 && allImgIndexes[1] != 0 {
+                         let tempCent:CGPoint = allImgViews[1].center
+                         
+                         allImgViews[1].center = allImgViews[2].center
+                         allImgViews[2].center = tempCent
+                         
+                         }
+                         else {
+                         let tempCent:CGPoint = allImgViews[14].center
+                         
+                         allImgViews[14].center = allImgViews[15].center
+                         allImgViews[15].center = tempCent
+                         
+                         }
+                         print("Made solvable")
+                    }
+                    else {
+                        print("Number of inversions are odd")
+                        solvable = false
+                        
+                        /*if allImgIndexes[0] != 0 && allImgIndexes[1] != 0 {
                             let tempCent:CGPoint = allImgViews[1].center
                             
                             allImgViews[1].center = allImgViews[2].center
@@ -924,7 +963,7 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
                             allImgViews[15].center = tempCent
                             
                         }
-                        print("Made solvable")
+                        print("Made solvable")*/
                     }
 
                 }
