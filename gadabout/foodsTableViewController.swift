@@ -357,8 +357,11 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.tableView.isScrollEnabled = false
-        let rowToSelect: IndexPath = IndexPath(row: 0, section: 0)
-        self.tableView.scrollToRow(at: rowToSelect, at: .top, animated: false)
+        
+        if option1.count > 0 {
+            let rowToSelect: IndexPath = IndexPath(row: 0, section: 0)
+            self.tableView.scrollToRow(at: rowToSelect, at: .top, animated: false)
+        }
         
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
         popOverVC.scoreWin = Score

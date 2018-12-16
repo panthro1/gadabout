@@ -111,6 +111,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             userScoreQuery.findObjectsInBackground { [unowned self] (objects, error) in
                 if let score = objects?.first {
                     if let totalScore = Int(score["score"] as! String) {
+                        print("Score: \(self.scorePoint)")
                         self.totalScoreAfterTest = totalScore + self.scorePoint
                         self.showPopup(Score: self.scorePoint, totalScore: self.totalScoreAfterTest)
                         
@@ -369,8 +370,10 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.tableView.isScrollEnabled = false
-        let rowToSelect: IndexPath = IndexPath(row: 0, section: 0)
-        self.tableView.scrollToRow(at: rowToSelect, at: .top, animated: false)
+        if option1.count > 0 {
+            let rowToSelect: IndexPath = IndexPath(row: 0, section: 0)
+            self.tableView.scrollToRow(at: rowToSelect, at: .top, animated: false)
+        }
 
 
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
