@@ -106,39 +106,9 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 indx = indx + 1
             }
             
-            let userScoreQuery = PFQuery(className: "UserScore")
-            userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
-            userScoreQuery.findObjectsInBackground { [unowned self] (objects, error) in
-                if let score = objects?.first {
-                    if let totalScore = Int(score["score"] as! String) {
-                        print("Score: \(self.scorePoint)")
-                        self.totalScoreAfterTest = totalScore + self.scorePoint
-                        self.showPopup(Score: self.scorePoint, totalScore: self.totalScoreAfterTest)
-                        
-                        score["userId"] = PFUser.current()?.objectId
-                        score["score"] = String(self.totalScoreAfterTest)
-                        score.saveInBackground()
-                        
-                    }
-                    else {
-                        self.totalScoreAfterTest = self.scorePoint
-                        self.showPopup(Score: self.scorePoint, totalScore: self.totalScoreAfterTest)
-                        
-                        score["userId"] = PFUser.current()?.objectId
-                        score["score"] = String(self.totalScoreAfterTest)
-                        score.saveInBackground()
-                    }
-                }
-                else {
-                    self.totalScoreAfterTest = self.scorePoint
-                    self.showPopup(Score: self.scorePoint, totalScore: self.totalScoreAfterTest)
-                    
-                    let score = PFObject(className: "UserScore")
-                    score["userId"] = PFUser.current()?.objectId
-                    score["score"] = String(self.totalScoreAfterTest)
-                    score.saveInBackground()
-                }
-            }
+            glbUserScore = glbUserScore + scorePoint
+            showPopup(Score: scorePoint, totalScore: glbUserScore)
+            
             timer.invalidate()
         }
         else {
@@ -308,38 +278,9 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             timer.invalidate()
             timeLabel.text = "\(0)"
             quizCompleted()
-            let userScoreQuery = PFQuery(className: "UserScore")
-            userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
-            userScoreQuery.findObjectsInBackground { [unowned self] (objects, error) in
-                if let score = objects?.first {
-                    if let totalScore = Int(score["score"] as! String) {
-                        self.totalScoreAfterTest = totalScore + self.scorePoint
-                        self.showPopup(Score: self.scorePoint, totalScore: self.totalScoreAfterTest)
-                        
-                        score["userId"] = PFUser.current()?.objectId
-                        score["score"] = String(self.totalScoreAfterTest)
-                        score.saveInBackground()
-                        
-                    }
-                    else {
-                        self.totalScoreAfterTest = self.scorePoint
-                        self.showPopup(Score: self.scorePoint, totalScore: self.totalScoreAfterTest)
-                        
-                        score["userId"] = PFUser.current()?.objectId
-                        score["score"] = String(self.totalScoreAfterTest)
-                        score.saveInBackground()
-                    }
-                }
-                else {
-                    self.totalScoreAfterTest = self.scorePoint
-                    self.showPopup(Score: self.scorePoint, totalScore: self.totalScoreAfterTest)
-                    
-                    let score = PFObject(className: "UserScore")
-                    score["userId"] = PFUser.current()?.objectId
-                    score["score"] = String(self.totalScoreAfterTest)
-                    score.saveInBackground()
-                }
-            }
+            
+            glbUserScore = glbUserScore + scorePoint
+            showPopup(Score: scorePoint, totalScore: glbUserScore)
 
             progressLayer.strokeEnd = 1
         }
@@ -1101,6 +1042,18 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             interstitial.present(fromRootViewController: self)
         } else {
             print("Ad wasn't ready")
+        }
+        
+        let userScoreQuery = PFQuery(className: "UserScore")
+        userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+        userScoreQuery.findObjectsInBackground { (objects, error) in
+            if let score = objects?.first {
+                if Int(score["score"] as! String) != nil {
+                    
+                    score["score"] = String(glbUserScore)
+                    score.saveInBackground()
+                }
+            }
         }
     }
     

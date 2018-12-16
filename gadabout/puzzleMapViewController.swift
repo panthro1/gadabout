@@ -723,51 +723,10 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
                         let seconds = endTime.timeIntervalSince(self.startTime)
                         //let formatted = String(format: "%.1f", seconds)
                         //self.displayAlert(title: "Puzzle completed", message: " You have completed in \(formatted) seconds.")
-                        let userScoreQuery = PFQuery(className: "UserScore")
-                        userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
-                        userScoreQuery.findObjectsInBackground { [unowned self] (objects, error) in
-                            if let score = objects?.first {
-                                if let totalScore = Int(score["score"] as! String) {
-                                    /*var scorePoint = 20
-                                    if self.harder == true {
-                                        scorePoint = 120
-                                    }*/
-                                    
-                                    let totalScoreAfterTest = totalScore + self.scorePoint
-                                    self.showPopup(Score: self.scorePoint, totalScore: totalScoreAfterTest)
-                                    
-                                    score["userId"] = PFUser.current()?.objectId
-                                    score["score"] = String(totalScoreAfterTest)
-                                    score.saveInBackground()
-                                    
-                                }
-                                else {
-                                    /*var scorePoint = 20
-                                    if self.harder == true {
-                                        scorePoint = 120
-                                    }*/
-                                    let totalScoreAfterTest = self.scorePoint
-                                    self.showPopup(Score: self.scorePoint, totalScore: totalScoreAfterTest)
-                                    
-                                    score["userId"] = PFUser.current()?.objectId
-                                    score["score"] = String(totalScoreAfterTest)
-                                    score.saveInBackground()
-                                }
-                            }
-                            else {
-                                /*var scorePoint = 20
-                                if self.harder == true {
-                                    scorePoint = 120
-                                }*/
-                                let totalScoreAfterTest = self.scorePoint
-                                self.showPopup(Score: self.scorePoint, totalScore: totalScoreAfterTest)
-                                
-                                let score = PFObject(className: "UserScore")
-                                score["userId"] = PFUser.current()?.objectId
-                                score["score"] = String(totalScoreAfterTest)
-                                score.saveInBackground()
-                            }
-                        }
+                        
+                        glbUserScore = glbUserScore + scorePoint
+                        showPopup(Score: scorePoint, totalScore: glbUserScore)
+                        
                         print("Puzzle Completed")
                     }
                 }
@@ -1024,6 +983,18 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
             interstitial.present(fromRootViewController: self)
         } else {
             print("Ad wasn't ready")
+        }
+        
+        let userScoreQuery = PFQuery(className: "UserScore")
+        userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+        userScoreQuery.findObjectsInBackground { (objects, error) in
+            if let score = objects?.first {
+                if Int(score["score"] as! String) != nil {
+                    
+                    score["score"] = String(glbUserScore)
+                    score.saveInBackground()
+                }
+            }
         }
     }
     

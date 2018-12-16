@@ -35,6 +35,7 @@ var glbToDoItemImageFile = [PFFile]()
 var glbToDoItemIDs = [String]()
 var glbToDoItemCompleted = [Bool]()
 var glbToDoItemPlaceOrFood = [String]()
+var glbUserScore: Int = -1
 
 
 class MainPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -466,6 +467,24 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                     activityIndicator.stopAnimating()
                     UIApplication.shared.endIgnoringInteractionEvents()
 
+                }
+            }
+        }
+        
+        if glbUserScore < 0 {
+            let userScoreQuery = PFQuery(className: "UserScore")
+            userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
+            userScoreQuery.findObjectsInBackground { (objects, error) in
+                if let score = objects?.first {
+                    if let totalScore = Int(score["score"] as! String) {
+                        glbUserScore = totalScore
+                    }
+                    else {
+                        glbUserScore = 0
+                    }
+                }
+                else {
+                   glbUserScore = 0
                 }
             }
         }
