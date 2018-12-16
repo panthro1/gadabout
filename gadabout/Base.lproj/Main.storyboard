@@ -1099,8 +1099,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qhN-fU-Sgk">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qhN-fU-Sgk">
+                                <rect key="frame" x="0.0" y="50" width="414" height="44"/>
                                 <items>
                                     <navigationItem id="wvJ-mK-YWw">
                                         <barButtonItem key="leftBarButtonItem" title="Back" image="back.png" id="ePL-yO-cgi">
@@ -1112,8 +1112,19 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="KGX-qI-Iif">
+                                <rect key="frame" x="0.0" y="94" width="414" height="37.666666666666657"/>
+                                <segments>
+                                    <segment title="All"/>
+                                    <segment title="Uncompleted"/>
+                                </segments>
+                                <color key="tintColor" red="0.6848415732383728" green="0.16641205549240112" blue="0.71869808435440063" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="segmentChanged:" destination="uew-mE-85R" eventType="valueChanged" id="kVx-1t-S4J"/>
+                                </connections>
+                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="knA-Tt-rNr">
-                                <rect key="frame" x="0.0" y="94" width="414" height="642"/>
+                                <rect key="frame" x="0.0" y="135.66666666666669" width="414" height="600.33333333333326"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="5vt-GS-ftO" detailTextLabel="r4P-HU-H1x" style="IBUITableViewCellStyleSubtitle" id="9Pr-89-dYU">
@@ -1149,24 +1160,29 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="knA-Tt-rNr" firstAttribute="top" secondItem="qhN-fU-Sgk" secondAttribute="bottom" id="7zu-80-bo9"/>
+                            <constraint firstItem="KGX-qI-Iif" firstAttribute="height" secondItem="8AV-qg-wjA" secondAttribute="height" multiplier="0.05" id="528-6Q-vcA"/>
                             <constraint firstItem="knA-Tt-rNr" firstAttribute="bottom" secondItem="yFz-hu-Ki4" secondAttribute="bottom" id="87k-ha-Mhy"/>
                             <constraint firstItem="qhN-fU-Sgk" firstAttribute="top" secondItem="yFz-hu-Ki4" secondAttribute="top" constant="30" id="C1t-Kh-lqm"/>
+                            <constraint firstItem="knA-Tt-rNr" firstAttribute="top" secondItem="KGX-qI-Iif" secondAttribute="bottom" constant="5" id="FJc-I4-va4"/>
                             <constraint firstItem="qhN-fU-Sgk" firstAttribute="leading" secondItem="yFz-hu-Ki4" secondAttribute="leading" id="JlF-aW-uMf"/>
+                            <constraint firstItem="KGX-qI-Iif" firstAttribute="leading" secondItem="yFz-hu-Ki4" secondAttribute="leading" id="QW2-dp-hye"/>
                             <constraint firstItem="knA-Tt-rNr" firstAttribute="leading" secondItem="yFz-hu-Ki4" secondAttribute="leading" id="Zk6-ik-Uah"/>
+                            <constraint firstItem="yFz-hu-Ki4" firstAttribute="trailing" secondItem="KGX-qI-Iif" secondAttribute="trailing" id="gbT-Uo-SEx"/>
                             <constraint firstItem="qhN-fU-Sgk" firstAttribute="trailing" secondItem="yFz-hu-Ki4" secondAttribute="trailing" id="ju0-Rs-dzu"/>
+                            <constraint firstItem="KGX-qI-Iif" firstAttribute="top" secondItem="qhN-fU-Sgk" secondAttribute="bottom" id="mr0-n3-IxT"/>
                             <constraint firstItem="knA-Tt-rNr" firstAttribute="trailing" secondItem="yFz-hu-Ki4" secondAttribute="trailing" id="q9X-wd-qTr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yFz-hu-Ki4"/>
                     </view>
                     <connections>
+                        <outlet property="allUncompletedSegment" destination="KGX-qI-Iif" id="uTc-dj-WW8"/>
                         <outlet property="table" destination="knA-Tt-rNr" id="6cB-V0-JDu"/>
                         <segue destination="77F-Fn-Frx" kind="presentation" identifier="toDoBackSegue" animates="NO" id="oEp-Lf-uRp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4er-OO-PYn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3588" y="115.59220389805098"/>
+            <point key="canvasLocation" x="3586.9565217391305" y="114.94565217391305"/>
         </scene>
         <!--Score Pop Up View Controller-->
         <scene sceneID="6IQ-dW-UbB">
@@ -1435,6 +1451,6 @@
         <image name="uncheck.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="e9z-7M-9hq"/>
+        <segue reference="oEp-Lf-uRp"/>
     </inferredMetricsTieBreakers>
 </document>

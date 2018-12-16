@@ -18,14 +18,86 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
     var imageFile = [PFFile]()
     var itemNames = [String]()
     var itemDescriptions = [String]()
+    var itemsCompleted = [Bool]()
+    var showAll = true
+    var itemImages = [PFFile]()
 
     @IBOutlet weak var table: UITableView!
     
+    @IBOutlet weak var allUncompletedSegment: UISegmentedControl!
     
     @IBAction func backTapped(_ sender: Any) {
         
         performSegue(withIdentifier: "toDoBackSegue", sender: self)
     }
+    
+    func segmentChangeTrack() {
+        switch allUncompletedSegment.selectedSegmentIndex
+        {
+        case 0:
+            showAll = true
+            itemNames = glbToDoItemNames
+            itemDescriptions = glbToDoItemDescriptions
+            itemsCompleted = glbToDoItemCompleted
+            itemImages = glbToDoItemImageFile
+            
+        case 1:
+            showAll = false
+            itemNames.removeAll()
+            itemDescriptions.removeAll()
+            itemsCompleted.removeAll()
+            itemImages.removeAll()
+            var indx = 0;
+            for item in glbToDoItemCompleted {
+                if item == false {
+                    itemNames.append(glbToDoItemNames[indx])
+                    itemDescriptions.append(glbToDoItemDescriptions[indx])
+                    itemsCompleted.append(false)
+                    itemImages.append(glbToDoItemImageFile[indx])
+                }
+                indx += 1
+            }
+        default:
+            break
+        }
+        table.reloadData()
+    }
+    
+    @IBAction func segmentChanged(_ sender: Any) {
+        
+        /*switch allUncompletedSegment.selectedSegmentIndex
+        {
+            case 0:
+                showAll = true
+                itemNames = glbToDoItemNames
+                itemDescriptions = glbToDoItemDescriptions
+                itemsCompleted = glbToDoItemCompleted
+            
+            case 1:
+                showAll = false
+                itemNames.removeAll()
+                itemDescriptions.removeAll()
+                itemsCompleted.removeAll()
+                itemImages.removeAll()
+                var indx = 0;
+                for item in glbToDoItemCompleted {
+                    if item == false {
+                        itemNames.append(glbToDoItemNames[indx])
+                        itemDescriptions.append(glbToDoItemDescriptions[indx])
+                        itemsCompleted.append(false)
+                        itemImages.append(glbToDoItemImageFile[indx])
+                    }
+                    indx += 1
+                }
+            default:
+                break
+        }
+        table.reloadData()*/
+        
+        segmentChangeTrack()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,6 +105,12 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         
         itemNames = glbToDoItemNames
         itemDescriptions = glbToDoItemDescriptions
+        itemsCompleted = glbToDoItemCompleted
+        itemImages = glbToDoItemImageFile
+        
+        let font = UIFont.systemFont(ofSize: 16)
+        allUncompletedSegment.setTitleTextAttributes([NSAttributedStringKey.font: font],
+                                                for: .normal)
         
         table.reloadData()
         
@@ -45,8 +123,8 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
     
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemNames.count
         
+        return itemNames.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -65,11 +143,11 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         }*/
         
        // New code
-        if glbToDoItemNames.count >= indexPath.row {
+        if itemNames.count >= indexPath.row {
          toDoName = itemNames[indexPath.row]
          }
          
-         if glbToDoItemDescriptions.count >= indexPath.row {
+         if itemDescriptions.count >= indexPath.row {
          toDoDesc = itemDescriptions[indexPath.row]
          }
         
@@ -79,7 +157,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.textLabel?.numberOfLines = 0
         
         
-        if glbToDoItemCompleted[indexPath.row] == true {
+        if itemsCompleted[indexPath.row] == true {
             let toDoNameAttributeString: NSMutableAttributedString =  NSMutableAttributedString(string: toDoName)
             toDoNameAttributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 1, range: NSMakeRange(0, toDoNameAttributeString.length))
             cell.textLabel?.attributedText = toDoNameAttributeString
@@ -91,21 +169,22 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.detailTextLabel?.numberOfLines = 0
 
         
-
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
-            itemNames.remove(at: indexPath.row)
-            itemDescriptions.remove(at: indexPath.row)
             
-            
-            tableView.deleteRows(at: [indexPath], with: .bottom)
-            
+            if let itemIndx = glbToDoItemNames.firstIndex(of: self.itemNames[indexPath.row]) {
+
+                itemNames.remove(at: indexPath.row)
+                itemDescriptions.remove(at: indexPath.row)
+                itemsCompleted.remove(at: indexPath.row)
+                
+                tableView.deleteRows(at: [indexPath], with: .bottom)
+
             let toDoItemQuery = PFQuery(className: "ToDoList")
-            toDoItemQuery.whereKey("item", equalTo: glbToDoItemIDs[indexPath.row])
+            toDoItemQuery.whereKey("item", equalTo: glbToDoItemIDs[itemIndx])
             toDoItemQuery.findObjectsInBackground(block: { (objects, error) in
                 if let error = error {
                     print(error.localizedDescription)
@@ -117,12 +196,13 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             })
             
-            glbToDoItemNames.remove(at: indexPath.row)
-            glbToDoItemDescriptions.remove(at: indexPath.row)
-            glbToDoItemImageFile.remove(at: indexPath.row)
-            glbToDoItemIDs.remove(at: indexPath.row)
-            glbToDoItemCompleted.remove(at: indexPath.row)
-            glbToDoItemPlaceOrFood.remove(at: indexPath.row)
+            glbToDoItemNames.remove(at: itemIndx)
+            glbToDoItemDescriptions.remove(at: itemIndx)
+            glbToDoItemImageFile.remove(at: itemIndx)
+            glbToDoItemIDs.remove(at: itemIndx)
+            glbToDoItemCompleted.remove(at: itemIndx)
+            glbToDoItemPlaceOrFood.remove(at: itemIndx)
+            }
         }
     }
 
@@ -153,65 +233,70 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let closeAction = UIContextualAction(style: .normal, title: nil, handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
-            if glbToDoItemCompleted[indexPath.row] == true {
-                glbToDoItemCompleted[indexPath.row] = false
+        if let itemIndx = glbToDoItemNames.firstIndex(of: self.itemNames[indexPath.row]) {
+            
+            let closeAction = UIContextualAction(style: .normal, title: nil, handler: { [unowned self] (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
                 
-                let toDoItemQuery = PFQuery(className: "ToDoList")
-                toDoItemQuery.whereKey("item", equalTo: glbToDoItemIDs[indexPath.row])
-                toDoItemQuery.findObjectsInBackground(block: { (objects, error) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    }
-                    else {
-                        if let item = objects?.first {
-                            item["Completed"] = "NO"
-                            item.saveInBackground()
+                print("Item No: \(itemIndx)")
+                
+                if glbToDoItemCompleted[itemIndx] == true {
+                    glbToDoItemCompleted[itemIndx] = false
+                    
+                    let toDoItemQuery = PFQuery(className: "ToDoList")
+                    toDoItemQuery.whereKey("item", equalTo: glbToDoItemIDs[itemIndx])
+                    toDoItemQuery.findObjectsInBackground(block: { (objects, error) in
+                        if let error = error {
+                            print(error.localizedDescription)
                         }
-                    }
-                })
+                        else {
+                            if let item = objects?.first {
+                                item["Completed"] = "NO"
+                                item.saveInBackground()
+                            }
+                        }
+                    })
+                }
+                else {
+                    glbToDoItemCompleted[itemIndx] = true
+                    // New code
+                    let toDoItemQuery = PFQuery(className: "ToDoList")
+                    toDoItemQuery.whereKey("item", equalTo: glbToDoItemIDs[itemIndx])
+                    toDoItemQuery.findObjectsInBackground(block: { (objects, error) in
+                        if let error = error {
+                            print(error.localizedDescription)
+                        }
+                        else {
+                            if let item = objects?.first {
+                                item["Completed"] = "YES"
+                                item.saveInBackground()
+                            }
+                        }
+                    })
+                }
+                
+                self.segmentChangeTrack()
+                
+                success(true)
+            })
+            if glbToDoItemCompleted[itemIndx] == true {
+                closeAction.image = UIImage(named: "undo-arrow.png")
             }
             else {
-                glbToDoItemCompleted[indexPath.row] = true
-                // New code
-                let toDoItemQuery = PFQuery(className: "ToDoList")
-                toDoItemQuery.whereKey("item", equalTo: glbToDoItemIDs[indexPath.row])
-                toDoItemQuery.findObjectsInBackground(block: { (objects, error) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    }
-                    else {
-                        if let item = objects?.first {
-                            item["Completed"] = "YES"
-                            item.saveInBackground()
-                        }
-                    }
-                })
+                closeAction.image = UIImage(named: "checked.png")
             }
-            tableView.reloadData()
-            
-
-
-
-
-        
-            success(true)
-        })
-        if glbToDoItemCompleted[indexPath.row] == true {
-            closeAction.image = UIImage(named: "undo-arrow.png")
+            closeAction.backgroundColor = .purple
+            return UISwipeActionsConfiguration(actions: [closeAction])
         }
         else {
-            closeAction.image = UIImage(named: "checked.png")
+            return nil
         }
-        closeAction.backgroundColor = .purple
-        return UISwipeActionsConfiguration(actions: [closeAction])
     }
     
     func showPopup(indx: Int) {
         
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "toDoImagePopupID") as! ToDoImageDisplayViewController
         
-        glbToDoItemImageFile[indx].getDataInBackground { (data, error) in
+        itemImages[indx].getDataInBackground { (data, error) in
             if let imageData = data {
                 if let imageToDisplay = UIImage(data: imageData) {
 
@@ -220,8 +305,8 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
         }
-        popOverVC.header = glbToDoItemNames[indx]
-        popOverVC.desc = glbToDoItemDescriptions[indx]
+        popOverVC.header = itemNames[indx]//glbToDoItemNames[indx]
+        popOverVC.desc = itemDescriptions[indx]//glbToDoItemDescriptions[indx]
         //let header = glbToDoItemNames[indx]
         
         /*if glbToDoItemNames[indx].count > 0 {
