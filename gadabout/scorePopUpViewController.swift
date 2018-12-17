@@ -25,6 +25,10 @@ class scorePopUpViewController: UIViewController {
     
     @IBOutlet weak var totalScoreLabel: UILabel!
     
+    @IBOutlet weak var scoreHeader: UILabel!
+    
+    @IBOutlet weak var scoreImage: UIImageView!
+    
     @IBOutlet weak var closeButton: UIButton!
     
     var delegate: scorePopupDelegate?
@@ -42,6 +46,10 @@ class scorePopUpViewController: UIViewController {
         closeButton.layer.borderWidth = 1
         closeButton.layer.borderColor = UIColor.black.cgColor
         
+        if scoreWin == 0 {
+            scoreHeader.text = "Unfortunately!!"
+            //scoreImage.image = UIImage(named: "disappointed.png")
+        }
         scoreWinLabel.text = "You have won \(scoreWin) points"
         totalScoreLabel.text = "Your total score : \(totalScore) points"
         
