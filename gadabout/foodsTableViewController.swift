@@ -802,43 +802,46 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         })
         
         if let tappedIndexPath = tableView.indexPath(for: sender) {
-            glbToDoItemPlaceOrFood.append("Food")
-            glbToDoItemCompleted.append(false)
-            glbToDoItemDescriptions.append(descriptionEng[tappedIndexPath.row])
-            glbToDoItemImageFile.append(imageFile[tappedIndexPath.row])
-            glbToDoItemIDs.append(questionCompleted[tappedIndexPath.row])
             
-            if let correctAnsInt = Int(correctAnswer[tappedIndexPath.row]) {
-                if correctAnsInt == 1 {
-                    glbToDoItemNames.append(self.option1[tappedIndexPath.row])
-                }
-                else if correctAnsInt == 2 {
-                    glbToDoItemNames.append(self.option2[tappedIndexPath.row])
-                }
-                else if correctAnsInt == 3 {
-                    glbToDoItemNames.append(self.option3[tappedIndexPath.row])
-                }
-                else if correctAnsInt == 4 {
-                    glbToDoItemNames.append(self.option4[tappedIndexPath.row])
-                }
-            }
-            
-            let toDoItem = PFObject(className: "ToDoList")
-            
-            toDoItem["item"] = questionCompleted[tappedIndexPath.row]
-            toDoItem["userId"] = PFUser.current()?.objectId
-            toDoItem["PlaceOrFood"] = "Food"
-            toDoItem["Completed"] = "No"
-            
-            toDoItem.saveInBackground { (success, error) in
+            if glbToDoItemIDs.firstIndex(of: questionCompleted[tappedIndexPath.row]) == nil {
+                glbToDoItemPlaceOrFood.append("Food")
+                glbToDoItemCompleted.append(false)
+                glbToDoItemDescriptions.append(descriptionEng[tappedIndexPath.row])
+                glbToDoItemImageFile.append(imageFile[tappedIndexPath.row])
+                glbToDoItemIDs.append(questionCompleted[tappedIndexPath.row])
                 
-                if success {
-                    print("Entity saved successfully")
+                if let correctAnsInt = Int(correctAnswer[tappedIndexPath.row]) {
+                    if correctAnsInt == 1 {
+                        glbToDoItemNames.append(self.option1[tappedIndexPath.row])
+                    }
+                    else if correctAnsInt == 2 {
+                        glbToDoItemNames.append(self.option2[tappedIndexPath.row])
+                    }
+                    else if correctAnsInt == 3 {
+                        glbToDoItemNames.append(self.option3[tappedIndexPath.row])
+                    }
+                    else if correctAnsInt == 4 {
+                        glbToDoItemNames.append(self.option4[tappedIndexPath.row])
+                    }
                 }
-                else { // success
+                
+                let toDoItem = PFObject(className: "ToDoList")
+                
+                toDoItem["item"] = questionCompleted[tappedIndexPath.row]
+                toDoItem["userId"] = PFUser.current()?.objectId
+                toDoItem["PlaceOrFood"] = "Food"
+                toDoItem["Completed"] = "No"
+                
+                toDoItem.saveInBackground { (success, error) in
                     
-                    print("Entity could not be saved")
-                    print(error?.localizedDescription)
+                    if success {
+                        print("Entity saved successfully")
+                    }
+                    else { // success
+                        
+                        print("Entity could not be saved")
+                        print(error?.localizedDescription)
+                    }
                 }
             }
         }

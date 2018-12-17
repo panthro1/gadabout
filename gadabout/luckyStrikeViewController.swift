@@ -116,41 +116,43 @@ class luckyStrikeViewController: UIViewController {
         
         // New code
         print("Current object: \(currentObjectId) isPlace: \(isCurrentItemPlace)")
-        if currentObjectId.count > 0  {
-            let toDoItem = PFObject(className: "ToDoList")
-            
-            toDoItem["item"] = currentObjectId
-            toDoItem["userId"] = PFUser.current()?.objectId
-            if isCurrentItemPlace == true {
-                toDoItem["PlaceOrFood"] = "Place"
-            }
-            else {
-                toDoItem["PlaceOrFood"] = "Food"
-            }
-            toDoItem["Completed"] = "No"
-            
-            toDoItem.saveInBackground { (success, error) in
+        if glbToDoItemIDs.firstIndex(of: currentObjectId) == nil {
+            if currentObjectId.count > 0  {
+                let toDoItem = PFObject(className: "ToDoList")
                 
-                if success {
-                    print("Entity saved successfully")
+                toDoItem["item"] = currentObjectId
+                toDoItem["userId"] = PFUser.current()?.objectId
+                if isCurrentItemPlace == true {
+                    toDoItem["PlaceOrFood"] = "Place"
                 }
-                else { // success
+                else {
+                    toDoItem["PlaceOrFood"] = "Food"
+                }
+                toDoItem["Completed"] = "No"
+                
+                toDoItem.saveInBackground { (success, error) in
                     
-                    print("Entity could not be saved")
-                    print(error?.localizedDescription)
+                    if success {
+                        print("Entity saved successfully")
+                    }
+                    else { // success
+                        
+                        print("Entity could not be saved")
+                        print(error?.localizedDescription)
+                    }
                 }
-            }
-            if let header = headerLabel.text {
-                if let description = descriptionLabel.text {
-                    if let imgFile = currentImage.first {
-                     
-                        glbToDoItemIDs.append(currentObjectId)
-                        glbToDoItemNames.append(header)
-                        glbToDoItemDescriptions.append(description)
-                        glbToDoItemCompleted.append(false)
-                        glbToDoItemPlaceOrFood.append("Place")
-                        glbToDoItemImageFile.append(imgFile)
-
+                if let header = headerLabel.text {
+                    if let description = descriptionLabel.text {
+                        if let imgFile = currentImage.first {
+                            
+                            glbToDoItemIDs.append(currentObjectId)
+                            glbToDoItemNames.append(header)
+                            glbToDoItemDescriptions.append(description)
+                            glbToDoItemCompleted.append(false)
+                            glbToDoItemPlaceOrFood.append("Place")
+                            glbToDoItemImageFile.append(imgFile)
+                            
+                        }
                     }
                 }
             }
