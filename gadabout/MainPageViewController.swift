@@ -50,6 +50,9 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var bannerView: GADBannerView!
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    
+    var rowHeight = 100
     /*override var shouldAutorotate: Bool {
         return false
     }
@@ -102,7 +105,13 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         self.mainPageTableView.dataSource = self
         self.mainPageTableView.allowsSelection = true
         
-        self.mainPageTableView.rowHeight = 100
+        let screenSize = UIScreen.main.bounds
+        
+        let navBarHeight = self.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
+        let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
+        
+        rowHeight = Int((Int(screenSize.height) - upperOffset - 70) / 6)
+        self.mainPageTableView.rowHeight = CGFloat(rowHeight)//100
         
         // Account ad
         //bannerView.adUnitID = "ca-app-pub-5745243428784846~5277829027"
@@ -514,24 +523,36 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         cell.layer.borderColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 100).cgColor //logout.tintColor?.cgColor//UIColor.lightGray.cgColor  // set cell border color here
         cell.layer.borderWidth = 2 // set border width here
         
-        cell.textLabel?.font = UIFont(name: "Avenir", size: 32)
+        let screenSize = UIScreen.main.bounds
+        
+        if screenSize.width < 350 {
+            cell.textLabel?.font = UIFont(name: "Avenir", size: 28)
+        }
+        else if screenSize.width < 400 {
+            cell.textLabel?.font = UIFont(name: "Avenir", size: 30)
+        }
+        else {
+            cell.textLabel?.font = UIFont(name: "Avenir", size: 32)
+        }
+        
+        let rowImageSize = Double(rowHeight)*0.8
         
         if indexPath.row == 0 {
             cell.accessoryView = UIImageView(image: UIImage(named: "balloon.png"))
-            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
         }
         else if indexPath.row == 1 {
             cell.accessoryView = UIImageView(image: UIImage(named: "egg.png"))
-            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
         }
         else if indexPath.row == 2 {
             cell.accessoryView = UIImageView(image: UIImage(named: "puzzle.png"))
-            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
 
         }
         else if indexPath.row == 3 {
             cell.accessoryView = UIImageView(image: UIImage(named: "slot.png"))
-            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
         }
         else if indexPath.row == 4 {
             cell.accessoryView = UIImageView(image: UIImage(named: "list.png"))
@@ -541,22 +562,22 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         //cell.righ.image = UIImage(named: "world.png")
         
         if indexPath.row == 0 {
-            cell.textLabel?.text = "    Places"
+            cell.textLabel?.text = " Places"
         }
         else if indexPath.row == 1 {
-            cell.textLabel?.text = "    Foods"
+            cell.textLabel?.text = " Foods"
         }
         else if indexPath.row == 2 {
-            cell.textLabel?.text = "    Puzzle"
+            cell.textLabel?.text = " Puzzle"
         }
         else if indexPath.row == 5 {
-            cell.textLabel?.text = "    Post"
+            cell.textLabel?.text = "  Post"
         }
         else if indexPath.row == 4 {
-            cell.textLabel?.text = "    To Do List"
+            cell.textLabel?.text = " To Do List"
         }
         else if indexPath.row == 3 {
-            cell.textLabel?.text = "    Lucky Strike"
+            cell.textLabel?.text = " Lucky Strike"
         }
         
         return cell

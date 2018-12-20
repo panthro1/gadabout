@@ -249,6 +249,7 @@
                         <outlet property="bannerView" destination="O8c-nx-LZO" id="o2Y-Ds-FT7"/>
                         <outlet property="mailLogin" destination="tJe-U4-jJ6" id="FD7-aQ-PcL"/>
                         <outlet property="mainPageTableView" destination="WhE-j5-Xzq" id="84f-vZ-Y7t"/>
+                        <outlet property="navigationBar" destination="0za-ce-opn" id="nDT-Zg-2Aa"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="sUt-K6-2Q9"/>
                         <segue destination="SdN-Tf-nhA" kind="presentation" identifier="placesSegue" animates="NO" id="kvK-Dz-cGm"/>
                         <segue destination="Tzn-P9-zBi" kind="presentation" identifier="postSegue" animates="NO" id="2nL-Lu-Kco"/>
