@@ -446,6 +446,74 @@ class luckyStrikeViewController: UIViewController {
                     headerLabel.text = option4[randomIndex]
                 }
             }
+            
+            
+            /*if let correctAnsInt = Int(correctAnswer[randomIndex]) {
+                
+                if correctAnsInt == 1 {
+                    headerLabel.text = option1[randomIndex]
+                    /*let str: String = option1[randomIndex]
+                     let attrs = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 22)]
+                     let attributedString = NSMutableAttributedString(string:str, attributes:attrs)
+                     
+                     let normalText = "\n" + "testing"//descriptionEng[randomIndex]
+                     let attrs2 = [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 18)]
+                     let normalString = NSMutableAttributedString(string:normalText, attributes:attrs2)
+                     
+                     attributedString.append(normalString)
+                     headerLabel.attributedText = attributedString
+                     headerLabel.sizeToFit()*/
+                }
+                else if correctAnsInt == 2 {
+                    headerLabel.text = option2[randomIndex]
+                    
+                    /*let str: String = option2[randomIndex]
+                     let attrs = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 22)]
+                     let attributedString = NSMutableAttributedString(string:str, attributes:attrs)
+                     
+                     let normalText = "\n" + "testing"//descriptionEng[randomIndex]
+                     let attrs2 = [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 18)]
+                     let normalString = NSMutableAttributedString(string:normalText, attributes:attrs2)
+                     
+                     attributedString.append(normalString)
+                     headerLabel.attributedText = attributedString
+                     headerLabel.sizeToFit()*/
+                }
+                else if correctAnsInt == 3 {
+                    headerLabel.text = option3[randomIndex]
+                    
+                    /*let str: String = option3[randomIndex]
+                     let attrs = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 22)]
+                     let attributedString = NSMutableAttributedString(string:str, attributes:attrs)
+                     
+                     let normalText = "\n" + "testing"//descriptionEng[randomIndex]
+                     let attrs2 = [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 18)]
+                     let normalString = NSMutableAttributedString(string:normalText, attributes:attrs2)
+                     
+                     attributedString.append(normalString)
+                     headerLabel.attributedText = attributedString
+                     headerLabel.sizeToFit()*/
+                }
+                else if correctAnsInt == 4 {
+                    headerLabel.text = option4[randomIndex]
+                    
+                    /*let str: String = option4[randomIndex]
+                     let attrs = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 22)]
+                     let attributedString = NSMutableAttributedString(string:str, attributes:attrs)
+                     
+                     let normalText = "\n" + "testing"//descriptionEng[randomIndex]
+                     let attrs2 = [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 18)]
+                     let normalString = NSMutableAttributedString(string:normalText, attributes:attrs2)
+                     
+                     attributedString.append(normalString)
+                     headerLabel.attributedText = attributedString
+                     headerLabel.sizeToFit()*/
+                }
+                
+            }*/
+            
+            
+            
             currentObjectId = objectId[randomIndex]
             isCurrentItemPlace = isPlace[randomIndex]
             currentImage.removeAll()
@@ -453,8 +521,9 @@ class luckyStrikeViewController: UIViewController {
             
             descriptionLabel.text = descriptionEng[randomIndex]
             descriptionLabel.isHidden = false
-            self.descriptionLabel.sizeToFit()
             self.descriptionLabel.numberOfLines = 0
+            self.descriptionLabel.sizeToFit()
+
 
             headerLabel.isHidden = false
             image.isHidden = false

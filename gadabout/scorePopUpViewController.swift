@@ -48,9 +48,14 @@ class scorePopUpViewController: UIViewController {
         
         if scoreWin == 0 {
             scoreHeader.text = "Unfortunately!!"
+            scoreWinLabel.text = "You have not won any points"
+            
             //scoreImage.image = UIImage(named: "disappointed.png")
         }
-        scoreWinLabel.text = "You have won \(scoreWin) points"
+        else {
+            scoreHeader.text = "Congratulations"
+            scoreWinLabel.text = "You have won \(scoreWin) points"
+        }
         totalScoreLabel.text = "Your total score : \(totalScore) points"
         
         self.view.backgroundColor = UIColor.white
