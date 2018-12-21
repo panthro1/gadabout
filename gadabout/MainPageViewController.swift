@@ -56,6 +56,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     let network: NetworkManager = NetworkManager.sharedInstance
     
+    @IBOutlet weak var mainTableView: UITableView!
     /*override var shouldAutorotate: Bool {
         return false
     }
@@ -102,8 +103,9 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         AppDelegate.AppUtility.lockOrientation(.portrait)
         
-        NetworkManager.isUnreachable { _ in
-            print("NETWORK STATUS: Offline")
+        NetworkManager.isUnreachable { [unowned self]_ in
+            print("OFFLINE")
+            self.performSegue(withIdentifier: "offlineSegue", sender: self)
         }
         
         //super.viewDidLoad()
@@ -639,7 +641,27 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         AppDelegate.AppUtility.lockOrientation(.portrait)
     }
 
-    
+    func showOfflinePopup() {
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        mainTableView.isScrollEnabled = false
+        let rowToSelect: IndexPath = IndexPath(row: 0, section: 0)
+        mainTableView.scrollToRow(at: rowToSelect, at: .top, animated: false)
+        
+        
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "offlinePopUpID") as! OfflineViewController
+        
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = self.view.bounds//self.view.frame
+        //complete.isEnabled = false
+        //back.isEnabled = false
+        
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
+        
+        
+        
+    }
     
     
     /*

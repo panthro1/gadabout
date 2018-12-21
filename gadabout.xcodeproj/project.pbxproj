@@ -41,6 +41,8 @@
 		E3A3DDEE21A93BFD0070FB85 /* egg.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A3DDED21A93BFD0070FB85 /* egg.png */; };
 		E3A3DDF221A940050070FB85 /* slot.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A3DDF121A940050070FB85 /* slot.png */; };
 		E3B97A2C21CC8E9700C4AC0F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B97A2B21CC8E9700C4AC0F /* NetworkManager.swift */; };
+		E3B97A2E21CC934D00C4AC0F /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B97A2D21CC934D00C4AC0F /* OfflineViewController.swift */; };
+		E3B97A3021CC94E100C4AC0F /* NetworkConnection.png in Resources */ = {isa = PBXBuildFile; fileRef = E3B97A2F21CC94DF00C4AC0F /* NetworkConnection.png */; };
 		E3BA747C219A769800095B1B /* remove.png in Resources */ = {isa = PBXBuildFile; fileRef = E3BA747B219A769700095B1B /* remove.png */; };
 		E3CBDEDF21A04DB1002664B4 /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CBDEDE21A04DB1002664B4 /* checked.png */; };
 		E3CBDEE121A05C8B002664B4 /* undo-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CBDEE021A05C8A002664B4 /* undo-arrow.png */; };
@@ -116,6 +118,8 @@
 		E3A3DDED21A93BFD0070FB85 /* egg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = egg.png; sourceTree = "<group>"; };
 		E3A3DDF121A940050070FB85 /* slot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slot.png; sourceTree = "<group>"; };
 		E3B97A2B21CC8E9700C4AC0F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		E3B97A2D21CC934D00C4AC0F /* OfflineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineViewController.swift; sourceTree = "<group>"; };
+		E3B97A2F21CC94DF00C4AC0F /* NetworkConnection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NetworkConnection.png; sourceTree = "<group>"; };
 		E3BA747B219A769700095B1B /* remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remove.png; sourceTree = "<group>"; };
 		E3CBDEDE21A04DB1002664B4 /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
 		E3CBDEE021A05C8A002664B4 /* undo-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undo-arrow.png"; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 				E3261AE620F098920056CE99 /* AppDelegate.swift */,
 				E3261AE820F098920056CE99 /* ViewController.swift */,
 				E3261AEA20F098920056CE99 /* Main.storyboard */,
+				E3B97A2D21CC934D00C4AC0F /* OfflineViewController.swift */,
 				E32D30862177B6B70016D7EC /* foodsTableViewCell.swift */,
 				E32D30842177B6840016D7EC /* foodsTableViewController.swift */,
 				E3EB34A121751483000DB77A /* ToDoListViewController.swift */,
@@ -257,6 +262,7 @@
 		E3A3DDE421A91C110070FB85 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				E3B97A2F21CC94DF00C4AC0F /* NetworkConnection.png */,
 				E3BA747B219A769700095B1B /* remove.png */,
 				E36DA986212D71830031D337 /* wrong.gif */,
 				E3CF250A219D1C8000D5EA9F /* lock.png */,
@@ -402,6 +408,7 @@
 				E3A3DDEE21A93BFD0070FB85 /* egg.png in Resources */,
 				E3261AF120F098940056CE99 /* Assets.xcassets in Resources */,
 				E3261AEC20F098920056CE99 /* Main.storyboard in Resources */,
+				E3B97A3021CC94E100C4AC0F /* NetworkConnection.png in Resources */,
 				E3A3DDEA21A93A7B0070FB85 /* balloon.png in Resources */,
 				E309426D21A9A619000A0A52 /* puzzle.png in Resources */,
 				E313DF612118D4AD00BAE4C6 /* uncheck.png in Resources */,
@@ -492,6 +499,7 @@
 				E3261AE920F098920056CE99 /* ViewController.swift in Sources */,
 				E3B97A2C21CC8E9700C4AC0F /* NetworkManager.swift in Sources */,
 				E3261AEF20F098920056CE99 /* gadabout.xcdatamodeld in Sources */,
+				E3B97A2E21CC934D00C4AC0F /* OfflineViewController.swift in Sources */,
 				E3261AE720F098920056CE99 /* AppDelegate.swift in Sources */,
 				E342D9AC2104853C009D5C67 /* PlacesTableViewController.swift in Sources */,
 				E32D30872177B6B70016D7EC /* foodsTableViewCell.swift in Sources */,
