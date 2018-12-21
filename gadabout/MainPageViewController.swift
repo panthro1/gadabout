@@ -53,6 +53,9 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var navigationBar: UINavigationBar!
     
     var rowHeight = 100
+    
+    let network: NetworkManager = NetworkManager.sharedInstance
+    
     /*override var shouldAutorotate: Bool {
         return false
     }
@@ -99,6 +102,10 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         AppDelegate.AppUtility.lockOrientation(.portrait)
         
+        NetworkManager.isUnreachable { _ in
+            print("NETWORK STATUS: Offline")
+        }
+        
         //super.viewDidLoad()
         
         self.mainPageTableView.delegate = self
@@ -110,7 +117,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         let navBarHeight = self.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
         let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
         
-        rowHeight = Int((Int(screenSize.height) - upperOffset - 70) / 6)
+        rowHeight = Int((Int(screenSize.height) - upperOffset - Int(bannerView.frame.height)) / 6)
         self.mainPageTableView.rowHeight = CGFloat(rowHeight)//100
         
         // Account ad
