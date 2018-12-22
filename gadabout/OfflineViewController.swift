@@ -7,23 +7,18 @@
 //
 
 import UIKit
+//import Reachability
 
 class OfflineViewController: UIViewController {
-    
-    let network = NetworkManager.sharedInstance
+    //let reachability = Reachability()!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Inside Offline View Controller")
         
-        network.reachability.whenReachable = { [unowned self]_ in
-            
-            print("ONLINE AGAIN")
-        }
-
         // Do any additional setup after loading the view.
     }
     
-
     /*
     // MARK: - Navigation
 

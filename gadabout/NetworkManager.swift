@@ -6,7 +6,7 @@
 //  Copyright © 2018 Ahmet. All rights reserved.
 //
 
-import Foundation
+/*import Foundation
 import Reachability
 
 class NetworkManager: NSObject {
@@ -79,4 +79,4 @@ class NetworkManager: NSObject {
             completed(NetworkManager.sharedInstance)
         }
     }
-}
+}*/

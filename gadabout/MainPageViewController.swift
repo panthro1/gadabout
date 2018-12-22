@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Parse
 import GoogleMobileAds
+import Reachability
 
 var glbPlcImageFile = [PFFile]() // Global place variables
 var glbPlcOption1 = [String]()
@@ -54,7 +55,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     var rowHeight = 100
     
-    let network: NetworkManager = NetworkManager.sharedInstance
+    //let network: NetworkManager = NetworkManager.sharedInstance
+    let reachability = Reachability()!
     
     @IBOutlet weak var mainTableView: UITableView!
     /*override var shouldAutorotate: Bool {
@@ -103,12 +105,13 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         AppDelegate.AppUtility.lockOrientation(.portrait)
         
-        NetworkManager.isUnreachable { [unowned self]_ in
+        /*NetworkManager.isUnreachable { [unowned self]_ in
             print("OFFLINE")
-            self.performSegue(withIdentifier: "offlineSegue", sender: self)
-        }
+            DispatchQueue.main.async(){
+                self.performSegue(withIdentifier: "offlineSegue", sender: self)
+            }
+        }*/
         
-        //super.viewDidLoad()
         
         self.mainPageTableView.delegate = self
         self.mainPageTableView.dataSource = self
@@ -639,14 +642,38 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewWillAppear(_ animated: Bool) {
         AppDelegate.AppUtility.lockOrientation(.portrait)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+        do{
+            try reachability.startNotifier()
+        }catch{
+            print("could not start reachability notifier")
+        }
+    }
+    
+    @objc func reachabilityChanged(note: Notification) {
+        
+        let reachability = note.object as! Reachability
+        
+        switch reachability.connection {
+        case .wifi:
+            print("Reachable via WiFi")
+            removeOfflinePopup()
+        case .cellular:
+            print("Reachable via Cellular")
+        case .none:
+            //print("Network not reachable")
+            self.performSegue(withIdentifier: "offlineSegue", sender: self)
+            showOfflinePopup()
+        }
     }
 
     func showOfflinePopup() {
         
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        /*self.navigationController?.setNavigationBarHidden(true, animated: false)
         mainTableView.isScrollEnabled = false
         let rowToSelect: IndexPath = IndexPath(row: 0, section: 0)
-        mainTableView.scrollToRow(at: rowToSelect, at: .top, animated: false)
+        mainTableView.scrollToRow(at: rowToSelect, at: .top, animated: false)*/
         
         
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "offlinePopUpID") as! OfflineViewController
@@ -663,6 +690,17 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
+    func removeOfflinePopup() {
+        
+        print("Inside remove offline")
+        
+        
+       
+    }
+    /*override func viewDidDisappear(_ animated: Bool) {
+        reachability.stopNotifier()
+        NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
+    }*/
     
     /*
     // MARK: - Navigation

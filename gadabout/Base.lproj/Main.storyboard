@@ -209,7 +209,7 @@
         <!--Main Page View Controller-->
         <scene sceneID="14f-BH-WAL">
             <objects>
-                <viewController id="77F-Fn-Frx" customClass="MainPageViewController" customModule="gadabout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainPagePopUpID" id="77F-Fn-Frx" customClass="MainPageViewController" customModule="gadabout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Asc-Pw-HXp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -286,7 +286,7 @@
                         <segue destination="uew-mE-85R" kind="presentation" identifier="toDoListSegue" animates="NO" id="YWg-Dm-YHW"/>
                         <segue destination="xHi-hW-sEe" kind="presentation" identifier="foodsSegue" animates="NO" id="MrJ-V2-FWZ"/>
                         <segue destination="Mu3-9O-FyB" kind="presentation" identifier="luckyStrikeSegue" animates="NO" id="XWg-ht-3jw"/>
-                        <segue destination="O69-KC-Gqu" kind="presentation" identifier="offlineSegue" id="Ogy-18-MLL"/>
+                        <segue destination="O69-KC-Gqu" kind="show" identifier="offlineSegue" id="pjR-Gm-a4g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0XW-Pd-7Op" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1541,6 +1541,6 @@
         <image name="uncheck.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="E7f-hZ-Nwc"/>
+        <segue reference="oEp-Lf-uRp"/>
     </inferredMetricsTieBreakers>
 </document>
