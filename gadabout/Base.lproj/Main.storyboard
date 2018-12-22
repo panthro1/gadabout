@@ -24,19 +24,74 @@
                                     <constraint firstAttribute="width" secondItem="aEs-W7-LH3" secondAttribute="height" multiplier="1:1" id="gZp-Ag-H6d"/>
                                 </constraints>
                             </imageView>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ay0-zn-37X" userLabel="ViewBelowImage">
+                                <rect key="frame" x="0.0" y="458" width="414" height="9"/>
+                                <color key="backgroundColor" red="0.83137254900000002" green="0.16078431369999999" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO CONNECTION!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="jeJ-U4-JZ9" userLabel="HeaderLabel">
+                                <rect key="frame" x="0.0" y="467" width="414" height="44.666666666666686"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="34"/>
+                                <color key="textColor" red="0.67306995391845703" green="0.137910395860672" blue="0.70691710710525513" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sVk-jQ-Je8">
+                                <rect key="frame" x="0.0" y="511.66666666666674" width="414" height="9"/>
+                                <color key="backgroundColor" red="0.83137254900000002" green="0.16078431369999999" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bkm-3b-qaV" userLabel="ViewLeftMargin">
+                                <rect key="frame" x="0.0" y="520.66666666666663" width="20.666666666666668" height="292.33333333333337"/>
+                                <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oAU-4l-Jll" userLabel="ViewRightMargin">
+                                <rect key="frame" x="393.33333333333331" y="520.66666666666663" width="20.666666666666686" height="292.33333333333337"/>
+                                <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gadabout needs internet connection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="P7O-Lz-s7r" userLabel="TextLabel">
+                                <rect key="frame" x="20.666666666666657" y="520.66666666666663" width="372.66666666666674" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <color key="textColor" red="0.12788596749305725" green="0.36257743835449219" blue="0.49162966012954712" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="P7O-Lz-s7r" firstAttribute="leading" secondItem="bkm-3b-qaV" secondAttribute="trailing" id="04S-Pv-GAi"/>
+                            <constraint firstItem="Ay0-zn-37X" firstAttribute="leading" secondItem="ewe-8d-maU" secondAttribute="leading" id="2Yi-nI-0Qz"/>
+                            <constraint firstItem="bkm-3b-qaV" firstAttribute="top" secondItem="sVk-jQ-Je8" secondAttribute="bottom" id="4Mu-a8-Lro"/>
+                            <constraint firstItem="jeJ-U4-JZ9" firstAttribute="top" secondItem="Ay0-zn-37X" secondAttribute="bottom" id="AQV-Co-3HC"/>
+                            <constraint firstItem="ewe-8d-maU" firstAttribute="trailing" secondItem="Ay0-zn-37X" secondAttribute="trailing" id="FX8-uH-SyB"/>
+                            <constraint firstItem="P7O-Lz-s7r" firstAttribute="top" secondItem="sVk-jQ-Je8" secondAttribute="bottom" id="Kce-C9-c63"/>
+                            <constraint firstItem="ewe-8d-maU" firstAttribute="trailing" secondItem="jeJ-U4-JZ9" secondAttribute="trailing" id="Kig-KY-hhy"/>
+                            <constraint firstItem="bkm-3b-qaV" firstAttribute="leading" secondItem="ewe-8d-maU" secondAttribute="leading" id="MI4-xq-uDI"/>
+                            <constraint firstItem="jeJ-U4-JZ9" firstAttribute="height" secondItem="OFB-Hu-1AL" secondAttribute="height" multiplier="0.05" id="O2o-9z-Qnk"/>
+                            <constraint firstItem="Ay0-zn-37X" firstAttribute="top" secondItem="aEs-W7-LH3" secondAttribute="bottom" id="Q1C-pe-MUI"/>
+                            <constraint firstItem="Ay0-zn-37X" firstAttribute="height" secondItem="OFB-Hu-1AL" secondAttribute="height" multiplier="0.01" id="RuE-OH-3RC"/>
                             <constraint firstItem="ewe-8d-maU" firstAttribute="trailing" secondItem="aEs-W7-LH3" secondAttribute="trailing" id="Snc-3M-8HC"/>
+                            <constraint firstItem="oAU-4l-Jll" firstAttribute="trailing" secondItem="ewe-8d-maU" secondAttribute="trailing" id="URx-G4-h2o"/>
+                            <constraint firstItem="sVk-jQ-Je8" firstAttribute="leading" secondItem="ewe-8d-maU" secondAttribute="leading" id="UuQ-1h-Nle"/>
+                            <constraint firstItem="bkm-3b-qaV" firstAttribute="width" secondItem="OFB-Hu-1AL" secondAttribute="width" multiplier="0.05" id="Wft-Fc-WQ5"/>
+                            <constraint firstItem="sVk-jQ-Je8" firstAttribute="height" secondItem="OFB-Hu-1AL" secondAttribute="height" multiplier="0.01" id="XUS-W6-MT7"/>
+                            <constraint firstItem="ewe-8d-maU" firstAttribute="bottom" secondItem="oAU-4l-Jll" secondAttribute="bottom" id="ZKJ-iz-xpq"/>
+                            <constraint firstItem="jeJ-U4-JZ9" firstAttribute="leading" secondItem="ewe-8d-maU" secondAttribute="leading" id="a0M-5x-Us5"/>
+                            <constraint firstItem="oAU-4l-Jll" firstAttribute="leading" secondItem="P7O-Lz-s7r" secondAttribute="trailing" id="aYY-ku-1fu"/>
                             <constraint firstItem="aEs-W7-LH3" firstAttribute="leading" secondItem="ewe-8d-maU" secondAttribute="leading" id="b1S-dx-bMs"/>
+                            <constraint firstItem="sVk-jQ-Je8" firstAttribute="top" secondItem="jeJ-U4-JZ9" secondAttribute="bottom" id="gXG-se-ZEk"/>
+                            <constraint firstItem="P7O-Lz-s7r" firstAttribute="height" secondItem="OFB-Hu-1AL" secondAttribute="height" multiplier="0.04" id="hKH-dA-0lb"/>
+                            <constraint firstItem="ewe-8d-maU" firstAttribute="bottom" secondItem="bkm-3b-qaV" secondAttribute="bottom" id="kPD-AX-k9C"/>
                             <constraint firstItem="aEs-W7-LH3" firstAttribute="top" secondItem="ewe-8d-maU" secondAttribute="top" id="rd3-Ih-fnb"/>
+                            <constraint firstItem="oAU-4l-Jll" firstAttribute="top" secondItem="sVk-jQ-Je8" secondAttribute="bottom" id="tZx-5t-Af2"/>
+                            <constraint firstItem="oAU-4l-Jll" firstAttribute="width" secondItem="OFB-Hu-1AL" secondAttribute="width" multiplier="0.05" id="yHU-UD-tbS"/>
+                            <constraint firstItem="ewe-8d-maU" firstAttribute="trailing" secondItem="sVk-jQ-Je8" secondAttribute="trailing" id="yfY-QX-H1s"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ewe-8d-maU"/>
                     </view>
+                    <connections>
+                        <segue destination="77F-Fn-Frx" kind="show" identifier="backToOnlineSegue" id="14h-w3-4cb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tWm-82-82E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="912" y="-600"/>
+            <point key="canvasLocation" x="911.59420289855075" y="-600"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -1541,6 +1596,6 @@
         <image name="uncheck.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oEp-Lf-uRp"/>
+        <segue reference="14h-w3-4cb"/>
     </inferredMetricsTieBreakers>
 </document>

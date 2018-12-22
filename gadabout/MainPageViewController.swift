@@ -642,6 +642,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewWillAppear(_ animated: Bool) {
         AppDelegate.AppUtility.lockOrientation(.portrait)
+
         
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
         do{
@@ -662,9 +663,10 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         case .cellular:
             print("Reachable via Cellular")
         case .none:
-            //print("Network not reachable")
+            print("Network not reachable")
             self.performSegue(withIdentifier: "offlineSegue", sender: self)
-            showOfflinePopup()
+            //showOfflinePopup()
+            
         }
     }
 
@@ -682,7 +684,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         popOverVC.view.frame = self.view.bounds//self.view.frame
         //complete.isEnabled = false
         //back.isEnabled = false
-        
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParentViewController: self)
         
@@ -694,14 +695,12 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         print("Inside remove offline")
         
-        
        
     }
-    /*override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         reachability.stopNotifier()
         NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
-    }*/
-    
+    }
     /*
     // MARK: - Navigation
 
