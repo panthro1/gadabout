@@ -515,33 +515,13 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         else {
             
             cell.detailsButton.setTitle("Details", for: [])
-            imageFile[indexPath.row].getDataInBackground { (data, error) in
+            imageFile[indexPath.row].getDataInBackground { [unowned self] (data, error) in
             
                 if let imageData = data {
                 
                     if let imageToDisplay = UIImage(data: imageData) {
                     
                         cell.placeImage.image = imageToDisplay
-                        
-                        // test
-                        
-                        /*let boundsScale = cell.placeImage.bounds.size.width / cell.placeImage.bounds.size.height
-                        let imageScale = imageToDisplay.size.width / imageToDisplay.size.height
-                        
-                        var drawingRect: CGRect = cell.placeImage.bounds
-                        
-                        if boundsScale > imageScale {
-                            drawingRect.size.width =  drawingRect.size.height * imageScale
-                            drawingRect.origin.x = (cell.placeImage.bounds.size.width - drawingRect.size.width) / 2
-                        } else {
-                            drawingRect.size.height = drawingRect.size.width / imageScale
-                            drawingRect.origin.y = (cell.placeImage.bounds.size.height - drawingRect.size.height) / 2
-                        }
-                        let path = UIBezierPath(roundedRect: drawingRect, cornerRadius: 10)
-                        let mask = CAShapeLayer()
-                        mask.path = path.cgPath
-                        cell.placeImage.layer.mask = mask*/
-                        
                     
                     }
                 }
