@@ -522,7 +522,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 6
+        return 7
         
     }
 
@@ -570,6 +570,10 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             cell.accessoryView = UIImageView(image: UIImage(named: "list.png"))
             cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
         }
+        else if indexPath.row == 5 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "Flag_icon.png"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+        }
         
         //cell.righ.image = UIImage(named: "world.png")
         
@@ -582,7 +586,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         else if indexPath.row == 2 {
             cell.textLabel?.text = " Puzzle"
         }
-        else if indexPath.row == 5 {
+        else if indexPath.row == 6 {
             cell.textLabel?.text = "  Post"
         }
         else if indexPath.row == 4 {
@@ -590,6 +594,9 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         }
         else if indexPath.row == 3 {
             cell.textLabel?.text = " Lucky Strike"
+        }
+        else if indexPath.row == 5 {
+            cell.textLabel?.text = " Flag Challenge"
         }
         
         return cell
@@ -611,9 +618,13 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             performSegue(withIdentifier: "puzzleMapSegue", sender: self)
 
         }
-        else if indexPath.row == 5 {
+        else if indexPath.row == 6 {
             print("Post selected")
             performSegue(withIdentifier: "postSegue", sender: self)
+        }
+        else if indexPath.row == 5 {
+            print("Post selected")
+            performSegue(withIdentifier: "flagSegue", sender: self)
         }
         else if indexPath.row == 4 {
             print("To Do List selected")
