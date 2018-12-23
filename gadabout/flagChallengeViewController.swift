@@ -71,6 +71,13 @@ class flagChallengeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        image.isHidden = true
+        option1.isHidden = true
+        option2.isHidden = true
+        option3.isHidden = true
+        option4.isHidden = true
+
+        
         let spacing: CGFloat = 5 // the amount of spacing to appear between image and title
 
         option1.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
@@ -97,7 +104,44 @@ class flagChallengeViewController: UIViewController {
         option4.setTitleColor(UIColor.black, for: .normal)
         option4.layer.borderWidth = 0
         
-        prepareNextQuestion()
+        if glbFlagOption1.count == 0 {
+            let flagsQuery = PFQuery(className: "Flags")
+            flagsQuery.findObjectsInBackground { [unowned self] (objects, error) in
+                if let flags = objects {
+                    
+                    for flag in flags {
+                        
+                        glbFlagOption1.append(flag["option1"] as! String)
+                        glbFlagOption2.append(flag["option2"] as! String)
+                        glbFlagOption3.append(flag["option3"] as! String)
+                        glbFlagOption4.append(flag["option4"] as! String)
+                        glbFlagImageFile.append(flag["imageFile"] as! PFFile)
+                        glbFlagCorrectAnswer.append(flag["correctAnswer"] as! String)
+                        
+                        self.flagOption1.append(flag["option1"] as! String)
+                        self.flagOption2.append(flag["option2"] as! String)
+                        self.flagOption3.append(flag["option3"] as! String)
+                        self.flagOption4.append(flag["option4"] as! String)
+                        self.flagImageFile.append(flag["imageFile"] as! PFFile)
+                        self.flagCorrectAnswer.append(flag["correctAnswer"] as! String)
+                    }
+                    self.prepareNextQuestion()
+                }
+                //activityIndicator.stopAnimating()
+                //UIApplication.shared.endIgnoringInteractionEvents()
+                
+                
+            }
+        }
+        else {
+            flagOption1 = glbFlagOption1
+            flagOption2 = glbFlagOption2
+            flagOption3 = glbFlagOption3
+            flagOption4 = glbFlagOption4
+            flagImageFile = glbFlagImageFile
+            flagCorrectAnswer = glbFlagCorrectAnswer
+            prepareNextQuestion()
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -119,6 +163,14 @@ class flagChallengeViewController: UIViewController {
     }
     
     func prepareNextQuestion() {
+        
+        image.isHidden = false
+        option1.isHidden = false
+        option2.isHidden = false
+        option3.isHidden = false
+        option4.isHidden = false
+
+        
         option1.setImage(UIImage(named: "uncheck.png"), for: [])
         option2.setImage(UIImage(named: "uncheck.png"), for: [])
         option3.setImage(UIImage(named: "uncheck.png"), for: [])
@@ -147,46 +199,6 @@ class flagChallengeViewController: UIViewController {
             }
             
         }
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        
-        if glbFlagOption1.count == 0 {
-            let flagsQuery = PFQuery(className: "Flags")
-            flagsQuery.findObjectsInBackground { [unowned self] (objects, error) in
-                if let flags = objects {
-                    
-                    for flag in flags {
-                        
-                        glbFlagOption1.append(flag["option1"] as! String)
-                        glbFlagOption2.append(flag["option2"] as! String)
-                        glbFlagOption3.append(flag["option3"] as! String)
-                        glbFlagOption4.append(flag["option4"] as! String)
-                        glbFlagImageFile.append(flag["imageFile"] as! PFFile)
-                        glbFlagCorrectAnswer.append(flag["correctAnswer"] as! String)
-                        
-                        self.flagOption1.append(flag["option1"] as! String)
-                        self.flagOption2.append(flag["option2"] as! String)
-                        self.flagOption3.append(flag["option3"] as! String)
-                        self.flagOption4.append(flag["option4"] as! String)
-                        self.flagImageFile.append(flag["imageFile"] as! PFFile)
-                        self.flagCorrectAnswer.append(flag["correctAnswer"] as! String)
-                    }
-                }
-                //activityIndicator.stopAnimating()
-                //UIApplication.shared.endIgnoringInteractionEvents()
-                
-                
-            }
-        }
-        else {
-            flagOption1 = glbFlagOption1
-            flagOption2 = glbFlagOption2
-            flagOption3 = glbFlagOption3
-            flagOption4 = glbFlagOption4
-            flagImageFile = glbFlagImageFile
-            flagCorrectAnswer = glbFlagCorrectAnswer
-        }
-
     }
     
 
