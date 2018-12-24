@@ -17,7 +17,7 @@ var glbFlagOption3 = [String]()
 var glbFlagOption4 = [String]()
 var glbFlagCorrectAnswer = [String]()
 
-class flagChallengeViewController: UIViewController {
+class flagChallengeViewController: UIViewController{
     
     @IBOutlet weak var image: UIImageView!
     
@@ -28,6 +28,14 @@ class flagChallengeViewController: UIViewController {
     @IBOutlet weak var option3: UIButton!
     
     @IBOutlet weak var option4: UIButton!
+    
+    @IBOutlet weak var scoreLabel: UILabel!
+    
+    @IBOutlet weak var bannerView: GADBannerView!
+    
+    var randomIndex = 0
+    
+    var score = 0
     
     var flagImageFile = [PFFile]() // Global food variables
     var flagOption1 = [String]()
@@ -46,6 +54,28 @@ class flagChallengeViewController: UIViewController {
         option2.setImage(UIImage(named: "uncheck.png"), for: [])
         option3.setImage(UIImage(named: "uncheck.png"), for: [])
         option4.setImage(UIImage(named: "uncheck.png"), for: [])
+        
+        if let correctAnsInt = Int(flagCorrectAnswer[randomIndex]) {
+            if correctAnsInt == 1 {
+                print("Correct")
+                score += 1
+                scoreLabel.text = "Score: \(score)"
+                prepareNextQuestion()
+                
+            }
+            else {
+                print("Incorrect")
+                showPopup(Score: score, totalScore: score)
+                flagOption1 = glbFlagOption1
+                flagOption2 = glbFlagOption2
+                flagOption3 = glbFlagOption3
+                flagOption4 = glbFlagOption4
+                flagImageFile = glbFlagImageFile
+                flagCorrectAnswer = glbFlagCorrectAnswer
+                prepareNextQuestion()
+            }
+        }
+
     }
     
     @IBAction func option2Tapped(_ sender: Any) {
@@ -53,6 +83,26 @@ class flagChallengeViewController: UIViewController {
         option2.setImage(UIImage(named: "check.png"), for: [])
         option3.setImage(UIImage(named: "uncheck.png"), for: [])
         option4.setImage(UIImage(named: "uncheck.png"), for: [])
+        
+        if let correctAnsInt = Int(flagCorrectAnswer[randomIndex]) {
+            if correctAnsInt == 2 {
+                print("Correct")
+                score += 1
+                scoreLabel.text = "Score: \(score)"
+                prepareNextQuestion()
+            }
+            else {
+                print("Incorrect")
+                showPopup(Score: score, totalScore: score)
+                flagOption1 = glbFlagOption1
+                flagOption2 = glbFlagOption2
+                flagOption3 = glbFlagOption3
+                flagOption4 = glbFlagOption4
+                flagImageFile = glbFlagImageFile
+                flagCorrectAnswer = glbFlagCorrectAnswer
+                prepareNextQuestion()
+            }
+        }
     }
     
     @IBAction func option3Tapped(_ sender: Any) {
@@ -60,6 +110,26 @@ class flagChallengeViewController: UIViewController {
         option2.setImage(UIImage(named: "uncheck.png"), for: [])
         option3.setImage(UIImage(named: "check.png"), for: [])
         option4.setImage(UIImage(named: "uncheck.png"), for: [])
+        
+        if let correctAnsInt = Int(flagCorrectAnswer[randomIndex]) {
+            if correctAnsInt == 3 {
+                print("Correct")
+                score += 1
+                scoreLabel.text = "Score: \(score)"
+                prepareNextQuestion()
+            }
+            else {
+                print("Incorrect")
+                showPopup(Score: score, totalScore: score)
+                flagOption1 = glbFlagOption1
+                flagOption2 = glbFlagOption2
+                flagOption3 = glbFlagOption3
+                flagOption4 = glbFlagOption4
+                flagImageFile = glbFlagImageFile
+                flagCorrectAnswer = glbFlagCorrectAnswer
+                prepareNextQuestion()
+            }
+        }
     }
     
     @IBAction func option4Tapped(_ sender: Any) {
@@ -67,6 +137,26 @@ class flagChallengeViewController: UIViewController {
         option2.setImage(UIImage(named: "uncheck.png"), for: [])
         option3.setImage(UIImage(named: "uncheck.png"), for: [])
         option4.setImage(UIImage(named: "check.png"), for: [])
+        
+        if let correctAnsInt = Int(flagCorrectAnswer[randomIndex]) {
+            if correctAnsInt == 4 {
+                print("Correct")
+                score += 1
+                scoreLabel.text = "Score: \(score)"
+                prepareNextQuestion()
+            }
+            else {
+                print("Incorrect")
+                showPopup(Score: score, totalScore: score)
+                flagOption1 = glbFlagOption1
+                flagOption2 = glbFlagOption2
+                flagOption3 = glbFlagOption3
+                flagOption4 = glbFlagOption4
+                flagImageFile = glbFlagImageFile
+                flagCorrectAnswer = glbFlagCorrectAnswer
+                prepareNextQuestion()
+            }
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,6 +193,15 @@ class flagChallengeViewController: UIViewController {
         option4.imageView?.contentMode = .scaleAspectFit
         option4.setTitleColor(UIColor.black, for: .normal)
         option4.layer.borderWidth = 0
+        
+        // Account ad
+        //bannerView.adUnitID = "ca-app-pub-5745243428784846~5277829027"
+        
+        // Test add
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
         
         if glbFlagOption1.count == 0 {
             let flagsQuery = PFQuery(className: "Flags")
@@ -181,7 +280,9 @@ class flagChallengeViewController: UIViewController {
         option3.setTitle("Country3", for: [])
         option4.setTitle("Country4", for: [])*/
         
-        let randomIndex = 0
+        randomIndex = Int(arc4random_uniform(UInt32(flagOption1.count)))
+        print("Random Index: \(randomIndex)")
+        
         option1.setTitle(flagOption1[randomIndex], for: [])
         option2.setTitle(flagOption2[randomIndex], for: [])
         option3.setTitle(flagOption3[randomIndex], for: [])
@@ -199,7 +300,33 @@ class flagChallengeViewController: UIViewController {
             }
             
         }
+        
+        flagOption1.remove(at: randomIndex)
+        flagOption2.remove(at: randomIndex)
+        flagOption3.remove(at: randomIndex)
+        flagOption4.remove(at: randomIndex)
+        flagImageFile.remove(at: randomIndex)
     }
+    
+    func showPopup(Score: Int, totalScore: Int) {
+        
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
+        popOverVC.scoreWin = Score
+        popOverVC.totalScore = totalScore
+        //popOverVC.delegate = self
+        
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = self.view.bounds//self.view.frame
+        //complete.isEnabled = false
+        //back.isEnabled = false
+        
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
+        
+        
+        
+    }
+    
     
 
     /*

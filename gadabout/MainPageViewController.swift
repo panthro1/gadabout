@@ -568,11 +568,11 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         }
         else if indexPath.row == 4 {
             cell.accessoryView = UIImageView(image: UIImage(named: "list.png"))
-            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
         }
         else if indexPath.row == 5 {
             cell.accessoryView = UIImageView(image: UIImage(named: "Flag_icon.png"))
-            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: 75, height: 75)
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
         }
         
         //cell.righ.image = UIImage(named: "world.png")

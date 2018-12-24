@@ -190,7 +190,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                     
                     for _ in 0 ..< questionLimit {
                         
-                        let randomIndex = Int(arc4random_uniform(UInt32(glbFdObjectId.count - 1)))
+                        let randomIndex = Int(arc4random_uniform(UInt32(glbFdObjectId.count)))
                         
                         self.option1.append(glbFdOption1[randomIndex])
                         self.option2.append(glbFdOption2[randomIndex])
@@ -228,7 +228,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             
             for _ in 0 ..< questionLimit {
                 
-                let randomIndex = Int(arc4random_uniform(UInt32(glbFdObjectId.count - 1)))
+                let randomIndex = Int(arc4random_uniform(UInt32(glbFdObjectId.count)))
                 
                 option1.append(glbFdOption1[randomIndex])
                 option2.append(glbFdOption2[randomIndex])
@@ -1005,7 +1005,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                     
                     for _ in 0 ..< questionLimit {
                         
-                        let randomIndex = Int(arc4random_uniform(UInt32(glbFdObjectId.count - 1)))
+                        let randomIndex = Int(arc4random_uniform(UInt32(glbFdObjectId.count)))
                         
                         self.option1.append(glbFdOption1[randomIndex])
                         self.option2.append(glbFdOption2[randomIndex])
@@ -1043,7 +1043,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             
             for _ in 0 ..< questionLimit {
                 
-                let randomIndex = Int(arc4random_uniform(UInt32(glbFdObjectId.count - 1)))
+                let randomIndex = Int(arc4random_uniform(UInt32(glbFdObjectId.count)))
                 
                 option1.append(glbFdOption1[randomIndex])
                 option2.append(glbFdOption2[randomIndex])

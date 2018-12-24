@@ -227,7 +227,7 @@ class luckyStrikeViewController: UIViewController {
                             }
                         }
                     }
-                    let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count - 1)))
+                    let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
                     print("Random Index: \(randomIndex)")
                     
                     self.imageFile[randomIndex].getDataInBackground { (data, error) in
@@ -292,7 +292,7 @@ class luckyStrikeViewController: UIViewController {
         }
         else{
             
-            let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count - 1)))
+            let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
             print("Random Index: \(randomIndex)")
             
             self.imageFile[randomIndex].getDataInBackground { (data, error) in
@@ -417,7 +417,7 @@ class luckyStrikeViewController: UIViewController {
         if imageFile.count > 5 {
 
             
-            let randomIndex = Int(arc4random_uniform(UInt32(imageFile.count - 1)))
+            let randomIndex = Int(arc4random_uniform(UInt32(imageFile.count)))
             print("Random Index: \(randomIndex)")
             
             imageFile[randomIndex].getDataInBackground { (data, error) in
@@ -589,7 +589,7 @@ class luckyStrikeViewController: UIViewController {
                             }
                         }
                     }
-                    let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count - 1)))
+                    let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
                     print("Random Index: \(randomIndex)")
                     
                     self.imageFile[randomIndex].getDataInBackground { (data, error) in
@@ -722,7 +722,7 @@ class luckyStrikeViewController: UIViewController {
 
                                 }
                             }
-                            let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count - 1)))
+                            let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
                             print("Random Index: \(randomIndex)")
                             
                             self.imageFile[randomIndex].getDataInBackground { (data, error) in
@@ -783,7 +783,7 @@ class luckyStrikeViewController: UIViewController {
                 }
                 else {
                     
-                    let randomIndex = Int(arc4random_uniform(UInt32(imageFile.count - 1)))
+                    let randomIndex = Int(arc4random_uniform(UInt32(imageFile.count)))
                     print("Random Index: \(randomIndex)")
                     
                     imageFile[randomIndex].getDataInBackground { (data, error) in
