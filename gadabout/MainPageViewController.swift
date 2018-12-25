@@ -37,6 +37,7 @@ var glbToDoItemIDs = [String]()
 var glbToDoItemCompleted = [Bool]()
 var glbToDoItemPlaceOrFood = [String]()
 var glbUserScore: Int = -1
+var glbFlagScore: Int = -1
 
 
 class MainPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -503,9 +504,22 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                     else {
                         glbUserScore = 0
                     }
+                    
+                    if let strScore = score["flagScore"] {
+                        if let flagScore = Int(strScore as! String) {
+                            glbFlagScore = flagScore
+                        }
+                        else {
+                            glbFlagScore = 0
+                        }
+                    }
+                    else {
+                        glbFlagScore = 0
+                    }
                 }
                 else {
-                   glbUserScore = 0
+                    glbUserScore = 0
+                    glbFlagScore = 0
                 }
             }
         }

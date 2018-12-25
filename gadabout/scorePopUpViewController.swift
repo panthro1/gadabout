@@ -19,6 +19,7 @@ class scorePopUpViewController: UIViewController {
     
     public var scoreWin = Int()
     public var totalScore = Int()
+    public var isFlagOutput = Bool()
 
     
     @IBOutlet weak var scoreWinLabel: UILabel!
@@ -46,17 +47,37 @@ class scorePopUpViewController: UIViewController {
         closeButton.layer.borderWidth = 1
         closeButton.layer.borderColor = UIColor.black.cgColor
         
-        if scoreWin == 0 {
-            scoreHeader.text = "Unfortunately!!"
-            scoreWinLabel.text = "You have not won any points"
-            
-            //scoreImage.image = UIImage(named: "disappointed.png")
+        if isFlagOutput {
+            if scoreWin == 0 {
+                scoreHeader.text = "Unfortunately!!"
+                scoreWinLabel.text = "Score: \(scoreWin)"
+                totalScoreLabel.text = "Record: \(totalScore)"
+            }
+            else {
+                if scoreWin > totalScore {
+                    scoreHeader.text = "New Record!!"
+                    scoreWinLabel.text = "Score: \(scoreWin)"
+                    totalScoreLabel.text = "Old Record: \(totalScore)"
+                }
+                else {
+                    scoreHeader.text = "Congratulations"
+                    scoreWinLabel.text = "Score: \(scoreWin)"
+                    totalScoreLabel.text = "Record: \(totalScore)"
+                }
+            }
         }
         else {
-            scoreHeader.text = "Congratulations"
-            scoreWinLabel.text = "You have won \(scoreWin) points"
+            if scoreWin == 0 {
+                scoreHeader.text = "Unfortunately!!"
+                scoreWinLabel.text = "You have not won any points"
+            }
+            else {
+                scoreHeader.text = "Congratulations"
+                scoreWinLabel.text = "You have won \(scoreWin) points"
+            }
+            totalScoreLabel.text = "Your total score : \(totalScore) points"
         }
-        totalScoreLabel.text = "Your total score : \(totalScore) points"
+
         
         self.view.backgroundColor = UIColor.white
         

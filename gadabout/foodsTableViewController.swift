@@ -309,6 +309,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
         popOverVC.scoreWin = Score
         popOverVC.totalScore = totalScore
+        popOverVC.isFlagOutput = false
         popOverVC.delegate = self
         self.addChildViewController(popOverVC)
         popOverVC.view.frame = self.view.bounds//self.view.frame
