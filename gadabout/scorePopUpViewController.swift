@@ -20,6 +20,7 @@ class scorePopUpViewController: UIViewController {
     public var scoreWin = Int()
     public var totalScore = Int()
     public var isFlagOutput = Bool()
+    public var isScoreSummary = Bool()
 
     
     @IBOutlet weak var scoreWinLabel: UILabel!
@@ -47,36 +48,42 @@ class scorePopUpViewController: UIViewController {
         closeButton.layer.borderWidth = 1
         closeButton.layer.borderColor = UIColor.black.cgColor
         
-        if isFlagOutput {
-            if scoreWin == 0 {
-                scoreHeader.text = "Unfortunately!!"
-                scoreWinLabel.text = "Score: \(scoreWin)"
-                totalScoreLabel.text = "Record: \(totalScore)"
+        
+        if isScoreSummary {
+            
+            scoreHeader.text = "Summary"
+            applyBoldText(text1: "TotalScore", text2: "Flag Record")
+        }
+        else {
+            if isFlagOutput {
+                if scoreWin == 0 {
+                    scoreHeader.text = "Unfortunately!!"
+                    applyBoldText(text1: "Score", text2: "Record")
+                }
+                else {
+                    if scoreWin > totalScore {
+                        scoreHeader.text = "New Record!!"
+                        applyBoldText(text1: "Score", text2: "Old Record")
+                    }
+                    else {
+                        scoreHeader.text = "Congratulations"
+                        applyBoldText(text1: "Score", text2: "Record")
+                    }
+                }
             }
             else {
-                if scoreWin > totalScore {
-                    scoreHeader.text = "New Record!!"
-                    scoreWinLabel.text = "Score: \(scoreWin)"
-                    totalScoreLabel.text = "Old Record: \(totalScore)"
+                if scoreWin == 0 {
+                    scoreHeader.text = "Unfortunately!!"
+                    scoreWinLabel.text = "You have not won any points"
                 }
                 else {
                     scoreHeader.text = "Congratulations"
-                    scoreWinLabel.text = "Score: \(scoreWin)"
-                    totalScoreLabel.text = "Record: \(totalScore)"
+                    scoreWinLabel.text = "You have won \(scoreWin) points"
                 }
+                totalScoreLabel.text = "Your total score : \(totalScore) points"
             }
         }
-        else {
-            if scoreWin == 0 {
-                scoreHeader.text = "Unfortunately!!"
-                scoreWinLabel.text = "You have not won any points"
-            }
-            else {
-                scoreHeader.text = "Congratulations"
-                scoreWinLabel.text = "You have won \(scoreWin) points"
-            }
-            totalScoreLabel.text = "Your total score : \(totalScore) points"
-        }
+
 
         
         self.view.backgroundColor = UIColor.white
@@ -108,6 +115,29 @@ class scorePopUpViewController: UIViewController {
             self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         }
         self.view.removeFromSuperview()
+    }
+    
+    func applyBoldText (text1: String, text2: String) {
+        let boldText  = text1 + ": "
+        let attrs = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 25)]
+        let attributedString = NSMutableAttributedString(string:boldText, attributes:attrs)
+        
+        let normalText = "\(scoreWin) points"
+        let normalString = NSMutableAttributedString(string:normalText)
+        
+        attributedString.append(normalString)
+        scoreWinLabel.attributedText = attributedString
+        
+        let boldText2  = text2 + ": "
+        let attrs2 = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 25)]
+        let attributedString2 = NSMutableAttributedString(string:boldText2, attributes:attrs2)
+        
+        let normalText2 = "\(totalScore) points"
+        let normalString2 = NSMutableAttributedString(string:normalText2)
+        
+        attributedString2.append(normalString2)
+        totalScoreLabel.attributedText = attributedString2
+        //totalScoreLabel.text = "Flag Challenge Record: \(totalScore)"
     }
 
     /*

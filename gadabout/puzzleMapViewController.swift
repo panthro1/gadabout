@@ -739,6 +739,7 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
         popOverVC.scoreWin = Score
         popOverVC.totalScore = totalScore
         popOverVC.isFlagOutput = false
+        popOverVC.isScoreSummary = false
         popOverVC.delegate = self
         
         self.addChildViewController(popOverVC)

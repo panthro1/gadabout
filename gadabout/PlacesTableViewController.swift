@@ -321,6 +321,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         popOverVC.scoreWin = Score
         popOverVC.totalScore = totalScore
         popOverVC.isFlagOutput = false
+        popOverVC.isScoreSummary = false
         popOverVC.delegate = self
         
         self.addChildViewController(popOverVC)

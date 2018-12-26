@@ -310,6 +310,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         popOverVC.scoreWin = Score
         popOverVC.totalScore = totalScore
         popOverVC.isFlagOutput = false
+        popOverVC.isScoreSummary = false
         popOverVC.delegate = self
         self.addChildViewController(popOverVC)
         popOverVC.view.frame = self.view.bounds//self.view.frame

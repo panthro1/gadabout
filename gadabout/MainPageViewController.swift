@@ -40,7 +40,7 @@ var glbUserScore: Int = -1
 var glbFlagScore: Int = -1
 
 
-class MainPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, scorePopupDelegate  {
     
     var isEnglish = true
     var questionSeenBefore = [String]()
@@ -53,6 +53,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var bannerView: GADBannerView!
     
     @IBOutlet weak var navigationBar: UINavigationBar!
+    
+    var interstitial: GADInterstitial!
     
     var rowHeight = 100
     
@@ -80,6 +82,25 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
 
+    
+    @IBAction func scoreTapped(_ sender: Any) {
+        
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
+        popOverVC.scoreWin = glbUserScore
+        popOverVC.totalScore = glbFlagScore
+        popOverVC.isFlagOutput = false
+        popOverVC.isScoreSummary = true
+        popOverVC.delegate = self
+        
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = self.view.bounds//self.view.frame
+        //complete.isEnabled = false
+        //back.isEnabled = false
+        
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
+        
+    }
     
     
     @objc func isRotated() {
@@ -113,6 +134,13 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }*/
         
+        // Ad id
+        // interstitial = GADInterstitial(adUnitID: "ca-app-pub-5745243428784846~5277829027")
+        
+        // Test ad
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        let adRequest = GADRequest()
+        interstitial.load(adRequest)
         
         self.mainPageTableView.delegate = self
         self.mainPageTableView.dataSource = self
@@ -684,7 +712,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         switch reachability.connection {
         case .wifi:
             print("Reachable via WiFi")
-            removeOfflinePopup()
         case .cellular:
             print("Reachable via Cellular")
         case .none:
@@ -716,11 +743,14 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-    func removeOfflinePopup() {
+    
+    func SendCloseInfo() {
         
-        print("Inside remove offline")
-        
-       
+        if interstitial.isReady {
+            interstitial.present(fromRootViewController: self)
+        } else {
+            print("Ad wasn't ready")
+        }
     }
     override func viewWillDisappear(_ animated: Bool) {
         reachability.stopNotifier()
