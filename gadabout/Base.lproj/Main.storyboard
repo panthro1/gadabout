@@ -122,7 +122,7 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flag_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="M7O-t3-Rqy">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M7O-t3-Rqy">
                                 <rect key="frame" x="20.666666666666657" y="88.666666666666657" width="372.66666666666674" height="279.66666666666674"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="M7O-t3-Rqy" secondAttribute="height" multiplier="4:3" id="Sim-Ft-enz"/>
@@ -1805,7 +1805,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Flag_icon.png" width="300" height="422"/>
         <image name="NetworkConnection.png" width="500" height="373"/>
         <image name="back.png" width="32" height="32"/>
         <image name="remove.png" width="32" height="32"/>
@@ -1813,6 +1812,6 @@
         <image name="uncheck.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="e9z-7M-9hq"/>
+        <segue reference="raA-vn-2XX"/>
     </inferredMetricsTieBreakers>
 </document>
