@@ -35,6 +35,8 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
     
     var interstitial: GADInterstitial!
     
+    @IBOutlet weak var tryAgainButton: UIButton!
+    
     var randomIndex = 0
     
     var score = 0
@@ -71,6 +73,42 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         }
         else {
             print("Incorrect")
+            
+            option1.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
+            let origImage = UIImage(named: "check.png");
+            let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+            option1.setImage(tintedImage, for: .normal)
+            option1.tintColor = UIColor(rgb: 0xC20F16)
+            
+            if correctAnsInt  == 1 {
+                
+                option1.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                option1.layer.borderWidth = 2
+                option1.layer.cornerRadius = 10
+                
+            }
+            else if correctAnsInt  == 2 {
+                
+                option2.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                option2.layer.borderWidth = 2
+                option2.layer.cornerRadius = 10
+                
+            }
+            else if correctAnsInt  == 3 {
+                
+                option3.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                option3.layer.borderWidth = 2
+                option3.layer.cornerRadius = 10
+                
+            }
+            else {
+                
+                option4.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                option4.layer.borderWidth = 2
+                option4.layer.cornerRadius = 10
+                
+            }
+            
             showPopup(Score: score, oldRecord: glbFlagScore)
             flagOption1 = glbFlagOption1
             flagOption2 = glbFlagOption2
@@ -79,10 +117,21 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
             flagImageFile = glbFlagImageFile
             flagCorrectAnswer = glbFlagCorrectAnswer
             
-            prepareNextQuestion()
+            tryAgainButton.isHidden = false
+            
         }
 
     }
+    
+    @IBAction func tryAgainTapped(_ sender: Any) {
+        let button = sender as? UIButton
+        button?.pulsate()
+        
+        tryAgainButton.isHidden = true
+        
+        prepareNextQuestion()
+    }
+    
     
     @IBAction func option2Tapped(_ sender: Any) {
         option1.setImage(UIImage(named: "uncheck.png"), for: [])
@@ -101,6 +150,43 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         }
         else {
             print("Incorrect")
+            
+            option2.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
+            let origImage = UIImage(named: "check.png");
+            let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+            option2.setImage(tintedImage, for: .normal)
+            option2.tintColor = UIColor(rgb: 0xC20F16)
+            
+            if correctAnsInt  == 1 {
+                
+                option1.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                option1.layer.borderWidth = 2
+                option1.layer.cornerRadius = 10
+                
+            }
+            else if correctAnsInt  == 2 {
+                
+                option2.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                option2.layer.borderWidth = 2
+                option2.layer.cornerRadius = 10
+                
+            }
+            else if correctAnsInt  == 3 {
+                
+                option3.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                option3.layer.borderWidth = 2
+                option3.layer.cornerRadius = 10
+                
+            }
+            else {
+                
+                option4.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                option4.layer.borderWidth = 2
+                option4.layer.cornerRadius = 10
+                
+            }
+
+            
             showPopup(Score: score, oldRecord: glbFlagScore)
             flagOption1 = glbFlagOption1
             flagOption2 = glbFlagOption2
@@ -109,7 +195,7 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
             flagImageFile = glbFlagImageFile
             flagCorrectAnswer = glbFlagCorrectAnswer
             
-            prepareNextQuestion()
+            tryAgainButton.isHidden = false
         }
     }
     
@@ -130,6 +216,43 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         }
         else {
             print("Incorrect")
+            
+            option3.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
+            let origImage = UIImage(named: "check.png");
+            let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+            option3.setImage(tintedImage, for: .normal)
+            option3.tintColor = UIColor(rgb: 0xC20F16)
+            
+            if correctAnsInt  == 1 {
+                
+                option1.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                option1.layer.borderWidth = 2
+                option1.layer.cornerRadius = 10
+                
+            }
+            else if correctAnsInt  == 2 {
+                
+                option2.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                option2.layer.borderWidth = 2
+                option2.layer.cornerRadius = 10
+                
+            }
+            else if correctAnsInt  == 3 {
+                
+                option3.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                option3.layer.borderWidth = 2
+                option3.layer.cornerRadius = 10
+                
+            }
+            else {
+                
+                option4.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                option4.layer.borderWidth = 2
+                option4.layer.cornerRadius = 10
+                
+            }
+
+            
             showPopup(Score: score, oldRecord: glbFlagScore)
             flagOption1 = glbFlagOption1
             flagOption2 = glbFlagOption2
@@ -138,7 +261,7 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
             flagImageFile = glbFlagImageFile
             flagCorrectAnswer = glbFlagCorrectAnswer
             
-            prepareNextQuestion()
+            tryAgainButton.isHidden = false
         }
     }
     
@@ -159,6 +282,43 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         }
         else {
             print("Incorrect")
+            
+            option4.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
+            let origImage = UIImage(named: "check.png");
+            let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+            option4.setImage(tintedImage, for: .normal)
+            option4.tintColor = UIColor(rgb: 0xC20F16)
+            
+            if correctAnsInt  == 1 {
+                
+                option1.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                option1.layer.borderWidth = 2
+                option1.layer.cornerRadius = 10
+                
+            }
+            else if correctAnsInt  == 2 {
+                
+                option2.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                option2.layer.borderWidth = 2
+                option2.layer.cornerRadius = 10
+                
+            }
+            else if correctAnsInt  == 3 {
+                
+                option3.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                option3.layer.borderWidth = 2
+                option3.layer.cornerRadius = 10
+                
+            }
+            else {
+                
+                option4.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
+                option4.layer.borderWidth = 2
+                option4.layer.cornerRadius = 10
+                
+            }
+
+            
             showPopup(Score: score, oldRecord: glbFlagScore)
             flagOption1 = glbFlagOption1
             flagOption2 = glbFlagOption2
@@ -167,7 +327,7 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
             flagImageFile = glbFlagImageFile
             flagCorrectAnswer = glbFlagCorrectAnswer
             
-            prepareNextQuestion()
+            tryAgainButton.isHidden = false
         }
     }
     override func viewDidLoad() {
@@ -178,6 +338,16 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         option2.isHidden = true
         option3.isHidden = true
         option4.isHidden = true
+        tryAgainButton.isHidden = true
+        
+        /*tryAgainButton.layer.cornerRadius = 10
+        tryAgainButton.layer.borderWidth = 1
+        tryAgainButton.layer.borderColor = UIColor.black.cgColor*/
+        
+        tryAgainButton.backgroundColor = .clear
+        tryAgainButton.layer.cornerRadius = 5
+        tryAgainButton.layer.borderWidth = 1
+        tryAgainButton.layer.borderColor = UIColor.black.cgColor
         
         // Ad id
         // interstitial = GADInterstitial(adUnitID: "ca-app-pub-5745243428784846~5277829027")
@@ -288,8 +458,39 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         option2.isHidden = false
         option3.isHidden = false
         option4.isHidden = false
-
         
+        let spacing: CGFloat = 5 // the amount of spacing to appear between image and title
+        
+        option1.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
+        option1.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
+        option1.imageView?.contentMode = .scaleAspectFit
+        option1.setTitleColor(UIColor.black, for: .normal)
+        option1.layer.borderWidth = 0
+        
+        option2.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
+        option2.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
+        option2.imageView?.contentMode = .scaleAspectFit
+        option2.setTitleColor(UIColor.black, for: .normal)
+        option2.layer.borderWidth = 0
+        
+        option3.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
+        option3.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
+        option3.imageView?.contentMode = .scaleAspectFit
+        option3.setTitleColor(UIColor.black, for: .normal)
+        option3.layer.borderWidth = 0
+        
+        option4.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
+        option4.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
+        option4.imageView?.contentMode = .scaleAspectFit
+        option4.setTitleColor(UIColor.black, for: .normal)
+        option4.layer.borderWidth = 0
+
+        option1.setTitleColor(UIColor.black, for: [])
+        option2.setTitleColor(UIColor.black, for: [])
+        option3.setTitleColor(UIColor.black, for: [])
+        option4.setTitleColor(UIColor.black, for: [])
+        
+
         option1.setImage(UIImage(named: "uncheck.png"), for: [])
         option2.setImage(UIImage(named: "uncheck.png"), for: [])
         option3.setImage(UIImage(named: "uncheck.png"), for: [])

@@ -52,7 +52,7 @@ class scorePopUpViewController: UIViewController {
         if isScoreSummary {
             
             scoreHeader.text = "Summary"
-            applyBoldText(text1: "TotalScore", text2: "Flag Record")
+            applyBoldText(text1: "Total Score", text2: "Flag Record")
         }
         else {
             if isFlagOutput {
