@@ -505,7 +505,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WhE-j5-Xzq">
-                                <rect key="frame" x="0.0" y="94" width="414" height="719"/>
+                                <rect key="frame" x="0.0" y="94" width="414" height="669"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mainPageCell" rowHeight="104" id="Vha-kk-gev">
@@ -534,12 +534,12 @@
                         <constraints>
                             <constraint firstItem="0za-ce-opn" firstAttribute="leading" secondItem="ZDo-MM-aax" secondAttribute="leading" id="57W-f6-8R6"/>
                             <constraint firstItem="O8c-nx-LZO" firstAttribute="bottom" secondItem="ZDo-MM-aax" secondAttribute="bottom" id="6of-Qi-3Ly"/>
+                            <constraint firstItem="O8c-nx-LZO" firstAttribute="top" secondItem="WhE-j5-Xzq" secondAttribute="bottom" id="75X-NO-Ljy"/>
                             <constraint firstItem="WhE-j5-Xzq" firstAttribute="top" secondItem="0za-ce-opn" secondAttribute="bottom" id="FA0-eH-lLX"/>
                             <constraint firstItem="0za-ce-opn" firstAttribute="trailing" secondItem="ZDo-MM-aax" secondAttribute="trailing" id="NFB-wb-xK7"/>
                             <constraint firstItem="WhE-j5-Xzq" firstAttribute="trailing" secondItem="ZDo-MM-aax" secondAttribute="trailing" id="VaC-fF-rw4"/>
                             <constraint firstItem="0za-ce-opn" firstAttribute="top" secondItem="Asc-Pw-HXp" secondAttribute="topMargin" id="bOG-WS-JEk"/>
                             <constraint firstItem="ZDo-MM-aax" firstAttribute="trailing" secondItem="O8c-nx-LZO" secondAttribute="trailing" id="bTx-O4-NZu"/>
-                            <constraint firstItem="ZDo-MM-aax" firstAttribute="bottom" secondItem="WhE-j5-Xzq" secondAttribute="bottom" id="d5I-1R-l3b"/>
                             <constraint firstItem="O8c-nx-LZO" firstAttribute="leading" secondItem="ZDo-MM-aax" secondAttribute="leading" id="hhc-Po-meu"/>
                             <constraint firstItem="WhE-j5-Xzq" firstAttribute="leading" secondItem="ZDo-MM-aax" secondAttribute="leading" id="ohe-Z1-5bx"/>
                         </constraints>

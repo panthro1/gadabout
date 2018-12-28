@@ -148,10 +148,23 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         let screenSize = UIScreen.main.bounds
         
-        let navBarHeight = self.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
-        let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
+        let topSafeArea = UIApplication.shared.windows[0].safeAreaInsets.top
+        print("Top safe area: \(topSafeArea)")
         
-        rowHeight = Int((Int(screenSize.height) - upperOffset - Int(bannerView.frame.height)) / 6)
+        let bottomSafeArea = UIApplication.shared.windows[0].safeAreaInsets.bottom
+        print("Bottom safe area: \(bottomSafeArea)")
+        
+        
+        let navBarHeight = self.navigationBar.frame.size.height//UIApplication.shared.statusBarFrame.height
+        let upperOffset = /*Int(screenSize.height*0.01) + */Int(navBarHeight) + Int(topSafeArea)
+        rowHeight = Int((Int(screenSize.height) - upperOffset - Int(bannerView.frame.height) - Int(bottomSafeArea)) / 6)
+        
+        print("nav bar height: \(navigationBar.frame.size.height)" )
+        print("screen height: \(screenSize.height)" )
+        print("table height: \(mainTableView.frame.height)" )
+        print("status bar height: \(UIApplication.shared.statusBarFrame.height)" )
+
+
         self.mainPageTableView.rowHeight = CGFloat(rowHeight)//100
         
         // Account ad
@@ -162,8 +175,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
-        
-
         
         NotificationCenter.default.addObserver(self, selector: #selector(isRotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
@@ -564,7 +575,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 7
+        return 6
         
     }
 
