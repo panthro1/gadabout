@@ -299,7 +299,7 @@
                         <outlet property="option4" destination="3un-PL-9v6" id="eRC-sR-5qD"/>
                         <outlet property="scoreLabel" destination="nb6-p9-ZoQ" id="uBq-Ec-nZz"/>
                         <outlet property="tryAgainButton" destination="IBs-pE-Vsp" id="Tuu-58-nGk"/>
-                        <segue destination="77F-Fn-Frx" kind="presentation" identifier="flagBackSegue" id="raA-vn-2XX"/>
+                        <segue destination="77F-Fn-Frx" kind="presentation" identifier="flagBackSegue" animates="NO" id="raA-vn-2XX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JaE-sc-ZD5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -561,7 +561,7 @@
                         <segue destination="xHi-hW-sEe" kind="presentation" identifier="foodsSegue" animates="NO" id="MrJ-V2-FWZ"/>
                         <segue destination="Mu3-9O-FyB" kind="presentation" identifier="luckyStrikeSegue" animates="NO" id="XWg-ht-3jw"/>
                         <segue destination="O69-KC-Gqu" kind="show" identifier="offlineSegue" id="pjR-Gm-a4g"/>
-                        <segue destination="xO6-c5-z60" kind="presentation" identifier="flagSegue" id="NDQ-9Z-oCr"/>
+                        <segue destination="xO6-c5-z60" kind="presentation" identifier="flagSegue" animates="NO" id="NDQ-9Z-oCr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0XW-Pd-7Op" userLabel="First Responder" sceneMemberID="firstResponder"/>
