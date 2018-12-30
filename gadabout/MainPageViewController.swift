@@ -194,7 +194,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
         
-        if glbPlcObjectId.count < 5 {
+        if glbPlcObjectId.count < 4 {
             let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
             activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
             activityIndicator.center = self.view.center
@@ -248,16 +248,43 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                             }
                         }
                     }
-                    activityIndicator.stopAnimating()
-                    UIApplication.shared.endIgnoringInteractionEvents()
-
                     
+                    if glbPlcObjectId.count < 4 {
+                        let allPlacesQuery = PFQuery(className: "Places")
+                        allPlacesQuery.findObjectsInBackground { (objects, error) in
+                            if let places = objects {
+                                
+                                for place in places {
+                                    
+                                    if let question = place.objectId {
+                                        if glbPlcObjectId.firstIndex(of: question) == nil {
+                                            glbPlcObjectId.append(question)
+                                            glbPlcOption1.append(place["alternative1"] as! String)
+                                            glbPlcOption2.append(place["alternative2"] as! String)
+                                            glbPlcOption3.append(place["alternative3"] as! String)
+                                            glbPlcOption4.append(place["alternative4"] as! String)
+                                            glbPlcImageFile.append(place["imageFile"] as! PFFile)
+                                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
+                                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
+                                        }
+                                    }
+                                }
+                            }
+                            activityIndicator.stopAnimating()
+                            UIApplication.shared.endIgnoringInteractionEvents()
+                            print("Item Ids: \(glbPlcObjectId)")
+                        }
+                    }
+                    else {
+                        activityIndicator.stopAnimating()
+                        UIApplication.shared.endIgnoringInteractionEvents()
+                    }
                 }
                 
             }
         }
         
-        if glbFdObjectId.count < 5 {
+        if glbFdObjectId.count < 4 {
             
             let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
             activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
@@ -313,10 +340,36 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                             
                         }
                     }
-                    activityIndicator.stopAnimating()
-                    UIApplication.shared.endIgnoringInteractionEvents()
-
                     
+                    if glbFdObjectId.count < 4 {
+                        let allFoodsQuery = PFQuery(className: "Foods")
+                        allFoodsQuery.findObjectsInBackground { (objects, error) in
+                            if let foods = objects {
+                                
+                                for food in foods {
+                                    
+                                    if let question = food.objectId {
+                                        if glbFdObjectId.firstIndex(of: question) == nil {
+                                            glbFdObjectId.append(question)
+                                            glbFdOption1.append(food["alternative1"] as! String)
+                                            glbFdOption2.append(food["alternative2"] as! String)
+                                            glbFdOption3.append(food["alternative3"] as! String)
+                                            glbFdOption4.append(food["alternative4"] as! String)
+                                            glbFdImageFile.append(food["imageFile"] as! PFFile)
+                                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
+                                            glbFdDescriptionEng.append(food["engDescription"] as! String)
+                                        }
+                                    }
+                                }
+                            }
+                            activityIndicator.stopAnimating()
+                            UIApplication.shared.endIgnoringInteractionEvents()
+                        }
+                    }
+                    else {
+                        activityIndicator.stopAnimating()
+                        UIApplication.shared.endIgnoringInteractionEvents()
+                    }
                 }
                 
             }

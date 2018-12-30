@@ -504,10 +504,6 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         randomIndex = Int(arc4random_uniform(UInt32(flagOption1.count)))
         print("Random Index: \(randomIndex)")
         
-        option1.setTitle(flagOption1[randomIndex], for: [])
-        option2.setTitle(flagOption2[randomIndex], for: [])
-        option3.setTitle(flagOption3[randomIndex], for: [])
-        option4.setTitle(flagOption4[randomIndex], for: [])
         
         flagImageFile[randomIndex].getDataInBackground { [unowned self] (data, error) in
             
@@ -517,32 +513,38 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
                     
                     self.image.image = imageToDisplay
                     
+                    self.option1.setTitle(self.flagOption1[self.randomIndex], for: [])
+                    self.option2.setTitle(self.flagOption2[self.randomIndex], for: [])
+                    self.option3.setTitle(self.flagOption3[self.randomIndex], for: [])
+                    self.option4.setTitle(self.flagOption4[self.randomIndex], for: [])
+                    
+                    if let temp = Int(self.flagCorrectAnswer[self.randomIndex]) {
+                        self.correctAnsInt = temp
+                    }
+                    
+                    self.flagOption1.remove(at: self.randomIndex)
+                    self.flagOption2.remove(at: self.randomIndex)
+                    self.flagOption3.remove(at: self.randomIndex)
+                    self.flagOption4.remove(at: self.randomIndex)
+                    self.flagImageFile.remove(at: self.randomIndex)
+                    self.flagCorrectAnswer.remove(at: self.randomIndex)
+                    
+                    if self.flagOption1.count == 0 {
+                        
+                        self.flagOption1 = glbFlagOption1
+                        self.flagOption2 = glbFlagOption2
+                        self.flagOption3 = glbFlagOption3
+                        self.flagOption4 = glbFlagOption4
+                        self.flagImageFile = glbFlagImageFile
+                        self.flagCorrectAnswer = glbFlagCorrectAnswer
+                        
+                    }
+
                 }
             }
             
         }
         
-        if let temp = Int(flagCorrectAnswer[randomIndex]) {
-            correctAnsInt = temp
-        }
-        
-        flagOption1.remove(at: randomIndex)
-        flagOption2.remove(at: randomIndex)
-        flagOption3.remove(at: randomIndex)
-        flagOption4.remove(at: randomIndex)
-        flagImageFile.remove(at: randomIndex)
-        flagCorrectAnswer.remove(at: randomIndex)
-        
-        if flagOption1.count == 0 {
-            
-            flagOption1 = glbFlagOption1
-            flagOption2 = glbFlagOption2
-            flagOption3 = glbFlagOption3
-            flagOption4 = glbFlagOption4
-            flagImageFile = glbFlagImageFile
-            flagCorrectAnswer = glbFlagCorrectAnswer
-            
-        }
     }
     
     func showPopup(Score: Int, oldRecord: Int) {

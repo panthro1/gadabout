@@ -149,7 +149,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         
         scorePoint = 0
         
-        if glbPlcObjectId.count < 10 {
+        if glbPlcObjectId.count < 4 {
             questionSeenBefore.removeAll()
             let questionCoveredQuery = PFQuery(className: "placesCoveredBefore")
             questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
@@ -161,7 +161,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 else {
                     if let places = objects {
                         for place in places {
-                            //print("\(place["questionId"])")
                             self.questionSeenBefore.append(place["questionId"] as! String)
                         }
                     }
@@ -169,7 +168,9 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 
                 if glbPlcObjectId.count > 0 {
                     for indx in 0 ..< glbPlcObjectId.count {
-                        self.questionSeenBefore.append(glbPlcObjectId[indx])
+                        if self.questionSeenBefore.firstIndex(of: glbPlcObjectId[indx]) == nil {
+                            self.questionSeenBefore.append(glbPlcObjectId[indx])
+                        }
                     }
                 }
                 print("Question Seen Before: \(self.questionSeenBefore)")
@@ -194,39 +195,102 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                             }
                         }
                     }
-                    print("Pulled objects: \(glbPlcObjectId)")
-                    var questionLimit = 4
                     
-                    if glbPlcObjectId.count < questionLimit {
-                        questionLimit = glbPlcObjectId.count
+                    if glbPlcObjectId.count < 4 {
+                        let allPlacesQuery = PFQuery(className: "Places")
+                        allPlacesQuery.findObjectsInBackground { (objects, error) in
+                            if let places = objects {
+                                
+                                for place in places {
+                                    
+                                    if let question = place.objectId {
+                                        if glbPlcObjectId.firstIndex(of: question) == nil {
+                                            glbPlcObjectId.append(question)
+                                            glbPlcOption1.append(place["alternative1"] as! String)
+                                            glbPlcOption2.append(place["alternative2"] as! String)
+                                            glbPlcOption3.append(place["alternative3"] as! String)
+                                            glbPlcOption4.append(place["alternative4"] as! String)
+                                            glbPlcImageFile.append(place["imageFile"] as! PFFile)
+                                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
+                                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                            
+                            var questionLimit = 4
+                            
+                            if glbPlcObjectId.count < questionLimit {
+                                questionLimit = glbPlcObjectId.count
+                            }
+                            
+                            for _ in 0 ..< questionLimit {
+                                
+                                let randomIndex = Int(arc4random_uniform(UInt32(glbPlcObjectId.count)))
+                                
+                                self.option1.append(glbPlcOption1[randomIndex])
+                                self.option2.append(glbPlcOption2[randomIndex])
+                                self.option3.append(glbPlcOption3[randomIndex])
+                                self.option4.append(glbPlcOption4[randomIndex])
+                                self.imageFile.append(glbPlcImageFile[randomIndex])
+                                self.correctAnswer.append(glbPlcCorrectAnswer[randomIndex])
+                                self.descriptionEng.append(glbPlcDescriptionEng[randomIndex])
+                                self.questionCompleted.append(glbPlcObjectId[randomIndex])
+                                
+                                self.showDetail.append(false)
+                                self.userRecord.append(false)
+                                
+                                glbPlcOption1.remove(at: randomIndex)
+                                glbPlcOption2.remove(at: randomIndex)
+                                glbPlcOption3.remove(at: randomIndex)
+                                glbPlcOption4.remove(at: randomIndex)
+                                glbPlcImageFile.remove(at: randomIndex)
+                                glbPlcCorrectAnswer.remove(at: randomIndex)
+                                glbPlcDescriptionEng.remove(at: randomIndex)
+                                glbPlcObjectId.remove(at: randomIndex)
+                            }
+                            self.tableView.reloadData()
+
+                        }
+                        
                     }
                     
-                    for _ in 0 ..< questionLimit {
+                    else {
+                        var questionLimit = 4
                         
-                        let randomIndex = Int(arc4random_uniform(UInt32(glbPlcObjectId.count)))
+                        if glbPlcObjectId.count < questionLimit {
+                            questionLimit = glbPlcObjectId.count
+                        }
                         
-                        self.option1.append(glbPlcOption1[randomIndex])
-                        self.option2.append(glbPlcOption2[randomIndex])
-                        self.option3.append(glbPlcOption3[randomIndex])
-                        self.option4.append(glbPlcOption4[randomIndex])
-                        self.imageFile.append(glbPlcImageFile[randomIndex])
-                        self.correctAnswer.append(glbPlcCorrectAnswer[randomIndex])
-                        self.descriptionEng.append(glbPlcDescriptionEng[randomIndex])
-                        self.questionCompleted.append(glbPlcObjectId[randomIndex])
-                        
-                        self.showDetail.append(false)
-                        self.userRecord.append(false)
-                        
-                        glbPlcOption1.remove(at: randomIndex)
-                        glbPlcOption2.remove(at: randomIndex)
-                        glbPlcOption3.remove(at: randomIndex)
-                        glbPlcOption4.remove(at: randomIndex)
-                        glbPlcImageFile.remove(at: randomIndex)
-                        glbPlcCorrectAnswer.remove(at: randomIndex)
-                        glbPlcDescriptionEng.remove(at: randomIndex)
-                        glbPlcObjectId.remove(at: randomIndex)
+                        for _ in 0 ..< questionLimit {
+                            
+                            let randomIndex = Int(arc4random_uniform(UInt32(glbPlcObjectId.count)))
+                            
+                            self.option1.append(glbPlcOption1[randomIndex])
+                            self.option2.append(glbPlcOption2[randomIndex])
+                            self.option3.append(glbPlcOption3[randomIndex])
+                            self.option4.append(glbPlcOption4[randomIndex])
+                            self.imageFile.append(glbPlcImageFile[randomIndex])
+                            self.correctAnswer.append(glbPlcCorrectAnswer[randomIndex])
+                            self.descriptionEng.append(glbPlcDescriptionEng[randomIndex])
+                            self.questionCompleted.append(glbPlcObjectId[randomIndex])
+                            
+                            self.showDetail.append(false)
+                            self.userRecord.append(false)
+                            
+                            glbPlcOption1.remove(at: randomIndex)
+                            glbPlcOption2.remove(at: randomIndex)
+                            glbPlcOption3.remove(at: randomIndex)
+                            glbPlcOption4.remove(at: randomIndex)
+                            glbPlcImageFile.remove(at: randomIndex)
+                            glbPlcCorrectAnswer.remove(at: randomIndex)
+                            glbPlcDescriptionEng.remove(at: randomIndex)
+                            glbPlcObjectId.remove(at: randomIndex)
+                        }
+                        self.tableView.reloadData()
                     }
-                    self.tableView.reloadData()
+                    
                 }
                 
             }
@@ -879,7 +943,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         
         // New code
         print("Global Objects before: \(glbPlcObjectId)")
-        if glbPlcObjectId.count < 10 {
+        if glbPlcObjectId.count < 4 {
             questionSeenBefore.removeAll()
             let questionCoveredQuery = PFQuery(className: "placesCoveredBefore")
             questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
@@ -924,44 +988,102 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                             }
                         }
                     }
-                    print("Pulled onjects: \(glbPlcObjectId)")
-                    var questionLimit = 4
                     
-                    if glbPlcObjectId.count < questionLimit {
-                        questionLimit = glbPlcObjectId.count
+                    if glbPlcObjectId.count < 4 {
+                        let allPlacesQuery = PFQuery(className: "Places")
+                        allPlacesQuery.findObjectsInBackground { (objects, error) in
+                            if let places = objects {
+                                
+                                for place in places {
+                                    
+                                    if let question = place.objectId {
+                                        if glbPlcObjectId.firstIndex(of: question) == nil {
+                                            glbPlcObjectId.append(question)
+                                            glbPlcOption1.append(place["alternative1"] as! String)
+                                            glbPlcOption2.append(place["alternative2"] as! String)
+                                            glbPlcOption3.append(place["alternative3"] as! String)
+                                            glbPlcOption4.append(place["alternative4"] as! String)
+                                            glbPlcImageFile.append(place["imageFile"] as! PFFile)
+                                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
+                                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                            
+                            var questionLimit = 4
+                            
+                            if glbPlcObjectId.count < questionLimit {
+                                questionLimit = glbPlcObjectId.count
+                            }
+                            print("Global Objects after: \(glbPlcObjectId)")
+                            for _ in 0 ..< questionLimit {
+                                
+                                let randomIndex = Int(arc4random_uniform(UInt32(glbPlcObjectId.count)))
+                                
+                                self.option1.append(glbPlcOption1[randomIndex])
+                                self.option2.append(glbPlcOption2[randomIndex])
+                                self.option3.append(glbPlcOption3[randomIndex])
+                                self.option4.append(glbPlcOption4[randomIndex])
+                                self.imageFile.append(glbPlcImageFile[randomIndex])
+                                self.correctAnswer.append(glbPlcCorrectAnswer[randomIndex])
+                                self.descriptionEng.append(glbPlcDescriptionEng[randomIndex])
+                                self.questionCompleted.append(glbPlcObjectId[randomIndex])
+                                
+                                self.showDetail.append(false)
+                                self.userRecord.append(false)
+                                
+                                glbPlcOption1.remove(at: randomIndex)
+                                glbPlcOption2.remove(at: randomIndex)
+                                glbPlcOption3.remove(at: randomIndex)
+                                glbPlcOption4.remove(at: randomIndex)
+                                glbPlcImageFile.remove(at: randomIndex)
+                                glbPlcCorrectAnswer.remove(at: randomIndex)
+                                glbPlcDescriptionEng.remove(at: randomIndex)
+                                glbPlcObjectId.remove(at: randomIndex)
+                            }
+                            self.tableView.reloadData()
+                            
+                        }
+                        
                     }
-                    print("Global Objects after: \(glbPlcObjectId)")
-                    for _ in 0 ..< questionLimit {
+                    else {
+                        var questionLimit = 4
                         
-                        let randomIndex = Int(arc4random_uniform(UInt32(glbPlcObjectId.count)))
-                        
-                        self.option1.append(glbPlcOption1[randomIndex])
-                        self.option2.append(glbPlcOption2[randomIndex])
-                        self.option3.append(glbPlcOption3[randomIndex])
-                        self.option4.append(glbPlcOption4[randomIndex])
-                        self.imageFile.append(glbPlcImageFile[randomIndex])
-                        self.correctAnswer.append(glbPlcCorrectAnswer[randomIndex])
-                        self.descriptionEng.append(glbPlcDescriptionEng[randomIndex])
-                        self.questionCompleted.append(glbPlcObjectId[randomIndex])
-                        
-                        self.showDetail.append(false)
-                        self.userRecord.append(false)
-                        
-                        glbPlcOption1.remove(at: randomIndex)
-                        glbPlcOption2.remove(at: randomIndex)
-                        glbPlcOption3.remove(at: randomIndex)
-                        glbPlcOption4.remove(at: randomIndex)
-                        glbPlcImageFile.remove(at: randomIndex)
-                        glbPlcCorrectAnswer.remove(at: randomIndex)
-                        glbPlcDescriptionEng.remove(at: randomIndex)
-                        glbPlcObjectId.remove(at: randomIndex)
+                        if glbPlcObjectId.count < questionLimit {
+                            questionLimit = glbPlcObjectId.count
+                        }
+                        print("Global Objects after: \(glbPlcObjectId)")
+                        for _ in 0 ..< questionLimit {
+                            
+                            let randomIndex = Int(arc4random_uniform(UInt32(glbPlcObjectId.count)))
+                            
+                            self.option1.append(glbPlcOption1[randomIndex])
+                            self.option2.append(glbPlcOption2[randomIndex])
+                            self.option3.append(glbPlcOption3[randomIndex])
+                            self.option4.append(glbPlcOption4[randomIndex])
+                            self.imageFile.append(glbPlcImageFile[randomIndex])
+                            self.correctAnswer.append(glbPlcCorrectAnswer[randomIndex])
+                            self.descriptionEng.append(glbPlcDescriptionEng[randomIndex])
+                            self.questionCompleted.append(glbPlcObjectId[randomIndex])
+                            
+                            self.showDetail.append(false)
+                            self.userRecord.append(false)
+                            
+                            glbPlcOption1.remove(at: randomIndex)
+                            glbPlcOption2.remove(at: randomIndex)
+                            glbPlcOption3.remove(at: randomIndex)
+                            glbPlcOption4.remove(at: randomIndex)
+                            glbPlcImageFile.remove(at: randomIndex)
+                            glbPlcCorrectAnswer.remove(at: randomIndex)
+                            glbPlcDescriptionEng.remove(at: randomIndex)
+                            glbPlcObjectId.remove(at: randomIndex)
+                        }
+                        self.tableView.reloadData()
                     }
-                    self.tableView.reloadData()
-                    
                 }
-                
             }
-            
         }
         else {
             var questionLimit = 4
