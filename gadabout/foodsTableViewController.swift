@@ -136,7 +136,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
 
         
         // New code
-        if glbFdObjectId.count < 10 {
+        if glbFdObjectId.count < 4 {
             questionSeenBefore.removeAll()
             let questionCoveredQuery = PFQuery(className: "foodsCoveredBefore")
             questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
@@ -930,7 +930,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         scorePoint = 0
         
 
-        if glbFdObjectId.count < 10 {
+        if glbFdObjectId.count < 4 {
             questionSeenBefore.removeAll()
             let questionCoveredQuery = PFQuery(className: "foodsCoveredBefore")
             questionCoveredQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
