@@ -23,6 +23,7 @@
 		E32D30832177A5860016D7EC /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32D30822177A5860016D7EC /* UIButtonExtension.swift */; };
 		E32D30852177B6840016D7EC /* foodsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32D30842177B6840016D7EC /* foodsTableViewController.swift */; };
 		E32D30872177B6B70016D7EC /* foodsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32D30862177B6B70016D7EC /* foodsTableViewCell.swift */; };
+		E338B57D21DBAB50007D2ACE /* gadabout_launch.png in Resources */ = {isa = PBXBuildFile; fileRef = E338B57C21DBAB50007D2ACE /* gadabout_launch.png */; };
 		E33D52C32182BB180077E001 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = E33D52C22182BB170077E001 /* back.png */; };
 		E342D9AC2104853C009D5C67 /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E342D9AB2104853C009D5C67 /* PlacesTableViewController.swift */; };
 		E342D9AE21049038009D5C67 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E342D9AD21049038009D5C67 /* PostViewController.swift */; };
@@ -96,6 +97,7 @@
 		E32D30822177A5860016D7EC /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		E32D30842177B6840016D7EC /* foodsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foodsTableViewController.swift; sourceTree = "<group>"; };
 		E32D30862177B6B70016D7EC /* foodsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = foodsTableViewCell.swift; sourceTree = "<group>"; };
+		E338B57C21DBAB50007D2ACE /* gadabout_launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gadabout_launch.png; sourceTree = "<group>"; };
 		E33D52C22182BB170077E001 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		E342D9AB2104853C009D5C67 /* PlacesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
 		E342D9AD21049038009D5C67 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */,
 				E3E5BD52213295600019BFBC /* keyboard-right-arrow-button.png */,
 				E3261AF020F098940056CE99 /* Assets.xcassets */,
+				E338B57C21DBAB50007D2ACE /* gadabout_launch.png */,
 				E313DF602118D4AD00BAE4C6 /* uncheck.png */,
 				E3261AF220F098940056CE99 /* LaunchScreen.storyboard */,
 				E3F72E50217E40FD00487C72 /* GoogleService-Info.plist */,
@@ -381,6 +384,7 @@
 				E33D52C32182BB180077E001 /* back.png in Resources */,
 				E3CF250D219D1D5E00D5EA9F /* email.png in Resources */,
 				E313DF5F2118D4A500BAE4C6 /* check.png in Resources */,
+				E338B57D21DBAB50007D2ACE /* gadabout_launch.png in Resources */,
 				E3E5BD53213295610019BFBC /* keyboard-right-arrow-button.png in Resources */,
 				E3BA747C219A769800095B1B /* remove.png in Resources */,
 				E3CBDEE121A05C8B002664B4 /* undo-arrow.png in Resources */,
