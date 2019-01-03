@@ -628,9 +628,27 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 7
+        return 1
         
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 7
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return (UIScreen.main.bounds.height*0.01)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let v = UIView()
+        v.backgroundColor = UIColor.clear
+        return v
+    }
+    
+    
+    
 
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -655,53 +673,53 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         let rowImageSize = Double(rowHeight)*0.8
         
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
             cell.accessoryView = UIImageView(image: UIImage(named: "balloon.png"))
             cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
         }
-        else if indexPath.row == 1 {
+        else if indexPath.section == 1 {
             cell.accessoryView = UIImageView(image: UIImage(named: "egg.png"))
             cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
         }
-        else if indexPath.row == 2 {
+        else if indexPath.section == 2 {
             cell.accessoryView = UIImageView(image: UIImage(named: "puzzle.png"))
             cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
 
         }
-        else if indexPath.row == 3 {
+        else if indexPath.section == 3 {
             cell.accessoryView = UIImageView(image: UIImage(named: "slot.png"))
             cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
         }
-        else if indexPath.row == 4 {
+        else if indexPath.section == 4 {
             cell.accessoryView = UIImageView(image: UIImage(named: "list.png"))
             cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
         }
-        else if indexPath.row == 5 {
+        else if indexPath.section == 5 {
             cell.accessoryView = UIImageView(image: UIImage(named: "Flag_icon.png"))
             cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
         }
         
         //cell.righ.image = UIImage(named: "world.png")
         
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
             cell.textLabel?.text = " Places"
         }
-        else if indexPath.row == 1 {
+        else if indexPath.section == 1 {
             cell.textLabel?.text = " Foods"
         }
-        else if indexPath.row == 2 {
+        else if indexPath.section == 2 {
             cell.textLabel?.text = " Puzzle"
         }
-        else if indexPath.row == 6 {
+        else if indexPath.section == 6 {
             cell.textLabel?.text = "  Post"
         }
-        else if indexPath.row == 4 {
+        else if indexPath.section == 4 {
             cell.textLabel?.text = " To Do List"
         }
-        else if indexPath.row == 3 {
+        else if indexPath.section == 3 {
             cell.textLabel?.text = " Lucky Strike"
         }
-        else if indexPath.row == 5 {
+        else if indexPath.section == 5 {
             cell.textLabel?.text = " Flag Challenge"
         }
         
@@ -711,32 +729,32 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
             print("Places selected")
             performSegue(withIdentifier: "placesSegue", sender: self)
         }
-        else if indexPath.row == 1 {
+        else if indexPath.section == 1 {
             print("Food selected")
             performSegue(withIdentifier: "foodsSegue", sender: self)
         }
-        else if indexPath.row == 2 {
+        else if indexPath.section == 2 {
             print("Map puzzle selected")
             performSegue(withIdentifier: "puzzleMapSegue", sender: self)
 
         }
-        else if indexPath.row == 6 {
+        else if indexPath.section == 6 {
             print("Post selected")
             performSegue(withIdentifier: "postSegue", sender: self)
         }
-        else if indexPath.row == 5 {
+        else if indexPath.section == 5 {
             print("Post selected")
             performSegue(withIdentifier: "flagSegue", sender: self)
         }
-        else if indexPath.row == 4 {
+        else if indexPath.section == 4 {
             print("To Do List selected")
             performSegue(withIdentifier: "toDoListSegue", sender: self)
         }
-        else if indexPath.row == 3 {
+        else if indexPath.section == 3 {
             print("Lucky Strike selected")
             performSegue(withIdentifier: "luckyStrikeSegue", sender: self)
         }
