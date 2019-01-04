@@ -176,6 +176,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
         
+        
         NotificationCenter.default.addObserver(self, selector: #selector(isRotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
         if  PFUser.current() != nil {
@@ -273,6 +274,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                             activityIndicator.stopAnimating()
                             UIApplication.shared.endIgnoringInteractionEvents()
                             print("Item Ids: \(glbPlcObjectId)")
+                            
                         }
                     }
                     else {
@@ -364,6 +366,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                             }
                             activityIndicator.stopAnimating()
                             UIApplication.shared.endIgnoringInteractionEvents()
+                            
                         }
                     }
                     else {
@@ -517,6 +520,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                                 }
                                 activityIndicator.stopAnimating()
                                 UIApplication.shared.endIgnoringInteractionEvents()
+                                
 
                             })
                             
@@ -524,6 +528,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                         else {
                             activityIndicator.stopAnimating()
                             UIApplication.shared.endIgnoringInteractionEvents()
+
                         }
                     })
                 }
@@ -574,12 +579,14 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                         }
                         activityIndicator.stopAnimating()
                         UIApplication.shared.endIgnoringInteractionEvents()
+                        
 
                     })
                 }
                 else {
                     activityIndicator.stopAnimating()
                     UIApplication.shared.endIgnoringInteractionEvents()
+
 
                 }
             }

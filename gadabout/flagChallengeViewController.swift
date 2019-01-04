@@ -37,6 +37,8 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
     
     @IBOutlet weak var tryAgainButton: UIButton!
     
+    @IBOutlet weak var loadingView: UIView!
+    
     var randomIndex = 0
     
     var score = 0
@@ -428,6 +430,7 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
                     UIApplication.shared.endIgnoringInteractionEvents()
                     
                     self.prepareNextQuestion()
+                    self.loadingView.alpha = 0
                 }
                 //activityIndicator.stopAnimating()
                 //UIApplication.shared.endIgnoringInteractionEvents()
@@ -436,13 +439,16 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
             }
         }
         else {
+            
             flagOption1 = glbFlagOption1
             flagOption2 = glbFlagOption2
             flagOption3 = glbFlagOption3
             flagOption4 = glbFlagOption4
             flagImageFile = glbFlagImageFile
             flagCorrectAnswer = glbFlagCorrectAnswer
+            
             prepareNextQuestion()
+            loadingView.alpha = 0
         }
         // Do any additional setup after loading the view.
     }
