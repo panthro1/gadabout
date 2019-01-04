@@ -394,6 +394,16 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         bannerView.load(GADRequest())
         
         if glbFlagOption1.count == 0 {
+            let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
+            
+            activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+            activityIndicator.center = self.view.center
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+            view.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+            UIApplication.shared.beginIgnoringInteractionEvents()
+            
             let flagsQuery = PFQuery(className: "Flags")
             flagsQuery.findObjectsInBackground { [unowned self] (objects, error) in
                 if let flags = objects {
@@ -414,6 +424,9 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
                         self.flagImageFile.append(flag["imageFile"] as! PFFile)
                         self.flagCorrectAnswer.append(flag["correctAnswer"] as! String)
                     }
+                    activityIndicator.stopAnimating()
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                    
                     self.prepareNextQuestion()
                 }
                 //activityIndicator.stopAnimating()
