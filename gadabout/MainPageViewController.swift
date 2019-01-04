@@ -157,7 +157,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         let navBarHeight = self.navigationBar.frame.size.height//UIApplication.shared.statusBarFrame.height
         let upperOffset = /*Int(screenSize.height*0.01) + */Int(navBarHeight) + Int(topSafeArea)
-        rowHeight = Int((Int(screenSize.height) - upperOffset - Int(bannerView.frame.height) - Int(bottomSafeArea)) / 6)
+        rowHeight = Int((Int(screenSize.height) - upperOffset - Int(bannerView.frame.height) - Int(bottomSafeArea) - Int(screenSize.height*0.06)) / 6)
         
         print("nav bar height: \(navigationBar.frame.size.height)" )
         print("screen height: \(screenSize.height)" )
@@ -165,7 +165,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         print("status bar height: \(UIApplication.shared.statusBarFrame.height)" )
 
 
-        self.mainPageTableView.rowHeight = CGFloat(rowHeight)//100
+        self.mainPageTableView.rowHeight = CGFloat(rowHeight)
         
         // Account ad
         //bannerView.adUnitID = "ca-app-pub-5745243428784846~5277829027"

@@ -483,11 +483,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyq-Iu-SUq" userLabel="ViewRightMargin">
-                                <rect key="frame" x="393.33333333333331" y="94" width="20.666666666666686" height="719"/>
+                                <rect key="frame" x="393.33333333333331" y="94" width="20.666666666666686" height="669"/>
                                 <color key="backgroundColor" red="0.83137254900000002" green="0.16078431369999999" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ja9-Mj-oOK" userLabel="ViewLeftMargin">
-                                <rect key="frame" x="0.0" y="94" width="20.666666666666668" height="719"/>
+                                <rect key="frame" x="0.0" y="94" width="20.666666666666668" height="669"/>
                                 <color key="backgroundColor" red="0.83137254900000002" green="0.16078431369999999" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0za-ce-opn">
@@ -512,8 +512,15 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O8c-nx-LZO" customClass="GADBannerView">
+                                <rect key="frame" x="0.0" y="763" width="414" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="MiS-Uy-bIg"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WhE-j5-Xzq">
-                                <rect key="frame" x="20.666666666666657" y="94" width="372.66666666666674" height="719"/>
+                                <rect key="frame" x="20.666666666666657" y="94" width="372.66666666666674" height="669"/>
                                 <color key="backgroundColor" red="0.97244364023208618" green="0.97260981798171997" blue="0.97243314981460571" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mainPageCell" rowHeight="104" id="Vha-kk-gev">
@@ -530,33 +537,26 @@
                                     <outlet property="delegate" destination="77F-Fn-Frx" id="2ij-jv-Jdu"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O8c-nx-LZO" customClass="GADBannerView">
-                                <rect key="frame" x="0.0" y="813" width="414" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="MiS-Uy-bIg"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.97181697612732099" green="0.97181697612732099" blue="0.97181697612732099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="nyq-Iu-SUq" firstAttribute="width" secondItem="Asc-Pw-HXp" secondAttribute="width" multiplier="0.05" id="01X-cC-bDx"/>
                             <constraint firstItem="0za-ce-opn" firstAttribute="leading" secondItem="ZDo-MM-aax" secondAttribute="leading" id="57W-f6-8R6"/>
-                            <constraint firstItem="O8c-nx-LZO" firstAttribute="top" secondItem="WhE-j5-Xzq" secondAttribute="bottom" id="75X-NO-Ljy"/>
+                            <constraint firstItem="O8c-nx-LZO" firstAttribute="top" secondItem="nyq-Iu-SUq" secondAttribute="bottom" id="Caz-kY-pKs"/>
                             <constraint firstItem="WhE-j5-Xzq" firstAttribute="top" secondItem="0za-ce-opn" secondAttribute="bottom" id="FA0-eH-lLX"/>
                             <constraint firstItem="nyq-Iu-SUq" firstAttribute="trailing" secondItem="ZDo-MM-aax" secondAttribute="trailing" id="Kym-ct-SXS"/>
+                            <constraint firstItem="ZDo-MM-aax" firstAttribute="bottom" secondItem="O8c-nx-LZO" secondAttribute="bottom" id="Lb0-oh-reM"/>
                             <constraint firstItem="0za-ce-opn" firstAttribute="trailing" secondItem="ZDo-MM-aax" secondAttribute="trailing" id="NFB-wb-xK7"/>
                             <constraint firstItem="ja9-Mj-oOK" firstAttribute="top" secondItem="0za-ce-opn" secondAttribute="bottom" id="Pcj-rn-lYz"/>
                             <constraint firstItem="ja9-Mj-oOK" firstAttribute="width" secondItem="Asc-Pw-HXp" secondAttribute="width" multiplier="0.05" id="UcY-cp-9HZ"/>
-                            <constraint firstItem="O8c-nx-LZO" firstAttribute="top" secondItem="ja9-Mj-oOK" secondAttribute="bottom" id="apX-ky-vlI"/>
+                            <constraint firstItem="ZDo-MM-aax" firstAttribute="trailing" secondItem="O8c-nx-LZO" secondAttribute="trailing" id="Ulp-DE-w3r"/>
                             <constraint firstItem="0za-ce-opn" firstAttribute="top" secondItem="Asc-Pw-HXp" secondAttribute="topMargin" id="bOG-WS-JEk"/>
-                            <constraint firstItem="ZDo-MM-aax" firstAttribute="trailing" secondItem="O8c-nx-LZO" secondAttribute="trailing" id="bTx-O4-NZu"/>
                             <constraint firstItem="nyq-Iu-SUq" firstAttribute="leading" secondItem="WhE-j5-Xzq" secondAttribute="trailing" id="cwY-C6-Xvw"/>
-                            <constraint firstItem="O8c-nx-LZO" firstAttribute="leading" secondItem="ZDo-MM-aax" secondAttribute="leading" id="hhc-Po-meu"/>
+                            <constraint firstItem="O8c-nx-LZO" firstAttribute="leading" secondItem="ZDo-MM-aax" secondAttribute="leading" id="dVv-Rr-asZ"/>
+                            <constraint firstItem="O8c-nx-LZO" firstAttribute="top" secondItem="WhE-j5-Xzq" secondAttribute="bottom" id="eAq-y0-ham"/>
+                            <constraint firstItem="O8c-nx-LZO" firstAttribute="top" secondItem="ja9-Mj-oOK" secondAttribute="bottom" id="elF-NU-1VG"/>
                             <constraint firstItem="WhE-j5-Xzq" firstAttribute="leading" secondItem="ja9-Mj-oOK" secondAttribute="trailing" id="icJ-dj-1oR"/>
-                            <constraint firstItem="ja9-Mj-oOK" firstAttribute="bottom" secondItem="ZDo-MM-aax" secondAttribute="bottom" id="ifS-Xq-IEr"/>
                             <constraint firstItem="nyq-Iu-SUq" firstAttribute="top" secondItem="0za-ce-opn" secondAttribute="bottom" id="qUh-So-1yO"/>
-                            <constraint firstItem="O8c-nx-LZO" firstAttribute="top" secondItem="nyq-Iu-SUq" secondAttribute="bottom" id="wvG-Bv-114"/>
                             <constraint firstItem="ja9-Mj-oOK" firstAttribute="leading" secondItem="ZDo-MM-aax" secondAttribute="leading" id="yFC-uU-aJg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZDo-MM-aax"/>
