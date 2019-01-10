@@ -53,8 +53,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var progressLayer: CAShapeLayer!
     
     var interstitial: GADInterstitial!
-
-
+    
     @IBOutlet weak var back: UIBarButtonItem!
     
     override var shouldAutorotate: Bool {
@@ -119,7 +118,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             timeLabel.text = "\(timeRemaining)"
             timeLabel.font = UIFont.boldSystemFont(ofSize: 25)
             timeLabel.textColor = UIColor.black
-
+            
             pullQuizItems()
             /*timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
             RunLoop.main.add(timer, forMode: .commonModes)*/
@@ -923,6 +922,9 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     }
     
     func pullQuizItems() {
+        
+        tableView.alpha = 0.5
+        
         questionSeenBefore.removeAll()
         option1.removeAll()
         option2.removeAll()
@@ -1044,6 +1046,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                                 glbPlcObjectId.remove(at: randomIndex)
                             }
                             self.tableView.reloadData()
+                            self.tableView.alpha = 1
                             self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
                             RunLoop.main.add(self.timer, forMode: .commonModes)
                             
@@ -1083,6 +1086,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                             glbPlcObjectId.remove(at: randomIndex)
                         }
                         self.tableView.reloadData()
+                        self.tableView.alpha = 1
                         self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
                         RunLoop.main.add(self.timer, forMode: .commonModes)
                     }
@@ -1122,6 +1126,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 glbPlcObjectId.remove(at: randomIndex)
             }
             tableView.reloadData()
+            tableView.alpha = 1
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
             RunLoop.main.add(timer, forMode: .commonModes)
         }
