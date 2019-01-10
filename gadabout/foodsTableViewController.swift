@@ -108,8 +108,8 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             timeLabel.textColor = UIColor.black
             
             pullQuizItems()
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
-            RunLoop.main.add(timer, forMode: .commonModes)
+            /*timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
+            RunLoop.main.add(timer, forMode: .commonModes)*/
         }
 
     }
@@ -978,7 +978,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                     
                     if glbFdObjectId.count < 4 {
                         let allFoodsQuery = PFQuery(className: "Foods")
-                        allFoodsQuery.findObjectsInBackground { (objects, error) in
+                        allFoodsQuery.findObjectsInBackground { [unowned self] (objects, error) in
                             if let foods = objects {
                                 
                                 for food in foods {
@@ -1031,6 +1031,8 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                                 glbFdObjectId.remove(at: randomIndex)
                             }
                             self.tableView.reloadData()
+                            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
+                            RunLoop.main.add(self.timer, forMode: .commonModes)
                             
                         }
                         
@@ -1068,6 +1070,8 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                             glbFdObjectId.remove(at: randomIndex)
                         }
                         self.tableView.reloadData()
+                        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
+                        RunLoop.main.add(self.timer, forMode: .commonModes)
                     }
                 }
             }
@@ -1105,6 +1109,8 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                 glbFdObjectId.remove(at: randomIndex)
             }
             tableView.reloadData()
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
+            RunLoop.main.add(timer, forMode: .commonModes)
         }
 
         

@@ -121,8 +121,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             timeLabel.textColor = UIColor.black
 
             pullQuizItems()
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
-            RunLoop.main.add(timer, forMode: .commonModes)
+            /*timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
+            RunLoop.main.add(timer, forMode: .commonModes)*/
         }
         
     }
@@ -991,7 +991,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     
                     if glbPlcObjectId.count < 4 {
                         let allPlacesQuery = PFQuery(className: "Places")
-                        allPlacesQuery.findObjectsInBackground { (objects, error) in
+                        allPlacesQuery.findObjectsInBackground { [unowned self] (objects, error) in
                             if let places = objects {
                                 
                                 for place in places {
@@ -1044,6 +1044,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                                 glbPlcObjectId.remove(at: randomIndex)
                             }
                             self.tableView.reloadData()
+                            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
+                            RunLoop.main.add(self.timer, forMode: .commonModes)
                             
                         }
                         
@@ -1081,6 +1083,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                             glbPlcObjectId.remove(at: randomIndex)
                         }
                         self.tableView.reloadData()
+                        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
+                        RunLoop.main.add(self.timer, forMode: .commonModes)
                     }
                 }
             }
@@ -1118,6 +1122,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 glbPlcObjectId.remove(at: randomIndex)
             }
             tableView.reloadData()
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
+            RunLoop.main.add(timer, forMode: .commonModes)
         }
 
     }
