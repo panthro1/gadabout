@@ -1253,7 +1253,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="390.66666666666669"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xbt-XA-VLZ">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xbt-XA-VLZ">
                                             <rect key="frame" x="68" y="7.6666666666666714" width="278" height="156.33333333333331"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="Xbt-XA-VLZ" secondAttribute="height" multiplier="16:9" id="Ehc-ko-kvo"/>
@@ -1859,6 +1859,6 @@
         <image name="uncheck.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="raA-vn-2XX"/>
+        <segue reference="ERg-ar-XpG"/>
     </inferredMetricsTieBreakers>
 </document>
