@@ -388,7 +388,15 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         popOverVC.delegate = self
         
         self.addChildViewController(popOverVC)
-        popOverVC.view.frame = self.view.bounds//self.view.frame
+        
+        let popUpSize = self.view.bounds.width*0.9
+        
+        let centerY = self.view.bounds.height/2 - popUpSize/2
+        let centerX = self.view.bounds.width/2 - popUpSize/2
+        
+        popOverVC.view.frame = CGRect(x: centerX, y: centerY, width: popUpSize, height: popUpSize)//self.view.bounds
+        popOverVC.view.backgroundColor = UIColor(rgb: 0x8A6A8A)
+        
         //complete.isEnabled = false
         //back.isEnabled = false
         
