@@ -913,6 +913,8 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
     }
 
     func pullQuizItems() {
+        tableView.alpha = 0.5
+        
         questionSeenBefore.removeAll()
         option1.removeAll()
         option2.removeAll()
@@ -1031,6 +1033,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                                 glbFdObjectId.remove(at: randomIndex)
                             }
                             self.tableView.reloadData()
+                            self.tableView.alpha = 1
                             self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
                             RunLoop.main.add(self.timer, forMode: .commonModes)
                             
@@ -1070,6 +1073,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                             glbFdObjectId.remove(at: randomIndex)
                         }
                         self.tableView.reloadData()
+                        self.tableView.alpha = 1
                         self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
                         RunLoop.main.add(self.timer, forMode: .commonModes)
                     }
@@ -1109,6 +1113,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                 glbFdObjectId.remove(at: randomIndex)
             }
             tableView.reloadData()
+            tableView.alpha = 1
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
             RunLoop.main.add(timer, forMode: .commonModes)
         }
