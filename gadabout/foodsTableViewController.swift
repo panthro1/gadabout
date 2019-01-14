@@ -363,11 +363,11 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.tableView.isScrollEnabled = false
-        
         if option1.count > 0 {
             let rowToSelect: IndexPath = IndexPath(row: 0, section: 0)
             self.tableView.scrollToRow(at: rowToSelect, at: .top, animated: false)
         }
+        
         
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
         popOverVC.scoreWin = Score
@@ -375,10 +375,19 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         popOverVC.isFlagOutput = false
         popOverVC.isScoreSummary = false
         popOverVC.delegate = self
+        
         self.addChildViewController(popOverVC)
-        popOverVC.view.frame = self.view.bounds//self.view.frame
-        //complete.isEnabled = false
-        //back.isEnabled = false
+        
+        let popUpSize = self.view.bounds.width*0.9
+        
+        let centerY = self.view.bounds.height/2 - popUpSize/2
+        let centerX = self.view.bounds.width/2 - popUpSize/2
+        
+        popOverVC.view.frame = CGRect(x: centerX, y: centerY, width: popUpSize, height: popUpSize)//self.view.bounds
+        popOverVC.view.backgroundColor = UIColor(rgb: 0xDDD6F2)
+        popOverVC.view.layer.cornerRadius = 20
+        
+        
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParentViewController: self)
 
