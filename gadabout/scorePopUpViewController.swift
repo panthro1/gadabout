@@ -53,6 +53,7 @@ class scorePopUpViewController: UIViewController {
             
             scoreHeader.text = "Summary"
             applyBoldText(text1: "Total Score", text2: "Flag Record")
+            
         }
         else {
             if isFlagOutput {
@@ -84,9 +85,6 @@ class scorePopUpViewController: UIViewController {
             }
         }
 
-
-        
-        self.view.backgroundColor = UIColor.white
         
         self.showAnimate()
 
@@ -119,7 +117,7 @@ class scorePopUpViewController: UIViewController {
     
     func applyBoldText (text1: String, text2: String) {
         let boldText  = text1 + ": "
-        let attrs = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 25)]
+        let attrs = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 20)]
         let attributedString = NSMutableAttributedString(string:boldText, attributes:attrs)
         
         let normalText = "\(scoreWin) points"
@@ -129,7 +127,7 @@ class scorePopUpViewController: UIViewController {
         scoreWinLabel.attributedText = attributedString
         
         let boldText2  = text2 + ": "
-        let attrs2 = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 25)]
+        let attrs2 = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 20)]
         let attributedString2 = NSMutableAttributedString(string:boldText2, attributes:attrs2)
         
         let normalText2 = "\(totalScore) points"

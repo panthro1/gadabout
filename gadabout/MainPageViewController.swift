@@ -93,12 +93,20 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         popOverVC.delegate = self
         
         self.addChildViewController(popOverVC)
-        popOverVC.view.frame = self.view.bounds//self.view.frame
-        //complete.isEnabled = false
-        //back.isEnabled = false
+        let popUpSize = self.view.bounds.width*0.9
+        
+        let centerY = self.view.bounds.height/2 - popUpSize/2
+        let centerX = self.view.bounds.width/2 - popUpSize/2
+        
+        popOverVC.view.frame = CGRect(x: centerX, y: centerY, width: popUpSize, height: popUpSize)
+        popOverVC.view.backgroundColor = UIColor(rgb: 0xDDD6F2)
+        popOverVC.view.layer.cornerRadius = 20
+        
+        //popOverVC.view.frame = self.view.bounds//self.view.frame
         
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParentViewController: self)
+        
         
     }
     

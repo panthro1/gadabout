@@ -395,7 +395,9 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         let centerX = self.view.bounds.width/2 - popUpSize/2
         
         popOverVC.view.frame = CGRect(x: centerX, y: centerY, width: popUpSize, height: popUpSize)//self.view.bounds
-        popOverVC.view.backgroundColor = UIColor(rgb: 0x8A6A8A)
+        //popOverVC.view.backgroundColor = UIColor(rgb: 0xDBCFF2)
+        popOverVC.view.backgroundColor = UIColor(rgb: 0xDDD6F2)
+        popOverVC.view.layer.cornerRadius = 20
         
         //complete.isEnabled = false
         //back.isEnabled = false
