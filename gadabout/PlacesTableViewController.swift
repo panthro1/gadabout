@@ -587,7 +587,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         else {
             
             cell.detailsButton.setTitle("Details", for: [])
-            imageFile[indexPath.row].getDataInBackground { [unowned self] (data, error) in
+            imageFile[indexPath.row].getDataInBackground { (data, error) in
             
                 if let imageData = data {
                 
@@ -672,6 +672,12 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 cell.markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
                 cell.markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
                 cell.markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
+                
+                cell.markOption1.backgroundColor = UIColor.clear
+                cell.markOption2.backgroundColor = UIColor.clear
+                cell.markOption3.backgroundColor = UIColor.clear
+                cell.markOption4.backgroundColor = UIColor.clear
+
             
                 cell.markOption1.isEnabled = false
                 cell.markOption2.isEnabled = false
@@ -697,6 +703,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                                 cell.markOption1.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
                                 cell.markOption1.layer.borderWidth = 2
                                 cell.markOption1.layer.cornerRadius = 10
+                                
+                                
                                 
                             }
                             else if correctAnswerInt == 2 {
@@ -735,81 +743,90 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
 
                     if selected == 1 {
 
-                        //cell.markOption1.setImage(UIImage(named: "correct2.png"), for: [])
-                        cell.markOption1.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
+                        /*cell.markOption1.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
                         let origImage = UIImage(named: "check.png");
                         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                         cell.markOption1.setImage(tintedImage, for: .normal)
-                        cell.markOption1.tintColor = UIColor(rgb: 0x039D18)//UIColor.green
+                        cell.markOption1.tintColor = UIColor(rgb: 0x039D18)//UIColor.green*/
+                        
+                        cell.markOption1.backgroundColor = UIColor(rgb: 0x29D3AE)
                     }
                     else if selected == 2 {
 
-                        //cell.markOption2.setImage(UIImage(named: "correct2.png"), for: [])
-                        cell.markOption2.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
+                        /*cell.markOption2.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
                         let origImage = UIImage(named: "check.png");
                         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                         cell.markOption2.setImage(tintedImage, for: .normal)
-                        cell.markOption2.tintColor = UIColor(rgb: 0x039D18)//UIColor.green
+                        cell.markOption2.tintColor = UIColor(rgb: 0x039D18)//UIColor.green*/
+                        
+                        cell.markOption2.backgroundColor = UIColor(rgb: 0x29D3AE)
                     }
                     else if selected == 3 {
-                        //cell.markOption3.setImage(UIImage(named: "correct2.png"), for: [])
-                        cell.markOption3.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
+                        /*cell.markOption3.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
                         let origImage = UIImage(named: "check.png");
                         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                         cell.markOption3.setImage(tintedImage, for: .normal)
-                        cell.markOption3.tintColor = UIColor(rgb: 0x039D18)//UIColor.green
+                        cell.markOption3.tintColor = UIColor(rgb: 0x039D18)//UIColor.green*/
+                        
+                        cell.markOption3.backgroundColor = UIColor(rgb: 0x29D3AE)
                     }
                     else if selected == 4 {
 
-                        //cell.markOption4.setImage(UIImage(named: "correct2.png"), for: [])
-                        cell.markOption4.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
+                        /*cell.markOption4.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
                         let origImage = UIImage(named: "check.png");
                         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                         cell.markOption4.setImage(tintedImage, for: .normal)
-                        cell.markOption4.tintColor = UIColor(rgb: 0x039D18)//UIColor.green
+                        cell.markOption4.tintColor = UIColor(rgb: 0x039D18)//UIColor.green*/
+                        
+                        cell.markOption4.backgroundColor = UIColor(rgb: 0x29D3AE)
                     }
                 }
                 else if status == 0 {
 
                     if selected == 1 {
                     
-                       //cell.markOption1.setImage(UIImage(named: "wrong.gif"), for: .normal)
-                        cell.markOption1.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
+                        /*cell.markOption1.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
                         let origImage = UIImage(named: "check.png");
                         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                         cell.markOption1.setImage(tintedImage, for: .normal)
-                        cell.markOption1.tintColor = UIColor(rgb: 0xC20F16)
+                        cell.markOption1.tintColor = UIColor(rgb: 0xC20F16)*/
+                        
+                        cell.markOption1.backgroundColor = UIColor(rgb: 0xE9375D)
+
                     
                     }
                     else if selected == 2 {
                     
-                        //cell.markOption2.setImage(UIImage(named: "wrong.gif"), for: [])
-                        cell.markOption2.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
+                        /*cell.markOption2.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
                         let origImage = UIImage(named: "check.png");
                         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                         cell.markOption2.setImage(tintedImage, for: .normal)
-                        cell.markOption2.tintColor = UIColor(rgb: 0xC20F16)
+                        cell.markOption2.tintColor = UIColor(rgb: 0xC20F16)*/
 
-                    
+                        cell.markOption2.backgroundColor = UIColor(rgb: 0xE9375D)
+
                     }
                     else if selected == 3 {
                     
-                        //cell.markOption3.setImage(UIImage(named: "wrong.gif"), for: [])
-                        cell.markOption3.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
+                        /*cell.markOption3.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
                         let origImage = UIImage(named: "check.png");
                         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                         cell.markOption3.setImage(tintedImage, for: .normal)
-                        cell.markOption3.tintColor = UIColor(rgb: 0xC20F16)
+                        cell.markOption3.tintColor = UIColor(rgb: 0xC20F16)*/
+                        
+                        cell.markOption3.backgroundColor = UIColor(rgb: 0xE9375D)
+
                     
                     }
                     else if selected == 4 {
                     
-                        //cell.markOption4.setImage(UIImage(named: "wrong.gif"), for: [])
-                        cell.markOption4.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
+                        /*cell.markOption4.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
                         let origImage = UIImage(named: "check.png");
                         let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                         cell.markOption4.setImage(tintedImage, for: .normal)
-                        cell.markOption4.tintColor = UIColor(rgb: 0xC20F16)
+                        cell.markOption4.tintColor = UIColor(rgb: 0xC20F16)*/
+                        
+                        cell.markOption4.backgroundColor = UIColor(rgb: 0xE9375D)
                     
                     }
                 }
