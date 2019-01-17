@@ -31,6 +31,7 @@
 		E3687E8B2115CE8000CC60E9 /* PlacesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3687E8A2115CE8000CC60E9 /* PlacesTableViewCell.swift */; };
 		E36DA987212D71830031D337 /* wrong.gif in Resources */ = {isa = PBXBuildFile; fileRef = E36DA986212D71830031D337 /* wrong.gif */; };
 		E39D488E212EB87100A32212 /* correct2.png in Resources */ = {isa = PBXBuildFile; fileRef = E39D488D212EB87100A32212 /* correct2.png */; };
+		E3A2588F21ECDEF0001323B3 /* rightArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A2588E21ECDEF0001323B3 /* rightArrow.png */; };
 		E3A38444215044A1003A0A8C /* puzzleMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A38443215044A1003A0A8C /* puzzleMapViewController.swift */; };
 		E3A3DDEA21A93A7B0070FB85 /* balloon.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A3DDE921A93A7B0070FB85 /* balloon.png */; };
 		E3A3DDEC21A93B050070FB85 /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A3DDEB21A93B050070FB85 /* list.png */; };
@@ -105,6 +106,7 @@
 		E3687E8A2115CE8000CC60E9 /* PlacesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesTableViewCell.swift; sourceTree = "<group>"; };
 		E36DA986212D71830031D337 /* wrong.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = wrong.gif; path = gadabout/images/wrong.gif; sourceTree = SOURCE_ROOT; };
 		E39D488D212EB87100A32212 /* correct2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = correct2.png; sourceTree = SOURCE_ROOT; };
+		E3A2588E21ECDEF0001323B3 /* rightArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rightArrow.png; path = ../../../Attributions/rightArrow.png; sourceTree = "<group>"; };
 		E3A38443215044A1003A0A8C /* puzzleMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = puzzleMapViewController.swift; sourceTree = "<group>"; };
 		E3A3DDE921A93A7B0070FB85 /* balloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = balloon.png; sourceTree = "<group>"; };
 		E3A3DDEB21A93B050070FB85 /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				E3C20D3721D6B34600A162E0 /* checked.png */,
 				E36DA986212D71830031D337 /* wrong.gif */,
 				E3CF250A219D1C8000D5EA9F /* lock.png */,
+				E3A2588E21ECDEF0001323B3 /* rightArrow.png */,
 				E3A3DDE921A93A7B0070FB85 /* balloon.png */,
 				E3A3DDF121A940050070FB85 /* slot.png */,
 				E3C7E93C21D32D8C00FA2FA3 /* Flag_icon.png */,
@@ -394,6 +397,7 @@
 				E3EF3A3A2188042100821C47 /* score-icon.png in Resources */,
 				E3A3DDEE21A93BFD0070FB85 /* egg.png in Resources */,
 				E3261AF120F098940056CE99 /* Assets.xcassets in Resources */,
+				E3A2588F21ECDEF0001323B3 /* rightArrow.png in Resources */,
 				E3261AEC20F098920056CE99 /* Main.storyboard in Resources */,
 				E3B97A3021CC94E100C4AC0F /* NetworkConnection.png in Resources */,
 				E3A3DDEA21A93A7B0070FB85 /* balloon.png in Resources */,

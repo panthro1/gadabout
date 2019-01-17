@@ -45,6 +45,7 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
     
     var correctAnsInt = 1
     
+    @IBOutlet weak var nextButton: UIButton!
     var flagImageFile = [PFFile]() // Global food variables
     var flagOption1 = [String]()
     var flagOption2 = [String]()
@@ -57,57 +58,87 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
     }
     
     
+    @IBAction func nextTapped(_ sender: Any) {
+        nextButton.isHidden = true
+        
+        option1.isEnabled = true
+        option2.isEnabled = true
+        option3.isEnabled = true
+        option4.isEnabled = true
+        
+        option1.layer.borderColor = UIColor.clear.cgColor
+        option1.layer.borderWidth = 0
+
+        option2.layer.borderColor = UIColor.clear.cgColor
+        option2.layer.borderWidth = 0
+
+        option3.layer.borderColor = UIColor.clear.cgColor
+        option3.layer.borderWidth = 0
+
+        option4.layer.borderColor = UIColor.clear.cgColor
+        option4.layer.borderWidth = 0
+
+        prepareNextQuestion()
+        
+    }
+    
+    
     @IBAction func option1Tapped(_ sender: Any) {
-        option1.setImage(UIImage(named: "check.png"), for: [])
-        option2.setImage(UIImage(named: "uncheck.png"), for: [])
-        option3.setImage(UIImage(named: "uncheck.png"), for: [])
-        option4.setImage(UIImage(named: "uncheck.png"), for: [])
+        
+        option1.isEnabled = false
+        option2.isEnabled = false
+        option3.isEnabled = false
+        option4.isEnabled = false
         
         print("Option 1 tapped")
         print("Correct answer: \(correctAnsInt)")
         
+
+        
         if correctAnsInt == 1 {
+            option1.pulsate()
+            option1.backgroundColor = UIColor(rgb: 0x29D3AE)
+            
             print("Correct")
             score += 1
             scoreLabel.text = "Score: \(score)"
-            prepareNextQuestion()
+            
+            nextButton.alpha = 0
+            nextButton.isHidden = false
+            UIView.animate(withDuration: 0.3, animations: {
+                self.nextButton.alpha = 1
+            }, completion : nil)
+
+            //prepareNextQuestion()
             
         }
         else {
             print("Incorrect")
             
-            option1.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
-            let origImage = UIImage(named: "check.png");
-            let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-            option1.setImage(tintedImage, for: .normal)
-            option1.tintColor = UIColor(rgb: 0xC20F16)
+            option1.backgroundColor = UIColor(rgb: 0xE9375D)
             
             if correctAnsInt  == 1 {
                 
                 option1.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
                 option1.layer.borderWidth = 2
-                option1.layer.cornerRadius = 10
                 
             }
             else if correctAnsInt  == 2 {
                 
                 option2.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
                 option2.layer.borderWidth = 2
-                option2.layer.cornerRadius = 10
                 
             }
             else if correctAnsInt  == 3 {
                 
                 option3.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
                 option3.layer.borderWidth = 2
-                option3.layer.cornerRadius = 10
                 
             }
             else {
                 
                 option4.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
                 option4.layer.borderWidth = 2
-                option4.layer.cornerRadius = 10
                 
             }
             
@@ -131,60 +162,80 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         
         tryAgainButton.isHidden = true
         
+        option1.isEnabled = true
+        option2.isEnabled = true
+        option3.isEnabled = true
+        option4.isEnabled = true
+        
+        option1.layer.borderColor = UIColor.clear.cgColor
+        option1.layer.borderWidth = 0
+        
+        option2.layer.borderColor = UIColor.clear.cgColor
+        option2.layer.borderWidth = 0
+        
+        option3.layer.borderColor = UIColor.clear.cgColor
+        option3.layer.borderWidth = 0
+        
+        option4.layer.borderColor = UIColor.clear.cgColor
+        option4.layer.borderWidth = 0
+        
         prepareNextQuestion()
     }
     
     
     @IBAction func option2Tapped(_ sender: Any) {
-        option1.setImage(UIImage(named: "uncheck.png"), for: [])
-        option2.setImage(UIImage(named: "check.png"), for: [])
-        option3.setImage(UIImage(named: "uncheck.png"), for: [])
-        option4.setImage(UIImage(named: "uncheck.png"), for: [])
+        
+        option1.isEnabled = false
+        option2.isEnabled = false
+        option3.isEnabled = false
+        option4.isEnabled = false
         
         print("Option 2 tapped")
         print("Correct answer: \(correctAnsInt)")
         
         if correctAnsInt == 2 {
+            option2.pulsate()
+            option2.backgroundColor = UIColor(rgb: 0x29D3AE)
+            
             print("Correct")
             score += 1
             scoreLabel.text = "Score: \(score)"
-            prepareNextQuestion()
+            
+            nextButton.alpha = 0
+            nextButton.isHidden = false
+            UIView.animate(withDuration: 0.3, animations: {
+                self.nextButton.alpha = 1
+            }, completion : nil)
+            
+            //prepareNextQuestion()
         }
         else {
             print("Incorrect")
             
-            option2.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
-            let origImage = UIImage(named: "check.png");
-            let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-            option2.setImage(tintedImage, for: .normal)
-            option2.tintColor = UIColor(rgb: 0xC20F16)
+            option2.backgroundColor = UIColor(rgb: 0xE9375D)
             
             if correctAnsInt  == 1 {
                 
                 option1.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
                 option1.layer.borderWidth = 2
-                option1.layer.cornerRadius = 10
                 
             }
             else if correctAnsInt  == 2 {
                 
                 option2.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
                 option2.layer.borderWidth = 2
-                option2.layer.cornerRadius = 10
                 
             }
             else if correctAnsInt  == 3 {
                 
                 option3.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
                 option3.layer.borderWidth = 2
-                option3.layer.cornerRadius = 10
                 
             }
             else {
                 
                 option4.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
                 option4.layer.borderWidth = 2
-                option4.layer.cornerRadius = 10
                 
             }
 
@@ -202,55 +253,58 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
     }
     
     @IBAction func option3Tapped(_ sender: Any) {
-        option1.setImage(UIImage(named: "uncheck.png"), for: [])
-        option2.setImage(UIImage(named: "uncheck.png"), for: [])
-        option3.setImage(UIImage(named: "check.png"), for: [])
-        option4.setImage(UIImage(named: "uncheck.png"), for: [])
+        
+        option1.isEnabled = false
+        option2.isEnabled = false
+        option3.isEnabled = false
+        option4.isEnabled = false
         
         print("Option 3 tapped")
         print("Correct answer: \(correctAnsInt)")
         
         if correctAnsInt == 3 {
+            option3.pulsate()
+            option3.backgroundColor = UIColor(rgb: 0x29D3AE)
+            
             print("Correct")
             score += 1
             scoreLabel.text = "Score: \(score)"
-            prepareNextQuestion()
+            
+            nextButton.alpha = 0
+            nextButton.isHidden = false
+            UIView.animate(withDuration: 0.3, animations: {
+                self.nextButton.alpha = 1
+            }, completion : nil)
+            
+            //prepareNextQuestion()
         }
         else {
             print("Incorrect")
             
-            option3.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
-            let origImage = UIImage(named: "check.png");
-            let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-            option3.setImage(tintedImage, for: .normal)
-            option3.tintColor = UIColor(rgb: 0xC20F16)
+            option3.backgroundColor = UIColor(rgb: 0xE9375D)
             
             if correctAnsInt  == 1 {
                 
                 option1.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
                 option1.layer.borderWidth = 2
-                option1.layer.cornerRadius = 10
                 
             }
             else if correctAnsInt  == 2 {
                 
                 option2.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
                 option2.layer.borderWidth = 2
-                option2.layer.cornerRadius = 10
                 
             }
             else if correctAnsInt  == 3 {
                 
                 option3.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
                 option3.layer.borderWidth = 2
-                option3.layer.cornerRadius = 10
                 
             }
             else {
                 
                 option4.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
                 option4.layer.borderWidth = 2
-                option4.layer.cornerRadius = 10
                 
             }
 
@@ -268,55 +322,58 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
     }
     
     @IBAction func option4Tapped(_ sender: Any) {
-        option1.setImage(UIImage(named: "uncheck.png"), for: [])
-        option2.setImage(UIImage(named: "uncheck.png"), for: [])
-        option3.setImage(UIImage(named: "uncheck.png"), for: [])
-        option4.setImage(UIImage(named: "check.png"), for: [])
+        
+        option1.isEnabled = false
+        option2.isEnabled = false
+        option3.isEnabled = false
+        option4.isEnabled = false
         
         print("Option 4 tapped")
         print("Correct answer: \(correctAnsInt)")
         
         if correctAnsInt == 4 {
+            option4.pulsate()
+            option4.backgroundColor = UIColor(rgb: 0x29D3AE)
+            
             print("Correct")
             score += 1
             scoreLabel.text = "Score: \(score)"
-            prepareNextQuestion()
+            
+            nextButton.alpha = 0
+            nextButton.isHidden = false
+            UIView.animate(withDuration: 0.3, animations: {
+                self.nextButton.alpha = 1
+            }, completion : nil)
+            
+            //prepareNextQuestion()
         }
         else {
             print("Incorrect")
             
-            option4.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
-            let origImage = UIImage(named: "check.png");
-            let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-            option4.setImage(tintedImage, for: .normal)
-            option4.tintColor = UIColor(rgb: 0xC20F16)
+            option4.backgroundColor = UIColor(rgb: 0xE9375D)
             
             if correctAnsInt  == 1 {
                 
                 option1.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
                 option1.layer.borderWidth = 2
-                option1.layer.cornerRadius = 10
                 
             }
             else if correctAnsInt  == 2 {
                 
                 option2.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
                 option2.layer.borderWidth = 2
-                option2.layer.cornerRadius = 10
                 
             }
             else if correctAnsInt  == 3 {
                 
                 option3.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
                 option3.layer.borderWidth = 2
-                option3.layer.cornerRadius = 10
                 
             }
             else {
                 
                 option4.layer.borderColor = UIColor(rgb: 0x039D18).cgColor
                 option4.layer.borderWidth = 2
-                option4.layer.cornerRadius = 10
                 
             }
 
@@ -340,7 +397,19 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         option2.isHidden = true
         option3.isHidden = true
         option4.isHidden = true
+        
+        option1.layer.cornerRadius = 10
+        option2.layer.cornerRadius = 10
+        option3.layer.cornerRadius = 10
+        option4.layer.cornerRadius = 10
+        
+        option1.titleEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+        option2.titleEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+        option3.titleEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+        option4.titleEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+
         tryAgainButton.isHidden = true
+        nextButton.isHidden = true
         
         /*tryAgainButton.layer.cornerRadius = 10
         tryAgainButton.layer.borderWidth = 1
@@ -359,30 +428,15 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         let adRequest = GADRequest()
         interstitial.load(adRequest)
 
-        
-        let spacing: CGFloat = 5 // the amount of spacing to appear between image and title
-
-        option1.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
-        option1.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
-        option1.imageView?.contentMode = .scaleAspectFit
         option1.setTitleColor(UIColor.black, for: .normal)
         option1.layer.borderWidth = 0
 
-        option2.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
-        option2.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
-        option2.imageView?.contentMode = .scaleAspectFit
         option2.setTitleColor(UIColor.black, for: .normal)
         option2.layer.borderWidth = 0
 
-        option3.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
-        option3.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
-        option3.imageView?.contentMode = .scaleAspectFit
         option3.setTitleColor(UIColor.black, for: .normal)
         option3.layer.borderWidth = 0
 
-        option4.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
-        option4.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
-        option4.imageView?.contentMode = .scaleAspectFit
         option4.setTitleColor(UIColor.black, for: .normal)
         option4.layer.borderWidth = 0
         
@@ -478,47 +532,10 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         option3.isHidden = false
         option4.isHidden = false
         
-        let spacing: CGFloat = 5 // the amount of spacing to appear between image and title
-        
-        option1.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
-        option1.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
-        option1.imageView?.contentMode = .scaleAspectFit
-        option1.setTitleColor(UIColor.black, for: .normal)
-        option1.layer.borderWidth = 0
-        
-        option2.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
-        option2.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
-        option2.imageView?.contentMode = .scaleAspectFit
-        option2.setTitleColor(UIColor.black, for: .normal)
-        option2.layer.borderWidth = 0
-        
-        option3.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
-        option3.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
-        option3.imageView?.contentMode = .scaleAspectFit
-        option3.setTitleColor(UIColor.black, for: .normal)
-        option3.layer.borderWidth = 0
-        
-        option4.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
-        option4.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
-        option4.imageView?.contentMode = .scaleAspectFit
-        option4.setTitleColor(UIColor.black, for: .normal)
-        option4.layer.borderWidth = 0
-
-        option1.setTitleColor(UIColor.black, for: [])
-        option2.setTitleColor(UIColor.black, for: [])
-        option3.setTitleColor(UIColor.black, for: [])
-        option4.setTitleColor(UIColor.black, for: [])
-        
-
-        option1.setImage(UIImage(named: "uncheck.png"), for: [])
-        option2.setImage(UIImage(named: "uncheck.png"), for: [])
-        option3.setImage(UIImage(named: "uncheck.png"), for: [])
-        option4.setImage(UIImage(named: "uncheck.png"), for: [])
-        
-        /*option1.setTitle("Country1", for: [])
-        option2.setTitle("Country2", for: [])
-        option3.setTitle("Country3", for: [])
-        option4.setTitle("Country4", for: [])*/
+        option1.backgroundColor = UIColor.clear
+        option2.backgroundColor = UIColor.clear
+        option3.backgroundColor = UIColor.clear
+        option4.backgroundColor = UIColor.clear
         
         randomIndex = Int(arc4random_uniform(UInt32(flagOption1.count)))
         print("Random Index: \(randomIndex)")
