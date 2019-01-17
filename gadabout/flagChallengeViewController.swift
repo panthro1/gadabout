@@ -584,6 +584,7 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
     }
     
     func showPopup(Score: Int, oldRecord: Int) {
+        tryAgainButton.isEnabled = false
         
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
         popOverVC.scoreWin = Score
@@ -609,6 +610,8 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
     }
     
     func SendCloseInfo() {
+        
+        tryAgainButton.isEnabled = true
         
         if interstitial.isReady {
             interstitial.present(fromRootViewController: self)
