@@ -115,6 +115,8 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         else {
             print("Incorrect")
             
+            option1.shake()
+            
             option1.backgroundColor = UIColor(rgb: 0xE9375D)
             
             if correctAnsInt  == 1 {
@@ -141,8 +143,10 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
                 option4.layer.borderWidth = 2
                 
             }
-            
-            showPopup(Score: score, oldRecord: glbFlagScore)
+            if score >= glbFlagScore {
+                showPopup(Score: score, oldRecord: glbFlagScore)
+            }
+
             flagOption1 = glbFlagOption1
             flagOption2 = glbFlagOption2
             flagOption3 = glbFlagOption3
@@ -159,6 +163,15 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
     @IBAction func tryAgainTapped(_ sender: Any) {
         let button = sender as? UIButton
         button?.pulsate()
+        
+        score = 0
+        scoreLabel.text = "Score: \(self.score)"
+        
+        if interstitial.isReady {
+            interstitial.present(fromRootViewController: self)
+        } else {
+            print("Ad wasn't ready")
+        }
         
         tryAgainButton.isHidden = true
         
@@ -212,6 +225,8 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         else {
             print("Incorrect")
             
+            option2.shake()
+            
             option2.backgroundColor = UIColor(rgb: 0xE9375D)
             
             if correctAnsInt  == 1 {
@@ -240,7 +255,10 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
             }
 
             
-            showPopup(Score: score, oldRecord: glbFlagScore)
+            if score >= glbFlagScore {
+                showPopup(Score: score, oldRecord: glbFlagScore)
+            }
+
             flagOption1 = glbFlagOption1
             flagOption2 = glbFlagOption2
             flagOption3 = glbFlagOption3
@@ -281,6 +299,8 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         else {
             print("Incorrect")
             
+            option3.shake()
+            
             option3.backgroundColor = UIColor(rgb: 0xE9375D)
             
             if correctAnsInt  == 1 {
@@ -309,7 +329,10 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
             }
 
             
-            showPopup(Score: score, oldRecord: glbFlagScore)
+            if score >= glbFlagScore {
+                showPopup(Score: score, oldRecord: glbFlagScore)
+            }
+
             flagOption1 = glbFlagOption1
             flagOption2 = glbFlagOption2
             flagOption3 = glbFlagOption3
@@ -350,6 +373,8 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         else {
             print("Incorrect")
             
+            option4.shake()
+            
             option4.backgroundColor = UIColor(rgb: 0xE9375D)
             
             if correctAnsInt  == 1 {
@@ -376,9 +401,11 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
                 option4.layer.borderWidth = 2
                 
             }
-
             
-            showPopup(Score: score, oldRecord: glbFlagScore)
+            if score >= glbFlagScore {
+                showPopup(Score: score, oldRecord: glbFlagScore)
+            }
+            
             flagOption1 = glbFlagOption1
             flagOption2 = glbFlagOption2
             flagOption3 = glbFlagOption3
