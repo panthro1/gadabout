@@ -48,12 +48,19 @@ class PlacesTableViewCell: UITableViewCell {
     
     
     @IBAction func markOption1Tapped(_ sender: Any) {
+         markOption1.pulsate()
         
         if option1Marked {
             markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
             markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
             markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
             markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
+            
+            markOption1.backgroundColor = UIColor.clear
+            markOption2.backgroundColor = UIColor.clear
+            markOption3.backgroundColor = UIColor.clear
+            markOption4.backgroundColor = UIColor.clear
+            
             option1Marked = false
             option2Marked = false
             option3Marked = false
@@ -66,6 +73,14 @@ class PlacesTableViewCell: UITableViewCell {
             markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
             markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
             markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
+            
+            markOption2.backgroundColor = UIColor.clear
+            markOption3.backgroundColor = UIColor.clear
+            markOption4.backgroundColor = UIColor.clear
+            
+            markOption1.layer.cornerRadius = 10
+            markOption1.backgroundColor = UIColor(rgb: 0x7E9BE6)
+
             option1Marked = true
             option2Marked = false
             option3Marked = false
@@ -78,12 +93,20 @@ class PlacesTableViewCell: UITableViewCell {
     
     
     @IBAction func markOption2Tapped(_ sender: Any) {
+        
+        markOption2.pulsate()
 
         if option2Marked {
             markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
             markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
             markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
             markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
+            
+            markOption1.backgroundColor = UIColor.clear
+            markOption2.backgroundColor = UIColor.clear
+            markOption3.backgroundColor = UIColor.clear
+            markOption4.backgroundColor = UIColor.clear
+
             option1Marked = false
             option2Marked = false
             option3Marked = false
@@ -96,6 +119,14 @@ class PlacesTableViewCell: UITableViewCell {
             markOption2.setImage(UIImage(named: "check.png"), for: [])
             markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
             markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
+            
+            markOption1.backgroundColor = UIColor.clear
+            markOption3.backgroundColor = UIColor.clear
+            markOption4.backgroundColor = UIColor.clear
+            
+            markOption2.layer.cornerRadius = 10
+            markOption2.backgroundColor = UIColor(rgb: 0x7E9BE6)
+            
             option1Marked = false
             option2Marked = true
             option3Marked = false
@@ -109,12 +140,20 @@ class PlacesTableViewCell: UITableViewCell {
     
     
     @IBAction func markOption3Tapped(_ sender: Any) {
+         markOption3.pulsate()
         
         if option3Marked {
             markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
             markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
             markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
             markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
+            
+            markOption1.backgroundColor = UIColor.clear
+            markOption2.backgroundColor = UIColor.clear
+            markOption3.backgroundColor = UIColor.clear
+            markOption4.backgroundColor = UIColor.clear
+
+            
             option1Marked = false
             option2Marked = false
             option3Marked = false
@@ -127,6 +166,14 @@ class PlacesTableViewCell: UITableViewCell {
             markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
             markOption3.setImage(UIImage(named: "check.png"), for: [])
             markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
+            
+            markOption1.backgroundColor = UIColor.clear
+            markOption2.backgroundColor = UIColor.clear
+            markOption4.backgroundColor = UIColor.clear
+            
+            markOption3.layer.cornerRadius = 10
+            markOption3.backgroundColor = UIColor(rgb: 0x7E9BE6)
+            
             option1Marked = false
             option2Marked = false
             option3Marked = true
@@ -138,12 +185,20 @@ class PlacesTableViewCell: UITableViewCell {
     
     
     @IBAction func markOption4Tapped(_ sender: Any) {
+         markOption4.pulsate()
         
         if option4Marked {
             markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
             markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
             markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
             markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
+            
+            markOption1.backgroundColor = UIColor.clear
+            markOption2.backgroundColor = UIColor.clear
+            markOption3.backgroundColor = UIColor.clear
+            markOption4.backgroundColor = UIColor.clear
+
+            
             option1Marked = false
             option2Marked = false
             option3Marked = false
@@ -156,6 +211,15 @@ class PlacesTableViewCell: UITableViewCell {
             markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
             markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
             markOption4.setImage(UIImage(named: "check.png"), for: [])
+            
+            markOption1.backgroundColor = UIColor.clear
+            markOption2.backgroundColor = UIColor.clear
+            markOption3.backgroundColor = UIColor.clear
+
+            markOption4.layer.cornerRadius = 10
+            markOption4.backgroundColor = UIColor(rgb: 0x7E9BE6)
+
+            
             option1Marked = false
             option2Marked = false
             option3Marked = false

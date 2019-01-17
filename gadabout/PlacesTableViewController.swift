@@ -617,6 +617,11 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             cell.markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
             cell.markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
             cell.markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
+            
+            cell.markOption1.backgroundColor = UIColor.clear
+            cell.markOption2.backgroundColor = UIColor.clear
+            cell.markOption3.backgroundColor = UIColor.clear
+            cell.markOption4.backgroundColor = UIColor.clear
 
             let questionIndex = questionNo.index(of: indexPath.row)
             
@@ -624,15 +629,27 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 let answerIndex = answer[qIndex]
                 if answerIndex == 1 {
                     cell.markOption1.setImage(UIImage(named: "check.png"), for: [])
+                    
+                    cell.markOption1.layer.cornerRadius = 10
+                    cell.markOption1.backgroundColor = UIColor(rgb: 0x7E9BE6)
                 }
                 else if answerIndex == 2 {
                     cell.markOption2.setImage(UIImage(named: "check.png"), for: [])
+
+                    cell.markOption2.layer.cornerRadius = 10
+                    cell.markOption2.backgroundColor = UIColor(rgb: 0x7E9BE6)
                 }
                 else if answerIndex == 3 {
                     cell.markOption3.setImage(UIImage(named: "check.png"), for: [])
+
+                    cell.markOption3.layer.cornerRadius = 10
+                    cell.markOption3.backgroundColor = UIColor(rgb: 0x7E9BE6)
                 }
                 else if answerIndex == 4 {
                     cell.markOption4.setImage(UIImage(named: "check.png"), for: [])
+
+                    cell.markOption4.layer.cornerRadius = 10
+                    cell.markOption4.backgroundColor = UIColor(rgb: 0x7E9BE6)
                 }
             }
 

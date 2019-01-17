@@ -155,6 +155,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hqn-JB-vjW">
                                 <rect key="frame" x="49.666666666666657" y="439" width="335.33333333333337" height="45"/>
+                                <color key="backgroundColor" red="0.48897939920425415" green="0.60097509622573853" blue="0.91210120916366577" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Country2">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
