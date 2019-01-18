@@ -479,18 +479,35 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         cell.markOption1.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
         cell.markOption1.setTitleColor(UIColor.black, for: .normal)
         cell.markOption1.layer.borderWidth = 0
+        
+        cell.markOption1.titleLabel?.numberOfLines = 1
+        cell.markOption1.titleLabel?.adjustsFontSizeToFitWidth = true
+        cell.markOption1.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
 
         cell.markOption2.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
         cell.markOption2.setTitleColor(UIColor.black, for: .normal)
         cell.markOption2.layer.borderWidth = 0
 
+        cell.markOption2.titleLabel?.numberOfLines = 1
+        cell.markOption2.titleLabel?.adjustsFontSizeToFitWidth = true
+        cell.markOption2.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
+
         cell.markOption3.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
         cell.markOption3.setTitleColor(UIColor.black, for: .normal)
         cell.markOption3.layer.borderWidth = 0
-        
+
+        cell.markOption3.titleLabel?.numberOfLines = 1
+        cell.markOption3.titleLabel?.adjustsFontSizeToFitWidth = true
+        cell.markOption3.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
+
         cell.markOption4.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
         cell.markOption4.setTitleColor(UIColor.black, for: .normal)
         cell.markOption4.layer.borderWidth = 0
+
+        cell.markOption4.titleLabel?.numberOfLines = 1
+        cell.markOption4.titleLabel?.adjustsFontSizeToFitWidth = true
+        cell.markOption4.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
+
         
         let screenSize = UIScreen.main.bounds
         
