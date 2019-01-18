@@ -476,27 +476,19 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         cell.toDoListButton.layer.borderColor = UIColor.black.cgColor
         
         let spacing: CGFloat = 5 // the amount of spacing to appear between image and title
-        cell.markOption1.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
         cell.markOption1.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
-        cell.markOption1.imageView?.contentMode = .scaleAspectFit
         cell.markOption1.setTitleColor(UIColor.black, for: .normal)
         cell.markOption1.layer.borderWidth = 0
 
-        cell.markOption2.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
         cell.markOption2.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
-        cell.markOption2.imageView?.contentMode = .scaleAspectFit
         cell.markOption2.setTitleColor(UIColor.black, for: .normal)
         cell.markOption2.layer.borderWidth = 0
 
-        cell.markOption3.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
         cell.markOption3.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
-        cell.markOption3.imageView?.contentMode = .scaleAspectFit
         cell.markOption3.setTitleColor(UIColor.black, for: .normal)
         cell.markOption3.layer.borderWidth = 0
         
-        cell.markOption4.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, spacing);
         cell.markOption4.titleEdgeInsets = UIEdgeInsetsMake(0, spacing, 0, 0);
-        cell.markOption4.imageView?.contentMode = .scaleAspectFit
         cell.markOption4.setTitleColor(UIColor.black, for: .normal)
         cell.markOption4.layer.borderWidth = 0
         
@@ -544,6 +536,11 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             cell.markOption4.isHidden = true
             cell.detailsButton.isHidden = false
             cell.toDoListButton.isHidden = false
+            cell.optionALabel.isHidden = true
+            cell.optionBLabel.isHidden = true
+            cell.optionCLabel.isHidden = true
+            cell.optionDLabel.isHidden = true
+            
             cell.detailsButton.setTitle("Back", for: [])
             
             cell.detailText.isHidden = false
@@ -558,25 +555,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     if let imageToDisplay = UIImage(data: imageData) {
                         
                         cell.placeImage.image = imageToDisplay
-                        
-                        // test
-                        
-                        /*let boundsScale = cell.placeImage.bounds.size.width / cell.placeImage.bounds.size.height
-                        let imageScale = imageToDisplay.size.width / imageToDisplay.size.height
-                        
-                        var drawingRect: CGRect = cell.placeImage.bounds
-                        
-                        if boundsScale > imageScale {
-                            drawingRect.size.width =  drawingRect.size.height * imageScale
-                            drawingRect.origin.x = (cell.placeImage.bounds.size.width - drawingRect.size.width) / 2
-                        } else {
-                            drawingRect.size.height = drawingRect.size.width / imageScale
-                            drawingRect.origin.y = (cell.placeImage.bounds.size.height - drawingRect.size.height) / 2
-                        }
-                        let path = UIBezierPath(roundedRect: drawingRect, cornerRadius: 10)
-                        let mask = CAShapeLayer()
-                        mask.path = path.cgPath
-                        cell.placeImage.layer.mask = mask*/
                         
                     }
                 }
@@ -604,6 +582,12 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             cell.markOption2.isHidden = false
             cell.markOption3.isHidden = false
             cell.markOption4.isHidden = false
+            
+            cell.optionALabel.isHidden = false
+            cell.optionBLabel.isHidden = false
+            cell.optionCLabel.isHidden = false
+            cell.optionDLabel.isHidden = false
+
         
             cell.detailText.isHidden = true
             
@@ -612,12 +596,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             cell.markOption3.setTitle(option3[indexPath.row], for: [])
             cell.markOption4.setTitle(option4[indexPath.row], for: [])
 
-            
-            cell.markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
-            cell.markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
-            cell.markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
-            cell.markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
-            
             cell.markOption1.backgroundColor = UIColor.clear
             cell.markOption2.backgroundColor = UIColor.clear
             cell.markOption3.backgroundColor = UIColor.clear
@@ -628,25 +606,21 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             if let qIndex = questionIndex {
                 let answerIndex = answer[qIndex]
                 if answerIndex == 1 {
-                    cell.markOption1.setImage(UIImage(named: "check.png"), for: [])
-                    
+
                     cell.markOption1.layer.cornerRadius = 10
                     cell.markOption1.backgroundColor = UIColor(rgb: 0x7E9BE6)
                 }
                 else if answerIndex == 2 {
-                    cell.markOption2.setImage(UIImage(named: "check.png"), for: [])
 
                     cell.markOption2.layer.cornerRadius = 10
                     cell.markOption2.backgroundColor = UIColor(rgb: 0x7E9BE6)
                 }
                 else if answerIndex == 3 {
-                    cell.markOption3.setImage(UIImage(named: "check.png"), for: [])
 
                     cell.markOption3.layer.cornerRadius = 10
                     cell.markOption3.backgroundColor = UIColor(rgb: 0x7E9BE6)
                 }
                 else if answerIndex == 4 {
-                    cell.markOption4.setImage(UIImage(named: "check.png"), for: [])
 
                     cell.markOption4.layer.cornerRadius = 10
                     cell.markOption4.backgroundColor = UIColor(rgb: 0x7E9BE6)
@@ -667,11 +641,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
 
                 cell.detailsButton.isHidden = false
                 cell.toDoListButton.isHidden = false
-                
-                cell.markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
-                cell.markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
-                cell.markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
-                cell.markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
                 
                 cell.markOption1.backgroundColor = UIColor.clear
                 cell.markOption2.backgroundColor = UIColor.clear
@@ -742,41 +711,19 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 if status == 1 {
 
                     if selected == 1 {
-
-                        /*cell.markOption1.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
-                        let origImage = UIImage(named: "check.png");
-                        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-                        cell.markOption1.setImage(tintedImage, for: .normal)
-                        cell.markOption1.tintColor = UIColor(rgb: 0x039D18)//UIColor.green*/
                         
                         cell.markOption1.backgroundColor = UIColor(rgb: 0x29D3AE)
                     }
                     else if selected == 2 {
-
-                        /*cell.markOption2.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
-                        let origImage = UIImage(named: "check.png");
-                        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-                        cell.markOption2.setImage(tintedImage, for: .normal)
-                        cell.markOption2.tintColor = UIColor(rgb: 0x039D18)//UIColor.green*/
                         
                         cell.markOption2.backgroundColor = UIColor(rgb: 0x29D3AE)
                     }
                     else if selected == 3 {
-                        /*cell.markOption3.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
-                        let origImage = UIImage(named: "check.png");
-                        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-                        cell.markOption3.setImage(tintedImage, for: .normal)
-                        cell.markOption3.tintColor = UIColor(rgb: 0x039D18)//UIColor.green*/
                         
                         cell.markOption3.backgroundColor = UIColor(rgb: 0x29D3AE)
                     }
                     else if selected == 4 {
 
-                        /*cell.markOption4.setTitleColor(UIColor(rgb: 0x039D18), for: .normal)
-                        let origImage = UIImage(named: "check.png");
-                        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-                        cell.markOption4.setImage(tintedImage, for: .normal)
-                        cell.markOption4.tintColor = UIColor(rgb: 0x039D18)//UIColor.green*/
                         
                         cell.markOption4.backgroundColor = UIColor(rgb: 0x29D3AE)
                     }
@@ -784,12 +731,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 else if status == 0 {
 
                     if selected == 1 {
-                    
-                        /*cell.markOption1.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
-                        let origImage = UIImage(named: "check.png");
-                        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-                        cell.markOption1.setImage(tintedImage, for: .normal)
-                        cell.markOption1.tintColor = UIColor(rgb: 0xC20F16)*/
                         
                         cell.markOption1.backgroundColor = UIColor(rgb: 0xE9375D)
 
@@ -797,22 +738,10 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     }
                     else if selected == 2 {
                     
-                        /*cell.markOption2.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
-                        let origImage = UIImage(named: "check.png");
-                        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-                        cell.markOption2.setImage(tintedImage, for: .normal)
-                        cell.markOption2.tintColor = UIColor(rgb: 0xC20F16)*/
-
                         cell.markOption2.backgroundColor = UIColor(rgb: 0xE9375D)
 
                     }
                     else if selected == 3 {
-                    
-                        /*cell.markOption3.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
-                        let origImage = UIImage(named: "check.png");
-                        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-                        cell.markOption3.setImage(tintedImage, for: .normal)
-                        cell.markOption3.tintColor = UIColor(rgb: 0xC20F16)*/
                         
                         cell.markOption3.backgroundColor = UIColor(rgb: 0xE9375D)
 
@@ -820,11 +749,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     }
                     else if selected == 4 {
                     
-                        /*cell.markOption4.setTitleColor(UIColor(rgb: 0xC20F16), for: .normal)
-                        let origImage = UIImage(named: "check.png");
-                        let tintedImage = origImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-                        cell.markOption4.setImage(tintedImage, for: .normal)
-                        cell.markOption4.tintColor = UIColor(rgb: 0xC20F16)*/
                         
                         cell.markOption4.backgroundColor = UIColor(rgb: 0xE9375D)
                     

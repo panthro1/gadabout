@@ -46,15 +46,18 @@ class PlacesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var toDoListButton: UIButton!
     
+    @IBOutlet weak var optionALabel: UILabel!
+    
+    @IBOutlet weak var optionBLabel: UILabel!
+    
+    @IBOutlet weak var optionCLabel: UILabel!
+    
+    @IBOutlet weak var optionDLabel: UILabel!
     
     @IBAction func markOption1Tapped(_ sender: Any) {
          markOption1.pulsate()
         
         if option1Marked {
-            markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
             
             markOption1.backgroundColor = UIColor.clear
             markOption2.backgroundColor = UIColor.clear
@@ -69,10 +72,6 @@ class PlacesTableViewCell: UITableViewCell {
             
         }
         else {
-            markOption1.setImage(UIImage(named: "check.png"), for: [])
-            markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
             
             markOption2.backgroundColor = UIColor.clear
             markOption3.backgroundColor = UIColor.clear
@@ -97,10 +96,6 @@ class PlacesTableViewCell: UITableViewCell {
         markOption2.pulsate()
 
         if option2Marked {
-            markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
             
             markOption1.backgroundColor = UIColor.clear
             markOption2.backgroundColor = UIColor.clear
@@ -115,10 +110,6 @@ class PlacesTableViewCell: UITableViewCell {
             
         }
         else {
-            markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption2.setImage(UIImage(named: "check.png"), for: [])
-            markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
             
             markOption1.backgroundColor = UIColor.clear
             markOption3.backgroundColor = UIColor.clear
@@ -143,10 +134,6 @@ class PlacesTableViewCell: UITableViewCell {
          markOption3.pulsate()
         
         if option3Marked {
-            markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
             
             markOption1.backgroundColor = UIColor.clear
             markOption2.backgroundColor = UIColor.clear
@@ -162,10 +149,6 @@ class PlacesTableViewCell: UITableViewCell {
             
         }
         else {
-            markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption3.setImage(UIImage(named: "check.png"), for: [])
-            markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
             
             markOption1.backgroundColor = UIColor.clear
             markOption2.backgroundColor = UIColor.clear
@@ -188,10 +171,6 @@ class PlacesTableViewCell: UITableViewCell {
          markOption4.pulsate()
         
         if option4Marked {
-            markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption4.setImage(UIImage(named: "uncheck.png"), for: [])
             
             markOption1.backgroundColor = UIColor.clear
             markOption2.backgroundColor = UIColor.clear
@@ -207,10 +186,6 @@ class PlacesTableViewCell: UITableViewCell {
             
         }
         else {
-            markOption1.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption2.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption3.setImage(UIImage(named: "uncheck.png"), for: [])
-            markOption4.setImage(UIImage(named: "check.png"), for: [])
             
             markOption1.backgroundColor = UIColor.clear
             markOption2.backgroundColor = UIColor.clear
