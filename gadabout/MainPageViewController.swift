@@ -11,6 +11,7 @@ import CoreData
 import Parse
 import GoogleMobileAds
 import Reachability
+import UserNotifications
 
 var glbPlcImageFile = [PFFile]() // Global place variables
 var glbPlcOption1 = [String]()
@@ -134,6 +135,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         
         AppDelegate.AppUtility.lockOrientation(.portrait)
+        
+        registerUserNotification()
         
         /*NetworkManager.isUnreachable { [unowned self]_ in
             print("OFFLINE")
@@ -852,6 +855,24 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewWillDisappear(_ animated: Bool) {
         reachability.stopNotifier()
         NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)
+    }
+    
+    func registerUserNotification() {
+        let center = UNUserNotificationCenter.current()
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Waiting for you"
+        content.body = "New things to explore from all over the world !!"
+        content.categoryIdentifier = "alarm"
+        content.sound = UNNotificationSound.default()
+        
+        var dateComponents = DateComponents()
+        dateComponents.hour = 11
+        dateComponents.minute = 20
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        center.add(request)
     }
     /*
     // MARK: - Navigation
