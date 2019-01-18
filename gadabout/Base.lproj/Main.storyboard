@@ -370,6 +370,10 @@
                         <outlet property="option2" destination="Hqn-JB-vjW" id="QuS-ia-eHS"/>
                         <outlet property="option3" destination="AKi-Pz-RvN" id="2Zu-fD-567"/>
                         <outlet property="option4" destination="3un-PL-9v6" id="eRC-sR-5qD"/>
+                        <outlet property="optionALabel" destination="VqK-Np-rJ4" id="pcv-Qq-MaE"/>
+                        <outlet property="optionBLabel" destination="hK7-iV-C3w" id="mec-fx-8Vl"/>
+                        <outlet property="optionCLabel" destination="W8u-YR-nrt" id="ErL-wt-P8n"/>
+                        <outlet property="optionDLabel" destination="Hqp-Lm-EpB" id="1Bt-8M-VdA"/>
                         <outlet property="scoreLabel" destination="nb6-p9-ZoQ" id="uBq-Ec-nZz"/>
                         <outlet property="tryAgainButton" destination="IBs-pE-Vsp" id="Tuu-58-nGk"/>
                         <segue destination="77F-Fn-Frx" kind="presentation" identifier="flagBackSegue" animates="NO" id="raA-vn-2XX"/>

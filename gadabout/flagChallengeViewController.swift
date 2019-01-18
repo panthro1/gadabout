@@ -33,6 +33,15 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
     
     @IBOutlet weak var bannerView: GADBannerView!
     
+    
+    @IBOutlet weak var optionALabel: UILabel!
+    
+    @IBOutlet weak var optionBLabel: UILabel!
+    
+    @IBOutlet weak var optionCLabel: UILabel!
+    
+    @IBOutlet weak var optionDLabel: UILabel!
+    
     var interstitial: GADInterstitial!
     
     @IBOutlet weak var tryAgainButton: UIButton!
@@ -425,6 +434,11 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         option3.isHidden = true
         option4.isHidden = true
         
+        optionALabel.isHidden = true
+        optionBLabel.isHidden = true
+        optionCLabel.isHidden = true
+        optionDLabel.isHidden = true
+
         option1.layer.cornerRadius = 10
         option2.layer.cornerRadius = 10
         option3.layer.cornerRadius = 10
@@ -553,11 +567,6 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
     
     func prepareNextQuestion() {
         
-        image.isHidden = false
-        option1.isHidden = false
-        option2.isHidden = false
-        option3.isHidden = false
-        option4.isHidden = false
         
         option1.backgroundColor = UIColor.clear
         option2.backgroundColor = UIColor.clear
@@ -584,6 +593,18 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
                     if let temp = Int(self.flagCorrectAnswer[self.randomIndex]) {
                         self.correctAnsInt = temp
                     }
+                    
+                    self.image.isHidden = false
+                    self.option1.isHidden = false
+                    self.option2.isHidden = false
+                    self.option3.isHidden = false
+                    self.option4.isHidden = false
+                    
+                    self.optionALabel.isHidden = false
+                    self.optionBLabel.isHidden = false
+                    self.optionCLabel.isHidden = false
+                    self.optionDLabel.isHidden = false
+
                     
                     self.flagOption1.remove(at: self.randomIndex)
                     self.flagOption2.remove(at: self.randomIndex)
