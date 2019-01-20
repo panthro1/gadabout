@@ -749,8 +749,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 0 {
-            print("Places selected")
-            performSegue(withIdentifier: "placesSegue", sender: self)
+            print("Challenges selected")
+            performSegue(withIdentifier: "challengeSegue", sender: self)
         }
         else if indexPath.section == 1 {
             print("Food selected")

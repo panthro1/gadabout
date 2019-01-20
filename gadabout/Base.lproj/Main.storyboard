@@ -390,9 +390,43 @@
                     <view key="view" contentMode="scaleToFill" id="t1M-l4-WUw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8eO-K0-xmd" customClass="GADBannerView">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="e91-o2-uUp"/>
+                                </constraints>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="67w-vz-q2D">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem id="Q8l-F5-3CX">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="back-button.png" id="Y6l-5y-45c">
+                                            <color key="tintColor" red="0.67306995391845703" green="0.137910395860672" blue="0.70691710710525513" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="backTapped:" destination="oun-ZY-9MZ" id="TGx-gn-BAe"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="67w-vz-q2D" firstAttribute="top" secondItem="XNB-9q-Djo" secondAttribute="top" id="G7i-Ik-BWi"/>
+                            <constraint firstItem="67w-vz-q2D" firstAttribute="leading" secondItem="XNB-9q-Djo" secondAttribute="leading" id="THx-4Y-hvc"/>
+                            <constraint firstItem="67w-vz-q2D" firstAttribute="trailing" secondItem="XNB-9q-Djo" secondAttribute="trailing" id="c7D-kM-d4M"/>
+                            <constraint firstItem="8eO-K0-xmd" firstAttribute="bottom" secondItem="XNB-9q-Djo" secondAttribute="bottom" id="loB-WK-rz4"/>
+                            <constraint firstItem="8eO-K0-xmd" firstAttribute="trailing" secondItem="XNB-9q-Djo" secondAttribute="trailing" id="pdy-kc-kYA"/>
+                            <constraint firstItem="8eO-K0-xmd" firstAttribute="leading" secondItem="XNB-9q-Djo" secondAttribute="leading" id="zup-Nf-bU4"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="XNB-9q-Djo"/>
                     </view>
+                    <connections>
+                        <outlet property="bannerView" destination="8eO-K0-xmd" id="UVT-pQ-RJ2"/>
+                        <segue destination="77F-Fn-Frx" kind="presentation" identifier="challengeBackSegue" animates="NO" id="S2j-oq-cwx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iz4-0j-cfR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -711,6 +745,7 @@
                         <segue destination="Mu3-9O-FyB" kind="presentation" identifier="luckyStrikeSegue" animates="NO" id="XWg-ht-3jw"/>
                         <segue destination="O69-KC-Gqu" kind="show" identifier="offlineSegue" id="pjR-Gm-a4g"/>
                         <segue destination="xO6-c5-z60" kind="presentation" identifier="flagSegue" animates="NO" id="NDQ-9Z-oCr"/>
+                        <segue destination="oun-ZY-9MZ" kind="presentation" identifier="challengeSegue" animates="NO" id="RwC-9j-Eg1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0XW-Pd-7Op" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2072,6 +2107,6 @@
         <image name="score-icon.png" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="14h-w3-4cb"/>
+        <segue reference="S2j-oq-cwx"/>
     </inferredMetricsTieBreakers>
 </document>
