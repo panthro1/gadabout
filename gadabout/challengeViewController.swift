@@ -13,8 +13,6 @@ class challengeViewController: UIViewController, UITableViewDelegate, UITableVie
 
     @IBOutlet weak var bannerView: GADBannerView!
     
-    var interstitial: GADInterstitial!
-    
     @IBOutlet weak var navigationBar: UINavigationBar!
     
     @IBOutlet weak var challengeTableView: UITableView!

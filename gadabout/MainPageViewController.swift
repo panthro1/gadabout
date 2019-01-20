@@ -747,8 +747,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
         }
         else if indexPath.section == 3 {
-            print("Lucky Strike selected")
-            performSegue(withIdentifier: "luckyStrikeSegue", sender: self)
+            print("Profile selected")
+            performSegue(withIdentifier: "profileSegue", sender: self)
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
