@@ -168,7 +168,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         let navBarHeight = self.navigationBar.frame.size.height//UIApplication.shared.statusBarFrame.height
         let upperOffset = /*Int(screenSize.height*0.01) + */Int(navBarHeight) + Int(topSafeArea)
-        rowHeight = Int((Int(screenSize.height) - upperOffset - Int(bannerView.frame.height) - Int(bottomSafeArea) - Int(screenSize.height*0.06)) / 6)
+        rowHeight = Int((Int(screenSize.height*0.70) - upperOffset - Int(bannerView.frame.height) - Int(bottomSafeArea) - Int(screenSize.height*0.08)) / 4)
         
         print("nav bar height: \(navigationBar.frame.size.height)" )
         print("screen height: \(screenSize.height)" )
@@ -651,12 +651,12 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 7
+        return 4
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        return (UIScreen.main.bounds.height*0.01)
+        return (UIScreen.main.bounds.height*0.02)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -676,6 +676,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         cell.layer.cornerRadius=10 //set corner radius here
         cell.layer.borderColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 100).cgColor //logout.tintColor?.cgColor//UIColor.lightGray.cgColor  // set cell border color here
         cell.layer.borderWidth = 2 // set border width here
+        cell.backgroundColor = UIColor.clear
         
         let screenSize = UIScreen.main.bounds
         
@@ -692,11 +693,11 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         let rowImageSize = Double(rowHeight)*0.8
         
         if indexPath.section == 0 {
-            cell.accessoryView = UIImageView(image: UIImage(named: "balloon.png"))
+            cell.accessoryView = UIImageView(image: UIImage(named: "scoring.png"))
             cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
         }
         else if indexPath.section == 1 {
-            cell.accessoryView = UIImageView(image: UIImage(named: "egg.png"))
+            cell.accessoryView = UIImageView(image: UIImage(named: "slot-machine.png"))
             cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
         }
         else if indexPath.section == 2 {
@@ -705,7 +706,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
 
         }
         else if indexPath.section == 3 {
-            cell.accessoryView = UIImageView(image: UIImage(named: "slot.png"))
+            cell.accessoryView = UIImageView(image: UIImage(named: "users.png"))
             cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
         }
         else if indexPath.section == 4 {
@@ -720,24 +721,24 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         //cell.righ.image = UIImage(named: "world.png")
         
         if indexPath.section == 0 {
-            cell.textLabel?.text = " Places"
+            cell.textLabel?.text = " Challenges"
         }
         else if indexPath.section == 1 {
-            cell.textLabel?.text = " Foods"
+            cell.textLabel?.text = " Lucky Strike"
         }
         else if indexPath.section == 2 {
             cell.textLabel?.text = " Puzzle"
         }
-        else if indexPath.section == 6 {
-            cell.textLabel?.text = "  Post"
+        else if indexPath.section == 3 {
+            cell.textLabel?.text = "  Profile"
         }
         else if indexPath.section == 4 {
             cell.textLabel?.text = " To Do List"
         }
-        else if indexPath.section == 3 {
+        else if indexPath.section == 5 {
             cell.textLabel?.text = " Lucky Strike"
         }
-        else if indexPath.section == 5 {
+        else if indexPath.section == 6 {
             cell.textLabel?.text = " Flag Challenge"
         }
         
