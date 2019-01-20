@@ -709,14 +709,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             cell.accessoryView = UIImageView(image: UIImage(named: "users.png"))
             cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
         }
-        else if indexPath.section == 4 {
-            cell.accessoryView = UIImageView(image: UIImage(named: "list.png"))
-            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
-        }
-        else if indexPath.section == 5 {
-            cell.accessoryView = UIImageView(image: UIImage(named: "Flag_icon.png"))
-            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
-        }
+
         
         //cell.righ.image = UIImage(named: "world.png")
         
@@ -732,15 +725,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         else if indexPath.section == 3 {
             cell.textLabel?.text = "  Profile"
         }
-        else if indexPath.section == 4 {
-            cell.textLabel?.text = " To Do List"
-        }
-        else if indexPath.section == 5 {
-            cell.textLabel?.text = " Lucky Strike"
-        }
-        else if indexPath.section == 6 {
-            cell.textLabel?.text = " Flag Challenge"
-        }
+
         
         return cell
     }
@@ -754,24 +739,12 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         }
         else if indexPath.section == 1 {
             print("Food selected")
-            performSegue(withIdentifier: "foodsSegue", sender: self)
+            performSegue(withIdentifier: "luckyStrikeSegue", sender: self)
         }
         else if indexPath.section == 2 {
             print("Map puzzle selected")
             performSegue(withIdentifier: "puzzleMapSegue", sender: self)
 
-        }
-        else if indexPath.section == 6 {
-            print("Post selected")
-            performSegue(withIdentifier: "postSegue", sender: self)
-        }
-        else if indexPath.section == 5 {
-            print("Post selected")
-            performSegue(withIdentifier: "flagSegue", sender: self)
-        }
-        else if indexPath.section == 4 {
-            print("To Do List selected")
-            performSegue(withIdentifier: "toDoListSegue", sender: self)
         }
         else if indexPath.section == 3 {
             print("Lucky Strike selected")
