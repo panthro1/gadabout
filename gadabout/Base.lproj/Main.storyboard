@@ -383,10 +383,10 @@
             </objects>
             <point key="canvasLocation" x="1882.608695652174" y="-602.00892857142856"/>
         </scene>
-        <!--View Controller-->
+        <!--Challenge View Controller-->
         <scene sceneID="0ZV-gw-ArJ">
             <objects>
-                <viewController id="oun-ZY-9MZ" sceneMemberID="viewController">
+                <viewController id="oun-ZY-9MZ" customClass="challengeViewController" customModule="gadabout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t1M-l4-WUw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -397,6 +397,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iz4-0j-cfR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3028" y="-600"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="RRj-yk-LqU">
+            <objects>
+                <viewController id="x1p-wt-JH7" customClass="profileViewController" customModule="gadabout" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="25t-Wf-QZy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="rbA-Hm-y7q"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DNZ-97-3ZM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4046" y="-602"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -2057,6 +2072,6 @@
         <image name="score-icon.png" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="raA-vn-2XX"/>
+        <segue reference="14h-w3-4cb"/>
     </inferredMetricsTieBreakers>
 </document>

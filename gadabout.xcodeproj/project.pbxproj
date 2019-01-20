@@ -32,10 +32,12 @@
 		E3A2588F21ECDEF0001323B3 /* rightArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A2588E21ECDEF0001323B3 /* rightArrow.png */; };
 		E3A38444215044A1003A0A8C /* puzzleMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A38443215044A1003A0A8C /* puzzleMapViewController.swift */; };
 		E3A3DDEA21A93A7B0070FB85 /* balloon.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A3DDE921A93A7B0070FB85 /* balloon.png */; };
-		E3A3DDEC21A93B050070FB85 /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A3DDEB21A93B050070FB85 /* list.png */; };
 		E3A3DDEE21A93BFD0070FB85 /* egg.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A3DDED21A93BFD0070FB85 /* egg.png */; };
 		E3A3DDF221A940050070FB85 /* slot.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A3DDF121A940050070FB85 /* slot.png */; };
 		E3B4752D21F480BA00952566 /* back-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E3B4752C21F480BA00952566 /* back-button.png */; };
+		E3B4752F21F4842700952566 /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = E3B4752E21F4842700952566 /* list.png */; };
+		E3B4753121F484CF00952566 /* challengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B4753021F484CF00952566 /* challengeViewController.swift */; };
+		E3B4753321F484F300952566 /* profileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B4753221F484F300952566 /* profileViewController.swift */; };
 		E3B97A2C21CC8E9700C4AC0F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B97A2B21CC8E9700C4AC0F /* NetworkManager.swift */; };
 		E3B97A2E21CC934D00C4AC0F /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B97A2D21CC934D00C4AC0F /* OfflineViewController.swift */; };
 		E3B97A3021CC94E100C4AC0F /* NetworkConnection.png in Resources */ = {isa = PBXBuildFile; fileRef = E3B97A2F21CC94DF00C4AC0F /* NetworkConnection.png */; };
@@ -112,10 +114,12 @@
 		E3A2588E21ECDEF0001323B3 /* rightArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rightArrow.png; path = ../../../Attributions/rightArrow.png; sourceTree = "<group>"; };
 		E3A38443215044A1003A0A8C /* puzzleMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = puzzleMapViewController.swift; sourceTree = "<group>"; };
 		E3A3DDE921A93A7B0070FB85 /* balloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = balloon.png; sourceTree = "<group>"; };
-		E3A3DDEB21A93B050070FB85 /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = "<group>"; };
 		E3A3DDED21A93BFD0070FB85 /* egg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = egg.png; sourceTree = "<group>"; };
 		E3A3DDF121A940050070FB85 /* slot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slot.png; sourceTree = "<group>"; };
 		E3B4752C21F480BA00952566 /* back-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back-button.png"; path = "../../../Attributions/back-button.png"; sourceTree = "<group>"; };
+		E3B4752E21F4842700952566 /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = list.png; path = ../../../Attributions/list.png; sourceTree = "<group>"; };
+		E3B4753021F484CF00952566 /* challengeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = challengeViewController.swift; sourceTree = "<group>"; };
+		E3B4753221F484F300952566 /* profileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileViewController.swift; sourceTree = "<group>"; };
 		E3B97A2B21CC8E9700C4AC0F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E3B97A2D21CC934D00C4AC0F /* OfflineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineViewController.swift; sourceTree = "<group>"; };
 		E3B97A2F21CC94DF00C4AC0F /* NetworkConnection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NetworkConnection.png; sourceTree = "<group>"; };
@@ -212,6 +216,8 @@
 				E3261AE620F098920056CE99 /* AppDelegate.swift */,
 				E3261AE820F098920056CE99 /* ViewController.swift */,
 				E3261AEA20F098920056CE99 /* Main.storyboard */,
+				E3B4753221F484F300952566 /* profileViewController.swift */,
+				E3B4753021F484CF00952566 /* challengeViewController.swift */,
 				E31A21BC21CF578300475EFD /* flagChallengeViewController.swift */,
 				E3B97A2D21CC934D00C4AC0F /* OfflineViewController.swift */,
 				E32D30862177B6B70016D7EC /* foodsTableViewCell.swift */,
@@ -278,11 +284,11 @@
 				E3C88C0D21F46F01007EB21A /* breakfast.png */,
 				E3B4752C21F480BA00952566 /* back-button.png */,
 				E3C88C0B21F46DE2007EB21A /* scoring.png */,
+				E3B4752E21F4842700952566 /* list.png */,
 				E3A3DDF121A940050070FB85 /* slot.png */,
 				E3C7E93C21D32D8C00FA2FA3 /* Flag_icon.png */,
 				E3A3DDED21A93BFD0070FB85 /* egg.png */,
 				E3CBDEE021A05C8A002664B4 /* undo-arrow.png */,
-				E3A3DDEB21A93B050070FB85 /* list.png */,
 				E3EF3A392188042000821C47 /* score-icon.png */,
 				E3CF250C219D1D5E00D5EA9F /* email.png */,
 			);
@@ -406,6 +412,7 @@
 				E3BA747C219A769800095B1B /* remove.png in Resources */,
 				E3CBDEE121A05C8B002664B4 /* undo-arrow.png in Resources */,
 				E36DA987212D71830031D337 /* wrong.gif in Resources */,
+				E3B4752F21F4842700952566 /* list.png in Resources */,
 				E3C7E93D21D32D8C00FA2FA3 /* Flag_icon.png in Resources */,
 				E3CF250B219D1C8100D5EA9F /* lock.png in Resources */,
 				E3EF3A3A2188042100821C47 /* score-icon.png in Resources */,
@@ -421,7 +428,6 @@
 				E3A3DDEA21A93A7B0070FB85 /* balloon.png in Resources */,
 				E313DF612118D4AD00BAE4C6 /* uncheck.png in Resources */,
 				E39D488E212EB87100A32212 /* correct2.png in Resources */,
-				E3A3DDEC21A93B050070FB85 /* list.png in Resources */,
 				E3C88C1221F47153007EB21A /* hot-air-balloon.png in Resources */,
 				E3C88C1021F4707F007EB21A /* users.png in Resources */,
 				E3C88C0E21F46F02007EB21A /* breakfast.png in Resources */,
@@ -500,6 +506,7 @@
 			files = (
 				E34AB2282186CACF0080A5C4 /* scorePopUpViewController.swift in Sources */,
 				E342D9AE21049038009D5C67 /* PostViewController.swift in Sources */,
+				E3B4753321F484F300952566 /* profileViewController.swift in Sources */,
 				E32D30832177A5860016D7EC /* UIButtonExtension.swift in Sources */,
 				E32D30852177B6840016D7EC /* foodsTableViewController.swift in Sources */,
 				E3DD8F2221A65D9200ED982B /* ToDoImageDisplayViewController.swift in Sources */,
@@ -516,6 +523,7 @@
 				E342D9AC2104853C009D5C67 /* PlacesTableViewController.swift in Sources */,
 				E32D30872177B6B70016D7EC /* foodsTableViewCell.swift in Sources */,
 				E3EB34A221751483000DB77A /* ToDoListViewController.swift in Sources */,
+				E3B4753121F484CF00952566 /* challengeViewController.swift in Sources */,
 				E3A38444215044A1003A0A8C /* puzzleMapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
