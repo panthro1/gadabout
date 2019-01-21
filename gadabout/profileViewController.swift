@@ -75,6 +75,32 @@ class profileViewController: UIViewController, UITableViewDataSource, UITableVie
             
             src.view.window?.layer.add(transition, forKey: nil)
         }
+        else if segue.identifier == "toDoListSegue" {
+
+            let src = self
+            let transition: CATransition = CATransition()
+            let timeFunc : CAMediaTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            transition.duration = 0.3
+            transition.timingFunction = timeFunc
+            transition.type = kCATransitionPush
+            transition.subtype = kCATransitionFromRight
+            
+            src.view.window?.layer.add(transition, forKey: nil)
+
+        }
+        else if segue.identifier == "mailLoginSegue" {
+            
+            let src = self
+            let transition: CATransition = CATransition()
+            let timeFunc : CAMediaTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            transition.duration = 0.3
+            transition.timingFunction = timeFunc
+            transition.type = kCATransitionPush
+            transition.subtype = kCATransitionFromRight
+            
+            src.view.window?.layer.add(transition, forKey: nil)
+            
+        }
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -150,6 +176,24 @@ class profileViewController: UIViewController, UITableViewDataSource, UITableVie
         
     }
 
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 0 {
+            print("To Do List selected")
+            performSegue(withIdentifier: "toDoListSegue", sender: self)
+        }
+        else if indexPath.section == 1 {
+            print("Foods selected")
+            performSegue(withIdentifier: "mailLoginSegue", sender: self)
+        }
+        else if indexPath.section == 2 {
+            print("Flag selected")
+            performSegue(withIdentifier: "mailLoginSegue", sender: self)
+            
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 
     
     /*

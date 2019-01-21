@@ -76,6 +76,7 @@ class challengeViewController: UIViewController, UITableViewDelegate, UITableVie
             src.view.window?.layer.add(transition, forKey: nil)
         }
         else if segue.identifier == "placesSegue" {
+     
             let src = self
             let transition: CATransition = CATransition()
             let timeFunc : CAMediaTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)

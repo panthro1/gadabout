@@ -25,18 +25,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var logIn: UIButton!
     
     var interstitial: GADInterstitial!
-
-    @IBOutlet weak var cancelButton: UIButton!
+    
+    @IBOutlet weak var bannerView: GADBannerView!
+    
     
     var isEnglish = true
     
     var oldUserID = ""
     var isAnonymous = true
-    
-    
-    @IBAction func cancelButtonTapped(_ sender: Any) {
-        self.removeAnimate()
-    }
     
     
 
@@ -51,6 +47,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let adRequest = GADRequest()
         interstitial.load(adRequest)
         
+        // Account ad
+        //bannerView.adUnitID = "ca-app-pub-5745243428784846~5277829027"
+        
+        // Test add
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+
+        
         // Do any additional setup after loading the view, typically from a nib.
         print("Hello World")
         
@@ -59,12 +65,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         logIn.layer.borderWidth = 1
         logIn.layer.borderColor = UIColor.black.cgColor
 
-        cancelButton.layer.cornerRadius = 10
-        cancelButton.layer.borderWidth = 1
         var color = UIColor()
         color = signIn.titleColor(for: [])!
-        cancelButton.layer.borderColor = color.cgColor
-
+        
         /*usernameTextField.layer.cornerRadius = 10
         usernameTextField.layer.borderWidth = 2
         usernameTextField.layer.borderColor = color.cgColor*/
@@ -129,6 +132,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
 
 
+    }
+    @IBAction func backTapped(_ sender: Any) {
+        
+        backToProfile()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -196,7 +204,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 
                 let userScoreQuery = PFQuery(className: "UserScore")
                 userScoreQuery.whereKey("userId", equalTo: self.oldUserID)
-                userScoreQuery.findObjectsInBackground { (objects, error) in
+                userScoreQuery.findObjectsInBackground { [unowned self] (objects, error) in
                     if let score = objects?.first {
                         score["userId"] = PFUser.current()?.objectId
                         score.saveInBackground()
@@ -221,7 +229,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 }
                 
                 print("Current user after login: \(PFUser.current()?.objectId)")
-                self.removeAnimate()
+                self.backToProfile()
 
                 //self.performSegue(withIdentifier: "loginSegue", sender: self)
             }
@@ -251,7 +259,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         activityIndicator.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
         
-        PFUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTextField.text!) { (user, error) in
+        PFUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTextField.text!) { [unowned self] (user, error) in
             
             activityIndicator.stopAnimating()
             UIApplication.shared.endIgnoringInteractionEvents()
@@ -319,7 +327,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     }
 
                     print("Current user after login: \(PFUser.current()?.objectId)")
-                    self.removeAnimate()
+                    self.backToProfile()
                 }
                 else {
                 
@@ -376,12 +384,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func removeAnimate() {
-        UIView.animate(withDuration: 0.25) {
-            self.view.alpha = 1.0
-            self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+    func backToProfile() {
+        performSegue(withIdentifier: "loginSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "loginSegue" {
+            let src = self
+            let transition: CATransition = CATransition()
+            let timeFunc : CAMediaTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            transition.duration = 0.3
+            transition.timingFunction = timeFunc
+            transition.type = kCATransitionPush
+            transition.subtype = kCATransitionFromLeft
+            
+            
+            src.view.window?.layer.add(transition, forKey: nil)
         }
-        self.view.removeFromSuperview()
+        
     }
 
 
