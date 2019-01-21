@@ -535,15 +535,15 @@
                                     <constraint firstAttribute="height" constant="50" id="trK-4m-ON6"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="chD-B8-Dfj" userLabel="ViewLeftMArgin">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="chD-B8-Dfj" userLabel="ViewLeftMArgin">
                                 <rect key="frame" x="0.0" y="94" width="20.666666666666668" height="718"/>
                                 <color key="backgroundColor" red="0.83137254900000002" green="0.16078431369999999" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QLn-lc-Es5" userLabel="ViewRightMargin">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QLn-lc-Es5" userLabel="ViewRightMargin">
                                 <rect key="frame" x="393.33333333333331" y="94" width="20.666666666666686" height="718"/>
                                 <color key="backgroundColor" red="0.83137254900000002" green="0.16078431369999999" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NvK-S8-sg2" userLabel="ViewUpperOffset">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NvK-S8-sg2" userLabel="ViewUpperOffset">
                                 <rect key="frame" x="20.666666666666657" y="94" width="372.66666666666674" height="27"/>
                                 <color key="backgroundColor" red="0.015686274510000001" green="0.20000000000000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -553,7 +553,7 @@
                                 <color key="textColor" red="0.67306995390000002" green="0.13791039590000001" blue="0.7069171071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i1y-G2-Pkp" userLabel="ViewLowerOffset">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i1y-G2-Pkp" userLabel="ViewLowerOffset">
                                 <rect key="frame" x="20.666666666666657" y="561" width="372.66666666666674" height="251"/>
                                 <color key="backgroundColor" red="0.015686274510000001" green="0.20000000000000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -613,6 +613,8 @@
                     </view>
                     <connections>
                         <outlet property="bannerView" destination="Gfb-NO-Rb1" id="GsR-yx-tuw"/>
+                        <outlet property="navigationBar" destination="V5b-ZW-XTh" id="Sk0-4h-gdz"/>
+                        <outlet property="profileTableView" destination="Ouu-ub-cyO" id="cCU-aP-bzg"/>
                         <segue destination="77F-Fn-Frx" kind="presentation" identifier="profileBackSegue" animates="NO" id="rL3-3i-zHW"/>
                     </connections>
                 </viewController>
