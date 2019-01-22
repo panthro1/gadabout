@@ -188,34 +188,6 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         option2.isEnabled = true
         option3.isEnabled = true
         option4.isEnabled = true
-        
-        option1.layer.borderColor = UIColor.clear.cgColor
-        option1.layer.borderWidth = 0
-        
-        option1.titleLabel?.numberOfLines = 1
-        option1.titleLabel?.adjustsFontSizeToFitWidth = true
-        option1.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
-        
-        option2.layer.borderColor = UIColor.clear.cgColor
-        option2.layer.borderWidth = 0
-        
-        option2.titleLabel?.numberOfLines = 1
-        option2.titleLabel?.adjustsFontSizeToFitWidth = true
-        option2.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
-
-        option3.layer.borderColor = UIColor.clear.cgColor
-        option3.layer.borderWidth = 0
-        
-        option3.titleLabel?.numberOfLines = 1
-        option3.titleLabel?.adjustsFontSizeToFitWidth = true
-        option3.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
-
-        option4.layer.borderColor = UIColor.clear.cgColor
-        option4.layer.borderWidth = 0
-
-        option4.titleLabel?.numberOfLines = 1
-        option4.titleLabel?.adjustsFontSizeToFitWidth = true
-        option4.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
 
         prepareNextQuestion()
     }
@@ -588,6 +560,34 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         option2.backgroundColor = UIColor.clear
         option3.backgroundColor = UIColor.clear
         option4.backgroundColor = UIColor.clear
+        
+        option1.layer.borderColor = UIColor.clear.cgColor
+        option1.layer.borderWidth = 0
+        
+        option1.titleLabel?.numberOfLines = 1
+        option1.titleLabel?.adjustsFontSizeToFitWidth = true
+        option1.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
+        
+        option2.layer.borderColor = UIColor.clear.cgColor
+        option2.layer.borderWidth = 0
+        
+        option2.titleLabel?.numberOfLines = 1
+        option2.titleLabel?.adjustsFontSizeToFitWidth = true
+        option2.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
+        
+        option3.layer.borderColor = UIColor.clear.cgColor
+        option3.layer.borderWidth = 0
+        
+        option3.titleLabel?.numberOfLines = 1
+        option3.titleLabel?.adjustsFontSizeToFitWidth = true
+        option3.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
+        
+        option4.layer.borderColor = UIColor.clear.cgColor
+        option4.layer.borderWidth = 0
+        
+        option4.titleLabel?.numberOfLines = 1
+        option4.titleLabel?.adjustsFontSizeToFitWidth = true
+        option4.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
         
         randomIndex = Int(arc4random_uniform(UInt32(flagOption1.count)))
         print("Random Index: \(randomIndex)")
