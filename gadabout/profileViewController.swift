@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMobileAds
 
-class profileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class profileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, scorePopupDelegate  {
 
     @IBOutlet weak var bannerView: GADBannerView!
     
@@ -18,6 +18,8 @@ class profileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var profileTableView: UITableView!
     
     @IBOutlet weak var navigationBar: UINavigationBar!
+    
+    var interstitial: GADInterstitial!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,15 @@ class profileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
+        
+        
+        // Ad id
+        // interstitial = GADInterstitial(adUnitID: "ca-app-pub-5745243428784846~5277829027")
+        
+        // Test ad
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        let adRequest = GADRequest()
+        interstitial.load(adRequest)
         
         self.profileTableView.delegate = self
         self.profileTableView.dataSource = self
@@ -100,6 +111,18 @@ class profileViewController: UIViewController, UITableViewDataSource, UITableVie
             
             src.view.window?.layer.add(transition, forKey: nil)
             
+        }
+        else if segue.identifier == "scoreSegue" {
+            
+            let src = self
+            let transition: CATransition = CATransition()
+            let timeFunc : CAMediaTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            transition.duration = 0.3
+            transition.timingFunction = timeFunc
+            transition.type = kCATransitionPush
+            transition.subtype = kCATransitionFromRight
+            
+            src.view.window?.layer.add(transition, forKey: nil)
         }
     }
     
@@ -183,8 +206,30 @@ class profileViewController: UIViewController, UITableViewDataSource, UITableVie
             performSegue(withIdentifier: "toDoListSegue", sender: self)
         }
         else if indexPath.section == 1 {
-            print("Foods selected")
-            performSegue(withIdentifier: "mailLoginSegue", sender: self)
+            print("Score selected")
+            /*let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
+            popOverVC.scoreWin = glbUserScore
+            popOverVC.totalScore = glbFlagScore
+            popOverVC.isFlagOutput = false
+            popOverVC.isScoreSummary = true
+            popOverVC.delegate = self
+            
+            self.addChildViewController(popOverVC)
+            let popUpSize = self.view.bounds.width*0.9
+            
+            let centerY = self.view.bounds.height/2 - popUpSize/2
+            let centerX = self.view.bounds.width/2 - popUpSize/2
+            
+            popOverVC.view.frame = CGRect(x: centerX, y: centerY, width: popUpSize, height: popUpSize)
+            popOverVC.view.backgroundColor = UIColor(rgb: 0xDDD6F2)
+            popOverVC.view.layer.cornerRadius = 20
+            
+            //popOverVC.view.frame = self.view.bounds//self.view.frame
+            
+            self.view.addSubview(popOverVC.view)
+            popOverVC.didMove(toParentViewController: self)*/
+            performSegue(withIdentifier: "scoreSegue", sender: self)
+            
         }
         else if indexPath.section == 2 {
             print("Flag selected")
@@ -193,6 +238,15 @@ class profileViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func SendCloseInfo() {
+        
+        if interstitial.isReady {
+            interstitial.present(fromRootViewController: self)
+        } else {
+            print("Ad wasn't ready")
+        }
     }
 
     

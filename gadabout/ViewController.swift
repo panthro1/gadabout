@@ -64,6 +64,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         logIn.layer.cornerRadius = 10
         logIn.layer.borderWidth = 1
         logIn.layer.borderColor = UIColor.black.cgColor
+        
+        signIn.titleLabel?.numberOfLines = 1
+        signIn.titleLabel?.adjustsFontSizeToFitWidth = true
+        signIn.titleLabel?.lineBreakMode = NSLineBreakMode.byClipping
 
         var color = UIColor()
         color = signIn.titleColor(for: [])!
@@ -105,13 +109,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.showAnimate()
         
         usernameTextField.leftViewMode = UITextFieldViewMode.always
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
         let image = UIImage(named: "email.png")
         imageView.image = image
         usernameTextField.leftView = imageView
 
         passwordTextField.leftViewMode = UITextFieldViewMode.always
-        let imageView2 = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        let imageView2 = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
         let image2 = UIImage(named: "lock.png")
         imageView2.image = image2
         passwordTextField.leftView = imageView2

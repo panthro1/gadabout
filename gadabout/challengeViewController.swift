@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMobileAds
 
-class challengeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class challengeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
 
     @IBOutlet weak var bannerView: GADBannerView!
     
