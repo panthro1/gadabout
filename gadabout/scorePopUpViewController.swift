@@ -81,10 +81,10 @@ class scorePopUpViewController: UIViewController {
                     scoreHeader.text = "Congratulations"
                     scoreWinLabel.text = "You have won \(scoreWin) points"
                 }
-                totalScoreLabel.text = "Your total score : \(totalScore) points"
+                totalScoreLabel.text = "Total Score : \(totalScore) points"
             }
         }
-
+        
         
         self.showAnimate()
 

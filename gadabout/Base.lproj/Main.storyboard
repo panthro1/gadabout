@@ -800,7 +800,7 @@
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do not have an account?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="QH7-qF-S9v">
                                 <rect key="frame" x="20.666666666666671" y="449.33333333333331" width="207" height="62.666666666666686"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1117,6 +1117,7 @@
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0B-kA-2X6">
                                             <rect key="frame" x="41.333333333333343" y="196.66666666666666" width="352" height="46"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <state key="normal" title="Button">
                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
@@ -1126,6 +1127,7 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49V-sp-gbt">
                                             <rect key="frame" x="41.333333333333343" y="247" width="352" height="46"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <state key="normal" title="Button">
                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
@@ -1135,6 +1137,7 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4rK-OE-GTb">
                                             <rect key="frame" x="41.333333333333343" y="347.66666666666669" width="352" height="46"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <state key="normal" title="Button">
                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
@@ -1189,6 +1192,7 @@
                                         </view>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XbF-1o-sos">
                                             <rect key="frame" x="41.333333333333343" y="297.33333333333331" width="352" height="46"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <state key="normal" title="Button">
                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
@@ -2448,7 +2452,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="14h-w3-4cb"/>
-        <segue reference="n0a-1n-FF0"/>
-        <segue reference="RwC-9j-Eg1"/>
+        <segue reference="M3m-48-g2n"/>
+        <segue reference="zna-AK-ADo"/>
     </inferredMetricsTieBreakers>
 </document>
