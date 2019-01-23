@@ -42,13 +42,13 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gadabout needs internet connection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="P7O-Lz-s7r" userLabel="TextLabel">
                                 <rect key="frame" x="20.666666666666657" y="520.66666666666663" width="372.66666666666674" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="23"/>
                                 <color key="textColor" red="0.12788596749305725" green="0.36257743835449219" blue="0.49162966012954712" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="NO CONNECTION!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="jeJ-U4-JZ9" userLabel="HeaderLabel">
                                 <rect key="frame" x="0.0" y="475" width="414" height="44.666666666666686"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="34"/>
+                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="34"/>
                                 <color key="textColor" red="0.67306995391845703" green="0.137910395860672" blue="0.70691710710525513" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -656,15 +656,15 @@
                                     <constraint firstAttribute="height" constant="50" id="v2i-w3-Ghw"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4F-tA-hXi" userLabel="ViewLeftMargin">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4F-tA-hXi" userLabel="ViewLeftMargin">
                                 <rect key="frame" x="0.0" y="94" width="20.666666666666668" height="718"/>
                                 <color key="backgroundColor" red="0.83137254900000002" green="0.16078431369999999" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uk2-Fh-vbI" userLabel="ViewRightMargin">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uk2-Fh-vbI" userLabel="ViewRightMargin">
                                 <rect key="frame" x="393.33333333333331" y="94" width="20.666666666666686" height="718"/>
                                 <color key="backgroundColor" red="0.83137254900000002" green="0.16078431369999999" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IEj-nb-dPa">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IEj-nb-dPa" userLabel="ViewBelowScoreHeader">
                                 <rect key="frame" x="20.666666666666657" y="94" width="372.66666666666674" height="27"/>
                                 <color key="backgroundColor" red="0.015686274510000001" green="0.20000000000000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -675,39 +675,45 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="score-icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ihh-Lb-fGY">
-                                <rect key="frame" x="103.66666666666669" y="219.33333333333337" width="207" height="207"/>
+                                <rect key="frame" x="103.66666666666669" y="246.33333333333337" width="207" height="207"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Ihh-Lb-fGY" secondAttribute="height" multiplier="1:1" id="foV-Cu-7r2"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="69Q-hu-PpH" userLabel="ViewBelowImage">
-                                <rect key="frame" x="20.666666666666657" y="426.33333333333331" width="372.66666666666674" height="18"/>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="69Q-hu-PpH" userLabel="ViewBelowImage">
+                                <rect key="frame" x="20.666666666666657" y="453.33333333333331" width="372.66666666666674" height="18"/>
                                 <color key="backgroundColor" red="0.015686274510000001" green="0.20000000000000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geU-Bx-TP3">
-                                <rect key="frame" x="20.666666666666657" y="444.33333333333331" width="372.66666666666674" height="62.666666666666686"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geU-Bx-TP3">
+                                <rect key="frame" x="20.666666666666657" y="471.33333333333331" width="372.66666666666674" height="62.666666666666686"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hn-Zm-4w5">
-                                <rect key="frame" x="20.666666666666657" y="507" width="372.66666666666674" height="9"/>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hn-Zm-4w5">
+                                <rect key="frame" x="20.666666666666657" y="534" width="372.66666666666674" height="9"/>
                                 <color key="backgroundColor" red="0.015686274510000001" green="0.20000000000000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IXC-9T-ha8">
-                                <rect key="frame" x="20.666666666666657" y="516" width="372.66666666666674" height="62.666666666666629"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IXC-9T-ha8">
+                                <rect key="frame" x="20.666666666666657" y="543" width="372.66666666666674" height="62.666666666666629"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BFb-pQ-GhI">
+                                <rect key="frame" x="20.666666666666657" y="219.33333333333334" width="372.66666666666674" height="27"/>
+                                <color key="backgroundColor" red="0.015686274510000001" green="0.20000000000000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="BFb-pQ-GhI" firstAttribute="height" secondItem="6nK-Az-tHV" secondAttribute="height" multiplier="0.03" id="1z7-2b-H0X"/>
                             <constraint firstItem="IEj-nb-dPa" firstAttribute="top" secondItem="bE7-JI-c0E" secondAttribute="bottom" id="20I-Gn-Rt5"/>
                             <constraint firstItem="geU-Bx-TP3" firstAttribute="top" secondItem="69Q-hu-PpH" secondAttribute="bottom" id="4Bc-1r-Kdd"/>
                             <constraint firstItem="bTN-2r-tuy" firstAttribute="height" secondItem="6nK-Az-tHV" secondAttribute="height" multiplier="0.11" id="5fT-Wj-fa9"/>
                             <constraint firstItem="5Jq-qD-bQY" firstAttribute="leading" secondItem="Vxj-l3-WWf" secondAttribute="leading" id="7LF-Mp-PHB"/>
                             <constraint firstItem="5Jq-qD-bQY" firstAttribute="bottom" secondItem="Vxj-l3-WWf" secondAttribute="bottom" id="BjI-Pt-jLY"/>
+                            <constraint firstItem="uk2-Fh-vbI" firstAttribute="leading" secondItem="BFb-pQ-GhI" secondAttribute="trailing" id="DER-1s-Oqh"/>
                             <constraint firstItem="3hn-Zm-4w5" firstAttribute="height" secondItem="6nK-Az-tHV" secondAttribute="height" multiplier="0.01" id="Gog-Zu-Q2u"/>
                             <constraint firstItem="Ihh-Lb-fGY" firstAttribute="centerX" secondItem="6nK-Az-tHV" secondAttribute="centerX" id="JIw-fr-8y3"/>
                             <constraint firstItem="uk2-Fh-vbI" firstAttribute="width" secondItem="6nK-Az-tHV" secondAttribute="width" multiplier="0.05" id="JuS-WF-Uru"/>
@@ -721,6 +727,7 @@
                             <constraint firstItem="bTN-2r-tuy" firstAttribute="leading" secondItem="f4F-tA-hXi" secondAttribute="trailing" id="QL1-eA-WUU"/>
                             <constraint firstItem="Ihh-Lb-fGY" firstAttribute="width" secondItem="6nK-Az-tHV" secondAttribute="width" multiplier="0.5" id="R1t-b2-ppw"/>
                             <constraint firstItem="69Q-hu-PpH" firstAttribute="height" secondItem="6nK-Az-tHV" secondAttribute="height" multiplier="0.02" id="R7t-9d-wHl"/>
+                            <constraint firstItem="BFb-pQ-GhI" firstAttribute="top" secondItem="bTN-2r-tuy" secondAttribute="bottom" id="Sa1-fH-eVr"/>
                             <constraint firstItem="uk2-Fh-vbI" firstAttribute="leading" secondItem="IXC-9T-ha8" secondAttribute="trailing" id="TrV-5c-1MR"/>
                             <constraint firstItem="uk2-Fh-vbI" firstAttribute="leading" secondItem="3hn-Zm-4w5" secondAttribute="trailing" id="Txz-hy-1vE"/>
                             <constraint firstItem="IEj-nb-dPa" firstAttribute="leading" secondItem="f4F-tA-hXi" secondAttribute="trailing" id="UEK-hg-FaN"/>
@@ -736,10 +743,11 @@
                             <constraint firstItem="IXC-9T-ha8" firstAttribute="leading" secondItem="f4F-tA-hXi" secondAttribute="trailing" id="kdz-Bq-Hdo"/>
                             <constraint firstItem="geU-Bx-TP3" firstAttribute="height" secondItem="6nK-Az-tHV" secondAttribute="height" multiplier="0.07" id="o1Q-Kk-RUv"/>
                             <constraint firstItem="f4F-tA-hXi" firstAttribute="leading" secondItem="Vxj-l3-WWf" secondAttribute="leading" id="oci-ey-REn"/>
+                            <constraint firstItem="Ihh-Lb-fGY" firstAttribute="top" secondItem="BFb-pQ-GhI" secondAttribute="bottom" id="oei-0U-3si"/>
                             <constraint firstItem="3hn-Zm-4w5" firstAttribute="top" secondItem="geU-Bx-TP3" secondAttribute="bottom" id="qEb-oo-mBV"/>
                             <constraint firstItem="IXC-9T-ha8" firstAttribute="height" secondItem="6nK-Az-tHV" secondAttribute="height" multiplier="0.07" id="qWZ-8F-hf3"/>
+                            <constraint firstItem="BFb-pQ-GhI" firstAttribute="leading" secondItem="f4F-tA-hXi" secondAttribute="trailing" id="r8f-mM-ngL"/>
                             <constraint firstItem="f4F-tA-hXi" firstAttribute="width" secondItem="6nK-Az-tHV" secondAttribute="width" multiplier="0.05" id="sv1-SU-5Vd"/>
-                            <constraint firstItem="Ihh-Lb-fGY" firstAttribute="top" secondItem="bTN-2r-tuy" secondAttribute="bottom" id="uQP-Jj-yPV"/>
                             <constraint firstItem="3hn-Zm-4w5" firstAttribute="leading" secondItem="f4F-tA-hXi" secondAttribute="trailing" id="wo8-p5-Gn9"/>
                             <constraint firstItem="Vxj-l3-WWf" firstAttribute="trailing" secondItem="5Jq-qD-bQY" secondAttribute="trailing" id="yGz-Gl-8ml"/>
                             <constraint firstItem="5Jq-qD-bQY" firstAttribute="top" secondItem="f4F-tA-hXi" secondAttribute="bottom" id="yrA-qu-jkN"/>
@@ -2166,14 +2174,14 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="OZY-vZ-1hv">
-                                <rect key="frame" x="62" y="196.66666666666666" width="290.33333333333331" height="61.999999999999972"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="37"/>
+                                <rect key="frame" x="78.666666666666657" y="196.66666666666666" width="256.66666666666674" height="61.999999999999972"/>
+                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="37"/>
                                 <color key="textColor" red="0.58105844259999995" green="0.12855249639999999" blue="0.57453137639999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="eOH-5B-wt7">
-                                <rect key="frame" x="183" y="260.66666666666669" width="48" height="33.333333333333314"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="183.66666666666666" y="260.66666666666669" width="47" height="33.333333333333314"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="20"/>
                                 <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
                             </label>
@@ -2189,8 +2197,8 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Txo-Wd-qUV">
-                                <rect key="frame" x="183" y="296" width="48" height="33"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="20"/>
+                                <rect key="frame" x="183.66666666666666" y="296" width="47" height="33"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="20"/>
                                 <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
                             </label>
@@ -2439,7 +2447,7 @@
         <image name="score-icon.png" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rL3-3i-zHW"/>
+        <segue reference="14h-w3-4cb"/>
         <segue reference="n0a-1n-FF0"/>
         <segue reference="RwC-9j-Eg1"/>
     </inferredMetricsTieBreakers>

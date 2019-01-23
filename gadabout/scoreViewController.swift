@@ -58,7 +58,7 @@ class scoreViewController: UIViewController {
     
     func applyBoldText (text1: String, text2: String) {
         let boldText  = text1 + ": "
-        let attrs = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 20)]
+        let attrs = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 25)]
         let attributedString = NSMutableAttributedString(string:boldText, attributes:attrs)
         
         let normalText = "\(glbFlagScore) points"
@@ -68,7 +68,7 @@ class scoreViewController: UIViewController {
         totalScoreLabel.attributedText = attributedString
         
         let boldText2  = text2 + ": "
-        let attrs2 = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 20)]
+        let attrs2 = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 25)]
         let attributedString2 = NSMutableAttributedString(string:boldText2, attributes:attrs2)
         
         let normalText2 = "\(glbUserScore) points"
