@@ -42,13 +42,13 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gadabout needs internet connection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="P7O-Lz-s7r" userLabel="TextLabel">
                                 <rect key="frame" x="20.666666666666657" y="520.66666666666663" width="372.66666666666674" height="36"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="23"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="23"/>
                                 <color key="textColor" red="0.12788596749305725" green="0.36257743835449219" blue="0.49162966012954712" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="NO CONNECTION!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="jeJ-U4-JZ9" userLabel="HeaderLabel">
                                 <rect key="frame" x="0.0" y="475" width="414" height="44.666666666666686"/>
-                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="34"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="34"/>
                                 <color key="textColor" red="0.67306995391845703" green="0.137910395860672" blue="0.70691710710525513" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -428,7 +428,7 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Challenges" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gsu-Vf-ozx">
                                 <rect key="frame" x="20.666666666666657" y="121" width="372.66666666666674" height="98.333333333333314"/>
-                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="37"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="37"/>
                                 <color key="textColor" red="0.67306995391845703" green="0.137910395860672" blue="0.70691710710525513" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -549,10 +549,24 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="78V-il-s2Q">
                                 <rect key="frame" x="20.666666666666657" y="121" width="372.66666666666674" height="98.333333333333314"/>
-                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="37"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="37"/>
                                 <color key="textColor" red="0.67306995390000002" green="0.13791039590000001" blue="0.7069171071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mXo-ap-4YM" userLabel="Attributions">
+                                <rect key="frame" x="323.33333333333331" y="772" width="70" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="CAs-ea-pjW"/>
+                                    <constraint firstAttribute="height" constant="20" id="eOt-aB-tZu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="Attributions">
+                                    <color key="titleColor" red="0.67306995390000002" green="0.13791039590000001" blue="0.7069171071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="attributionsTapped:" destination="x1p-wt-JH7" eventType="touchUpInside" id="ad6-5f-5J1"/>
+                                </connections>
+                            </button>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i1y-G2-Pkp" userLabel="ViewLowerOffset">
                                 <rect key="frame" x="20.666666666666657" y="561" width="372.66666666666674" height="251"/>
                                 <color key="backgroundColor" red="0.015686274510000001" green="0.20000000000000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -588,9 +602,11 @@
                             <constraint firstItem="QLn-lc-Es5" firstAttribute="trailing" secondItem="rbA-Hm-y7q" secondAttribute="trailing" id="BmP-W6-a4E"/>
                             <constraint firstItem="QLn-lc-Es5" firstAttribute="leading" secondItem="78V-il-s2Q" secondAttribute="trailing" id="FgQ-Ib-YZv"/>
                             <constraint firstItem="i1y-G2-Pkp" firstAttribute="leading" secondItem="chD-B8-Dfj" secondAttribute="trailing" id="GAK-Ij-7Lb"/>
+                            <constraint firstItem="Gfb-NO-Rb1" firstAttribute="top" secondItem="mXo-ap-4YM" secondAttribute="bottom" constant="20" id="IMO-F1-rbA"/>
                             <constraint firstItem="Gfb-NO-Rb1" firstAttribute="top" secondItem="i1y-G2-Pkp" secondAttribute="bottom" id="JIJ-Eb-wTn"/>
                             <constraint firstItem="Gfb-NO-Rb1" firstAttribute="leading" secondItem="rbA-Hm-y7q" secondAttribute="leading" id="Ln3-Yd-N3a"/>
                             <constraint firstItem="rbA-Hm-y7q" firstAttribute="trailing" secondItem="Gfb-NO-Rb1" secondAttribute="trailing" id="MBF-qr-f0P"/>
+                            <constraint firstItem="QLn-lc-Es5" firstAttribute="leading" secondItem="mXo-ap-4YM" secondAttribute="trailing" id="MXM-GJ-Xx2"/>
                             <constraint firstItem="V5b-ZW-XTh" firstAttribute="leading" secondItem="rbA-Hm-y7q" secondAttribute="leading" id="Nf4-nK-g64"/>
                             <constraint firstItem="QLn-lc-Es5" firstAttribute="top" secondItem="V5b-ZW-XTh" secondAttribute="bottom" id="NzD-Xk-xYk"/>
                             <constraint firstItem="78V-il-s2Q" firstAttribute="height" secondItem="25t-Wf-QZy" secondAttribute="height" multiplier="0.11" id="Oy5-od-7Ic"/>
@@ -619,6 +635,7 @@
                         <segue destination="uew-mE-85R" kind="presentation" identifier="toDoListSegue" animates="NO" id="CMu-2v-R3b"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="mailLoginSegue" animates="NO" id="PW9-ZY-d13"/>
                         <segue destination="SxA-7k-6om" kind="presentation" identifier="scoreSegue" animates="NO" id="g6P-aT-Naz"/>
+                        <segue destination="GjV-0A-K4A" kind="presentation" identifier="attributionSegue" animates="NO" id="iMx-Q8-uL4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DNZ-97-3ZM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -668,9 +685,9 @@
                                 <rect key="frame" x="20.666666666666657" y="94" width="372.66666666666674" height="27"/>
                                 <color key="backgroundColor" red="0.015686274510000001" green="0.20000000000000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTN-2r-tuy">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTN-2r-tuy">
                                 <rect key="frame" x="20.666666666666657" y="121" width="372.66666666666674" height="98.333333333333314"/>
-                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="37"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="37"/>
                                 <color key="textColor" red="0.67306995391845703" green="0.137910395860672" blue="0.70691710710525513" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -766,6 +783,126 @@
             </objects>
             <point key="canvasLocation" x="4973.913043478261" y="-600"/>
         </scene>
+        <!--Attributions View Controller-->
+        <scene sceneID="aQc-xd-diH">
+            <objects>
+                <viewController id="GjV-0A-K4A" customClass="attributionsViewController" customModule="gadabout" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rRt-zb-dFS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HtO-cC-eSf">
+                                <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="D72-Cv-c7f"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem id="hH4-Ol-XkF">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="back-button.png" id="L07-hW-CfL">
+                                            <color key="tintColor" red="0.67306995390000002" green="0.13791039590000001" blue="0.7069171071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="backTapped:" destination="GjV-0A-K4A" id="XTC-BO-Crr"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K7I-QZ-hDO" customClass="GADBannerView">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="VnV-vj-hBF"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ekw-Dr-vsy" userLabel="ViewLeftMargin">
+                                <rect key="frame" x="0.0" y="94" width="20.666666666666668" height="718"/>
+                                <color key="backgroundColor" red="0.83137254900000002" green="0.16078431369999999" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9tf-XM-Ece" userLabel="ViewRightMargin">
+                                <rect key="frame" x="393.33333333333331" y="94" width="20.666666666666686" height="718"/>
+                                <color key="backgroundColor" red="0.83137254900000002" green="0.16078431369999999" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dDU-X6-phc" userLabel="ViewUpperOffset">
+                                <rect key="frame" x="20.666666666666657" y="94" width="372.66666666666674" height="27"/>
+                                <color key="backgroundColor" red="0.015686274510000001" green="0.20000000000000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attributions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zXF-wR-lKo">
+                                <rect key="frame" x="20.666666666666657" y="121" width="372.66666666666674" height="98.333333333333314"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="37"/>
+                                <color key="textColor" red="0.67306995390000002" green="0.13791039590000001" blue="0.7069171071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wuV-VO-4Gd" userLabel="ViewBelowHeader">
+                                <rect key="frame" x="20.666666666666657" y="219.33333333333334" width="372.66666666666674" height="27"/>
+                                <color key="backgroundColor" red="0.015686274510000001" green="0.20000000000000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tMq-c7-Sp0" userLabel="ViewAboveBanner">
+                                <rect key="frame" x="20.666666666666657" y="785" width="372.66666666666674" height="27"/>
+                                <color key="backgroundColor" red="0.015686274510000001" green="0.20000000000000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hwv-My-smK">
+                                <rect key="frame" x="20.666666666666657" y="246.33333333333331" width="372.66666666666674" height="538.66666666666674"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="VyF-Cm-Zwx">
+                                        <rect key="frame" x="0.0" y="28" width="372.66666666666674" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VyF-Cm-Zwx" id="aon-sn-6ad">
+                                            <rect key="frame" x="0.0" y="0.0" width="372.66666666666674" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="9tf-XM-Ece" firstAttribute="top" secondItem="HtO-cC-eSf" secondAttribute="bottom" id="0aX-bU-T6j"/>
+                            <constraint firstItem="tMq-c7-Sp0" firstAttribute="leading" secondItem="ekw-Dr-vsy" secondAttribute="trailing" id="2kk-DG-Gif"/>
+                            <constraint firstItem="9tf-XM-Ece" firstAttribute="leading" secondItem="tMq-c7-Sp0" secondAttribute="trailing" id="5Iq-u6-zw9"/>
+                            <constraint firstItem="dDU-X6-phc" firstAttribute="top" secondItem="HtO-cC-eSf" secondAttribute="bottom" id="64w-fA-8Ag"/>
+                            <constraint firstItem="zXF-wR-lKo" firstAttribute="leading" secondItem="ekw-Dr-vsy" secondAttribute="trailing" id="7r0-fl-14S"/>
+                            <constraint firstItem="9tf-XM-Ece" firstAttribute="width" secondItem="rRt-zb-dFS" secondAttribute="width" multiplier="0.05" id="8Td-3b-SXI"/>
+                            <constraint firstItem="K7I-QZ-hDO" firstAttribute="top" secondItem="tMq-c7-Sp0" secondAttribute="bottom" id="9ka-C6-xx4"/>
+                            <constraint firstItem="wuV-VO-4Gd" firstAttribute="top" secondItem="zXF-wR-lKo" secondAttribute="bottom" id="Cyc-jd-AhC"/>
+                            <constraint firstItem="9tf-XM-Ece" firstAttribute="leading" secondItem="hwv-My-smK" secondAttribute="trailing" id="EIG-OA-1y9"/>
+                            <constraint firstItem="tMq-c7-Sp0" firstAttribute="top" secondItem="hwv-My-smK" secondAttribute="bottom" id="EUy-yd-bRO"/>
+                            <constraint firstItem="K7I-QZ-hDO" firstAttribute="top" secondItem="ekw-Dr-vsy" secondAttribute="bottom" id="Fcb-JQ-M2X"/>
+                            <constraint firstItem="dDU-X6-phc" firstAttribute="height" secondItem="rRt-zb-dFS" secondAttribute="height" multiplier="0.03" id="Fqt-Mk-6mn"/>
+                            <constraint firstItem="K7I-QZ-hDO" firstAttribute="top" secondItem="9tf-XM-Ece" secondAttribute="bottom" id="GSs-Qz-nVo"/>
+                            <constraint firstItem="vnP-m2-RvR" firstAttribute="trailing" secondItem="K7I-QZ-hDO" secondAttribute="trailing" id="IsJ-c3-tJs"/>
+                            <constraint firstItem="ekw-Dr-vsy" firstAttribute="leading" secondItem="vnP-m2-RvR" secondAttribute="leading" id="Kah-ik-hKI"/>
+                            <constraint firstItem="hwv-My-smK" firstAttribute="top" secondItem="wuV-VO-4Gd" secondAttribute="bottom" id="L1k-9u-OWT"/>
+                            <constraint firstItem="wuV-VO-4Gd" firstAttribute="height" secondItem="rRt-zb-dFS" secondAttribute="height" multiplier="0.03" id="P98-bN-m2b"/>
+                            <constraint firstItem="zXF-wR-lKo" firstAttribute="height" secondItem="rRt-zb-dFS" secondAttribute="height" multiplier="0.11" id="RXd-8V-a14"/>
+                            <constraint firstItem="9tf-XM-Ece" firstAttribute="leading" secondItem="dDU-X6-phc" secondAttribute="trailing" id="S1n-Av-hLF"/>
+                            <constraint firstItem="hwv-My-smK" firstAttribute="leading" secondItem="ekw-Dr-vsy" secondAttribute="trailing" id="STJ-V0-BpN"/>
+                            <constraint firstItem="ekw-Dr-vsy" firstAttribute="top" secondItem="HtO-cC-eSf" secondAttribute="bottom" id="UZs-vq-cVj"/>
+                            <constraint firstItem="HtO-cC-eSf" firstAttribute="leading" secondItem="vnP-m2-RvR" secondAttribute="leading" id="VzT-fv-CcN"/>
+                            <constraint firstItem="zXF-wR-lKo" firstAttribute="top" secondItem="dDU-X6-phc" secondAttribute="bottom" id="ZLc-5Q-uCH"/>
+                            <constraint firstItem="HtO-cC-eSf" firstAttribute="trailing" secondItem="vnP-m2-RvR" secondAttribute="trailing" id="adF-rb-GYV"/>
+                            <constraint firstItem="9tf-XM-Ece" firstAttribute="trailing" secondItem="vnP-m2-RvR" secondAttribute="trailing" id="ayI-59-KCw"/>
+                            <constraint firstItem="K7I-QZ-hDO" firstAttribute="bottom" secondItem="vnP-m2-RvR" secondAttribute="bottom" id="iGG-Ln-RgL"/>
+                            <constraint firstItem="9tf-XM-Ece" firstAttribute="leading" secondItem="zXF-wR-lKo" secondAttribute="trailing" id="iO7-Bc-3yP"/>
+                            <constraint firstItem="tMq-c7-Sp0" firstAttribute="height" secondItem="rRt-zb-dFS" secondAttribute="height" multiplier="0.03" id="k30-HC-DrE"/>
+                            <constraint firstItem="wuV-VO-4Gd" firstAttribute="leading" secondItem="ekw-Dr-vsy" secondAttribute="trailing" id="ls2-tW-pfK"/>
+                            <constraint firstItem="ekw-Dr-vsy" firstAttribute="width" secondItem="rRt-zb-dFS" secondAttribute="width" multiplier="0.05" id="lvf-mZ-M0F"/>
+                            <constraint firstItem="HtO-cC-eSf" firstAttribute="top" secondItem="vnP-m2-RvR" secondAttribute="top" id="ok6-Tb-ZdB"/>
+                            <constraint firstItem="9tf-XM-Ece" firstAttribute="leading" secondItem="wuV-VO-4Gd" secondAttribute="trailing" id="uWU-oE-5XM"/>
+                            <constraint firstItem="dDU-X6-phc" firstAttribute="leading" secondItem="ekw-Dr-vsy" secondAttribute="trailing" id="yFB-71-E44"/>
+                            <constraint firstItem="K7I-QZ-hDO" firstAttribute="leading" secondItem="vnP-m2-RvR" secondAttribute="leading" id="yvH-3Q-dp6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vnP-m2-RvR"/>
+                    </view>
+                    <connections>
+                        <outlet property="bannerView" destination="K7I-QZ-hDO" id="saF-oV-Vee"/>
+                        <segue destination="x1p-wt-JH7" kind="presentation" identifier="attributionBackSegue" animates="NO" id="TmX-2R-lZ3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4DM-gs-j42" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5931.884057971015" y="-600"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -800,7 +937,7 @@
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do not have an account?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="QH7-qF-S9v">
                                 <rect key="frame" x="20.666666666666671" y="449.33333333333331" width="207" height="62.666666666666686"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -865,7 +1002,7 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mail Login" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="32s-zx-N0E" userLabel="HeaderLabel">
                                 <rect key="frame" x="20.666666666666657" y="121" width="372.66666666666674" height="98.333333333333314"/>
-                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="37"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="37"/>
                                 <color key="textColor" red="0.67306995390000002" green="0.13791039590000001" blue="0.7069171071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -982,20 +1119,7 @@
                                     <constraint firstAttribute="height" constant="50" id="Ywz-mX-R3M"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem id="36Q-er-9bH">
-                                        <barButtonItem key="leftBarButtonItem" title="Score" id="rne-Zh-GTp">
-                                            <color key="tintColor" red="0.680938720703125" green="0.15207105875015259" blue="0.71479576826095581" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <action selector="scoreTapped:" destination="77F-Fn-Frx" id="qNq-37-RuJ"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Mail Login" id="tJe-U4-jJ6">
-                                            <color key="tintColor" red="0.67450980392156867" green="0.13269695639610291" blue="0.70693856477737427" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <action selector="mailLoginTapped:" destination="77F-Fn-Frx" id="5yP-U2-C78"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
+                                    <navigationItem id="36Q-er-9bH"/>
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O8c-nx-LZO" customClass="GADBannerView">
@@ -1029,7 +1153,7 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gadabout" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="rmx-k6-IhE" userLabel="HeaderLabel">
                                 <rect key="frame" x="20.666666666666657" y="121" width="372.66666666666674" height="98.333333333333314"/>
-                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="37"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="37"/>
                                 <color key="textColor" red="0.67306995391845703" green="0.137910395860672" blue="0.70691710710525513" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1077,7 +1201,6 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="bannerView" destination="O8c-nx-LZO" id="o2Y-Ds-FT7"/>
-                        <outlet property="mailLogin" destination="tJe-U4-jJ6" id="FD7-aQ-PcL"/>
                         <outlet property="mainPageTableView" destination="WhE-j5-Xzq" id="84f-vZ-Y7t"/>
                         <outlet property="mainTableView" destination="WhE-j5-Xzq" id="eRw-KI-exr"/>
                         <outlet property="navigationBar" destination="0za-ce-opn" id="nDT-Zg-2Aa"/>
@@ -2178,20 +2301,20 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="OZY-vZ-1hv">
-                                <rect key="frame" x="78.666666666666657" y="196.66666666666666" width="256.66666666666674" height="61.999999999999972"/>
-                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="37"/>
+                                <rect key="frame" x="69" y="196.66666666666666" width="276.33333333333331" height="61.999999999999972"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="37"/>
                                 <color key="textColor" red="0.58105844259999995" green="0.12855249639999999" blue="0.57453137639999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="eOH-5B-wt7">
-                                <rect key="frame" x="183.66666666666666" y="302.33333333333331" width="47" height="33"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="20"/>
+                                <rect key="frame" x="182.66666666666666" y="302.33333333333331" width="48.666666666666657" height="33"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
                                 <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Txo-Wd-qUV">
-                                <rect key="frame" x="183.66666666666666" y="260.66666666666669" width="47" height="33.333333333333314"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="20"/>
+                                <rect key="frame" x="182.66666666666666" y="260.66666666666669" width="48.666666666666657" height="33.333333333333314"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
                                 <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
                             </label>
@@ -2452,7 +2575,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="14h-w3-4cb"/>
-        <segue reference="M3m-48-g2n"/>
-        <segue reference="zna-AK-ADo"/>
+        <segue reference="ksF-O3-2uc"/>
+        <segue reference="RwC-9j-Eg1"/>
     </inferredMetricsTieBreakers>
 </document>

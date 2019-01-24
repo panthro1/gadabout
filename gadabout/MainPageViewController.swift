@@ -41,15 +41,13 @@ var glbUserScore: Int = -1
 var glbFlagScore: Int = -1
 
 
-class MainPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, scorePopupDelegate  {
+class MainPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var isEnglish = true
     var questionSeenBefore = [String]()
 
     
     @IBOutlet weak var mainPageTableView: UITableView!
-    
-    @IBOutlet weak var mailLogin: UIBarButtonItem!
     
     @IBOutlet weak var bannerView: GADBannerView!
     
@@ -70,48 +68,9 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }*/
-    
-    
-    
-    @IBAction func mailLoginTapped(_ sender: Any) {
-        
-        let loginPopupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginPopUpID") as! ViewController
-        self.addChildViewController(loginPopupVC)
-        loginPopupVC.view.frame = self.view.bounds//self.view.frame
-        self.view.addSubview(loginPopupVC.view)
-        loginPopupVC.didMove(toParentViewController: self)
-        
-    }
 
-    
-    @IBAction func scoreTapped(_ sender: Any) {
-        
-        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
-        popOverVC.scoreWin = glbUserScore
-        popOverVC.totalScore = glbFlagScore
-        popOverVC.isFlagOutput = false
-        popOverVC.isScoreSummary = true
-        popOverVC.delegate = self
-        
-        self.addChildViewController(popOverVC)
-        let popUpSize = self.view.bounds.width*0.9
-        
-        let centerY = self.view.bounds.height/2 - popUpSize/2
-        let centerX = self.view.bounds.width/2 - popUpSize/2
-        
-        popOverVC.view.frame = CGRect(x: centerX, y: centerY, width: popUpSize, height: popUpSize)
-        popOverVC.view.backgroundColor = UIColor(rgb: 0xDDD6F2)
-        popOverVC.view.layer.cornerRadius = 20
-        
-        //popOverVC.view.frame = self.view.bounds//self.view.frame
-        
-        self.view.addSubview(popOverVC.view)
-        popOverVC.didMove(toParentViewController: self)
-        
-        
-    }
-    
-    
+
+
     @objc func isRotated() {
         switch UIDevice.current.orientation {
         case .landscapeLeft:
@@ -681,7 +640,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         let screenSize = UIScreen.main.bounds
         
         if screenSize.width < 350 {
-            cell.textLabel?.font = UIFont(name: "Avenir", size: 28)
+            cell.textLabel?.font = UIFont(name: "Avenir", size: 28) //
         }
         else if screenSize.width < 400 {
             cell.textLabel?.font = UIFont(name: "Avenir", size: 30)
@@ -818,14 +777,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    func SendCloseInfo() {
-        
-        if interstitial.isReady {
-            interstitial.present(fromRootViewController: self)
-        } else {
-            print("Ad wasn't ready")
-        }
-    }
+
     override func viewWillDisappear(_ animated: Bool) {
         reachability.stopNotifier()
         NotificationCenter.default.removeObserver(self, name: .reachabilityChanged, object: reachability)

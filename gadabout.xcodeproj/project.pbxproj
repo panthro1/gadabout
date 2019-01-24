@@ -55,6 +55,7 @@
 		E3C88C1421F474AF007EB21A /* slot-machine.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C88C1321F474AF007EB21A /* slot-machine.png */; };
 		E3C88C1A21F4795D007EB21A /* puzzle.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C88C1921F4795C007EB21A /* puzzle.png */; };
 		E3CBDEE121A05C8B002664B4 /* undo-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CBDEE021A05C8A002664B4 /* undo-arrow.png */; };
+		E3D0DD0C21F8160A00AE340F /* attributionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D0DD0B21F8160A00AE340F /* attributionsViewController.swift */; };
 		E3D2740921BF5C41006663DC /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D2740821BF5C41006663DC /* UIColorExtension.swift */; };
 		E3DD8F2221A65D9200ED982B /* ToDoImageDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DD8F2121A65D9200ED982B /* ToDoImageDisplayViewController.swift */; };
 		E3E1BEF12179133700C62595 /* luckyStrikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */; };
@@ -139,6 +140,7 @@
 		E3C88C1321F474AF007EB21A /* slot-machine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slot-machine.png"; sourceTree = "<group>"; };
 		E3C88C1921F4795C007EB21A /* puzzle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = puzzle.png; path = ../../../Attributions/puzzle.png; sourceTree = "<group>"; };
 		E3CBDEE021A05C8A002664B4 /* undo-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undo-arrow.png"; sourceTree = "<group>"; };
+		E3D0DD0B21F8160A00AE340F /* attributionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = attributionsViewController.swift; sourceTree = "<group>"; };
 		E3D2740821BF5C41006663DC /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		E3DD8F2121A65D9200ED982B /* ToDoImageDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoImageDisplayViewController.swift; sourceTree = "<group>"; };
 		E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = luckyStrikeViewController.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				E3261AE620F098920056CE99 /* AppDelegate.swift */,
 				E3261AE820F098920056CE99 /* ViewController.swift */,
 				E3261AEA20F098920056CE99 /* Main.storyboard */,
+				E3D0DD0B21F8160A00AE340F /* attributionsViewController.swift */,
 				E3BFE73721F6C2590007A652 /* scoreViewController.swift */,
 				E3B4753221F484F300952566 /* profileViewController.swift */,
 				E3B4753021F484CF00952566 /* challengeViewController.swift */,
@@ -525,6 +528,7 @@
 				E3261AE920F098920056CE99 /* ViewController.swift in Sources */,
 				E31A21BD21CF578300475EFD /* flagChallengeViewController.swift in Sources */,
 				E3B97A2C21CC8E9700C4AC0F /* NetworkManager.swift in Sources */,
+				E3D0DD0C21F8160A00AE340F /* attributionsViewController.swift in Sources */,
 				E3261AEF20F098920056CE99 /* gadabout.xcdatamodeld in Sources */,
 				E3B97A2E21CC934D00C4AC0F /* OfflineViewController.swift in Sources */,
 				E3261AE720F098920056CE99 /* AppDelegate.swift in Sources */,

@@ -124,6 +124,19 @@ class profileViewController: UIViewController, UITableViewDataSource, UITableVie
             
             src.view.window?.layer.add(transition, forKey: nil)
         }
+        else if segue.identifier == "attributionSegue" {
+
+            let src = self
+            let transition: CATransition = CATransition()
+            let timeFunc : CAMediaTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            transition.duration = 0.3
+            transition.timingFunction = timeFunc
+            transition.type = kCATransitionPush
+            transition.subtype = kCATransitionFromRight
+            
+            src.view.window?.layer.add(transition, forKey: nil)
+
+        }
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -250,6 +263,10 @@ class profileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
 
     
+    @IBAction func attributionsTapped(_ sender: Any) {
+        
+        performSegue(withIdentifier: "attributionSegue", sender: self)
+    }
     /*
     // MARK: - Navigation
 

@@ -402,8 +402,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParentViewController: self)
         
-
-        
     }
     
     func quizCompleted() {

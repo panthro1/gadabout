@@ -37,6 +37,8 @@ class scorePopUpViewController: UIViewController {
 
     @IBAction func closeTapped(_ sender: Any) {
         
+        closeButton.pulsate()
+        
         delegate?.SendCloseInfo()
         self.removeAnimate()
     }

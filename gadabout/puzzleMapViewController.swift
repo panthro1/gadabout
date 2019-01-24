@@ -735,6 +735,11 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
         
     }
     func showPopup(Score: Int, totalScore: Int) {
+        
+        navigationBar.isHidden = true
+        hintButton.isEnabled = false
+        harderSimpleButton.isEnabled = false
+        
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
         popOverVC.scoreWin = Score
         popOverVC.totalScore = totalScore
@@ -743,7 +748,17 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
         popOverVC.delegate = self
         
         self.addChildViewController(popOverVC)
-        popOverVC.view.frame = self.view.frame
+        
+        let popUpSize = self.view.bounds.width*0.9
+        
+        let centerY = self.view.bounds.height/2 - popUpSize/2
+        let centerX = self.view.bounds.width/2 - popUpSize/2
+        
+        popOverVC.view.frame = CGRect(x: centerX, y: centerY, width: popUpSize, height: popUpSize)//self.view.bounds
+        popOverVC.view.backgroundColor = UIColor(rgb: 0xDDD6F2)
+        popOverVC.view.layer.cornerRadius = 20
+        
+        
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParentViewController: self)
         
@@ -986,6 +1001,10 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
         } else {
             print("Ad wasn't ready")
         }
+        
+        navigationBar.isHidden = false
+        hintButton.isEnabled = true
+        harderSimpleButton.isEnabled = true
         
         let userScoreQuery = PFQuery(className: "UserScore")
         userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
