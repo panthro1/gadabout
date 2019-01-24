@@ -630,7 +630,8 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "mainPageCell")
+        //let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "mainPageCell")
+        let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "Cell")
         
         cell.layer.cornerRadius=10 //set corner radius here
         cell.layer.borderColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 100).cgColor //logout.tintColor?.cgColor//UIColor.lightGray.cgColor  // set cell border color here
@@ -674,17 +675,30 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         if indexPath.section == 0 {
             cell.textLabel?.text = " Challenges"
+            
+            cell.detailTextLabel?.text = "   Quizzes with images"
+            
+            /*cell.textLabel?.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.bold)
+            cell.textLabel?.sizeToFit()
+            cell.textLabel?.numberOfLines = 0
+            
+            cell.detailTextLabel?.text = "Test your place, food and flag knowledge"
+            cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.thin)
+            cell.detailTextLabel?.sizeToFit()
+            cell.detailTextLabel?.numberOfLines = 0*/
         }
         else if indexPath.section == 1 {
             cell.textLabel?.text = " Lucky Strike"
+            cell.detailTextLabel?.text = "   Randomly picked images"
         }
         else if indexPath.section == 2 {
             cell.textLabel?.text = " Puzzle"
+            cell.detailTextLabel?.text = "   Sliding image puzzle"
         }
         else if indexPath.section == 3 {
-            cell.textLabel?.text = "  Profile"
+            cell.textLabel?.text = " Profile"
+            cell.detailTextLabel?.text = "   To Do list, mail login"
         }
-
         
         return cell
     }

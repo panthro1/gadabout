@@ -374,6 +374,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.tableView.isScrollEnabled = false
+        
         if option1.count > 0 {
             let rowToSelect: IndexPath = IndexPath(row: 0, section: 0)
             self.tableView.scrollToRow(at: rowToSelect, at: .top, animated: false)
