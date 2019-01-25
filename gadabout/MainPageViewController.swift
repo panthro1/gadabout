@@ -689,27 +689,26 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             cell.textLabel?.text = " Challenges"
             
             cell.detailTextLabel?.text = "   Quizzes with images"
+            cell.detailTextLabel?.textColor = UIColor.darkGray
             
-            /*cell.textLabel?.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.bold)
-            cell.textLabel?.sizeToFit()
-            cell.textLabel?.numberOfLines = 0
-            
-            cell.detailTextLabel?.text = "Test your place, food and flag knowledge"
-            cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.thin)
-            cell.detailTextLabel?.sizeToFit()
-            cell.detailTextLabel?.numberOfLines = 0*/
         }
         else if indexPath.section == 1 {
             cell.textLabel?.text = " Lucky Strike"
+
             cell.detailTextLabel?.text = "   Randomly picked images"
+            cell.detailTextLabel?.textColor = UIColor.darkGray
         }
         else if indexPath.section == 2 {
             cell.textLabel?.text = " Puzzle"
+
             cell.detailTextLabel?.text = "   Sliding image puzzle"
+            cell.detailTextLabel?.textColor = UIColor.darkGray
         }
         else if indexPath.section == 3 {
             cell.textLabel?.text = " Profile"
+
             cell.detailTextLabel?.text = "   To Do list, mail login"
+            cell.detailTextLabel?.textColor = UIColor.darkGray
         }
         
         return cell
