@@ -95,7 +95,19 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
         
         AppDelegate.AppUtility.lockOrientation(.portrait)
         
-        registerUserNotification()
+        /*let center = UNUserNotificationCenter.current()
+        center.removeAllDeliveredNotifications() // To remove all delivered notifications
+        center.removeAllPendingNotificationRequests()*/
+        
+        UNUserNotificationCenter.current().getPendingNotificationRequests { [unowned self ] (requests) in
+            print("Recorded requests count \(requests.count)")
+            
+            if requests.count == 0 {
+                print("Record notification request")
+                self.registerUserNotification()
+            }
+        }
+        
         
         /*NetworkManager.isUnreachable { [unowned self]_ in
             print("OFFLINE")

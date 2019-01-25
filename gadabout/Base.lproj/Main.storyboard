@@ -853,6 +853,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="GjV-0A-K4A" id="N96-Zz-P0i"/>
+                                    <outlet property="delegate" destination="GjV-0A-K4A" id="boc-pN-aKX"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -895,6 +899,7 @@
                         <viewLayoutGuide key="safeArea" id="vnP-m2-RvR"/>
                     </view>
                     <connections>
+                        <outlet property="attributionsTableView" destination="hwv-My-smK" id="Fcc-jE-vkP"/>
                         <outlet property="bannerView" destination="K7I-QZ-hDO" id="saF-oV-Vee"/>
                         <segue destination="x1p-wt-JH7" kind="presentation" identifier="attributionBackSegue" animates="NO" id="TmX-2R-lZ3"/>
                     </connections>
@@ -2575,7 +2580,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="14h-w3-4cb"/>
-        <segue reference="SrD-HH-HDz"/>
+        <segue reference="TmX-2R-lZ3"/>
         <segue reference="RwC-9j-Eg1"/>
     </inferredMetricsTieBreakers>
 </document>

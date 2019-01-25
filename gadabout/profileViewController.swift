@@ -220,27 +220,6 @@ class profileViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         else if indexPath.section == 1 {
             print("Score selected")
-            /*let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "scorePopUpID") as! scorePopUpViewController
-            popOverVC.scoreWin = glbUserScore
-            popOverVC.totalScore = glbFlagScore
-            popOverVC.isFlagOutput = false
-            popOverVC.isScoreSummary = true
-            popOverVC.delegate = self
-            
-            self.addChildViewController(popOverVC)
-            let popUpSize = self.view.bounds.width*0.9
-            
-            let centerY = self.view.bounds.height/2 - popUpSize/2
-            let centerX = self.view.bounds.width/2 - popUpSize/2
-            
-            popOverVC.view.frame = CGRect(x: centerX, y: centerY, width: popUpSize, height: popUpSize)
-            popOverVC.view.backgroundColor = UIColor(rgb: 0xDDD6F2)
-            popOverVC.view.layer.cornerRadius = 20
-            
-            //popOverVC.view.frame = self.view.bounds//self.view.frame
-            
-            self.view.addSubview(popOverVC.view)
-            popOverVC.didMove(toParentViewController: self)*/
             performSegue(withIdentifier: "scoreSegue", sender: self)
             
         }
