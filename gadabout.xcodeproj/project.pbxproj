@@ -32,7 +32,6 @@
 		E3A2588F21ECDEF0001323B3 /* rightArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A2588E21ECDEF0001323B3 /* rightArrow.png */; };
 		E3A38444215044A1003A0A8C /* puzzleMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A38443215044A1003A0A8C /* puzzleMapViewController.swift */; };
 		E3A38E5D21F56A06009CCD52 /* outlook.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A38E5C21F56A05009CCD52 /* outlook.png */; };
-		E3A3DDEA21A93A7B0070FB85 /* balloon.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A3DDE921A93A7B0070FB85 /* balloon.png */; };
 		E3A3DDEE21A93BFD0070FB85 /* egg.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A3DDED21A93BFD0070FB85 /* egg.png */; };
 		E3A3DDF221A940050070FB85 /* slot.png in Resources */ = {isa = PBXBuildFile; fileRef = E3A3DDF121A940050070FB85 /* slot.png */; };
 		E3B4752D21F480BA00952566 /* back-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E3B4752C21F480BA00952566 /* back-button.png */; };
@@ -117,7 +116,6 @@
 		E3A2588E21ECDEF0001323B3 /* rightArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rightArrow.png; path = ../../../Attributions/rightArrow.png; sourceTree = "<group>"; };
 		E3A38443215044A1003A0A8C /* puzzleMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = puzzleMapViewController.swift; sourceTree = "<group>"; };
 		E3A38E5C21F56A05009CCD52 /* outlook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = outlook.png; sourceTree = "<group>"; };
-		E3A3DDE921A93A7B0070FB85 /* balloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = balloon.png; sourceTree = "<group>"; };
 		E3A3DDED21A93BFD0070FB85 /* egg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = egg.png; sourceTree = "<group>"; };
 		E3A3DDF121A940050070FB85 /* slot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slot.png; sourceTree = "<group>"; };
 		E3B4752C21F480BA00952566 /* back-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back-button.png"; path = "../../../Attributions/back-button.png"; sourceTree = "<group>"; };
@@ -284,7 +282,6 @@
 				E3A38E5C21F56A05009CCD52 /* outlook.png */,
 				E36DA986212D71830031D337 /* wrong.gif */,
 				E3A2588E21ECDEF0001323B3 /* rightArrow.png */,
-				E3A3DDE921A93A7B0070FB85 /* balloon.png */,
 				E3C88C1321F474AF007EB21A /* slot-machine.png */,
 				E3C88C0F21F4707F007EB21A /* users.png */,
 				E3BFE73521F6C0130007A652 /* lock.png */,
@@ -435,7 +432,6 @@
 				E3BFE73621F6C0130007A652 /* lock.png in Resources */,
 				E3BFE73421F6BF950007A652 /* email.png in Resources */,
 				E3C88C1421F474AF007EB21A /* slot-machine.png in Resources */,
-				E3A3DDEA21A93A7B0070FB85 /* balloon.png in Resources */,
 				E313DF612118D4AD00BAE4C6 /* uncheck.png in Resources */,
 				E39D488E212EB87100A32212 /* correct2.png in Resources */,
 				E3C88C1221F47153007EB21A /* hot-air-balloon.png in Resources */,

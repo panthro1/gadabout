@@ -16,6 +16,8 @@ class attributionsViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var bannerView: GADBannerView!
     
+    let rowHeight: CGFloat = 50
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,7 +30,7 @@ class attributionsViewController: UIViewController, UITableViewDataSource, UITab
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
         
-        attributionsTableView.rowHeight = 50
+        attributionsTableView.rowHeight = rowHeight
         // Do any additional setup after loading the view.
     }
     
@@ -85,33 +87,103 @@ class attributionsViewController: UIViewController, UITableViewDataSource, UITab
         cell.backgroundColor = UIColor.clear
         
         
-        /*let rowImageSize = Double(rowHeight)*0.8
+        let rowImageSize = Double(rowHeight)*0.6
         
         if indexPath.section == 0 {
-            cell.accessoryView = UIImageView(image: UIImage(named: "list.png"))
+            cell.accessoryView = UIImageView(image: UIImage(named: "gadabout_launch.png"))
             cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
         }
         else if indexPath.section == 1 {
-            cell.accessoryView = UIImageView(image: UIImage(named: "score-icon.png"))
+            cell.accessoryView = UIImageView(image: UIImage(named: "scoring.png"))
             cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
         }
         else if indexPath.section == 2 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "breakfast.png"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
+        }
+        else if indexPath.section == 3 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "users.png"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
+        }
+        else if indexPath.section == 4 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "hot-air-balloon.png"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
+        }
+        else if indexPath.section == 5 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "slot-machine.png"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
+        }
+        else if indexPath.section == 6 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "puzzle.png"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
+        }
+        else if indexPath.section == 7 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "back-button.png"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
+        }
+        else if indexPath.section == 8 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "rightArrow.png"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
+        }
+        else if indexPath.section == 9 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "list.png"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
+        }
+        else if indexPath.section == 10 {
             cell.accessoryView = UIImageView(image: UIImage(named: "outlook.png"))
             cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
-            
-        }*/
+        }
+        else if indexPath.section == 11 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "email.png"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
+        }
+        else if indexPath.section == 12 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "lock.png"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
+        }
+
         
         
         if indexPath.section == 0 {
             cell.textLabel?.text = "Icon made by Freepik from www.flaticon.com"
         }
         else if indexPath.section == 1 {
-            cell.textLabel?.text = " Score"
+            cell.textLabel?.text = "Icon made by Eucalyp from www.flaticon.com"
         }
         else if indexPath.section == 2 {
-            cell.textLabel?.text = " Mail Login"
+            cell.textLabel?.text = "Icon made by photo3idea_studio from www.flaticon.com"
         }
-        
+        else if indexPath.section == 3 {
+            cell.textLabel?.text = "Icon made by Smashicons from www.flaticon.com"
+        }
+        else if indexPath.section == 4 {
+            cell.textLabel?.text = "Icon made by Payungkead from www.flaticon.com"
+        }
+        else if indexPath.section == 5 {
+            cell.textLabel?.text = "Icon made by Smashicons from www.flaticon.com"
+        }
+        else if indexPath.section == 6 {
+            cell.textLabel?.text = "Icon made by Becris from www.flaticon.com"
+        }
+        else if indexPath.section == 7 {
+            cell.textLabel?.text = "Icon made by Google from www.flaticon.com"
+        }
+        else if indexPath.section == 8 {
+            cell.textLabel?.text = "Icon made by Freepik from www.flaticon.com"
+        }
+        else if indexPath.section == 9 {
+            cell.textLabel?.text = "Icon made by Freepik from www.flaticon.com"
+        }
+        else if indexPath.section == 10 {
+            cell.textLabel?.text = "Icon made by Pixel perfect from www.flaticon.com"
+        }
+        else if indexPath.section == 11 {
+            cell.textLabel?.text = "Icon made by Freepik from www.flaticon.com"
+        }
+        else if indexPath.section == 12 {
+            cell.textLabel?.text = "Icon made by Those Icons from www.flaticon.com"
+        }
+
         cell.textLabel?.sizeToFit()
         cell.textLabel?.numberOfLines = 0
         

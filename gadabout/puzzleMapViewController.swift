@@ -1002,6 +1002,14 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
             print("Ad wasn't ready")
         }
         
+        // Ad id
+        // interstitial = GADInterstitial(adUnitID: "ca-app-pub-5745243428784846~5277829027")
+        
+        // Test ad
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        let adRequest = GADRequest()
+        interstitial.load(adRequest)
+        
         navigationBar.isHidden = false
         hintButton.isEnabled = true
         harderSimpleButton.isEnabled = true
