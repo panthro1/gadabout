@@ -56,6 +56,7 @@
 		E3CBDEE121A05C8B002664B4 /* undo-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E3CBDEE021A05C8A002664B4 /* undo-arrow.png */; };
 		E3D0DD0C21F8160A00AE340F /* attributionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D0DD0B21F8160A00AE340F /* attributionsViewController.swift */; };
 		E3D2740921BF5C41006663DC /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D2740821BF5C41006663DC /* UIColorExtension.swift */; };
+		E3D5F09A21FCD58B00307ED0 /* replay.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D5F09921FCD58900307ED0 /* replay.png */; };
 		E3DD8F2221A65D9200ED982B /* ToDoImageDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DD8F2121A65D9200ED982B /* ToDoImageDisplayViewController.swift */; };
 		E3E1BEF12179133700C62595 /* luckyStrikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */; };
 		E3E5BD53213295610019BFBC /* keyboard-right-arrow-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E3E5BD52213295600019BFBC /* keyboard-right-arrow-button.png */; };
@@ -140,6 +141,7 @@
 		E3CBDEE021A05C8A002664B4 /* undo-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undo-arrow.png"; sourceTree = "<group>"; };
 		E3D0DD0B21F8160A00AE340F /* attributionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = attributionsViewController.swift; sourceTree = "<group>"; };
 		E3D2740821BF5C41006663DC /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		E3D5F09921FCD58900307ED0 /* replay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = replay.png; path = ../../../Attributions/replay.png; sourceTree = "<group>"; };
 		E3DD8F2121A65D9200ED982B /* ToDoImageDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoImageDisplayViewController.swift; sourceTree = "<group>"; };
 		E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = luckyStrikeViewController.swift; sourceTree = "<group>"; };
 		E3E5BD52213295600019BFBC /* keyboard-right-arrow-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard-right-arrow-button.png"; sourceTree = SOURCE_ROOT; };
@@ -279,6 +281,7 @@
 				E3B97A2F21CC94DF00C4AC0F /* NetworkConnection.png */,
 				E3BA747B219A769700095B1B /* remove.png */,
 				E3C20D3721D6B34600A162E0 /* checked.png */,
+				E3D5F09921FCD58900307ED0 /* replay.png */,
 				E3A38E5C21F56A05009CCD52 /* outlook.png */,
 				E36DA986212D71830031D337 /* wrong.gif */,
 				E3A2588E21ECDEF0001323B3 /* rightArrow.png */,
@@ -414,6 +417,7 @@
 				E313DF5F2118D4A500BAE4C6 /* check.png in Resources */,
 				E338B57D21DBAB50007D2ACE /* gadabout_launch.png in Resources */,
 				E3A38E5D21F56A06009CCD52 /* outlook.png in Resources */,
+				E3D5F09A21FCD58B00307ED0 /* replay.png in Resources */,
 				E3E5BD53213295610019BFBC /* keyboard-right-arrow-button.png in Resources */,
 				E3BA747C219A769800095B1B /* remove.png in Resources */,
 				E3CBDEE121A05C8B002664B4 /* undo-arrow.png in Resources */,

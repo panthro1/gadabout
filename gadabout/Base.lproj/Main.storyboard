@@ -205,10 +205,10 @@
                                 <rect key="frame" x="20.666666666666657" y="736" width="372.66666666666674" height="4.3333333333333712"/>
                                 <color key="backgroundColor" red="0.83137254900000002" green="0.16078431369999999" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBs-pE-Vsp">
-                                <rect key="frame" x="124.33333333333333" y="673" width="165.33333333333337" height="63"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="Try Again">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBs-pE-Vsp">
+                                <rect key="frame" x="20.666666666666657" y="673" width="372.66666666666674" height="63"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="24"/>
+                                <state key="normal" title="try again" image="replay.png">
                                     <color key="titleColor" red="0.60106390710000002" green="0.2603271902" blue="0.62250882389999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -278,7 +278,6 @@
                             <constraint firstItem="en2-gf-Nzf" firstAttribute="top" secondItem="aca-Zb-qo4" secondAttribute="bottom" id="8lJ-rL-K1j"/>
                             <constraint firstItem="Vjb-k0-sTy" firstAttribute="top" secondItem="nb6-p9-ZoQ" secondAttribute="bottom" id="8sg-jA-AG7"/>
                             <constraint firstItem="jLr-TQ-GIn" firstAttribute="leading" secondItem="Hqn-JB-vjW" secondAttribute="trailing" id="8us-BW-Su3"/>
-                            <constraint firstItem="IBs-pE-Vsp" firstAttribute="width" secondItem="ZbR-Fn-KHI" secondAttribute="width" multiplier="0.4" id="94Z-l4-Iye"/>
                             <constraint firstItem="Vjb-k0-sTy" firstAttribute="top" secondItem="jLr-TQ-GIn" secondAttribute="bottom" id="9AQ-6v-9wH"/>
                             <constraint firstItem="jLr-TQ-GIn" firstAttribute="leading" secondItem="DcG-pT-KBF" secondAttribute="trailing" id="9Pe-Zz-MyH"/>
                             <constraint firstItem="nb6-p9-ZoQ" firstAttribute="top" secondItem="L0A-hj-1xZ" secondAttribute="bottom" id="A7B-cU-eAT"/>
@@ -298,6 +297,7 @@
                             <constraint firstItem="3KT-rQ-D33" firstAttribute="trailing" secondItem="yfc-8a-Edp" secondAttribute="trailing" id="Iby-Hv-BnM"/>
                             <constraint firstItem="Hqn-JB-vjW" firstAttribute="leading" secondItem="hK7-iV-C3w" secondAttribute="trailing" id="JIW-Tb-KaD"/>
                             <constraint firstItem="hK7-iV-C3w" firstAttribute="leading" secondItem="HgE-dU-FE5" secondAttribute="trailing" id="K9b-gA-KfB"/>
+                            <constraint firstItem="kUB-5A-aSM" firstAttribute="leading" secondItem="IBs-pE-Vsp" secondAttribute="trailing" id="KYI-rG-M0R"/>
                             <constraint firstItem="IBs-pE-Vsp" firstAttribute="height" secondItem="ZbR-Fn-KHI" secondAttribute="height" multiplier="0.07" id="NM9-Fv-wNB"/>
                             <constraint firstItem="jLr-TQ-GIn" firstAttribute="leading" secondItem="3un-PL-9v6" secondAttribute="trailing" id="P1P-Fh-VzO"/>
                             <constraint firstItem="WeY-jL-ZDw" firstAttribute="height" secondItem="ZbR-Fn-KHI" secondAttribute="height" multiplier="0.01" id="PkX-sf-mqZ"/>
@@ -348,6 +348,7 @@
                             <constraint firstItem="kUB-5A-aSM" firstAttribute="leading" secondItem="urk-HJ-lRM" secondAttribute="trailing" id="rml-pf-qCH"/>
                             <constraint firstItem="aca-Zb-qo4" firstAttribute="leading" secondItem="Rse-NY-184" secondAttribute="trailing" id="sFi-74-85J"/>
                             <constraint firstItem="LI2-bw-Klq" firstAttribute="leading" secondItem="yfc-8a-Edp" secondAttribute="leading" id="smd-dy-uKR"/>
+                            <constraint firstItem="IBs-pE-Vsp" firstAttribute="leading" secondItem="Rse-NY-184" secondAttribute="trailing" id="tHG-NI-Nr3"/>
                             <constraint firstItem="nb6-p9-ZoQ" firstAttribute="height" secondItem="ZbR-Fn-KHI" secondAttribute="height" multiplier="0.08" id="tTg-sZ-Y83"/>
                             <constraint firstItem="m92-0C-E32" firstAttribute="top" secondItem="Hqn-JB-vjW" secondAttribute="bottom" id="u1q-c2-5xL"/>
                             <constraint firstItem="AKi-Pz-RvN" firstAttribute="height" secondItem="ZbR-Fn-KHI" secondAttribute="height" multiplier="0.05" id="uv5-xw-aRu"/>
@@ -1532,10 +1533,10 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Py-TE-VEr">
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Py-TE-VEr">
                                 <rect key="frame" x="145" y="677.66666666666663" width="124" height="62.666666666666629"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Next">
+                                <state key="normal" title="next" image="rightArrow.png">
                                     <color key="titleColor" red="0.57761341333389282" green="0.21455127000808716" blue="0.59906274080276489" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -1573,7 +1574,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lmc-la-YMg">
                                 <rect key="frame" x="8.3333333333333286" y="749.33333333333337" width="140.66666666666669" height="53.666666666666629"/>
-                                <color key="backgroundColor" red="0.60106390714645386" green="0.26032719016075134" blue="0.62250882387161255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.59999999999999998" green="0.25882352941176467" blue="0.62352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Add To Do List">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1838,7 +1839,7 @@
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBz-ZL-mbw">
-                                <rect key="frame" x="103.66666666666669" y="702.66666666666663" width="207" height="62.666666666666629"/>
+                                <rect key="frame" x="103.66666666666669" y="666.66666666666663" width="207" height="63"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <state key="normal" title="Make it harder ?">
                                     <color key="titleColor" red="0.60106390714645386" green="0.26032719016075134" blue="0.62250882387161255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1855,15 +1856,15 @@
                                 </constraints>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ks8-Py-xDG" userLabel="ViewAboveBanner">
-                                <rect key="frame" x="0.0" y="837" width="414" height="9"/>
+                                <rect key="frame" x="0.0" y="801.33333333333337" width="414" height="44.666666666666629"/>
                                 <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pMw-fm-zIU" userLabel="ViewAboveHintButton">
-                                <rect key="frame" x="0.0" y="765.33333333333337" width="414" height="9"/>
+                                <rect key="frame" x="0.0" y="729.66666666666663" width="414" height="8.6666666666666288"/>
                                 <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOU-iJ-iWi">
-                                <rect key="frame" x="124.33333333333333" y="774.33333333333337" width="165.33333333333337" height="62.666666666666629"/>
+                                <rect key="frame" x="124.33333333333333" y="738.33333333333337" width="165.33333333333337" height="63"/>
                                 <color key="backgroundColor" red="0.60106390714645386" green="0.26032719016075134" blue="0.62250882387161255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Hint">
@@ -1896,7 +1897,7 @@
                             <constraint firstItem="JQx-Bo-aVE" firstAttribute="leading" secondItem="BbH-2J-5Xy" secondAttribute="leading" id="gax-eu-U5c"/>
                             <constraint firstItem="pMw-fm-zIU" firstAttribute="top" secondItem="CBz-ZL-mbw" secondAttribute="bottom" id="ha8-sz-G5E"/>
                             <constraint firstItem="ks8-Py-xDG" firstAttribute="top" secondItem="SOU-iJ-iWi" secondAttribute="bottom" id="hzV-ys-bIn"/>
-                            <constraint firstItem="ks8-Py-xDG" firstAttribute="height" secondItem="P7J-iu-hkg" secondAttribute="height" multiplier="0.01" id="k0r-qU-EXl"/>
+                            <constraint firstItem="ks8-Py-xDG" firstAttribute="height" secondItem="P7J-iu-hkg" secondAttribute="height" multiplier="0.05" id="k0r-qU-EXl"/>
                             <constraint firstItem="CBz-ZL-mbw" firstAttribute="width" secondItem="P7J-iu-hkg" secondAttribute="width" multiplier="0.5" id="zrz-n9-KKz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BbH-2J-5Xy"/>
@@ -2575,12 +2576,13 @@
     <resources>
         <image name="NetworkConnection.png" width="500" height="373"/>
         <image name="back-button.png" width="32" height="32"/>
+        <image name="replay.png" width="32" height="32"/>
         <image name="rightArrow.png" width="30" height="30"/>
         <image name="score-icon.png" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="14h-w3-4cb"/>
+        <segue reference="e9z-7M-9hq"/>
         <segue reference="TmX-2R-lZ3"/>
-        <segue reference="RwC-9j-Eg1"/>
+        <segue reference="xaI-zu-Pdj"/>
     </inferredMetricsTieBreakers>
 </document>

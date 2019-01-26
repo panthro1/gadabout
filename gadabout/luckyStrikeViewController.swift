@@ -61,60 +61,7 @@ class luckyStrikeViewController: UIViewController {
                             })
         })
         
-        /*let itemsObjectDescription = UserDefaults.standard.object(forKey: "toDoItemDescription")
-        
-        let itemsObjectName = UserDefaults.standard.object(forKey: "toDoItem")
-        
-        let itemsImage = UserDefaults.standard.object(forKey: "toDoImage")
-        
-        var itemsDescription = [String]()
-        
-        var itemsName = [String]()
-        
-        
-        if let tempItemsDescription = itemsObjectDescription {
-            if let tempItemsName = itemsObjectName {
-                itemsDescription = tempItemsDescription as! [String]
-                itemsName = tempItemsName as! [String]
-                
-                if let descText = descriptionText.text {
-                    if let nameText = headerLabel.text {
-                        itemsDescription.append(descText)
-                        itemsName.append(nameText)
-                    }
-                }
-            }
-            else {
-                
-                if let descText = descriptionText.text {
-                    if let nameText = headerLabel.text {
-                        itemsDescription.append(descText)
-                        itemsName.append(nameText)
-                    }
-                }
-            }
-            
-        }
-        else {
-            if let descText = descriptionText.text {
-                if let nameText = headerLabel.text {
-                    itemsDescription.append(descText)
-                    itemsName.append(nameText)
-                }
-            }
-        }
-        print("itemsName : \(itemsName)")
-        print("itemsDescription: \(itemsDescription)")
-        
-        UserDefaults.standard.set(itemsName, forKey: "toDoItem")
-        UserDefaults.standard.set(itemsDescription, forKey: "toDoItemDescription")
-        // New code
-        if let imageTobeSaved = image.image {
-            let imageData = UIImageJPEGRepresentation(imageTobeSaved, 1.0)
 
-        }*/
-        
-        // New code
         print("Current object: \(currentObjectId) isPlace: \(isCurrentItemPlace)")
         if glbToDoItemIDs.firstIndex(of: currentObjectId) == nil {
             if currentObjectId.count > 0  {
@@ -356,10 +303,10 @@ class luckyStrikeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        nextButton.backgroundColor = .clear
+        /*nextButton.backgroundColor = .clear
         nextButton.layer.cornerRadius = 5
         nextButton.layer.borderWidth = 1
-        nextButton.layer.borderColor = UIColor.black.cgColor
+        nextButton.layer.borderColor = UIColor.black.cgColor*/
         
         toDoListButton.layer.cornerRadius = 5
         toDoListButton.layer.borderWidth = 1

@@ -64,7 +64,7 @@ class attributionsViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 13
+        return 14
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -141,6 +141,10 @@ class attributionsViewController: UIViewController, UITableViewDataSource, UITab
             cell.accessoryView = UIImageView(image: UIImage(named: "lock.png"))
             cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
         }
+        else if indexPath.section == 13 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "replay.png"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
+        }
 
         
         
@@ -182,6 +186,9 @@ class attributionsViewController: UIViewController, UITableViewDataSource, UITab
         }
         else if indexPath.section == 12 {
             cell.textLabel?.text = "Icon made by Those Icons from www.flaticon.com"
+        }
+        else if indexPath.section == 13 {
+            cell.textLabel?.text = "Icon made by Freepik from www.flaticon.com"
         }
 
         cell.textLabel?.sizeToFit()

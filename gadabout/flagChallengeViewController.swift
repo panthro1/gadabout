@@ -449,14 +449,13 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         tryAgainButton.isHidden = true
         nextButton.isHidden = true
         
-        /*tryAgainButton.layer.cornerRadius = 10
+        /*tryAgainButton.backgroundColor = .clear
+        tryAgainButton.layer.cornerRadius = 5
         tryAgainButton.layer.borderWidth = 1
         tryAgainButton.layer.borderColor = UIColor.black.cgColor*/
         
-        tryAgainButton.backgroundColor = .clear
-        tryAgainButton.layer.cornerRadius = 5
-        tryAgainButton.layer.borderWidth = 1
-        tryAgainButton.layer.borderColor = UIColor.black.cgColor
+        tryAgainButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -10);
+        
         
         // Ad id
         // interstitial = GADInterstitial(adUnitID: "ca-app-pub-5745243428784846~5277829027")
