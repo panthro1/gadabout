@@ -122,6 +122,16 @@ class luckyStrikeViewController: UIViewController {
         activityIndicator.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
         
+        // Account ad
+        //bannerView.adUnitID = "ca-app-pub-5745243428784846~5277829027"
+        
+        // Test add
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+
+        
         // New code
         
         if imageFile.count < 2 {
@@ -616,6 +626,16 @@ class luckyStrikeViewController: UIViewController {
                 view.addSubview(activityIndicator)
                 activityIndicator.startAnimating()
                 UIApplication.shared.beginIgnoringInteractionEvents()
+                
+                // Account ad
+                //bannerView.adUnitID = "ca-app-pub-5745243428784846~5277829027"
+                
+                // Test add
+                bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+                
+                bannerView.rootViewController = self
+                bannerView.load(GADRequest())
+
                 
                 if imageFile.count < 2 {
                     
