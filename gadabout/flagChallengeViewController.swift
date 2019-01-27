@@ -487,14 +487,6 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         option4.setTitleColor(UIColor.black, for: .normal)
         option4.layer.borderWidth = 0
         
-        // Account ad
-        //bannerView.adUnitID = "ca-app-pub-5745243428784846~5277829027"
-        
-        // Test add
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
         
         if glbFlagOption1.count == 0 {
             let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
