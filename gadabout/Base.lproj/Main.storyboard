@@ -1839,7 +1839,7 @@
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBz-ZL-mbw">
-                                <rect key="frame" x="103.66666666666669" y="666.66666666666663" width="207" height="63"/>
+                                <rect key="frame" x="103.66666666666669" y="632.66666666666663" width="207" height="63"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <state key="normal" title="Make it harder ?">
                                     <color key="titleColor" red="0.60106390714645386" green="0.26032719016075134" blue="0.62250882387161255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1849,22 +1849,22 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C9o-fz-mKS" customClass="GADBannerView">
-                                <rect key="frame" x="0.0" y="846" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="kKX-41-jVK"/>
                                 </constraints>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ks8-Py-xDG" userLabel="ViewAboveBanner">
-                                <rect key="frame" x="0.0" y="801.33333333333337" width="414" height="44.666666666666629"/>
+                                <rect key="frame" x="0.0" y="767.33333333333337" width="414" height="44.666666666666629"/>
                                 <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pMw-fm-zIU" userLabel="ViewAboveHintButton">
-                                <rect key="frame" x="0.0" y="729.66666666666663" width="414" height="8.6666666666666288"/>
+                                <rect key="frame" x="0.0" y="695.66666666666663" width="414" height="8.6666666666666288"/>
                                 <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOU-iJ-iWi">
-                                <rect key="frame" x="124.33333333333333" y="738.33333333333337" width="165.33333333333337" height="63"/>
+                                <rect key="frame" x="124.33333333333333" y="704.33333333333337" width="165.33333333333337" height="63"/>
                                 <color key="backgroundColor" red="0.60106390714645386" green="0.26032719016075134" blue="0.62250882387161255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Hint">
@@ -1880,8 +1880,8 @@
                             <constraint firstItem="ks8-Py-xDG" firstAttribute="trailing" secondItem="BbH-2J-5Xy" secondAttribute="trailing" id="4bb-8N-Bv2"/>
                             <constraint firstItem="CBz-ZL-mbw" firstAttribute="centerX" secondItem="P7J-iu-hkg" secondAttribute="centerX" id="4zQ-Zb-Cyu"/>
                             <constraint firstItem="SOU-iJ-iWi" firstAttribute="top" secondItem="pMw-fm-zIU" secondAttribute="bottom" id="7kT-mf-XHx"/>
-                            <constraint firstAttribute="bottom" secondItem="C9o-fz-mKS" secondAttribute="bottom" id="Beg-jl-feP"/>
                             <constraint firstItem="ks8-Py-xDG" firstAttribute="leading" secondItem="BbH-2J-5Xy" secondAttribute="leading" id="Eka-BZ-HGr"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="C9o-fz-mKS" secondAttribute="bottom" id="Gy4-wo-iUT"/>
                             <constraint firstItem="SOU-iJ-iWi" firstAttribute="width" secondItem="P7J-iu-hkg" secondAttribute="width" multiplier="0.4" id="HgS-mM-Ppj"/>
                             <constraint firstItem="SOU-iJ-iWi" firstAttribute="centerX" secondItem="P7J-iu-hkg" secondAttribute="centerX" id="I4Q-5R-9Lz"/>
                             <constraint firstItem="C9o-fz-mKS" firstAttribute="top" secondItem="ks8-Py-xDG" secondAttribute="bottom" id="OYo-iS-Cnt"/>
