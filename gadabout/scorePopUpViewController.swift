@@ -69,7 +69,7 @@ class scorePopUpViewController: UIViewController {
                         applyBoldText(text1: "Score", text2: "Old Record")
                     }
                     else {
-                        scoreHeader.text = "Congratulations"
+                        scoreHeader.text = "Awesome"
                         applyBoldText(text1: "Score", text2: "Record")
                     }
                 }
@@ -80,7 +80,7 @@ class scorePopUpViewController: UIViewController {
                     scoreWinLabel.text = "You have not won any points"
                 }
                 else {
-                    scoreHeader.text = "Congratulations"
+                    scoreHeader.text = "Awesome"
                     scoreWinLabel.text = "You have won \(scoreWin) points"
                 }
                 totalScoreLabel.text = "Total Score : \(totalScore) points"
