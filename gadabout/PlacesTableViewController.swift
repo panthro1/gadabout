@@ -560,6 +560,18 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             cell.detailsButton.setTitle("Back", for: [])
             
             cell.detailText.isHidden = false
+            /*let newDescription = NSString(string: descriptionEng[indexPath.row])
+            let components = newDescription.components(separatedBy: "Photo licensed under")
+            if components.count == 2 {
+                let attributedDescription = attributedText(withString: components[0], boldString: components[1], fontNormal: cell.detailText.font, fontCredit: cell.detailText.font.withSize(9))
+                cell.detailText.text = attributedDescription.string
+                print("2 components")
+            }
+            else
+            {
+                cell.detailText.text = descriptionEng[indexPath.row]
+            }*/
+            cell.detailText.text = descriptionEng[indexPath.row]
             cell.detailText.text = descriptionEng[indexPath.row]
             cell.detailText.sizeToFit()
             cell.detailText.numberOfLines = 0
@@ -1211,6 +1223,15 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     
     override func viewWillDisappear(_ animated: Bool) {
         timer.invalidate()
+    }
+    
+    func attributedText(withString string: String, boldString: String, fontNormal: UIFont, fontCredit: UIFont) -> NSAttributedString {
+        let attributedString = NSMutableAttributedString(string: string,
+                                                         attributes: [NSAttributedStringKey.font: fontNormal])
+        let boldFontAttribute: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: fontCredit.pointSize)]
+        let range = (string as NSString).range(of: boldString)
+        attributedString.addAttributes(boldFontAttribute, range: range)
+        return attributedString
     }
     
     
