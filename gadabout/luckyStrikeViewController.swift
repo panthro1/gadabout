@@ -363,6 +363,9 @@ class luckyStrikeViewController: UIViewController {
     
     
     @IBAction func prevTapped(_ sender: Any) {
+        let button = sender as? UIButton
+        button?.pulsate()
+        
         print("Show the previous, Prev Indx: \(prevIndx)")
         if prevIndx >= 1 {
             prevIndx -= 1
