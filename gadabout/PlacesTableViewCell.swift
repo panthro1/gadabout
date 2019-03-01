@@ -54,6 +54,8 @@ class PlacesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var optionDLabel: UILabel!
     
+    @IBOutlet weak var photoCredit: UILabel!
+    
     @IBAction func markOption1Tapped(_ sender: Any) {
          markOption1.pulsate()
         
