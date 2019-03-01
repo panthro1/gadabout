@@ -105,8 +105,9 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 indx = indx + 1
             }
             
-            glbUserScore = glbUserScore + scorePoint
-            showPopup(Score: scorePoint, totalScore: glbUserScore)
+            glbCorrectAnswer = glbCorrectAnswer + scorePoint
+            glbTotalQuestion = glbTotalQuestion + option1.count
+            showPopup(Score: scorePoint, totalScore: glbCorrectAnswer)
             
             timer.invalidate()
         }
@@ -342,8 +343,9 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             timeLabel.text = "\(0)"
             quizCompleted()
             
-            glbUserScore = glbUserScore + scorePoint
-            showPopup(Score: scorePoint, totalScore: glbUserScore)
+            glbCorrectAnswer = glbCorrectAnswer + scorePoint
+            glbTotalQuestion = glbTotalQuestion + option1.count
+            showPopup(Score: scorePoint, totalScore: glbCorrectAnswer)
 
             progressLayer.strokeEnd = 1
         }
@@ -1135,7 +1137,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 if let qIndex = questionIndex {
                     selected = answer[qIndex]
                     if answer[qIndex] == correctAnswerInt {
-                        scorePoint = scorePoint + 7
+                        scorePoint = scorePoint + 1
                         userRecord[indx] = true
                     }
                 }
@@ -1165,12 +1167,19 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         let userScoreQuery = PFQuery(className: "UserScore")
         userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
         userScoreQuery.findObjectsInBackground { (objects, error) in
+            
             if let score = objects?.first {
-                if Int(score["score"] as! String) != nil {
-                    
-                    score["score"] = String(glbUserScore)
-                    score.saveInBackground()
-                }
+                score["correctAnswer"] = String(glbCorrectAnswer)
+                score["totalQuestion"] = String(glbTotalQuestion)
+                score.saveInBackground()
+            }
+            else {
+                
+                let score = PFObject(className: "UserScore")
+                score["correctAnswer"] = String(glbCorrectAnswer)
+                score["totalQuestion"] = String(glbTotalQuestion)
+                score["userId"] = PFUser.current()?.objectId
+                score.saveInBackground()
             }
         }
     }

@@ -966,6 +966,11 @@ class luckyStrikeViewController: UIViewController {
         
         headerLabel.isHidden = false
         image.isHidden = false
+        
+        currentObjectId = histObjectId[prevIndx]
+        isCurrentItemPlace = histIsPlace[prevIndx]
+        currentImage.removeAll()
+        currentImage.append(histImageFile[prevIndx])
 
     }
     

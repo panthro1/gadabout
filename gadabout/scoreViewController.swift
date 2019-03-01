@@ -71,7 +71,7 @@ class scoreViewController: UIViewController {
         let attrs2 = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 25)]
         let attributedString2 = NSMutableAttributedString(string:boldText2, attributes:attrs2)
         
-        let normalText2 = "\(glbUserScore) points"
+        let normalText2 = "\(glbPuzzleScore) points"
         let normalString2 = NSMutableAttributedString(string:normalText2)
         
         attributedString2.append(normalString2)

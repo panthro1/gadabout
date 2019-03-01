@@ -37,8 +37,12 @@ var glbToDoItemImageFile = [PFFile]()
 var glbToDoItemIDs = [String]()
 var glbToDoItemCompleted = [Bool]()
 var glbToDoItemPlaceOrFood = [String]()
-var glbUserScore: Int = -1
+
 var glbFlagScore: Int = -1
+var glbCorrectAnswer: Int = -1
+var glbTotalQuestion: Int = -1
+var glbPuzzleScore: Int = -1
+
 
 
 class MainPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -574,18 +578,47 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
         
-        if glbUserScore < 0 {
+        if (glbFlagScore < 0) || (glbPuzzleScore < 0) || (glbCorrectAnswer < 0) || (glbTotalQuestion < 0) {
             let userScoreQuery = PFQuery(className: "UserScore")
             userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
             userScoreQuery.findObjectsInBackground { (objects, error) in
                 if let score = objects?.first {
-                    if let totalScore = Int(score["score"] as! String) {
-                        glbUserScore = totalScore
+                    if let strTotalQuestion = score["totalQuestion"] {
+                        if let totalQuestion = Int(strTotalQuestion as! String) {
+                            glbTotalQuestion = totalQuestion
+                        }
+                        else {
+                            glbTotalQuestion = 0
+                        }
                     }
                     else {
-                        glbUserScore = 0
+                        glbTotalQuestion = 0
                     }
                     
+                    if let strCorrectAnswer = score["correctAnswer"] {
+                        if let correctAnswer = Int(strCorrectAnswer as! String) {
+                            glbCorrectAnswer = correctAnswer
+                        }
+                        else {
+                            glbCorrectAnswer = 0
+                        }
+                    }
+                    else {
+                        glbCorrectAnswer = 0
+                    }
+
+                    if let strPuzzleScore = score["score"] {
+                        if let puzzleScore = Int(strPuzzleScore as! String) {
+                            glbPuzzleScore = puzzleScore
+                        }
+                        else {
+                            glbPuzzleScore = 0
+                        }
+                    }
+                    else {
+                        glbPuzzleScore = 0
+                    }
+
                     if let strScore = score["flagScore"] {
                         if let flagScore = Int(strScore as! String) {
                             glbFlagScore = flagScore
@@ -597,10 +630,15 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                     else {
                         glbFlagScore = 0
                     }
+                    
+                    
                 }
                 else {
-                    glbUserScore = 0
+                    glbCorrectAnswer = 0
+                    glbTotalQuestion = 0
                     glbFlagScore = 0
+                    glbPuzzleScore = 0
+                    
                 }
             }
         }

@@ -724,8 +724,8 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
                         //let formatted = String(format: "%.1f", seconds)
                         //self.displayAlert(title: "Puzzle completed", message: " You have completed in \(formatted) seconds.")
                         
-                        glbUserScore = glbUserScore + scorePoint
-                        showPopup(Score: scorePoint, totalScore: glbUserScore)
+                        glbPuzzleScore = glbPuzzleScore + scorePoint
+                        showPopup(Score: scorePoint, totalScore: glbPuzzleScore)
                         
                         print("Puzzle Completed")
                     }
@@ -1019,11 +1019,15 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
         userScoreQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
         userScoreQuery.findObjectsInBackground { (objects, error) in
             if let score = objects?.first {
-                if Int(score["score"] as! String) != nil {
-                    
-                    score["score"] = String(glbUserScore)
-                    score.saveInBackground()
-                }
+                score["score"] = String(glbPuzzleScore)
+                score.saveInBackground()
+            }
+            else {
+                
+                let score = PFObject(className: "UserScore")
+                score["score"] = String(glbPuzzleScore)
+                score["userId"] = PFUser.current()?.objectId
+                score.saveInBackground()
             }
         }
     }
