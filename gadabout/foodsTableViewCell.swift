@@ -45,6 +45,8 @@ class foodsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var optionDLabel: UILabel!
     
+    @IBOutlet weak var photoCredit: UILabel!
+    
     var option1Marked = false
     var option2Marked = false
     var option3Marked = false

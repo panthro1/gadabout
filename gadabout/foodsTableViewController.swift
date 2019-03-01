@@ -532,8 +532,19 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             cell.toDoListButton.isHidden = false
             cell.detailsButton.setTitle("Back", for: [])
             
+            let newDescription = NSString(string: descriptionEng[indexPath.row])
+            let components = newDescription.components(separatedBy: "Photo licensed under")
+            if components.count == 2 {
+                cell.photoCredit.text = "Photo licensed under" + components[1]
+                cell.detailText.text = components[0]
+                cell.photoCredit.isHidden = false
+            }
+            else{
+                cell.photoCredit.isHidden = true
+                cell.detailText.text = descriptionEng[indexPath.row]
+            }
+            
             cell.detailText.isHidden = false
-            cell.detailText.text = descriptionEng[indexPath.row]
             cell.detailText.sizeToFit()
             cell.detailText.numberOfLines = 0
             
@@ -578,6 +589,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             cell.optionDLabel.isHidden = false
 
             cell.detailText.isHidden = true
+            cell.photoCredit.isHidden = true
             
             cell.markOption1.setTitle(option1[indexPath.row], for: [])
             cell.markOption2.setTitle(option2[indexPath.row], for: [])
