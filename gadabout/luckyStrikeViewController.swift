@@ -28,7 +28,15 @@ class luckyStrikeViewController: UIViewController {
     var currentImage = [PFFile]()
     var isPlace = [Bool]()
     var objectId = [String]()
-    
+
+    var histHeader = [String]()
+    var histDescriptionEng = [String]()
+    var histCorrectAnswer = [String]()
+    var histImageFile = [PFFile]()
+    var histIsPlace = [Bool]()
+    var histObjectId = [String]()
+    var prevIndx = -1
+
     @IBOutlet weak var image: UIImageView!
     
     @IBOutlet weak var headerLabel: UILabel!
@@ -115,213 +123,253 @@ class luckyStrikeViewController: UIViewController {
         let button = sender as? UIButton
         button?.pulsate()
         
-        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
-        activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-        view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
-        UIApplication.shared.beginIgnoringInteractionEvents()
-
-        
-        // New code
-        
-        if imageFile.count < 2 {
+        if prevIndx + 1 < histHeader.count {
+            prevIndx += 1
+            showPrevious()
             
-            let placesQuery = PFQuery(className: "Places")
+        }
+        else {
+            let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
+            activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+            activityIndicator.center = self.view.center
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+            view.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+            UIApplication.shared.beginIgnoringInteractionEvents()
             
-            placesQuery.limit = 1000
-            placesQuery.findObjectsInBackground { (objects, error) in
+            
+            // New code
+            
+            if imageFile.count < 2 {
                 
+                let placesQuery = PFQuery(className: "Places")
                 
-                if let places = objects {
-                    
-                    for place in places {
-                        
-                        self.option1.append(place["alternative1"] as! String)
-                        self.option2.append(place["alternative2"] as! String)
-                        self.option3.append(place["alternative3"] as! String)
-                        self.option4.append(place["alternative4"] as! String)
-                        self.imageFile.append(place["imageFile"] as! PFFile)
-                        self.correctAnswer.append(place["correctAlternative"] as! String)
-                        self.descriptionEng.append(place["engDescription"] as! String)
-                        self.isPlace.append(true)
-                        if let question = place.objectId {
-                            self.objectId.append(question)
-                        }
-                        
-                    }
-                }
-                
-                let foodsQuery = PFQuery(className: "Foods")
-                
-                foodsQuery.limit = 1000
-                foodsQuery.findObjectsInBackground { (objects, error) in
+                placesQuery.limit = 1000
+                placesQuery.findObjectsInBackground { (objects, error) in
                     
                     
-                    if let foods = objects {
+                    if let places = objects {
                         
-                        for food in foods {
+                        for place in places {
                             
-                            self.option1.append(food["alternative1"] as! String)
-                            self.option2.append(food["alternative2"] as! String)
-                            self.option3.append(food["alternative3"] as! String)
-                            self.option4.append(food["alternative4"] as! String)
-                            self.imageFile.append(food["imageFile"] as! PFFile)
-                            self.correctAnswer.append(food["correctAlternative"] as! String)
-                            self.descriptionEng.append(food["engDescription"] as! String)
-                            self.isPlace.append(false)
-                            if let question = food.objectId {
+                            self.option1.append(place["alternative1"] as! String)
+                            self.option2.append(place["alternative2"] as! String)
+                            self.option3.append(place["alternative3"] as! String)
+                            self.option4.append(place["alternative4"] as! String)
+                            self.imageFile.append(place["imageFile"] as! PFFile)
+                            self.correctAnswer.append(place["correctAlternative"] as! String)
+                            self.descriptionEng.append(place["engDescription"] as! String)
+                            self.isPlace.append(true)
+                            if let question = place.objectId {
                                 self.objectId.append(question)
                             }
+                            
                         }
                     }
-                    let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
-                    print("Random Index: \(randomIndex)")
                     
-                    self.imageFile[randomIndex].getDataInBackground { (data, error) in
+                    let foodsQuery = PFQuery(className: "Foods")
+                    
+                    foodsQuery.limit = 1000
+                    foodsQuery.findObjectsInBackground { (objects, error) in
                         
-                        if let imageData = data {
+                        
+                        if let foods = objects {
                             
-                            if let imageToDisplay = UIImage(data: imageData) {
+                            for food in foods {
                                 
-                                self.image.image = imageToDisplay
-
+                                self.option1.append(food["alternative1"] as! String)
+                                self.option2.append(food["alternative2"] as! String)
+                                self.option3.append(food["alternative3"] as! String)
+                                self.option4.append(food["alternative4"] as! String)
+                                self.imageFile.append(food["imageFile"] as! PFFile)
+                                self.correctAnswer.append(food["correctAlternative"] as! String)
+                                self.descriptionEng.append(food["engDescription"] as! String)
+                                self.isPlace.append(false)
+                                if let question = food.objectId {
+                                    self.objectId.append(question)
+                                }
+                            }
+                        }
+                        let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
+                        print("Random Index: \(randomIndex)")
+                        
+                        self.imageFile[randomIndex].getDataInBackground { (data, error) in
+                            
+                            if let imageData = data {
+                                
+                                if let imageToDisplay = UIImage(data: imageData) {
+                                    
+                                    self.image.image = imageToDisplay
+                                    
+                                }
+                            }
+                            
+                        }
+                        if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
+                            
+                            if correctAnsInt == 1 {
+                                self.headerLabel.text = self.option1[randomIndex]
+                                self.histHeader.append(self.option1[randomIndex])
+                            }
+                            else if correctAnsInt == 2 {
+                                self.headerLabel.text = self.option2[randomIndex]
+                                self.histHeader.append(self.option1[randomIndex])
+                            }
+                            else if correctAnsInt == 3 {
+                                self.headerLabel.text = self.option3[randomIndex]
+                                self.histHeader.append(self.option1[randomIndex])
+                            }
+                            else if correctAnsInt == 4 {
+                                self.headerLabel.text = self.option4[randomIndex]
+                                self.histHeader.append(self.option1[randomIndex])
                             }
                         }
                         
-                    }
-                    if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
+                        activityIndicator.stopAnimating()
+                        UIApplication.shared.endIgnoringInteractionEvents()
                         
-                        if correctAnsInt == 1 {
-                            self.headerLabel.text = self.option1[randomIndex]
-                        }
-                        else if correctAnsInt == 2 {
-                            self.headerLabel.text = self.option2[randomIndex]
-                        }
-                        else if correctAnsInt == 3 {
-                            self.headerLabel.text = self.option3[randomIndex]
-                        }
-                        else if correctAnsInt == 4 {
-                            self.headerLabel.text = self.option4[randomIndex]
-                        }
-                    }
-                    
-                    activityIndicator.stopAnimating()
-                    UIApplication.shared.endIgnoringInteractionEvents()
-                    
-                    self.currentObjectId = self.objectId[randomIndex]
-                    self.isCurrentItemPlace = self.isPlace[randomIndex]
-                    self.currentImage.removeAll()
-                    self.currentImage.append(self.imageFile[randomIndex])
-                    
-                    //self.descriptionText.text = self.descriptionEng[randomIndex]
-                    //self.descriptionText.isHidden = false
-                    let newDescription = NSString(string: self.descriptionEng[randomIndex])
-                    let components = newDescription.components(separatedBy: "Photo licensed under")
-                    if components.count == 2 {
-                        self.photoCredit.text = "Photo licensed under" + components[1]
-                        self.photoCredit.isHidden = false
-                        self.descriptionLabel.text = components[0]
-                    }
-                    else{
-                        self.photoCredit.isHidden = true
-                        self.descriptionLabel.text = self.descriptionEng[randomIndex]
-                    }
-                    self.descriptionLabel.isHidden = false
-                    self.descriptionLabel.sizeToFit()
-                    self.descriptionLabel.numberOfLines = 0
-                    
-                    self.headerLabel.isHidden = false
-                    self.image.isHidden = false
-                    
-                    self.option1.remove(at: randomIndex)
-                    self.option2.remove(at: randomIndex)
-                    self.option3.remove(at: randomIndex)
-                    self.option4.remove(at: randomIndex)
-                    self.imageFile.remove(at: randomIndex)
-                    self.correctAnswer.remove(at: randomIndex)
-                    self.descriptionEng.remove(at: randomIndex)
-                    self.isPlace.remove(at: randomIndex)
-                    self.objectId.remove(at: randomIndex)
-
-                }
-                
-            }
-        }
-        else{
-            
-            let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
-            print("Random Index: \(randomIndex)")
-            
-            self.imageFile[randomIndex].getDataInBackground { (data, error) in
-                
-                if let imageData = data {
-                    
-                    if let imageToDisplay = UIImage(data: imageData) {
+                        self.currentObjectId = self.objectId[randomIndex]
+                        self.isCurrentItemPlace = self.isPlace[randomIndex]
+                        self.currentImage.removeAll()
+                        self.currentImage.append(self.imageFile[randomIndex])
                         
-                        self.image.image = imageToDisplay
+                        //self.descriptionText.text = self.descriptionEng[randomIndex]
+                        //self.descriptionText.isHidden = false
+                        let newDescription = NSString(string: self.descriptionEng[randomIndex])
+                        let components = newDescription.components(separatedBy: "Photo licensed under")
+                        if components.count == 2 {
+                            self.photoCredit.text = "Photo licensed under" + components[1]
+                            self.photoCredit.isHidden = false
+                            self.descriptionLabel.text = components[0]
+                        }
+                        else{
+                            self.photoCredit.isHidden = true
+                            self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                        }
+                        self.descriptionLabel.isHidden = false
+                        self.descriptionLabel.sizeToFit()
+                        self.descriptionLabel.numberOfLines = 0
+                        
+                        self.headerLabel.isHidden = false
+                        self.image.isHidden = false
+                        
+                        self.histDescriptionEng.append(self.descriptionEng[randomIndex])
+                        self.histCorrectAnswer.append(self.correctAnswer[randomIndex])
+                        self.histImageFile.append(self.imageFile[randomIndex])
+                        self.histIsPlace.append(self.isPlace[randomIndex])
+                        self.histObjectId.append(self.objectId[randomIndex])
+                        self.prevIndx += 1
+                        
+                        self.option1.remove(at: randomIndex)
+                        self.option2.remove(at: randomIndex)
+                        self.option3.remove(at: randomIndex)
+                        self.option4.remove(at: randomIndex)
+                        self.imageFile.remove(at: randomIndex)
+                        self.correctAnswer.remove(at: randomIndex)
+                        self.descriptionEng.remove(at: randomIndex)
+                        self.isPlace.remove(at: randomIndex)
+                        self.objectId.remove(at: randomIndex)
                         
                     }
+                    
                 }
-                
-            }
-            if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
-                
-                if correctAnsInt == 1 {
-                    self.headerLabel.text = self.option1[randomIndex]
-                }
-                else if correctAnsInt == 2 {
-                    self.headerLabel.text = self.option2[randomIndex]
-                }
-                else if correctAnsInt == 3 {
-                    self.headerLabel.text = self.option3[randomIndex]
-                }
-                else if correctAnsInt == 4 {
-                    self.headerLabel.text = self.option4[randomIndex]
-                }
-            }
-            activityIndicator.stopAnimating()
-            UIApplication.shared.endIgnoringInteractionEvents()
-            
-            currentObjectId = objectId[randomIndex]
-            isCurrentItemPlace = isPlace[randomIndex]
-            currentImage.removeAll()
-            currentImage.append(imageFile[randomIndex])
-            
-            let newDescription = NSString(string: self.descriptionEng[randomIndex])
-            let components = newDescription.components(separatedBy: "Photo licensed under")
-            if components.count == 2 {
-                self.photoCredit.text = "Photo licensed under" + components[1]
-                self.photoCredit.isHidden = false
-                self.descriptionLabel.text = components[0]
             }
             else{
-                self.photoCredit.isHidden = true
-                self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                
+                let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
+                print("Random Index: \(randomIndex)")
+                
+                self.imageFile[randomIndex].getDataInBackground { (data, error) in
+                    
+                    if let imageData = data {
+                        
+                        if let imageToDisplay = UIImage(data: imageData) {
+                            
+                            self.image.image = imageToDisplay
+                            
+                        }
+                    }
+                    
+                }
+                if let correctAnsInt = Int(correctAnswer[randomIndex]) {
+                    
+                    if correctAnsInt == 1 {
+                        headerLabel.text = option1[randomIndex]
+                        histHeader.append(option1[randomIndex])
+                    }
+                    else if correctAnsInt == 2 {
+                        headerLabel.text = option2[randomIndex]
+                        histHeader.append(option2[randomIndex])
+                    }
+                    else if correctAnsInt == 3 {
+                        headerLabel.text = option3[randomIndex]
+                        histHeader.append(option3[randomIndex])
+                    }
+                    else if correctAnsInt == 4 {
+                        headerLabel.text = option4[randomIndex]
+                        histHeader.append(option4[randomIndex])
+                    }
+                }
+                activityIndicator.stopAnimating()
+                UIApplication.shared.endIgnoringInteractionEvents()
+                
+                currentObjectId = objectId[randomIndex]
+                isCurrentItemPlace = isPlace[randomIndex]
+                currentImage.removeAll()
+                currentImage.append(imageFile[randomIndex])
+                
+                let newDescription = NSString(string: self.descriptionEng[randomIndex])
+                let components = newDescription.components(separatedBy: "Photo licensed under")
+                if components.count == 2 {
+                    self.photoCredit.text = "Photo licensed under" + components[1]
+                    self.photoCredit.isHidden = false
+                    self.descriptionLabel.text = components[0]
+                }
+                else{
+                    self.photoCredit.isHidden = true
+                    self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                }
+                self.descriptionLabel.isHidden = false
+                self.descriptionLabel.sizeToFit()
+                self.descriptionLabel.numberOfLines = 0
+                
+                self.headerLabel.isHidden = false
+                self.image.isHidden = false
+                
+                histDescriptionEng.append(descriptionEng[randomIndex])
+                histCorrectAnswer.append(correctAnswer[randomIndex])
+                histImageFile.append(imageFile[randomIndex])
+                histIsPlace.append(isPlace[randomIndex])
+                histObjectId.append(objectId[randomIndex])
+                prevIndx += 1
+                
+                self.option1.remove(at: randomIndex)
+                self.option2.remove(at: randomIndex)
+                self.option3.remove(at: randomIndex)
+                self.option4.remove(at: randomIndex)
+                self.imageFile.remove(at: randomIndex)
+                self.correctAnswer.remove(at: randomIndex)
+                self.descriptionEng.remove(at: randomIndex)
+                self.isPlace.remove(at: randomIndex)
+                self.objectId.remove(at: randomIndex)
+                
             }
-            self.descriptionLabel.isHidden = false
-            self.descriptionLabel.sizeToFit()
-            self.descriptionLabel.numberOfLines = 0
-            
-            self.headerLabel.isHidden = false
-            self.image.isHidden = false
-            
-            self.option1.remove(at: randomIndex)
-            self.option2.remove(at: randomIndex)
-            self.option3.remove(at: randomIndex)
-            self.option4.remove(at: randomIndex)
-            self.imageFile.remove(at: randomIndex)
-            self.correctAnswer.remove(at: randomIndex)
-            self.descriptionEng.remove(at: randomIndex)
-            self.isPlace.remove(at: randomIndex)
-            self.objectId.remove(at: randomIndex)
-            
         }
+        
+
         
     }
     
+    
+    @IBAction func prevTapped(_ sender: Any) {
+        print("Show the previous, Prev Indx: \(prevIndx)")
+        if prevIndx >= 1 {
+            prevIndx -= 1
+            showPrevious()
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -405,84 +453,21 @@ class luckyStrikeViewController: UIViewController {
                 
                 if correctAnsInt == 1 {
                     headerLabel.text = option1[randomIndex]
+                    histHeader.append(option1[randomIndex])
                 }
                 else if correctAnsInt == 2 {
                     headerLabel.text = option2[randomIndex]
+                    histHeader.append(option2[randomIndex])
                 }
                 else if correctAnsInt == 3 {
                     headerLabel.text = option3[randomIndex]
+                    histHeader.append(option3[randomIndex])
                 }
                 else if correctAnsInt == 4 {
                     headerLabel.text = option4[randomIndex]
+                    histHeader.append(option4[randomIndex])
                 }
             }
-            
-            
-            /*if let correctAnsInt = Int(correctAnswer[randomIndex]) {
-                
-                if correctAnsInt == 1 {
-                    headerLabel.text = option1[randomIndex]
-                    /*let str: String = option1[randomIndex]
-                     let attrs = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 22)]
-                     let attributedString = NSMutableAttributedString(string:str, attributes:attrs)
-                     
-                     let normalText = "\n" + "testing"//descriptionEng[randomIndex]
-                     let attrs2 = [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 18)]
-                     let normalString = NSMutableAttributedString(string:normalText, attributes:attrs2)
-                     
-                     attributedString.append(normalString)
-                     headerLabel.attributedText = attributedString
-                     headerLabel.sizeToFit()*/
-                }
-                else if correctAnsInt == 2 {
-                    headerLabel.text = option2[randomIndex]
-                    
-                    /*let str: String = option2[randomIndex]
-                     let attrs = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 22)]
-                     let attributedString = NSMutableAttributedString(string:str, attributes:attrs)
-                     
-                     let normalText = "\n" + "testing"//descriptionEng[randomIndex]
-                     let attrs2 = [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 18)]
-                     let normalString = NSMutableAttributedString(string:normalText, attributes:attrs2)
-                     
-                     attributedString.append(normalString)
-                     headerLabel.attributedText = attributedString
-                     headerLabel.sizeToFit()*/
-                }
-                else if correctAnsInt == 3 {
-                    headerLabel.text = option3[randomIndex]
-                    
-                    /*let str: String = option3[randomIndex]
-                     let attrs = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 22)]
-                     let attributedString = NSMutableAttributedString(string:str, attributes:attrs)
-                     
-                     let normalText = "\n" + "testing"//descriptionEng[randomIndex]
-                     let attrs2 = [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 18)]
-                     let normalString = NSMutableAttributedString(string:normalText, attributes:attrs2)
-                     
-                     attributedString.append(normalString)
-                     headerLabel.attributedText = attributedString
-                     headerLabel.sizeToFit()*/
-                }
-                else if correctAnsInt == 4 {
-                    headerLabel.text = option4[randomIndex]
-                    
-                    /*let str: String = option4[randomIndex]
-                     let attrs = [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 22)]
-                     let attributedString = NSMutableAttributedString(string:str, attributes:attrs)
-                     
-                     let normalText = "\n" + "testing"//descriptionEng[randomIndex]
-                     let attrs2 = [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 18)]
-                     let normalString = NSMutableAttributedString(string:normalText, attributes:attrs2)
-                     
-                     attributedString.append(normalString)
-                     headerLabel.attributedText = attributedString
-                     headerLabel.sizeToFit()*/
-                }
-                
-            }*/
-            
-            
             
             currentObjectId = objectId[randomIndex]
             isCurrentItemPlace = isPlace[randomIndex]
@@ -504,6 +489,14 @@ class luckyStrikeViewController: UIViewController {
             descriptionLabel.isHidden = false
             descriptionLabel.numberOfLines = 0
             descriptionLabel.sizeToFit()
+            
+            histDescriptionEng.append(descriptionEng[randomIndex])
+            histCorrectAnswer.append(correctAnswer[randomIndex])
+            histImageFile.append(imageFile[randomIndex])
+            histIsPlace.append(isPlace[randomIndex])
+            histObjectId.append(objectId[randomIndex])
+            prevIndx += 1
+
 
 
             headerLabel.isHidden = false
@@ -588,15 +581,19 @@ class luckyStrikeViewController: UIViewController {
                         
                         if correctAnsInt == 1 {
                             self.headerLabel.text = self.option1[randomIndex]
+                            self.histHeader.append(self.option1[randomIndex])
                         }
                         else if correctAnsInt == 2 {
                             self.headerLabel.text = self.option2[randomIndex]
+                            self.histHeader.append(self.option2[randomIndex])
                         }
                         else if correctAnsInt == 3 {
                             self.headerLabel.text = self.option3[randomIndex]
+                            self.histHeader.append(self.option3[randomIndex])
                         }
                         else if correctAnsInt == 4 {
                             self.headerLabel.text = self.option4[randomIndex]
+                            self.histHeader.append(self.option4[randomIndex])
                         }
                     }
                     self.currentObjectId = self.objectId[randomIndex]
@@ -622,6 +619,14 @@ class luckyStrikeViewController: UIViewController {
                     
                     self.headerLabel.isHidden = false
                     //self.image.isHidden = false
+                    
+                    self.histDescriptionEng.append(self.descriptionEng[randomIndex])
+                    self.histCorrectAnswer.append(self.correctAnswer[randomIndex])
+                    self.histImageFile.append(self.imageFile[randomIndex])
+                    self.histIsPlace.append(self.isPlace[randomIndex])
+                    self.histObjectId.append(self.objectId[randomIndex])
+                    self.prevIndx += 1
+
                     
                     self.option1.remove(at: randomIndex)
                     self.option2.remove(at: randomIndex)
@@ -650,214 +655,252 @@ class luckyStrikeViewController: UIViewController {
         if gestureRecognizer.state == .ended {
             if image.center.x < (view.bounds.width/2 - 100) {
                 
-                UIView.beginAnimations(nil, context: nil)
-                UIView.setAnimationDuration(0.1)
-                
-                let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
-                activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
-                activityIndicator.center = self.view.center
-                activityIndicator.hidesWhenStopped = true
-                activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-                view.addSubview(activityIndicator)
-                activityIndicator.startAnimating()
-                UIApplication.shared.beginIgnoringInteractionEvents()
-
-                
-                if imageFile.count < 2 {
+                if prevIndx + 1 < histHeader.count {
+                    prevIndx += 1
+                    showPrevious()
                     
-                    let placesQuery = PFQuery(className: "Places")
-                    
-                    placesQuery.limit = 1000
-                    placesQuery.findObjectsInBackground { (objects, error) in
-                        
-                        
-                        if let places = objects {
-                            
-                            for place in places {
-                                
-                                self.option1.append(place["alternative1"] as! String)
-                                self.option2.append(place["alternative2"] as! String)
-                                self.option3.append(place["alternative3"] as! String)
-                                self.option4.append(place["alternative4"] as! String)
-                                self.imageFile.append(place["imageFile"] as! PFFile)
-                                self.correctAnswer.append(place["correctAlternative"] as! String)
-                                self.descriptionEng.append(place["engDescription"] as! String)
-                                self.isPlace.append(true)
-                                if let question = place.objectId {
-                                    self.objectId.append(question)
-                                }
-
-                                
-                            }
-                        }
-                        
-                        let foodsQuery = PFQuery(className: "Foods")
-                        
-                        foodsQuery.limit = 1000
-                        foodsQuery.findObjectsInBackground { (objects, error) in
-                            
-                            
-                            if let foods = objects {
-                                
-                                for food in foods {
-                                    
-                                    self.option1.append(food["alternative1"] as! String)
-                                    self.option2.append(food["alternative2"] as! String)
-                                    self.option3.append(food["alternative3"] as! String)
-                                    self.option4.append(food["alternative4"] as! String)
-                                    self.imageFile.append(food["imageFile"] as! PFFile)
-                                    self.correctAnswer.append(food["correctAlternative"] as! String)
-                                    self.descriptionEng.append(food["engDescription"] as! String)
-                                    self.isPlace.append(false)
-                                    if let question = food.objectId {
-                                        self.objectId.append(question)
-                                    }
-
-                                }
-                            }
-                            let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
-                            print("Random Index: \(randomIndex)")
-                            
-                            self.imageFile[randomIndex].getDataInBackground { (data, error) in
-                                
-                                if let imageData = data {
-                                    
-                                    if let imageToDisplay = UIImage(data: imageData) {
-                                        
-                                        self.image.image = imageToDisplay
-                                    }
-                                }
-                                
-                            }
-                            if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
-                                
-                                if correctAnsInt == 1 {
-                                    self.headerLabel.text = self.option1[randomIndex]
-                                }
-                                else if correctAnsInt == 2 {
-                                    self.headerLabel.text = self.option2[randomIndex]
-                                }
-                                else if correctAnsInt == 3 {
-                                    self.headerLabel.text = self.option3[randomIndex]
-                                }
-                                else if correctAnsInt == 4 {
-                                    self.headerLabel.text = self.option4[randomIndex]
-                                }
-                            }
-                            
-                            activityIndicator.stopAnimating()
-                            UIApplication.shared.endIgnoringInteractionEvents()
-                            
-                            self.currentObjectId = self.objectId[randomIndex]
-                            self.isCurrentItemPlace = self.isPlace[randomIndex]
-                            self.currentImage.removeAll()
-                            self.currentImage.append(self.imageFile[randomIndex])
-
-                            let newDescription = NSString(string: self.descriptionEng[randomIndex])
-                            let components = newDescription.components(separatedBy: "Photo licensed under")
-                            if components.count == 2 {
-                                self.photoCredit.text = "Photo licensed under" + components[1]
-                                self.photoCredit.isHidden = false
-                                self.descriptionLabel.text = components[0]
-                            }
-                            else{
-                                self.photoCredit.isHidden = true
-                                self.descriptionLabel.text = self.descriptionEng[randomIndex]
-                            }
-                            self.descriptionLabel.isHidden = false
-                            self.descriptionLabel.sizeToFit()
-                            self.descriptionLabel.numberOfLines = 0
-                            
-                            self.headerLabel.isHidden = false
-                            self.image.isHidden = false
-                            
-                            self.option1.remove(at: randomIndex)
-                            self.option2.remove(at: randomIndex)
-                            self.option3.remove(at: randomIndex)
-                            self.option4.remove(at: randomIndex)
-                            self.imageFile.remove(at: randomIndex)
-                            self.correctAnswer.remove(at: randomIndex)
-                            self.descriptionEng.remove(at: randomIndex)
-                            self.isPlace.remove(at: randomIndex)
-                            self.objectId.remove(at: randomIndex)
-
-                        }
-                    }
                 }
                 else {
+                    UIView.beginAnimations(nil, context: nil)
+                    UIView.setAnimationDuration(0.1)
                     
-                    let randomIndex = Int(arc4random_uniform(UInt32(imageFile.count)))
-                    print("Random Index: \(randomIndex)")
+                    let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
+                    activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+                    activityIndicator.center = self.view.center
+                    activityIndicator.hidesWhenStopped = true
+                    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+                    view.addSubview(activityIndicator)
+                    activityIndicator.startAnimating()
+                    UIApplication.shared.beginIgnoringInteractionEvents()
                     
-                    imageFile[randomIndex].getDataInBackground { (data, error) in
+                    
+                    if imageFile.count < 2 {
                         
-                        if let imageData = data {
+                        let placesQuery = PFQuery(className: "Places")
+                        
+                        placesQuery.limit = 1000
+                        placesQuery.findObjectsInBackground { (objects, error) in
                             
-                            if let imageToDisplay = UIImage(data: imageData) {
+                            
+                            if let places = objects {
                                 
-                                self.image.image = imageToDisplay
+                                for place in places {
+                                    
+                                    self.option1.append(place["alternative1"] as! String)
+                                    self.option2.append(place["alternative2"] as! String)
+                                    self.option3.append(place["alternative3"] as! String)
+                                    self.option4.append(place["alternative4"] as! String)
+                                    self.imageFile.append(place["imageFile"] as! PFFile)
+                                    self.correctAnswer.append(place["correctAlternative"] as! String)
+                                    self.descriptionEng.append(place["engDescription"] as! String)
+                                    self.isPlace.append(true)
+                                    if let question = place.objectId {
+                                        self.objectId.append(question)
+                                    }
+                                    
+                                    
+                                }
+                            }
+                            
+                            let foodsQuery = PFQuery(className: "Foods")
+                            
+                            foodsQuery.limit = 1000
+                            foodsQuery.findObjectsInBackground { (objects, error) in
+                                
+                                
+                                if let foods = objects {
+                                    
+                                    for food in foods {
+                                        
+                                        self.option1.append(food["alternative1"] as! String)
+                                        self.option2.append(food["alternative2"] as! String)
+                                        self.option3.append(food["alternative3"] as! String)
+                                        self.option4.append(food["alternative4"] as! String)
+                                        self.imageFile.append(food["imageFile"] as! PFFile)
+                                        self.correctAnswer.append(food["correctAlternative"] as! String)
+                                        self.descriptionEng.append(food["engDescription"] as! String)
+                                        self.isPlace.append(false)
+                                        if let question = food.objectId {
+                                            self.objectId.append(question)
+                                        }
+                                        
+                                    }
+                                }
+                                let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
+                                print("Random Index: \(randomIndex)")
+                                
+                                self.imageFile[randomIndex].getDataInBackground { (data, error) in
+                                    
+                                    if let imageData = data {
+                                        
+                                        if let imageToDisplay = UIImage(data: imageData) {
+                                            
+                                            self.image.image = imageToDisplay
+                                        }
+                                    }
+                                    
+                                }
+                                if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
+                                    
+                                    if correctAnsInt == 1 {
+                                        self.headerLabel.text = self.option1[randomIndex]
+                                        self.histHeader.append(self.option1[randomIndex])
+                                    }
+                                    else if correctAnsInt == 2 {
+                                        self.headerLabel.text = self.option2[randomIndex]
+                                        self.histHeader.append(self.option2[randomIndex])
+                                    }
+                                    else if correctAnsInt == 3 {
+                                        self.headerLabel.text = self.option3[randomIndex]
+                                        self.histHeader.append(self.option3[randomIndex])
+                                    }
+                                    else if correctAnsInt == 4 {
+                                        self.headerLabel.text = self.option4[randomIndex]
+                                        self.histHeader.append(self.option4[randomIndex])
+                                    }
+                                }
+                                
+                                activityIndicator.stopAnimating()
+                                UIApplication.shared.endIgnoringInteractionEvents()
+                                
+                                self.histDescriptionEng.append(self.descriptionEng[randomIndex])
+                                self.histCorrectAnswer.append(self.correctAnswer[randomIndex])
+                                self.histImageFile.append(self.imageFile[randomIndex])
+                                self.histIsPlace.append(self.isPlace[randomIndex])
+                                self.histObjectId.append(self.objectId[randomIndex])
+                                self.prevIndx += 1
+                                
+                                self.currentObjectId = self.objectId[randomIndex]
+                                self.isCurrentItemPlace = self.isPlace[randomIndex]
+                                self.currentImage.removeAll()
+                                self.currentImage.append(self.imageFile[randomIndex])
+                                
+                                let newDescription = NSString(string: self.descriptionEng[randomIndex])
+                                let components = newDescription.components(separatedBy: "Photo licensed under")
+                                if components.count == 2 {
+                                    self.photoCredit.text = "Photo licensed under" + components[1]
+                                    self.photoCredit.isHidden = false
+                                    self.descriptionLabel.text = components[0]
+                                }
+                                else{
+                                    self.photoCredit.isHidden = true
+                                    self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                                }
+                                self.descriptionLabel.isHidden = false
+                                self.descriptionLabel.sizeToFit()
+                                self.descriptionLabel.numberOfLines = 0
+                                
+                                self.headerLabel.isHidden = false
+                                self.image.isHidden = false
+                                
+                                self.option1.remove(at: randomIndex)
+                                self.option2.remove(at: randomIndex)
+                                self.option3.remove(at: randomIndex)
+                                self.option4.remove(at: randomIndex)
+                                self.imageFile.remove(at: randomIndex)
+                                self.correctAnswer.remove(at: randomIndex)
+                                self.descriptionEng.remove(at: randomIndex)
+                                self.isPlace.remove(at: randomIndex)
+                                self.objectId.remove(at: randomIndex)
                                 
                             }
                         }
+                    }
+                    else {
+                        
+                        let randomIndex = Int(arc4random_uniform(UInt32(imageFile.count)))
+                        print("Random Index: \(randomIndex)")
+                        
+                        imageFile[randomIndex].getDataInBackground { (data, error) in
+                            
+                            if let imageData = data {
+                                
+                                if let imageToDisplay = UIImage(data: imageData) {
+                                    
+                                    self.image.image = imageToDisplay
+                                    
+                                }
+                            }
+                            
+                        }
+                        if let correctAnsInt = Int(correctAnswer[randomIndex]) {
+                            
+                            if correctAnsInt == 1 {
+                                headerLabel.text = option1[randomIndex]
+                                histHeader.append(option1[randomIndex])
+                            }
+                            else if correctAnsInt == 2 {
+                                headerLabel.text = option2[randomIndex]
+                                histHeader.append(option2[randomIndex])
+                            }
+                            else if correctAnsInt == 3 {
+                                headerLabel.text = option3[randomIndex]
+                                histHeader.append(option3[randomIndex])
+                            }
+                            else if correctAnsInt == 4 {
+                                headerLabel.text = option4[randomIndex]
+                                histHeader.append(option4[randomIndex])
+                            }
+                        }
+                        activityIndicator.stopAnimating()
+                        UIApplication.shared.endIgnoringInteractionEvents()
+                        
+                        histDescriptionEng.append(descriptionEng[randomIndex])
+                        histCorrectAnswer.append(correctAnswer[randomIndex])
+                        histImageFile.append(imageFile[randomIndex])
+                        histIsPlace.append(isPlace[randomIndex])
+                        histObjectId.append(objectId[randomIndex])
+                        prevIndx += 1
+                        
+                        currentObjectId = objectId[randomIndex]
+                        isCurrentItemPlace = isPlace[randomIndex]
+                        currentImage.removeAll()
+                        currentImage.append(imageFile[randomIndex])
+                        
+                        let newDescription = NSString(string: descriptionEng[randomIndex])
+                        let components = newDescription.components(separatedBy: "Photo licensed under")
+                        if components.count == 2 {
+                            photoCredit.text = "Photo licensed under" + components[1]
+                            photoCredit.isHidden = false
+                            descriptionLabel.text = components[0]
+                        }
+                        else{
+                            photoCredit.isHidden = true
+                            descriptionLabel.text = descriptionEng[randomIndex]
+                        }
+                        descriptionLabel.isHidden = false
+                        descriptionLabel.sizeToFit()
+                        descriptionLabel.numberOfLines = 0
+                        
+                        headerLabel.isHidden = false
+                        image.isHidden = false
+                        
+                        option1.remove(at: randomIndex)
+                        option2.remove(at: randomIndex)
+                        option3.remove(at: randomIndex)
+                        option4.remove(at: randomIndex)
+                        imageFile.remove(at: randomIndex)
+                        correctAnswer.remove(at: randomIndex)
+                        descriptionEng.remove(at: randomIndex)
+                        isPlace.remove(at: randomIndex)
+                        objectId.remove(at: randomIndex)
+                        
                         
                     }
-                    if let correctAnsInt = Int(correctAnswer[randomIndex]) {
-                        
-                        if correctAnsInt == 1 {
-                            headerLabel.text = option1[randomIndex]
-                        }
-                        else if correctAnsInt == 2 {
-                            headerLabel.text = option2[randomIndex]
-                        }
-                        else if correctAnsInt == 3 {
-                            headerLabel.text = option3[randomIndex]
-                        }
-                        else if correctAnsInt == 4 {
-                            headerLabel.text = option4[randomIndex]
-                        }
-                    }
-                    activityIndicator.stopAnimating()
-                    UIApplication.shared.endIgnoringInteractionEvents()
                     
-                    currentObjectId = objectId[randomIndex]
-                    isCurrentItemPlace = isPlace[randomIndex]
-                    currentImage.removeAll()
-                    currentImage.append(imageFile[randomIndex])
-
-                    let newDescription = NSString(string: descriptionEng[randomIndex])
-                    let components = newDescription.components(separatedBy: "Photo licensed under")
-                    if components.count == 2 {
-                        photoCredit.text = "Photo licensed under" + components[1]
-                        photoCredit.isHidden = false
-                        descriptionLabel.text = components[0]
-                    }
-                    else{
-                        photoCredit.isHidden = true
-                        descriptionLabel.text = descriptionEng[randomIndex]
-                    }
-                    descriptionLabel.isHidden = false
-                    descriptionLabel.sizeToFit()
-                    descriptionLabel.numberOfLines = 0
                     
-                    headerLabel.isHidden = false
-                    image.isHidden = false
-                    
-                    option1.remove(at: randomIndex)
-                    option2.remove(at: randomIndex)
-                    option3.remove(at: randomIndex)
-                    option4.remove(at: randomIndex)
-                    imageFile.remove(at: randomIndex)
-                    correctAnswer.remove(at: randomIndex)
-                    descriptionEng.remove(at: randomIndex)
-                    isPlace.remove(at: randomIndex)
-                    objectId.remove(at: randomIndex)
-                    
+                    UIView.commitAnimations()
                     
                 }
-                
-                
-                UIView.commitAnimations()
-                
+            }
+            else if image.center.x > (view.bounds.width/2 + 100) {
+                print("Show the previous, Prev Indx: \(prevIndx)")
+                if prevIndx >= 1 {
+                    prevIndx -= 1
+                    showPrevious()
+                }
+
+                image.center = CGPoint(x: view.bounds.width/2, y: image.center.y)
             }
             else {
                 image.center = CGPoint(x: view.bounds.width/2, y: image.center.y)
@@ -885,6 +928,42 @@ class luckyStrikeViewController: UIViewController {
             src.view.window?.layer.add(transition, forKey: nil)
         }
         
+    }
+    func showPrevious() {
+        print("Inside show previous")
+        
+        histImageFile[prevIndx].getDataInBackground { (data, error) in
+            
+            if let imageData = data {
+                
+                if let imageToDisplay = UIImage(data: imageData) {
+                    
+                    self.image.image = imageToDisplay
+                }
+            }
+            
+        }
+        
+        headerLabel.text = histHeader[prevIndx]
+        
+        let newDescription = NSString(string: histDescriptionEng[prevIndx])
+        let components = newDescription.components(separatedBy: "Photo licensed under")
+        if components.count == 2 {
+            photoCredit.text = "Photo licensed under" + components[1]
+            photoCredit.isHidden = false
+            descriptionLabel.text = components[0]
+        }
+        else{
+            photoCredit.isHidden = true
+            descriptionLabel.text = descriptionEng[prevIndx]
+        }
+        descriptionLabel.isHidden = false
+        descriptionLabel.sizeToFit()
+        descriptionLabel.numberOfLines = 0
+        
+        headerLabel.isHidden = false
+        image.isHidden = false
+
     }
     
     

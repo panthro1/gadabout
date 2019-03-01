@@ -1633,6 +1633,9 @@
                                 <state key="normal" title="Prev" image="leftArrow.png">
                                     <color key="titleColor" red="0.67450980392156867" green="0.16470588235294117" blue="0.70588235294117641" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="prevTapped:" destination="Mu3-9O-FyB" eventType="touchUpInside" id="OdP-ku-5Xx"/>
+                                </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="h1N-M5-vP2">
                                 <rect key="frame" x="8.3333333333333428" y="650.66666666666663" width="397.33333333333326" height="27"/>
