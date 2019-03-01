@@ -560,17 +560,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             cell.detailsButton.setTitle("Back", for: [])
             
             cell.detailText.isHidden = false
-            /*let newDescription = NSString(string: descriptionEng[indexPath.row])
-            let components = newDescription.components(separatedBy: "Photo licensed under")
-            if components.count == 2 {
-                let attributedDescription = attributedText(withString: components[0], boldString: components[1], fontNormal: cell.detailText.font, fontCredit: cell.detailText.font.withSize(9))
-                cell.detailText.text = attributedDescription.string
-                print("2 components")
-            }
-            else
-            {
-                cell.detailText.text = descriptionEng[indexPath.row]
-            }*/
             cell.detailText.text = descriptionEng[indexPath.row]
             cell.detailText.text = descriptionEng[indexPath.row]
             cell.detailText.sizeToFit()

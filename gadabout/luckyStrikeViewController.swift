@@ -41,6 +41,8 @@ class luckyStrikeViewController: UIViewController {
     
     @IBOutlet weak var descriptionLabel: UILabel!
     
+    @IBOutlet weak var photoCredit: UILabel!
+    
     @IBAction func backTapped(_ sender: Any) {
         
         performSegue(withIdentifier: "luckyStrikeBackSegue", sender: self)
@@ -216,7 +218,17 @@ class luckyStrikeViewController: UIViewController {
                     
                     //self.descriptionText.text = self.descriptionEng[randomIndex]
                     //self.descriptionText.isHidden = false
-                    self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                    let newDescription = NSString(string: self.descriptionEng[randomIndex])
+                    let components = newDescription.components(separatedBy: "Photo licensed under")
+                    if components.count == 2 {
+                        self.photoCredit.text = "Photo licensed under" + components[1]
+                        self.photoCredit.isHidden = false
+                        self.descriptionLabel.text = components[0]
+                    }
+                    else{
+                        self.photoCredit.isHidden = true
+                        self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                    }
                     self.descriptionLabel.isHidden = false
                     self.descriptionLabel.sizeToFit()
                     self.descriptionLabel.numberOfLines = 0
@@ -278,7 +290,17 @@ class luckyStrikeViewController: UIViewController {
             currentImage.removeAll()
             currentImage.append(imageFile[randomIndex])
             
-            self.descriptionLabel.text = self.descriptionEng[randomIndex]
+            let newDescription = NSString(string: self.descriptionEng[randomIndex])
+            let components = newDescription.components(separatedBy: "Photo licensed under")
+            if components.count == 2 {
+                self.photoCredit.text = "Photo licensed under" + components[1]
+                self.photoCredit.isHidden = false
+                self.descriptionLabel.text = components[0]
+            }
+            else{
+                self.photoCredit.isHidden = true
+                self.descriptionLabel.text = self.descriptionEng[randomIndex]
+            }
             self.descriptionLabel.isHidden = false
             self.descriptionLabel.sizeToFit()
             self.descriptionLabel.numberOfLines = 0
@@ -467,10 +489,21 @@ class luckyStrikeViewController: UIViewController {
             currentImage.removeAll()
             currentImage.append(imageFile[randomIndex])
             
-            descriptionLabel.text = descriptionEng[randomIndex]
+             let newDescription = NSString(string: descriptionEng[randomIndex])
+             let components = newDescription.components(separatedBy: "Photo licensed under")
+             if components.count == 2 {
+                photoCredit.text = "Photo licensed under" + components[1]
+                photoCredit.isHidden = false
+                descriptionLabel.text = components[0]
+             }
+             else{
+                photoCredit.isHidden = true
+                descriptionLabel.text = descriptionEng[randomIndex]
+             }
+            
             descriptionLabel.isHidden = false
-            self.descriptionLabel.numberOfLines = 0
-            self.descriptionLabel.sizeToFit()
+            descriptionLabel.numberOfLines = 0
+            descriptionLabel.sizeToFit()
 
 
             headerLabel.isHidden = false
@@ -570,8 +603,19 @@ class luckyStrikeViewController: UIViewController {
                     self.isCurrentItemPlace = self.isPlace[randomIndex]
                     self.currentImage.removeAll()
                     self.currentImage.append(self.imageFile[randomIndex])
-
-                    self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                    
+                    let newDescription = NSString(string: self.descriptionEng[randomIndex])
+                    let components = newDescription.components(separatedBy: "Photo licensed under")
+                    if components.count == 2 {
+                        self.photoCredit.text = "Photo licensed under" + components[1]
+                        self.photoCredit.isHidden = false
+                        self.descriptionLabel.text = components[0]
+                    }
+                    else{
+                        self.photoCredit.isHidden = true
+                        self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                    }
+                    
                     self.descriptionLabel.isHidden = false
                     self.descriptionLabel.sizeToFit()
                     self.descriptionLabel.numberOfLines = 0
@@ -709,7 +753,17 @@ class luckyStrikeViewController: UIViewController {
                             self.currentImage.removeAll()
                             self.currentImage.append(self.imageFile[randomIndex])
 
-                            self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                            let newDescription = NSString(string: self.descriptionEng[randomIndex])
+                            let components = newDescription.components(separatedBy: "Photo licensed under")
+                            if components.count == 2 {
+                                self.photoCredit.text = "Photo licensed under" + components[1]
+                                self.photoCredit.isHidden = false
+                                self.descriptionLabel.text = components[0]
+                            }
+                            else{
+                                self.photoCredit.isHidden = true
+                                self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                            }
                             self.descriptionLabel.isHidden = false
                             self.descriptionLabel.sizeToFit()
                             self.descriptionLabel.numberOfLines = 0
@@ -770,7 +824,17 @@ class luckyStrikeViewController: UIViewController {
                     currentImage.removeAll()
                     currentImage.append(imageFile[randomIndex])
 
-                    descriptionLabel.text = self.descriptionEng[randomIndex]
+                    let newDescription = NSString(string: descriptionEng[randomIndex])
+                    let components = newDescription.components(separatedBy: "Photo licensed under")
+                    if components.count == 2 {
+                        photoCredit.text = "Photo licensed under" + components[1]
+                        photoCredit.isHidden = false
+                        descriptionLabel.text = components[0]
+                    }
+                    else{
+                        photoCredit.isHidden = true
+                        descriptionLabel.text = descriptionEng[randomIndex]
+                    }
                     descriptionLabel.isHidden = false
                     descriptionLabel.sizeToFit()
                     descriptionLabel.numberOfLines = 0

@@ -57,6 +57,7 @@
 		E3D0DD0C21F8160A00AE340F /* attributionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D0DD0B21F8160A00AE340F /* attributionsViewController.swift */; };
 		E3D2740921BF5C41006663DC /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D2740821BF5C41006663DC /* UIColorExtension.swift */; };
 		E3D5F09A21FCD58B00307ED0 /* replay.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D5F09921FCD58900307ED0 /* replay.png */; };
+		E3DBAFA42228E0B30033B637 /* leftArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E3DBAFA32228E0B10033B637 /* leftArrow.png */; };
 		E3DD8F2221A65D9200ED982B /* ToDoImageDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DD8F2121A65D9200ED982B /* ToDoImageDisplayViewController.swift */; };
 		E3E1BEF12179133700C62595 /* luckyStrikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */; };
 		E3E5BD53213295610019BFBC /* keyboard-right-arrow-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E3E5BD52213295600019BFBC /* keyboard-right-arrow-button.png */; };
@@ -142,6 +143,7 @@
 		E3D0DD0B21F8160A00AE340F /* attributionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = attributionsViewController.swift; sourceTree = "<group>"; };
 		E3D2740821BF5C41006663DC /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		E3D5F09921FCD58900307ED0 /* replay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = replay.png; path = ../../../Attributions/replay.png; sourceTree = "<group>"; };
+		E3DBAFA32228E0B10033B637 /* leftArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftArrow.png; sourceTree = "<group>"; };
 		E3DD8F2121A65D9200ED982B /* ToDoImageDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoImageDisplayViewController.swift; sourceTree = "<group>"; };
 		E3E1BEF02179133700C62595 /* luckyStrikeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = luckyStrikeViewController.swift; sourceTree = "<group>"; };
 		E3E5BD52213295600019BFBC /* keyboard-right-arrow-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard-right-arrow-button.png"; sourceTree = SOURCE_ROOT; };
@@ -283,6 +285,7 @@
 				E3C20D3721D6B34600A162E0 /* checked.png */,
 				E3D5F09921FCD58900307ED0 /* replay.png */,
 				E3A38E5C21F56A05009CCD52 /* outlook.png */,
+				E3DBAFA32228E0B10033B637 /* leftArrow.png */,
 				E36DA986212D71830031D337 /* wrong.gif */,
 				E3A2588E21ECDEF0001323B3 /* rightArrow.png */,
 				E3C88C1321F474AF007EB21A /* slot-machine.png */,
@@ -432,6 +435,7 @@
 				E3261AEC20F098920056CE99 /* Main.storyboard in Resources */,
 				E3C88C0C21F46DE2007EB21A /* scoring.png in Resources */,
 				E3B97A3021CC94E100C4AC0F /* NetworkConnection.png in Resources */,
+				E3DBAFA42228E0B30033B637 /* leftArrow.png in Resources */,
 				E3B4752D21F480BA00952566 /* back-button.png in Resources */,
 				E3BFE73621F6C0130007A652 /* lock.png in Resources */,
 				E3BFE73421F6BF950007A652 /* email.png in Resources */,
