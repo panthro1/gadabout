@@ -95,7 +95,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             
             glbCorrectAnswer = glbCorrectAnswer + scorePoint
             glbTotalQuestion = glbTotalQuestion + option1.count
-            showPopup(Score: scorePoint, totalScore: glbCorrectAnswer)
+            showPopup(Score: scorePoint, totalScore: option1.count)
             
             timer.invalidate()
         }
@@ -336,7 +336,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             
             glbCorrectAnswer = glbCorrectAnswer + scorePoint
             glbTotalQuestion = glbTotalQuestion + option1.count
-            showPopup(Score: scorePoint, totalScore: glbCorrectAnswer)
+            showPopup(Score: scorePoint, totalScore: option1.count)
             
             progressLayer.strokeEnd = 1
             
@@ -375,7 +375,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         popOverVC.scoreWin = Score
         popOverVC.totalScore = totalScore
         popOverVC.isFlagOutput = false
-        popOverVC.isScoreSummary = false
+        popOverVC.isPuzzleOutput = false
         popOverVC.delegate = self
         
         self.addChildViewController(popOverVC)

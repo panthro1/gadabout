@@ -20,7 +20,7 @@ class scorePopUpViewController: UIViewController {
     public var scoreWin = Int()
     public var totalScore = Int()
     public var isFlagOutput = Bool()
-    public var isScoreSummary = Bool()
+    public var isPuzzleOutput = Bool()
 
     
     @IBOutlet weak var scoreWinLabel: UILabel!
@@ -50,40 +50,49 @@ class scorePopUpViewController: UIViewController {
         closeButton.layer.borderWidth = 1
         closeButton.layer.borderColor = UIColor.black.cgColor
         
-        
-        if isScoreSummary {
-            
-            scoreHeader.text = "Summary"
-            applyBoldText(text1: "Total Score", text2: "Flag Record")
-            
-        }
-        else {
-            if isFlagOutput {
-                if scoreWin == 0 {
-                    scoreHeader.text = "Unfortunately!!"
-                    applyBoldText(text1: "Score", text2: "Record")
-                }
-                else {
-                    if scoreWin > totalScore {
-                        scoreHeader.text = "New Record!!"
-                        applyBoldText(text1: "Score", text2: "Old Record")
-                    }
-                    else {
-                        scoreHeader.text = "Awesome"
-                        applyBoldText(text1: "Score", text2: "Record")
-                    }
-                }
+        if isFlagOutput {
+            if scoreWin == 0 {
+                scoreHeader.text = "Unfortunately!!"
+                applyBoldText(text1: "Score", text2: "Record")
             }
             else {
-                if scoreWin == 0 {
-                    scoreHeader.text = "Unfortunately!!"
-                    scoreWinLabel.text = "You have not won any points"
+                if scoreWin > totalScore {
+                    scoreHeader.text = "New Record!!"
+                    applyBoldText(text1: "Score", text2: "Old Record")
                 }
                 else {
                     scoreHeader.text = "Awesome"
-                    scoreWinLabel.text = "You have won \(scoreWin) points"
+                    applyBoldText(text1: "Score", text2: "Record")
                 }
+            }
+        }
+        else if isPuzzleOutput{
+            if scoreWin > 105 {
+                scoreHeader.text = "Awesome"
+                scoreWinLabel.text = "You have won \(scoreWin) points"
                 totalScoreLabel.text = "Total Score : \(totalScore) points"
+            }
+            else {
+                scoreHeader.text = "Congratulations"
+                scoreWinLabel.text = "You have won \(scoreWin) points"
+                totalScoreLabel.text = "Total Score : \(totalScore) points"
+            }
+        }
+        else {
+            if scoreWin == totalScore {
+                scoreHeader.text = "Awesome"
+                scoreWinLabel.text = "\(scoreWin) / \(totalScore) correct answers"
+                totalScoreLabel.text = "Your Score : \(glbCorrectAnswer) / \(glbTotalQuestion)"
+            }
+            else if scoreWin > 0 {
+                scoreHeader.text = "Congratulations"
+                scoreWinLabel.text = "\(scoreWin) / \(totalScore) correct answers"
+                totalScoreLabel.text = "Your Score : \(glbCorrectAnswer) / \(glbTotalQuestion)"
+            }
+            else {
+                scoreHeader.text = "Unfortunately"
+                scoreWinLabel.text = "\(scoreWin) / \(totalScore) correct answers"
+                totalScoreLabel.text = "Your Score : \(glbCorrectAnswer) / \(glbTotalQuestion)"
             }
         }
         
@@ -137,7 +146,6 @@ class scorePopUpViewController: UIViewController {
         
         attributedString2.append(normalString2)
         totalScoreLabel.attributedText = attributedString2
-        //totalScoreLabel.text = "Flag Challenge Record: \(totalScore)"
     }
 
     /*
