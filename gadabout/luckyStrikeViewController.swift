@@ -958,7 +958,7 @@ class luckyStrikeViewController: UIViewController {
         }
         else{
             photoCredit.isHidden = true
-            descriptionLabel.text = descriptionEng[prevIndx]
+            descriptionLabel.text = histDescriptionEng[prevIndx]
         }
         descriptionLabel.isHidden = false
         descriptionLabel.sizeToFit()
