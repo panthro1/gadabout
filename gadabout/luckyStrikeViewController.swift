@@ -36,6 +36,8 @@ class luckyStrikeViewController: UIViewController {
     var histIsPlace = [Bool]()
     var histObjectId = [String]()
     var prevIndx = -1
+    
+    var cache = NSCache<AnyObject, AnyObject>()
 
     @IBOutlet weak var image: UIImageView!
     
@@ -129,20 +131,21 @@ class luckyStrikeViewController: UIViewController {
             
         }
         else {
-            let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
-            activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
-            activityIndicator.center = self.view.center
-            activityIndicator.hidesWhenStopped = true
-            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-            view.addSubview(activityIndicator)
-            activityIndicator.startAnimating()
-            UIApplication.shared.beginIgnoringInteractionEvents()
             
             
             // New code
             
             if imageFile.count < 2 {
-                
+
+                let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
+                activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+                activityIndicator.center = self.view.center
+                activityIndicator.hidesWhenStopped = true
+                activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+                view.addSubview(activityIndicator)
+                activityIndicator.startAnimating()
+                UIApplication.shared.beginIgnoringInteractionEvents()
+
                 let placesQuery = PFQuery(className: "Places")
                 
                 placesQuery.limit = 1000
@@ -194,7 +197,93 @@ class luckyStrikeViewController: UIViewController {
                         let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
                         print("Random Index: \(randomIndex)")
                         
-                        self.imageFile[randomIndex].getDataInBackground { (data, error) in
+                        //Caching uprdate
+                        
+                        self.imageFile[randomIndex].getDataInBackground { [unowned self] (data, error) in
+                            
+                            if let imageData = data {
+                                
+                                if let imageToDisplay = UIImage(data: imageData) {
+
+                                    let imageCache = imageToDisplay
+                                    
+                                    self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                    
+                                    if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                        
+                                        self.image.image = cacheimg
+                                        
+                                        if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
+                                            
+                                            if correctAnsInt == 1 {
+                                                self.headerLabel.text = self.option1[randomIndex]
+                                                self.histHeader.append(self.option1[randomIndex])
+                                            }
+                                            else if correctAnsInt == 2 {
+                                                self.headerLabel.text = self.option2[randomIndex]
+                                                self.histHeader.append(self.option1[randomIndex])
+                                            }
+                                            else if correctAnsInt == 3 {
+                                                self.headerLabel.text = self.option3[randomIndex]
+                                                self.histHeader.append(self.option1[randomIndex])
+                                            }
+                                            else if correctAnsInt == 4 {
+                                                self.headerLabel.text = self.option4[randomIndex]
+                                                self.histHeader.append(self.option1[randomIndex])
+                                            }
+                                        }
+                                        
+                                        activityIndicator.stopAnimating()
+                                        UIApplication.shared.endIgnoringInteractionEvents()
+                                        
+                                        self.currentObjectId = self.objectId[randomIndex]
+                                        self.isCurrentItemPlace = self.isPlace[randomIndex]
+                                        self.currentImage.removeAll()
+                                        self.currentImage.append(self.imageFile[randomIndex])
+                                        
+                                        let newDescription = NSString(string: self.descriptionEng[randomIndex])
+                                        let components = newDescription.components(separatedBy: "Photo licensed under")
+                                        if components.count == 2 {
+                                            self.photoCredit.text = "Photo licensed under" + components[1]
+                                            self.photoCredit.isHidden = false
+                                            self.descriptionLabel.text = components[0]
+                                        }
+                                        else{
+                                            self.photoCredit.isHidden = true
+                                            self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                                        }
+                                        self.descriptionLabel.isHidden = false
+                                        self.descriptionLabel.sizeToFit()
+                                        self.descriptionLabel.numberOfLines = 0
+                                        
+                                        self.headerLabel.isHidden = false
+                                        self.image.isHidden = false
+                                        
+                                        self.histDescriptionEng.append(self.descriptionEng[randomIndex])
+                                        self.histCorrectAnswer.append(self.correctAnswer[randomIndex])
+                                        self.histImageFile.append(self.imageFile[randomIndex])
+                                        self.histIsPlace.append(self.isPlace[randomIndex])
+                                        self.histObjectId.append(self.objectId[randomIndex])
+                                        self.prevIndx += 1
+                                        
+                                        self.option1.remove(at: randomIndex)
+                                        self.option2.remove(at: randomIndex)
+                                        self.option3.remove(at: randomIndex)
+                                        self.option4.remove(at: randomIndex)
+                                        self.imageFile.remove(at: randomIndex)
+                                        self.correctAnswer.remove(at: randomIndex)
+                                        self.descriptionEng.remove(at: randomIndex)
+                                        self.isPlace.remove(at: randomIndex)
+                                        self.objectId.remove(at: randomIndex)
+                                        
+                                    }
+                                }
+                            }
+                        }
+
+                        
+                        
+                        /*self.imageFile[randomIndex].getDataInBackground { (data, error) in
                             
                             if let imageData = data {
                                 
@@ -236,6 +325,8 @@ class luckyStrikeViewController: UIViewController {
                         
                         //self.descriptionText.text = self.descriptionEng[randomIndex]
                         //self.descriptionText.isHidden = false
+
+                        // Caching update
                         let newDescription = NSString(string: self.descriptionEng[randomIndex])
                         let components = newDescription.components(separatedBy: "Photo licensed under")
                         if components.count == 2 {
@@ -269,7 +360,7 @@ class luckyStrikeViewController: UIViewController {
                         self.correctAnswer.remove(at: randomIndex)
                         self.descriptionEng.remove(at: randomIndex)
                         self.isPlace.remove(at: randomIndex)
-                        self.objectId.remove(at: randomIndex)
+                        self.objectId.remove(at: randomIndex)*/
                         
                     }
                     
@@ -280,7 +371,91 @@ class luckyStrikeViewController: UIViewController {
                 let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
                 print("Random Index: \(randomIndex)")
                 
-                self.imageFile[randomIndex].getDataInBackground { (data, error) in
+                // Caching update
+                
+                self.imageFile[randomIndex].getDataInBackground { [unowned self] (data, error) in
+                    
+                    if let imageData = data {
+                        
+                        if let imageToDisplay = UIImage(data: imageData) {
+                            
+                            let imageCache = imageToDisplay
+                            
+                            self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                            
+                            if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                
+                                self.image.image = cacheimg
+                                
+                                if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
+                                    
+                                    if correctAnsInt == 1 {
+                                        self.headerLabel.text = self.option1[randomIndex]
+                                        self.histHeader.append(self.option1[randomIndex])
+                                    }
+                                    else if correctAnsInt == 2 {
+                                        self.headerLabel.text = self.option2[randomIndex]
+                                        self.histHeader.append(self.option2[randomIndex])
+                                    }
+                                    else if correctAnsInt == 3 {
+                                        self.headerLabel.text = self.option3[randomIndex]
+                                        self.histHeader.append(self.option3[randomIndex])
+                                    }
+                                    else if correctAnsInt == 4 {
+                                        self.headerLabel.text = self.option4[randomIndex]
+                                        self.histHeader.append(self.option4[randomIndex])
+                                    }
+                                }
+                                
+                                self.currentObjectId = self.objectId[randomIndex]
+                                self.isCurrentItemPlace = self.isPlace[randomIndex]
+                                self.currentImage.removeAll()
+                                self.currentImage.append(self.imageFile[randomIndex])
+                                
+                                let newDescription = NSString(string: self.descriptionEng[randomIndex])
+                                let components = newDescription.components(separatedBy: "Photo licensed under")
+                                if components.count == 2 {
+                                    self.photoCredit.text = "Photo licensed under" + components[1]
+                                    self.photoCredit.isHidden = false
+                                    self.descriptionLabel.text = components[0]
+                                }
+                                else{
+                                    self.photoCredit.isHidden = true
+                                    self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                                }
+                                self.descriptionLabel.isHidden = false
+                                self.descriptionLabel.sizeToFit()
+                                self.descriptionLabel.numberOfLines = 0
+                                
+                                self.headerLabel.isHidden = false
+                                self.image.isHidden = false
+                                
+                                
+                                
+                                self.histDescriptionEng.append(self.descriptionEng[randomIndex])
+                                self.histCorrectAnswer.append(self.correctAnswer[randomIndex])
+                                self.histImageFile.append(self.imageFile[randomIndex])
+                                self.histIsPlace.append(self.isPlace[randomIndex])
+                                self.histObjectId.append(self.objectId[randomIndex])
+                                self.prevIndx += 1
+                                
+                                self.option1.remove(at: randomIndex)
+                                self.option2.remove(at: randomIndex)
+                                self.option3.remove(at: randomIndex)
+                                self.option4.remove(at: randomIndex)
+                                self.imageFile.remove(at: randomIndex)
+                                self.correctAnswer.remove(at: randomIndex)
+                                self.descriptionEng.remove(at: randomIndex)
+                                self.isPlace.remove(at: randomIndex)
+                                self.objectId.remove(at: randomIndex)
+                                
+                            }
+                        }
+                    }
+                }
+
+                
+                /*self.imageFile[randomIndex].getDataInBackground { (data, error) in
                     
                     if let imageData = data {
                         
@@ -311,6 +486,7 @@ class luckyStrikeViewController: UIViewController {
                         histHeader.append(option4[randomIndex])
                     }
                 }
+                
                 activityIndicator.stopAnimating()
                 UIApplication.shared.endIgnoringInteractionEvents()
                 
@@ -319,6 +495,7 @@ class luckyStrikeViewController: UIViewController {
                 currentImage.removeAll()
                 currentImage.append(imageFile[randomIndex])
                 
+                // Caching update
                 let newDescription = NSString(string: self.descriptionEng[randomIndex])
                 let components = newDescription.components(separatedBy: "Photo licensed under")
                 if components.count == 2 {
@@ -336,6 +513,7 @@ class luckyStrikeViewController: UIViewController {
                 
                 self.headerLabel.isHidden = false
                 self.image.isHidden = false
+ 
                 
                 histDescriptionEng.append(descriptionEng[randomIndex])
                 histCorrectAnswer.append(correctAnswer[randomIndex])
@@ -353,6 +531,7 @@ class luckyStrikeViewController: UIViewController {
                 self.descriptionEng.remove(at: randomIndex)
                 self.isPlace.remove(at: randomIndex)
                 self.objectId.remove(at: randomIndex)
+ */
                 
             }
         }
@@ -441,6 +620,95 @@ class luckyStrikeViewController: UIViewController {
             let randomIndex = Int(arc4random_uniform(UInt32(imageFile.count)))
             print("Random Index: \(randomIndex)")
             
+            // Caching update
+            
+            imageFile[randomIndex].getDataInBackground { [unowned self] (data, error) in
+                
+                if let imageData = data {
+                    
+                    if let imageToDisplay = UIImage(data: imageData) {
+                        
+                        let imageCache = imageToDisplay
+                        
+                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                        
+                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                            
+                            self.image.image = cacheimg
+                            
+                            if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
+                                
+                                if correctAnsInt == 1 {
+                                    self.headerLabel.text = self.option1[randomIndex]
+                                    self.histHeader.append(self.option1[randomIndex])
+                                }
+                                else if correctAnsInt == 2 {
+                                    self.headerLabel.text = self.option2[randomIndex]
+                                    self.histHeader.append(self.option2[randomIndex])
+                                }
+                                else if correctAnsInt == 3 {
+                                    self.headerLabel.text = self.option3[randomIndex]
+                                    self.histHeader.append(self.option3[randomIndex])
+                                }
+                                else if correctAnsInt == 4 {
+                                    self.headerLabel.text = self.option4[randomIndex]
+                                    self.histHeader.append(self.option4[randomIndex])
+                                }
+                            }
+                            
+                            self.currentObjectId = self.objectId[randomIndex]
+                            self.isCurrentItemPlace = self.isPlace[randomIndex]
+                            self.currentImage.removeAll()
+                            self.currentImage.append(self.imageFile[randomIndex])
+
+                            
+                            let newDescription = NSString(string: self.descriptionEng[randomIndex])
+                            let components = newDescription.components(separatedBy: "Photo licensed under")
+                            if components.count == 2 {
+                                self.photoCredit.text = "Photo licensed under" + components[1]
+                                self.photoCredit.isHidden = false
+                                self.descriptionLabel.text = components[0]
+                            }
+                            else{
+                                self.photoCredit.isHidden = true
+                                self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                            }
+                            self.descriptionLabel.isHidden = false
+                            self.descriptionLabel.sizeToFit()
+                            self.descriptionLabel.numberOfLines = 0
+                            
+                            self.headerLabel.isHidden = false
+                            self.image.isHidden = false
+                            
+                            
+                            
+                            self.histDescriptionEng.append(self.descriptionEng[randomIndex])
+                            self.histCorrectAnswer.append(self.correctAnswer[randomIndex])
+                            self.histImageFile.append(self.imageFile[randomIndex])
+                            self.histIsPlace.append(self.isPlace[randomIndex])
+                            self.histObjectId.append(self.objectId[randomIndex])
+                            self.prevIndx += 1
+                            
+                            self.headerLabel.isHidden = false
+                            self.image.isHidden = false
+                            
+                            
+                            self.option1.remove(at: randomIndex)
+                            self.option2.remove(at: randomIndex)
+                            self.option3.remove(at: randomIndex)
+                            self.option4.remove(at: randomIndex)
+                            self.imageFile.remove(at: randomIndex)
+                            self.correctAnswer.remove(at: randomIndex)
+                            self.descriptionEng.remove(at: randomIndex)
+                            self.isPlace.remove(at: randomIndex)
+                            self.objectId.remove(at: randomIndex)
+                            
+                        }
+                    }
+                }
+            }
+
+            /*
             imageFile[randomIndex].getDataInBackground { (data, error) in
                 
                 if let imageData = data {
@@ -504,6 +772,7 @@ class luckyStrikeViewController: UIViewController {
 
             headerLabel.isHidden = false
             image.isHidden = false
+ 
             
             option1.remove(at: randomIndex)
             option2.remove(at: randomIndex)
@@ -514,6 +783,7 @@ class luckyStrikeViewController: UIViewController {
             descriptionEng.remove(at: randomIndex)
             isPlace.remove(at: randomIndex)
             objectId.remove(at: randomIndex)
+            */
 
         }
         
@@ -569,6 +839,95 @@ class luckyStrikeViewController: UIViewController {
                     let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
                     print("Random Index: \(randomIndex)")
                     
+                    //Caching update
+                    
+                    self.imageFile[randomIndex].getDataInBackground { [unowned self] (data, error) in
+                        
+                        if let imageData = data {
+                            
+                            if let imageToDisplay = UIImage(data: imageData) {
+                                
+                                let imageCache = imageToDisplay
+                                
+                                self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                
+                                if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                    
+                                    self.image.image = cacheimg
+                                    
+                                    if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
+                                        
+                                        if correctAnsInt == 1 {
+                                            self.headerLabel.text = self.option1[randomIndex]
+                                            self.histHeader.append(self.option1[randomIndex])
+                                        }
+                                        else if correctAnsInt == 2 {
+                                            self.headerLabel.text = self.option2[randomIndex]
+                                            self.histHeader.append(self.option2[randomIndex])
+                                        }
+                                        else if correctAnsInt == 3 {
+                                            self.headerLabel.text = self.option3[randomIndex]
+                                            self.histHeader.append(self.option3[randomIndex])
+                                        }
+                                        else if correctAnsInt == 4 {
+                                            self.headerLabel.text = self.option4[randomIndex]
+                                            self.histHeader.append(self.option4[randomIndex])
+                                        }
+                                    }
+                                    
+                                    self.currentObjectId = self.objectId[randomIndex]
+                                    self.isCurrentItemPlace = self.isPlace[randomIndex]
+                                    self.currentImage.removeAll()
+                                    self.currentImage.append(self.imageFile[randomIndex])
+                                    
+                                    
+                                    let newDescription = NSString(string: self.descriptionEng[randomIndex])
+                                    let components = newDescription.components(separatedBy: "Photo licensed under")
+                                    if components.count == 2 {
+                                        self.photoCredit.text = "Photo licensed under" + components[1]
+                                        self.photoCredit.isHidden = false
+                                        self.descriptionLabel.text = components[0]
+                                    }
+                                    else{
+                                        self.photoCredit.isHidden = true
+                                        self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                                    }
+                                    self.descriptionLabel.isHidden = false
+                                    self.descriptionLabel.sizeToFit()
+                                    self.descriptionLabel.numberOfLines = 0
+                                    
+                                    self.headerLabel.isHidden = false
+                                    self.image.isHidden = false
+                                    
+                                    
+                                    
+                                    self.histDescriptionEng.append(self.descriptionEng[randomIndex])
+                                    self.histCorrectAnswer.append(self.correctAnswer[randomIndex])
+                                    self.histImageFile.append(self.imageFile[randomIndex])
+                                    self.histIsPlace.append(self.isPlace[randomIndex])
+                                    self.histObjectId.append(self.objectId[randomIndex])
+                                    self.prevIndx += 1
+                                    
+                                    self.headerLabel.isHidden = false
+                                    self.image.isHidden = false
+                                    
+                                    
+                                    self.option1.remove(at: randomIndex)
+                                    self.option2.remove(at: randomIndex)
+                                    self.option3.remove(at: randomIndex)
+                                    self.option4.remove(at: randomIndex)
+                                    self.imageFile.remove(at: randomIndex)
+                                    self.correctAnswer.remove(at: randomIndex)
+                                    self.descriptionEng.remove(at: randomIndex)
+                                    self.isPlace.remove(at: randomIndex)
+                                    self.objectId.remove(at: randomIndex)
+                                    
+                                }
+                            }
+                        }
+                    }
+
+                    /*
                     self.imageFile[randomIndex].getDataInBackground { (data, error) in
                         
                         if let imageData = data {
@@ -640,6 +999,7 @@ class luckyStrikeViewController: UIViewController {
                     self.descriptionEng.remove(at: randomIndex)
                     self.isPlace.remove(at: randomIndex)
                     self.objectId.remove(at: randomIndex)
+ */
 
                 }
                 
@@ -667,18 +1027,18 @@ class luckyStrikeViewController: UIViewController {
                     UIView.beginAnimations(nil, context: nil)
                     UIView.setAnimationDuration(0.1)
                     
-                    let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
-                    activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
-                    activityIndicator.center = self.view.center
-                    activityIndicator.hidesWhenStopped = true
-                    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-                    view.addSubview(activityIndicator)
-                    activityIndicator.startAnimating()
-                    UIApplication.shared.beginIgnoringInteractionEvents()
                     
                     
                     if imageFile.count < 2 {
-                        
+                        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x, y: self.view.center.y, width: 100, height: 100))
+                        activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+                        activityIndicator.center = self.view.center
+                        activityIndicator.hidesWhenStopped = true
+                        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+                        view.addSubview(activityIndicator)
+                        activityIndicator.startAnimating()
+                        UIApplication.shared.beginIgnoringInteractionEvents()
+
                         let placesQuery = PFQuery(className: "Places")
                         
                         placesQuery.limit = 1000
@@ -732,6 +1092,99 @@ class luckyStrikeViewController: UIViewController {
                                 let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
                                 print("Random Index: \(randomIndex)")
                                 
+                                //Caching update
+                                
+                                self.imageFile[randomIndex].getDataInBackground { [unowned self] (data, error) in
+                                    
+                                    if let imageData = data {
+                                        
+                                        if let imageToDisplay = UIImage(data: imageData) {
+                                            
+                                            let imageCache = imageToDisplay
+                                            
+                                            self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                            
+                                            if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                
+                                                self.image.image = cacheimg
+                                                
+                                                if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
+                                                    
+                                                    if correctAnsInt == 1 {
+                                                        self.headerLabel.text = self.option1[randomIndex]
+                                                        self.histHeader.append(self.option1[randomIndex])
+                                                    }
+                                                    else if correctAnsInt == 2 {
+                                                        self.headerLabel.text = self.option2[randomIndex]
+                                                        self.histHeader.append(self.option2[randomIndex])
+                                                    }
+                                                    else if correctAnsInt == 3 {
+                                                        self.headerLabel.text = self.option3[randomIndex]
+                                                        self.histHeader.append(self.option3[randomIndex])
+                                                    }
+                                                    else if correctAnsInt == 4 {
+                                                        self.headerLabel.text = self.option4[randomIndex]
+                                                        self.histHeader.append(self.option4[randomIndex])
+                                                    }
+                                                }
+                                                
+                                                activityIndicator.stopAnimating()
+                                                UIApplication.shared.endIgnoringInteractionEvents()
+                                                
+                                                self.currentObjectId = self.objectId[randomIndex]
+                                                self.isCurrentItemPlace = self.isPlace[randomIndex]
+                                                self.currentImage.removeAll()
+                                                self.currentImage.append(self.imageFile[randomIndex])
+                                                
+                                                
+                                                let newDescription = NSString(string: self.descriptionEng[randomIndex])
+                                                let components = newDescription.components(separatedBy: "Photo licensed under")
+                                                if components.count == 2 {
+                                                    self.photoCredit.text = "Photo licensed under" + components[1]
+                                                    self.photoCredit.isHidden = false
+                                                    self.descriptionLabel.text = components[0]
+                                                }
+                                                else{
+                                                    self.photoCredit.isHidden = true
+                                                    self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                                                }
+                                                self.descriptionLabel.isHidden = false
+                                                self.descriptionLabel.sizeToFit()
+                                                self.descriptionLabel.numberOfLines = 0
+                                                
+                                                self.headerLabel.isHidden = false
+                                                self.image.isHidden = false
+                                                
+                                                
+                                                
+                                                self.histDescriptionEng.append(self.descriptionEng[randomIndex])
+                                                self.histCorrectAnswer.append(self.correctAnswer[randomIndex])
+                                                self.histImageFile.append(self.imageFile[randomIndex])
+                                                self.histIsPlace.append(self.isPlace[randomIndex])
+                                                self.histObjectId.append(self.objectId[randomIndex])
+                                                self.prevIndx += 1
+                                                
+                                                self.headerLabel.isHidden = false
+                                                self.image.isHidden = false
+                                                
+                                                
+                                                self.option1.remove(at: randomIndex)
+                                                self.option2.remove(at: randomIndex)
+                                                self.option3.remove(at: randomIndex)
+                                                self.option4.remove(at: randomIndex)
+                                                self.imageFile.remove(at: randomIndex)
+                                                self.correctAnswer.remove(at: randomIndex)
+                                                self.descriptionEng.remove(at: randomIndex)
+                                                self.isPlace.remove(at: randomIndex)
+                                                self.objectId.remove(at: randomIndex)
+                                                
+                                            }
+                                        }
+                                    }
+                                }
+
+
+                                /*
                                 self.imageFile[randomIndex].getDataInBackground { (data, error) in
                                     
                                     if let imageData = data {
@@ -743,6 +1196,7 @@ class luckyStrikeViewController: UIViewController {
                                     }
                                     
                                 }
+                                
                                 if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
                                     
                                     if correctAnsInt == 1 {
@@ -805,6 +1259,7 @@ class luckyStrikeViewController: UIViewController {
                                 self.descriptionEng.remove(at: randomIndex)
                                 self.isPlace.remove(at: randomIndex)
                                 self.objectId.remove(at: randomIndex)
+                                */
                                 
                             }
                         }
@@ -814,6 +1269,95 @@ class luckyStrikeViewController: UIViewController {
                         let randomIndex = Int(arc4random_uniform(UInt32(imageFile.count)))
                         print("Random Index: \(randomIndex)")
                         
+                        //Caching update
+                        
+                        imageFile[randomIndex].getDataInBackground { [unowned self] (data, error) in
+                            
+                            if let imageData = data {
+                                
+                                if let imageToDisplay = UIImage(data: imageData) {
+                                    
+                                    let imageCache = imageToDisplay
+                                    
+                                    self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                    
+                                    if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                        
+                                        self.image.image = cacheimg
+                                        
+                                        if let correctAnsInt = Int(self.correctAnswer[randomIndex]) {
+                                            
+                                            if correctAnsInt == 1 {
+                                                self.headerLabel.text = self.option1[randomIndex]
+                                                self.histHeader.append(self.option1[randomIndex])
+                                            }
+                                            else if correctAnsInt == 2 {
+                                                self.headerLabel.text = self.option2[randomIndex]
+                                                self.histHeader.append(self.option2[randomIndex])
+                                            }
+                                            else if correctAnsInt == 3 {
+                                                self.headerLabel.text = self.option3[randomIndex]
+                                                self.histHeader.append(self.option3[randomIndex])
+                                            }
+                                            else if correctAnsInt == 4 {
+                                                self.headerLabel.text = self.option4[randomIndex]
+                                                self.histHeader.append(self.option4[randomIndex])
+                                            }
+                                        }
+                                        
+                                        self.currentObjectId = self.objectId[randomIndex]
+                                        self.isCurrentItemPlace = self.isPlace[randomIndex]
+                                        self.currentImage.removeAll()
+                                        self.currentImage.append(self.imageFile[randomIndex])
+                                        
+                                        
+                                        let newDescription = NSString(string: self.descriptionEng[randomIndex])
+                                        let components = newDescription.components(separatedBy: "Photo licensed under")
+                                        if components.count == 2 {
+                                            self.photoCredit.text = "Photo licensed under" + components[1]
+                                            self.photoCredit.isHidden = false
+                                            self.descriptionLabel.text = components[0]
+                                        }
+                                        else{
+                                            self.photoCredit.isHidden = true
+                                            self.descriptionLabel.text = self.descriptionEng[randomIndex]
+                                        }
+                                        self.descriptionLabel.isHidden = false
+                                        self.descriptionLabel.sizeToFit()
+                                        self.descriptionLabel.numberOfLines = 0
+                                        
+                                        self.headerLabel.isHidden = false
+                                        self.image.isHidden = false
+                                        
+                                        
+                                        
+                                        self.histDescriptionEng.append(self.descriptionEng[randomIndex])
+                                        self.histCorrectAnswer.append(self.correctAnswer[randomIndex])
+                                        self.histImageFile.append(self.imageFile[randomIndex])
+                                        self.histIsPlace.append(self.isPlace[randomIndex])
+                                        self.histObjectId.append(self.objectId[randomIndex])
+                                        self.prevIndx += 1
+                                        
+                                        self.headerLabel.isHidden = false
+                                        self.image.isHidden = false
+                                        
+                                        
+                                        self.option1.remove(at: randomIndex)
+                                        self.option2.remove(at: randomIndex)
+                                        self.option3.remove(at: randomIndex)
+                                        self.option4.remove(at: randomIndex)
+                                        self.imageFile.remove(at: randomIndex)
+                                        self.correctAnswer.remove(at: randomIndex)
+                                        self.descriptionEng.remove(at: randomIndex)
+                                        self.isPlace.remove(at: randomIndex)
+                                        self.objectId.remove(at: randomIndex)
+                                        
+                                    }
+                                }
+                            }
+                        }
+
+                        /*
                         imageFile[randomIndex].getDataInBackground { (data, error) in
                             
                             if let imageData = data {
@@ -826,6 +1370,7 @@ class luckyStrikeViewController: UIViewController {
                             }
                             
                         }
+                        
                         if let correctAnsInt = Int(correctAnswer[randomIndex]) {
                             
                             if correctAnsInt == 1 {
@@ -888,7 +1433,7 @@ class luckyStrikeViewController: UIViewController {
                         isPlace.remove(at: randomIndex)
                         objectId.remove(at: randomIndex)
                         
-                        
+                        */
                     }
                     
                     
@@ -935,6 +1480,53 @@ class luckyStrikeViewController: UIViewController {
     func showPrevious() {
         print("Inside show previous")
         
+        //Caching update
+        
+        histImageFile[prevIndx].getDataInBackground { [unowned self] (data, error) in
+            
+            if let imageData = data {
+                
+                if let imageToDisplay = UIImage(data: imageData) {
+                    
+                    let imageCache = imageToDisplay
+                    
+                    self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                    
+                    if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                        
+                        self.image.image = cacheimg
+                        
+                        self.headerLabel.text = self.histHeader[self.prevIndx]
+                        
+                        let newDescription = NSString(string: self.histDescriptionEng[self.prevIndx])
+                        let components = newDescription.components(separatedBy: "Photo licensed under")
+                        if components.count == 2 {
+                            self.photoCredit.text = "Photo licensed under" + components[1]
+                            self.photoCredit.isHidden = false
+                            self.descriptionLabel.text = components[0]
+                        }
+                        else{
+                            self.photoCredit.isHidden = true
+                            self.descriptionLabel.text = self.histDescriptionEng[self.prevIndx]
+                        }
+                        self.descriptionLabel.isHidden = false
+                        self.descriptionLabel.sizeToFit()
+                        self.descriptionLabel.numberOfLines = 0
+                        
+                        self.headerLabel.isHidden = false
+                        self.image.isHidden = false
+                        
+                        self.currentObjectId = self.histObjectId[self.prevIndx]
+                        self.isCurrentItemPlace = self.histIsPlace[self.prevIndx]
+                        self.currentImage.removeAll()
+                        self.currentImage.append(self.histImageFile[self.prevIndx])
+                        
+                    }
+                }
+            }
+        }
+
+        /*
         histImageFile[prevIndx].getDataInBackground { (data, error) in
             
             if let imageData = data {
@@ -971,6 +1563,7 @@ class luckyStrikeViewController: UIViewController {
         isCurrentItemPlace = histIsPlace[prevIndx]
         currentImage.removeAll()
         currentImage.append(histImageFile[prevIndx])
+        */
 
     }
     
