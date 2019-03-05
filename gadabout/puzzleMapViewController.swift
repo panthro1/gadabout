@@ -27,7 +27,6 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
     var topIsEmpty : Bool = false
     var bottomIsEmpty : Bool = false
     var isHintDisplayed: Bool = false
-    var startTime = Date()
     var harder: Bool = false
     var puzzleCompleted: Bool = false
     var scorePoint = 20
@@ -40,7 +39,7 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
     var descriptionEng: String = ""
     var descriptionTr: String = ""
     var correctAnswer : String = ""
-    var imageFile = [PFFile]()
+    var imageFile = [UIImage]()
     var nofPlaceInstances: Int32 = 0
     var nofFoodInstances: Int32 = 0
     var placeFoodSelection: UInt32 = 0
@@ -93,98 +92,55 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
         allCenters.removeAll()
         
         let randomIndex = Int(arc4random_uniform(UInt32(self.imageFile.count)))
+        myPicture = imageFile[randomIndex]
         
-        self.imageFile[randomIndex].getDataInBackground { [unowned self] (data, error) in
-            
-            if let imageData = data {
-                
-                if let imageToDisplay = UIImage(data: imageData) {
-                    
-                    self.myPicture = imageToDisplay
-                    
-                    let images = self.slice(image: self.myPicture, into: nofRows)
-                    
-                    let screenSize = UIScreen.main.bounds
-                    
-                    var imageHeightAndWeight = Int(floor((screenSize.width*0.96)/3))
-                    let navBarHeight = self.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
-                    let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
-                    
-                    if self.harder == true {
-                        imageHeightAndWeight = Int(floor((screenSize.width*0.96)/4))
-                    }
-                    
-                    var xCent: Int = Int(0.02*screenSize.width) + imageHeightAndWeight/2
-                    var yCent: Int = upperOffset + imageHeightAndWeight/2
-                    
-                    
-                    for row in 0 ..< nofRows {
-                        for col in 0 ..< nofColumns {
-                            let myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: imageHeightAndWeight, height: imageHeightAndWeight))
-                            let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
-                            self.allCenters.append(currCent)
-                            myImgView.center = currCent
-                            myImgView.image = images[row*nofRows+col]
-                            myImgView.isUserInteractionEnabled = true
-                            myImgView.tag = 10+row*nofRows+col
-                            self.allImgViews.append(myImgView)
-                            self.view.addSubview(myImgView)
-                            xCent += imageHeightAndWeight
-                            
-                        }
-                        xCent = Int(0.02*screenSize.width) + imageHeightAndWeight/2
-                        yCent += imageHeightAndWeight
-                    }
-                    
-                    self.randomizeBlocks()
-                    self.allImgViews[0].removeFromSuperview()
-                    self.ensureSolvable()
-                    self.puzzleCompleted = false
-                    
-                    self.leftIsEmpty = false
-                    self.rightIsEmpty = false
-                    self.topIsEmpty = false
-                    self.bottomIsEmpty = false
-                    self.startTime = Date()
-
-                    
-                    /*var xCent: Int = 10+48/3*4
-                    var yCent: Int = 100+48/3*4
-                    
-                    for row in 0 ..< nofRows {
-                        for col in 0 ..< nofColumns {
-                            let myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: 96/3*4, height: 96/3*4))
-                            let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
-                            self.allCenters.append(currCent)
-                            myImgView.center = currCent
-                            myImgView.image = images[row*3+col]
-                            myImgView.isUserInteractionEnabled = true
-                            myImgView.tag = 10+row*3+col
-                            self.allImgViews.append(myImgView)
-                            self.view.addSubview(myImgView)
-                            xCent += 96/3*4
-                            
-                        }
-                        xCent = 10+48/3*4
-                        yCent += 96/3*4
-                    }
-                    
-                    self.randomizeBlocks()
-                    self.allImgViews[0].removeFromSuperview()
-                    
-                    self.leftIsEmpty = false
-                    self.rightIsEmpty = false
-                    self.topIsEmpty = false
-                    self.bottomIsEmpty = false
-                    self.startTime = Date()*/
-                    
-                    
-                    
-                }
-            }
-            activityIndicator.stopAnimating()
-            UIApplication.shared.endIgnoringInteractionEvents()
+        let images = slice(image: myPicture, into: nofRows)
+        
+        let screenSize = UIScreen.main.bounds
+        
+        var imageHeightAndWeight = Int(floor((screenSize.width*0.96)/3))
+        let navBarHeight = navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
+        let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
+        
+        if harder == true {
+            imageHeightAndWeight = Int(floor((screenSize.width*0.96)/4))
         }
+        
+        var xCent: Int = Int(0.02*screenSize.width) + imageHeightAndWeight/2
+        var yCent: Int = upperOffset + imageHeightAndWeight/2
+        
+        
+        for row in 0 ..< nofRows {
+            for col in 0 ..< nofColumns {
+                let myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: imageHeightAndWeight, height: imageHeightAndWeight))
+                let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
+                allCenters.append(currCent)
+                myImgView.center = currCent
+                myImgView.image = images[row*nofRows+col]
+                myImgView.isUserInteractionEnabled = true
+                myImgView.tag = 10+row*nofRows+col
+                allImgViews.append(myImgView)
+                view.addSubview(myImgView)
+                xCent += imageHeightAndWeight
+                
+            }
+            xCent = Int(0.02*screenSize.width) + imageHeightAndWeight/2
+            yCent += imageHeightAndWeight
+        }
+        
+        randomizeBlocks()
+        allImgViews[0].removeFromSuperview()
+        ensureSolvable()
+        puzzleCompleted = false
+        
+        leftIsEmpty = false
+        rightIsEmpty = false
+        topIsEmpty = false
+        bottomIsEmpty = false
+        
+        activityIndicator.stopAnimating()
+        UIApplication.shared.endIgnoringInteractionEvents()
+
     }
     
     
@@ -328,7 +284,6 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
             rightIsEmpty = false
             topIsEmpty = false
             bottomIsEmpty = false
-            startTime = Date()
         }
         else {
             let button = sender as? UIButton
@@ -500,26 +455,26 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
 
         NotificationCenter.default.addObserver(self, selector: #selector(isRotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
-        for indx in 0 ..< glbPlcImageFile.count {
+        for indx in 0 ..< glbPlcImgs.count {
             
             option1.append(glbPlcOption1[indx])
             option2.append(glbPlcOption2[indx])
             option3.append(glbPlcOption3[indx])
             option4.append(glbPlcOption4[indx])
-            imageFile.append(glbPlcImageFile[indx])
+            imageFile.append(glbPlcImgs[indx])
             correctAnswer.append(glbPlcCorrectAnswer[indx])
             descriptionEng.append(glbPlcDescriptionEng[indx])
             //objectId.append(glbPlcObjectId[indx])
             //isPlace.append(true)
         }
         
-        for indx in 0 ..< glbFdImageFile.count {
+        for indx in 0 ..< glbFdImgs.count {
             
             option1.append(glbFdOption1[indx])
             option2.append(glbFdOption2[indx])
             option3.append(glbFdOption3[indx])
             option4.append(glbFdOption4[indx])
-            imageFile.append(glbFdImageFile[indx])
+            imageFile.append(glbFdImgs[indx])
             correctAnswer.append(glbFdCorrectAnswer[indx])
             descriptionEng.append(glbFdDescriptionEng[indx])
             //objectId.append(glbFdObjectId[indx])
@@ -529,70 +484,57 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
         
         
         let randomIndex = Int(arc4random_uniform(UInt32(imageFile.count)))
+        myPicture = imageFile[randomIndex]
         
-        self.imageFile[randomIndex].getDataInBackground { [unowned self] (data, error) in
-            
-            if let imageData = data {
+        let images = slice(image: myPicture, into: 3)
+        
+        let imageHeightAndWeight = Int(floor((screenSize.width*0.96)/3))
+        let navBarHeight = navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
+        let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
+        
+        print("Navigation bar height: \(navBarHeight)")
+        
+        print("Screen width: \(screenSize.width)")
+        print("Image Height and Width: \(imageHeightAndWeight)")
+        print("Upper offset: \(upperOffset)")
+        
+        
+        var xCent: Int = Int(0.02*screenSize.width) + imageHeightAndWeight/2
+        var yCent: Int = upperOffset + imageHeightAndWeight/2
+        
+        let nofRows = 3
+        let nofColumns = 3
+        
+        for row in 0 ..< nofRows {
+            for col in 0 ..< nofColumns {
+                let myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: imageHeightAndWeight, height: imageHeightAndWeight))
+                let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
+                allCenters.append(currCent)
+                myImgView.center = currCent
+                myImgView.image = images[row*3+col]
+                myImgView.isUserInteractionEnabled = true
+                myImgView.tag = 10+row*nofRows+col
+                allImgViews.append(myImgView)
+                view.addSubview(myImgView)
+                xCent += imageHeightAndWeight
                 
-                if let imageToDisplay = UIImage(data: imageData) {
-                    
-                    self.myPicture = imageToDisplay
-                    
-                    let images = self.slice(image: self.myPicture, into: 3)
-                    
-                    let imageHeightAndWeight = Int(floor((screenSize.width*0.96)/3))
-                    let navBarHeight = self.navigationBar.frame.size.height + UIApplication.shared.statusBarFrame.height
-                    let upperOffset = Int(screenSize.height*0.01) + Int(navBarHeight)
-                    
-                    print("Navigation bar height: \(navBarHeight)")
-                    
-                    print("Screen width: \(screenSize.width)")
-                    print("Image Height and Width: \(imageHeightAndWeight)")
-                    print("Upper offset: \(upperOffset)")
-                    
-                    
-                    var xCent: Int = Int(0.02*screenSize.width) + imageHeightAndWeight/2
-                    var yCent: Int = upperOffset + imageHeightAndWeight/2
-                    
-                    let nofRows = 3
-                    let nofColumns = 3
-                    
-                    for row in 0 ..< nofRows {
-                        for col in 0 ..< nofColumns {
-                            let myImgView = UIImageView(frame: CGRect(x: 300, y: 234, width: imageHeightAndWeight, height: imageHeightAndWeight))
-                            let currCent:CGPoint = CGPoint(x: xCent, y: yCent)
-                            self.allCenters.append(currCent)
-                            myImgView.center = currCent
-                            myImgView.image = images[row*3+col]
-                            myImgView.isUserInteractionEnabled = true
-                            myImgView.tag = 10+row*nofRows+col
-                            self.allImgViews.append(myImgView)
-                            self.view.addSubview(myImgView)
-                            xCent += imageHeightAndWeight
-                            
-                        }
-                        xCent = Int(0.02*screenSize.width) + imageHeightAndWeight/2
-                        yCent += imageHeightAndWeight
-                    }
-                    
-                    self.randomizeBlocks()
-                    self.allImgViews[0].removeFromSuperview()
-                    self.ensureSolvable()
-                    self.puzzleCompleted = false
-                    
-                    
-                    
-                    self.leftIsEmpty = false
-                    self.rightIsEmpty = false
-                    self.topIsEmpty = false
-                    self.bottomIsEmpty = false
-                    self.startTime = Date()
-                    
-                    
-                }
             }
-            
+            xCent = Int(0.02*screenSize.width) + imageHeightAndWeight/2
+            yCent += imageHeightAndWeight
         }
+        
+        randomizeBlocks()
+        allImgViews[0].removeFromSuperview()
+        ensureSolvable()
+        puzzleCompleted = false
+        
+        
+        
+        leftIsEmpty = false
+        rightIsEmpty = false
+        topIsEmpty = false
+        bottomIsEmpty = false
+
 
 
     }
@@ -719,10 +661,6 @@ class puzzleMapViewController: UIViewController, scorePopupDelegate {
                     //completed = true // For only test purpose
                     if completed == true {
                         puzzleCompleted = true
-                        let endTime = Date()
-                        let seconds = endTime.timeIntervalSince(self.startTime)
-                        //let formatted = String(format: "%.1f", seconds)
-                        //self.displayAlert(title: "Puzzle completed", message: " You have completed in \(formatted) seconds.")
                         
                         glbPuzzleScore = glbPuzzleScore + scorePoint
                         showPopup(Score: scorePoint, totalScore: glbPuzzleScore)

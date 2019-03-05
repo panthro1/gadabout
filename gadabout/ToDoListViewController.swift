@@ -20,7 +20,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
     var itemDescriptions = [String]()
     var itemsCompleted = [Bool]()
     var showAll = true
-    var itemImages = [PFFile]()
+    var itemImages = [UIImage]()
 
     @IBOutlet weak var table: UITableView!
     
@@ -39,7 +39,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
             itemNames = glbToDoItemNames
             itemDescriptions = glbToDoItemDescriptions
             itemsCompleted = glbToDoItemCompleted
-            itemImages = glbToDoItemImageFile
+            itemImages = glbToDoItemImg
             
         case 1:
             showAll = false
@@ -53,7 +53,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
                     itemNames.append(glbToDoItemNames[indx])
                     itemDescriptions.append(glbToDoItemDescriptions[indx])
                     itemsCompleted.append(false)
-                    itemImages.append(glbToDoItemImageFile[indx])
+                    itemImages.append(glbToDoItemImg[indx])
                 }
                 indx += 1
             }
@@ -106,7 +106,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         itemNames = glbToDoItemNames
         itemDescriptions = glbToDoItemDescriptions
         itemsCompleted = glbToDoItemCompleted
-        itemImages = glbToDoItemImageFile
+        itemImages = glbToDoItemImg
         
         let font = UIFont.systemFont(ofSize: 16)
         allUncompletedSegment.setTitleTextAttributes([NSAttributedStringKey.font: font],
@@ -198,7 +198,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
             
             glbToDoItemNames.remove(at: itemIndx)
             glbToDoItemDescriptions.remove(at: itemIndx)
-            glbToDoItemImageFile.remove(at: itemIndx)
+            glbToDoItemImg.remove(at: itemIndx)
             glbToDoItemIDs.remove(at: itemIndx)
             glbToDoItemCompleted.remove(at: itemIndx)
             glbToDoItemPlaceOrFood.remove(at: itemIndx)
@@ -296,15 +296,7 @@ class ToDoListViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "toDoImagePopupID") as! ToDoImageDisplayViewController
         
-        itemImages[indx].getDataInBackground { (data, error) in
-            if let imageData = data {
-                if let imageToDisplay = UIImage(data: imageData) {
-
-                    popOverVC.toDoImage.image = imageToDisplay
-
-                }
-            }
-        }
+        popOverVC.toDoImage.image = itemImages[indx]
         popOverVC.header = itemNames[indx]//glbToDoItemNames[indx]
         popOverVC.desc = itemDescriptions[indx]//glbToDoItemDescriptions[indx]
         //let header = glbToDoItemNames[indx]

@@ -20,7 +20,6 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
     var descriptionEng = [String]()
     var descriptionTr = [String]()
     var correctAnswer = [String]()
-    var imageFile = [PFFile]()
     var imageArr = [UIImage]()
     var showDetail = [Bool]()
     var questionSeenBefore = [String]()
@@ -54,6 +53,8 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
     @IBOutlet weak var back: UIBarButtonItem!
     
     var interstitial: GADInterstitial!
+    
+    var cache = NSCache<AnyObject, AnyObject>()
     
     @IBAction func backTapped(_ sender: Any) {
 
@@ -171,37 +172,74 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                         
                         for food in foods {
                             
-                            glbFdOption1.append(food["alternative1"] as! String)
-                            glbFdOption2.append(food["alternative2"] as! String)
-                            glbFdOption3.append(food["alternative3"] as! String)
-                            glbFdOption4.append(food["alternative4"] as! String)
-                            glbFdImageFile.append(food["imageFile"] as! PFFile)
-                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
-                            glbFdDescriptionEng.append(food["engDescription"] as! String)
-                            
-                            if let question = food.objectId {
-                                glbFdObjectId.append(question)
+                            //Caching update
+                            let fdImg = food["imageFile"] as! PFFile
+                            fdImg.getDataInBackground { [unowned self] (data, error) in
+                                
+                                if let imageData = data {
+                                    
+                                    if let imageToDisplay = UIImage(data: imageData) {
+                                        
+                                        let imageCache = imageToDisplay
+                                        
+                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                        
+                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                            
+                                            glbFdImgs.append(cacheimg)
+                                            glbFdOption1.append(food["alternative1"] as! String)
+                                            glbFdOption2.append(food["alternative2"] as! String)
+                                            glbFdOption3.append(food["alternative3"] as! String)
+                                            glbFdOption4.append(food["alternative4"] as! String)
+                                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
+                                            glbFdDescriptionEng.append(food["engDescription"] as! String)
+                                            
+                                            if let question = food.objectId {
+                                                glbFdObjectId.append(question)
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                     
                     if glbFdObjectId.count < 4 {
                         let allFoodsQuery = PFQuery(className: "Foods")
-                        allFoodsQuery.findObjectsInBackground { (objects, error) in
+                        allFoodsQuery.findObjectsInBackground { [unowned self] (objects, error) in
                             if let foods = objects {
                                 
                                 for food in foods {
                                     
                                     if let question = food.objectId {
                                         if glbFdObjectId.firstIndex(of: question) == nil {
-                                            glbFdObjectId.append(question)
-                                            glbFdOption1.append(food["alternative1"] as! String)
-                                            glbFdOption2.append(food["alternative2"] as! String)
-                                            glbFdOption3.append(food["alternative3"] as! String)
-                                            glbFdOption4.append(food["alternative4"] as! String)
-                                            glbFdImageFile.append(food["imageFile"] as! PFFile)
-                                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
-                                            glbFdDescriptionEng.append(food["engDescription"] as! String)
+                                            
+                                            //Caching update
+                                            let fdImg = food["imageFile"] as! PFFile
+                                            fdImg.getDataInBackground { [unowned self] (data, error) in
+                                                
+                                                if let imageData = data {
+                                                    
+                                                    if let imageToDisplay = UIImage(data: imageData) {
+                                                        
+                                                        let imageCache = imageToDisplay
+                                                        
+                                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                        
+                                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                            
+                                                            glbFdImgs.append(cacheimg)
+                                                            glbFdObjectId.append(question)
+                                                            glbFdOption1.append(food["alternative1"] as! String)
+                                                            glbFdOption2.append(food["alternative2"] as! String)
+                                                            glbFdOption3.append(food["alternative3"] as! String)
+                                                            glbFdOption4.append(food["alternative4"] as! String)
+                                                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
+                                                            glbFdDescriptionEng.append(food["engDescription"] as! String)
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                     
@@ -222,7 +260,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                                 self.option2.append(glbFdOption2[randomIndex])
                                 self.option3.append(glbFdOption3[randomIndex])
                                 self.option4.append(glbFdOption4[randomIndex])
-                                self.imageFile.append(glbFdImageFile[randomIndex])
+                                self.imageArr.append(glbFdImgs[randomIndex])
                                 self.correctAnswer.append(glbFdCorrectAnswer[randomIndex])
                                 self.descriptionEng.append(glbFdDescriptionEng[randomIndex])
                                 self.questionCompleted.append(glbFdObjectId[randomIndex])
@@ -234,7 +272,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                                 glbFdOption2.remove(at: randomIndex)
                                 glbFdOption3.remove(at: randomIndex)
                                 glbFdOption4.remove(at: randomIndex)
-                                glbFdImageFile.remove(at: randomIndex)
+                                glbFdImgs.remove(at: randomIndex)
                                 glbFdCorrectAnswer.remove(at: randomIndex)
                                 glbFdDescriptionEng.remove(at: randomIndex)
                                 glbFdObjectId.remove(at: randomIndex)
@@ -260,7 +298,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                             self.option2.append(glbFdOption2[randomIndex])
                             self.option3.append(glbFdOption3[randomIndex])
                             self.option4.append(glbFdOption4[randomIndex])
-                            self.imageFile.append(glbFdImageFile[randomIndex])
+                            self.imageArr.append(glbFdImgs[randomIndex])
                             self.correctAnswer.append(glbFdCorrectAnswer[randomIndex])
                             self.descriptionEng.append(glbFdDescriptionEng[randomIndex])
                             self.questionCompleted.append(glbFdObjectId[randomIndex])
@@ -272,7 +310,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                             glbFdOption2.remove(at: randomIndex)
                             glbFdOption3.remove(at: randomIndex)
                             glbFdOption4.remove(at: randomIndex)
-                            glbFdImageFile.remove(at: randomIndex)
+                            glbFdImgs.remove(at: randomIndex)
                             glbFdCorrectAnswer.remove(at: randomIndex)
                             glbFdDescriptionEng.remove(at: randomIndex)
                             glbFdObjectId.remove(at: randomIndex)
@@ -298,7 +336,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                 option2.append(glbFdOption2[randomIndex])
                 option3.append(glbFdOption3[randomIndex])
                 option4.append(glbFdOption4[randomIndex])
-                imageFile.append(glbFdImageFile[randomIndex])
+                imageArr.append(glbFdImgs[randomIndex])
                 correctAnswer.append(glbFdCorrectAnswer[randomIndex])
                 descriptionEng.append(glbFdDescriptionEng[randomIndex])
                 questionCompleted.append(glbFdObjectId[randomIndex])
@@ -310,7 +348,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                 glbFdOption2.remove(at: randomIndex)
                 glbFdOption3.remove(at: randomIndex)
                 glbFdOption4.remove(at: randomIndex)
-                glbFdImageFile.remove(at: randomIndex)
+                glbFdImgs.remove(at: randomIndex)
                 glbFdCorrectAnswer.remove(at: randomIndex)
                 glbFdDescriptionEng.remove(at: randomIndex)
                 glbFdObjectId.remove(at: randomIndex)
@@ -550,35 +588,13 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             cell.detailText.sizeToFit()
             cell.detailText.numberOfLines = 0
             
-            imageFile[indexPath.row].getDataInBackground { (data, error) in
-                
-                if let imageData = data {
-                    
-                    if let imageToDisplay = UIImage(data: imageData) {
-                        
-                        cell.foodImage.image = imageToDisplay
-                        
-                    }
-                }
-            }
-            
+            cell.foodImage.image = imageArr[indexPath.row]
             
         }
         else {
             
             cell.detailsButton.setTitle("Details", for: [])
-            imageFile[indexPath.row].getDataInBackground { (data, error) in
-                
-                if let imageData = data {
-                    
-                    if let imageToDisplay = UIImage(data: imageData) {
-                        
-                        cell.foodImage.image = imageToDisplay
-                        
-                    }
-                }
-                
-            }
+            cell.foodImage.image = imageArr[indexPath.row]
             
             cell.markOption1.isHidden = false
             cell.markOption2.isHidden = false
@@ -842,7 +858,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                 glbToDoItemPlaceOrFood.append("Food")
                 glbToDoItemCompleted.append(false)
                 glbToDoItemDescriptions.append(descriptionEng[tappedIndexPath.row])
-                glbToDoItemImageFile.append(imageFile[tappedIndexPath.row])
+                glbToDoItemImg.append(imageArr[tappedIndexPath.row])
                 glbToDoItemIDs.append(questionCompleted[tappedIndexPath.row])
                 
                 if let correctAnsInt = Int(correctAnswer[tappedIndexPath.row]) {
@@ -890,7 +906,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         option2.removeAll()
         option3.removeAll()
         option4.removeAll()
-        imageFile.removeAll()
+        imageArr.removeAll()
         correctAnswer.removeAll()
         descriptionEng.removeAll()
         descriptionTr.removeAll()
@@ -934,16 +950,34 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                         
                         for food in foods {
                             
-                            glbFdOption1.append(food["alternative1"] as! String)
-                            glbFdOption2.append(food["alternative2"] as! String)
-                            glbFdOption3.append(food["alternative3"] as! String)
-                            glbFdOption4.append(food["alternative4"] as! String)
-                            glbFdImageFile.append(food["imageFile"] as! PFFile)
-                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
-                            glbFdDescriptionEng.append(food["engDescription"] as! String)
-                            
-                            if let question = food.objectId {
-                                glbFdObjectId.append(question)
+                            //Caching update
+                            let fdImg = food["imageFile"] as! PFFile
+                            fdImg.getDataInBackground { [unowned self] (data, error) in
+                                
+                                if let imageData = data {
+                                    
+                                    if let imageToDisplay = UIImage(data: imageData) {
+                                        
+                                        let imageCache = imageToDisplay
+                                        
+                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                        
+                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                            
+                                            glbFdImgs.append(cacheimg)
+                                            glbFdOption1.append(food["alternative1"] as! String)
+                                            glbFdOption2.append(food["alternative2"] as! String)
+                                            glbFdOption3.append(food["alternative3"] as! String)
+                                            glbFdOption4.append(food["alternative4"] as! String)
+                                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
+                                            glbFdDescriptionEng.append(food["engDescription"] as! String)
+                                            
+                                            if let question = food.objectId {
+                                                glbFdObjectId.append(question)
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -957,14 +991,33 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                                     
                                     if let question = food.objectId {
                                         if glbFdObjectId.firstIndex(of: question) == nil {
-                                            glbFdObjectId.append(question)
-                                            glbFdOption1.append(food["alternative1"] as! String)
-                                            glbFdOption2.append(food["alternative2"] as! String)
-                                            glbFdOption3.append(food["alternative3"] as! String)
-                                            glbFdOption4.append(food["alternative4"] as! String)
-                                            glbFdImageFile.append(food["imageFile"] as! PFFile)
-                                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
-                                            glbFdDescriptionEng.append(food["engDescription"] as! String)
+                                            
+                                            //Caching update
+                                            let fdImg = food["imageFile"] as! PFFile
+                                            fdImg.getDataInBackground { [unowned self] (data, error) in
+                                                
+                                                if let imageData = data {
+                                                    
+                                                    if let imageToDisplay = UIImage(data: imageData) {
+                                                        
+                                                        let imageCache = imageToDisplay
+                                                        
+                                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                        
+                                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                            
+                                                            glbFdImgs.append(cacheimg)
+                                                            glbFdObjectId.append(question)
+                                                            glbFdOption1.append(food["alternative1"] as! String)
+                                                            glbFdOption2.append(food["alternative2"] as! String)
+                                                            glbFdOption3.append(food["alternative3"] as! String)
+                                                            glbFdOption4.append(food["alternative4"] as! String)
+                                                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
+                                                            glbFdDescriptionEng.append(food["engDescription"] as! String)
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                     
@@ -985,7 +1038,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                                 self.option2.append(glbFdOption2[randomIndex])
                                 self.option3.append(glbFdOption3[randomIndex])
                                 self.option4.append(glbFdOption4[randomIndex])
-                                self.imageFile.append(glbFdImageFile[randomIndex])
+                                self.imageArr.append(glbFdImgs[randomIndex])
                                 self.correctAnswer.append(glbFdCorrectAnswer[randomIndex])
                                 self.descriptionEng.append(glbFdDescriptionEng[randomIndex])
                                 self.questionCompleted.append(glbFdObjectId[randomIndex])
@@ -997,7 +1050,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                                 glbFdOption2.remove(at: randomIndex)
                                 glbFdOption3.remove(at: randomIndex)
                                 glbFdOption4.remove(at: randomIndex)
-                                glbFdImageFile.remove(at: randomIndex)
+                                glbFdImgs.remove(at: randomIndex)
                                 glbFdCorrectAnswer.remove(at: randomIndex)
                                 glbFdDescriptionEng.remove(at: randomIndex)
                                 glbFdObjectId.remove(at: randomIndex)
@@ -1025,7 +1078,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                             self.option2.append(glbFdOption2[randomIndex])
                             self.option3.append(glbFdOption3[randomIndex])
                             self.option4.append(glbFdOption4[randomIndex])
-                            self.imageFile.append(glbFdImageFile[randomIndex])
+                            self.imageArr.append(glbFdImgs[randomIndex])
                             self.correctAnswer.append(glbFdCorrectAnswer[randomIndex])
                             self.descriptionEng.append(glbFdDescriptionEng[randomIndex])
                             self.questionCompleted.append(glbFdObjectId[randomIndex])
@@ -1037,7 +1090,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                             glbFdOption2.remove(at: randomIndex)
                             glbFdOption3.remove(at: randomIndex)
                             glbFdOption4.remove(at: randomIndex)
-                            glbFdImageFile.remove(at: randomIndex)
+                            glbFdImgs.remove(at: randomIndex)
                             glbFdCorrectAnswer.remove(at: randomIndex)
                             glbFdDescriptionEng.remove(at: randomIndex)
                             glbFdObjectId.remove(at: randomIndex)
@@ -1065,7 +1118,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                 option2.append(glbFdOption2[randomIndex])
                 option3.append(glbFdOption3[randomIndex])
                 option4.append(glbFdOption4[randomIndex])
-                imageFile.append(glbFdImageFile[randomIndex])
+                imageArr.append(glbFdImgs[randomIndex])
                 correctAnswer.append(glbFdCorrectAnswer[randomIndex])
                 descriptionEng.append(glbFdDescriptionEng[randomIndex])
                 questionCompleted.append(glbFdObjectId[randomIndex])
@@ -1077,7 +1130,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                 glbFdOption2.remove(at: randomIndex)
                 glbFdOption3.remove(at: randomIndex)
                 glbFdOption4.remove(at: randomIndex)
-                glbFdImageFile.remove(at: randomIndex)
+                glbFdImgs.remove(at: randomIndex)
                 glbFdCorrectAnswer.remove(at: randomIndex)
                 glbFdDescriptionEng.remove(at: randomIndex)
                 glbFdObjectId.remove(at: randomIndex)

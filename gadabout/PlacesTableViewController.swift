@@ -22,7 +22,6 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var descriptionEng = [String]()
     var descriptionTr = [String]()
     var correctAnswer = [String]()
-    var imageFile = [PFFile]()
     var imageArr = [UIImage]()
     var showDetail = [Bool]()
     var questionSeenBefore = [String]()
@@ -53,6 +52,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var progressLayer: CAShapeLayer!
     
     var interstitial: GADInterstitial!
+    
+    var cache = NSCache<AnyObject, AnyObject>()
     
     @IBOutlet weak var back: UIBarButtonItem!
     
@@ -182,37 +183,76 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                         
                         for place in places {
                             
-                            glbPlcOption1.append(place["alternative1"] as! String)
-                            glbPlcOption2.append(place["alternative2"] as! String)
-                            glbPlcOption3.append(place["alternative3"] as! String)
-                            glbPlcOption4.append(place["alternative4"] as! String)
-                            glbPlcImageFile.append(place["imageFile"] as! PFFile)
-                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
-                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
-                            
-                            if let question = place.objectId {
-                                glbPlcObjectId.append(question)
+                            //Caching update
+                            let plcImg = place["imageFile"] as! PFFile
+                            plcImg.getDataInBackground { [unowned self] (data, error) in
+                                
+                                if let imageData = data {
+                                    
+                                    if let imageToDisplay = UIImage(data: imageData) {
+                                        
+                                        let imageCache = imageToDisplay
+                                        
+                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                        
+                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                            
+                                            glbPlcImgs.append(cacheimg)
+                                            glbPlcOption1.append(place["alternative1"] as! String)
+                                            glbPlcOption2.append(place["alternative2"] as! String)
+                                            glbPlcOption3.append(place["alternative3"] as! String)
+                                            glbPlcOption4.append(place["alternative4"] as! String)
+                                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
+                                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
+                                            
+                                            if let question = place.objectId {
+                                                glbPlcObjectId.append(question)
+                                            }
+
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                     
                     if glbPlcObjectId.count < 4 {
                         let allPlacesQuery = PFQuery(className: "Places")
-                        allPlacesQuery.findObjectsInBackground { (objects, error) in
+                        allPlacesQuery.findObjectsInBackground { [unowned self] (objects, error) in
                             if let places = objects {
                                 
                                 for place in places {
                                     
                                     if let question = place.objectId {
                                         if glbPlcObjectId.firstIndex(of: question) == nil {
-                                            glbPlcObjectId.append(question)
-                                            glbPlcOption1.append(place["alternative1"] as! String)
-                                            glbPlcOption2.append(place["alternative2"] as! String)
-                                            glbPlcOption3.append(place["alternative3"] as! String)
-                                            glbPlcOption4.append(place["alternative4"] as! String)
-                                            glbPlcImageFile.append(place["imageFile"] as! PFFile)
-                                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
-                                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
+                                            
+                                            //Caching update
+                                            let plcImg = place["imageFile"] as! PFFile
+                                            plcImg.getDataInBackground { [unowned self] (data, error) in
+                                                
+                                                if let imageData = data {
+                                                    
+                                                    if let imageToDisplay = UIImage(data: imageData) {
+                                                        
+                                                        let imageCache = imageToDisplay
+                                                        
+                                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                        
+                                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                            
+                                                            glbPlcImgs.append(cacheimg)
+                                                            glbPlcObjectId.append(question)
+                                                            glbPlcOption1.append(place["alternative1"] as! String)
+                                                            glbPlcOption2.append(place["alternative2"] as! String)
+                                                            glbPlcOption3.append(place["alternative3"] as! String)
+                                                            glbPlcOption4.append(place["alternative4"] as! String)
+                                                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
+                                                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
+
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                     
@@ -233,7 +273,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                                 self.option2.append(glbPlcOption2[randomIndex])
                                 self.option3.append(glbPlcOption3[randomIndex])
                                 self.option4.append(glbPlcOption4[randomIndex])
-                                self.imageFile.append(glbPlcImageFile[randomIndex])
+                                self.imageArr.append(glbPlcImgs[randomIndex])
                                 self.correctAnswer.append(glbPlcCorrectAnswer[randomIndex])
                                 self.descriptionEng.append(glbPlcDescriptionEng[randomIndex])
                                 self.questionCompleted.append(glbPlcObjectId[randomIndex])
@@ -245,7 +285,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                                 glbPlcOption2.remove(at: randomIndex)
                                 glbPlcOption3.remove(at: randomIndex)
                                 glbPlcOption4.remove(at: randomIndex)
-                                glbPlcImageFile.remove(at: randomIndex)
+                                glbPlcImgs.remove(at: randomIndex)
                                 glbPlcCorrectAnswer.remove(at: randomIndex)
                                 glbPlcDescriptionEng.remove(at: randomIndex)
                                 glbPlcObjectId.remove(at: randomIndex)
@@ -271,7 +311,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                             self.option2.append(glbPlcOption2[randomIndex])
                             self.option3.append(glbPlcOption3[randomIndex])
                             self.option4.append(glbPlcOption4[randomIndex])
-                            self.imageFile.append(glbPlcImageFile[randomIndex])
+                            self.imageArr.append(glbPlcImgs[randomIndex])
                             self.correctAnswer.append(glbPlcCorrectAnswer[randomIndex])
                             self.descriptionEng.append(glbPlcDescriptionEng[randomIndex])
                             self.questionCompleted.append(glbPlcObjectId[randomIndex])
@@ -283,7 +323,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                             glbPlcOption2.remove(at: randomIndex)
                             glbPlcOption3.remove(at: randomIndex)
                             glbPlcOption4.remove(at: randomIndex)
-                            glbPlcImageFile.remove(at: randomIndex)
+                            glbPlcImgs.remove(at: randomIndex)
                             glbPlcCorrectAnswer.remove(at: randomIndex)
                             glbPlcDescriptionEng.remove(at: randomIndex)
                             glbPlcObjectId.remove(at: randomIndex)
@@ -311,7 +351,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 option2.append(glbPlcOption2[randomIndex])
                 option3.append(glbPlcOption3[randomIndex])
                 option4.append(glbPlcOption4[randomIndex])
-                imageFile.append(glbPlcImageFile[randomIndex])
+                imageArr.append(glbPlcImgs[randomIndex])
                 correctAnswer.append(glbPlcCorrectAnswer[randomIndex])
                 descriptionEng.append(glbPlcDescriptionEng[randomIndex])
                 questionCompleted.append(glbPlcObjectId[randomIndex])
@@ -323,7 +363,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 glbPlcOption2.remove(at: randomIndex)
                 glbPlcOption3.remove(at: randomIndex)
                 glbPlcOption4.remove(at: randomIndex)
-                glbPlcImageFile.remove(at: randomIndex)
+                glbPlcImgs.remove(at: randomIndex)
                 glbPlcCorrectAnswer.remove(at: randomIndex)
                 glbPlcDescriptionEng.remove(at: randomIndex)
                 glbPlcObjectId.remove(at: randomIndex)
@@ -577,35 +617,13 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             cell.detailText.sizeToFit()
             cell.detailText.numberOfLines = 0
             
-            imageFile[indexPath.row].getDataInBackground { (data, error) in
-                
-                if let imageData = data {
-                    
-                    if let imageToDisplay = UIImage(data: imageData) {
-                        
-                        cell.placeImage.image = imageToDisplay
-                        
-                    }
-                }
-            }
-
+            cell.placeImage.image = imageArr[indexPath.row]
 
         }
         else {
             
             cell.detailsButton.setTitle("Details", for: [])
-            imageFile[indexPath.row].getDataInBackground { (data, error) in
-            
-                if let imageData = data {
-                
-                    if let imageToDisplay = UIImage(data: imageData) {
-                    
-                        cell.placeImage.image = imageToDisplay
-                    
-                    }
-                }
-            
-            }
+            cell.placeImage.image = imageArr[indexPath.row]
             
             cell.markOption1.isHidden = false
             cell.markOption2.isHidden = false
@@ -872,7 +890,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 glbToDoItemPlaceOrFood.append("Place")
                 glbToDoItemCompleted.append(false)
                 glbToDoItemDescriptions.append(descriptionEng[tappedIndexPath.row])
-                glbToDoItemImageFile.append(imageFile[tappedIndexPath.row])
+                glbToDoItemImg.append(imageArr[tappedIndexPath.row])
                 glbToDoItemIDs.append(questionCompleted[tappedIndexPath.row])
                 
                 if let correctAnsInt = Int(correctAnswer[tappedIndexPath.row]) {
@@ -925,7 +943,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         option2.removeAll()
         option3.removeAll()
         option4.removeAll()
-        imageFile.removeAll()
+        imageArr.removeAll()
         correctAnswer.removeAll()
         descriptionEng.removeAll()
         descriptionTr.removeAll()
@@ -972,16 +990,36 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                         
                         for place in places {
                             
-                            glbPlcOption1.append(place["alternative1"] as! String)
-                            glbPlcOption2.append(place["alternative2"] as! String)
-                            glbPlcOption3.append(place["alternative3"] as! String)
-                            glbPlcOption4.append(place["alternative4"] as! String)
-                            glbPlcImageFile.append(place["imageFile"] as! PFFile)
-                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
-                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
                             
-                            if let question = place.objectId {
-                                glbPlcObjectId.append(question)
+                            //Caching update
+                            let plcImg = place["imageFile"] as! PFFile
+                            plcImg.getDataInBackground { [unowned self] (data, error) in
+                                
+                                if let imageData = data {
+                                    
+                                    if let imageToDisplay = UIImage(data: imageData) {
+                                        
+                                        let imageCache = imageToDisplay
+                                        
+                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                        
+                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                            
+                                            glbPlcImgs.append(cacheimg)
+                                            glbPlcOption1.append(place["alternative1"] as! String)
+                                            glbPlcOption2.append(place["alternative2"] as! String)
+                                            glbPlcOption3.append(place["alternative3"] as! String)
+                                            glbPlcOption4.append(place["alternative4"] as! String)
+                                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
+                                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
+                                            
+                                            if let question = place.objectId {
+                                                glbPlcObjectId.append(question)
+                                            }
+
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -995,14 +1033,34 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                                     
                                     if let question = place.objectId {
                                         if glbPlcObjectId.firstIndex(of: question) == nil {
-                                            glbPlcObjectId.append(question)
-                                            glbPlcOption1.append(place["alternative1"] as! String)
-                                            glbPlcOption2.append(place["alternative2"] as! String)
-                                            glbPlcOption3.append(place["alternative3"] as! String)
-                                            glbPlcOption4.append(place["alternative4"] as! String)
-                                            glbPlcImageFile.append(place["imageFile"] as! PFFile)
-                                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
-                                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
+                                            
+                                            //Caching update
+                                            let plcImg = place["imageFile"] as! PFFile
+                                            plcImg.getDataInBackground { [unowned self] (data, error) in
+                                                
+                                                if let imageData = data {
+                                                    
+                                                    if let imageToDisplay = UIImage(data: imageData) {
+                                                        
+                                                        let imageCache = imageToDisplay
+                                                        
+                                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                        
+                                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                            
+                                                            glbPlcImgs.append(cacheimg)
+                                                            glbPlcObjectId.append(question)
+                                                            glbPlcOption1.append(place["alternative1"] as! String)
+                                                            glbPlcOption2.append(place["alternative2"] as! String)
+                                                            glbPlcOption3.append(place["alternative3"] as! String)
+                                                            glbPlcOption4.append(place["alternative4"] as! String)
+                                                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
+                                                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
+
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                     
@@ -1023,7 +1081,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                                 self.option2.append(glbPlcOption2[randomIndex])
                                 self.option3.append(glbPlcOption3[randomIndex])
                                 self.option4.append(glbPlcOption4[randomIndex])
-                                self.imageFile.append(glbPlcImageFile[randomIndex])
+                                self.imageArr.append(glbPlcImgs[randomIndex])
                                 self.correctAnswer.append(glbPlcCorrectAnswer[randomIndex])
                                 self.descriptionEng.append(glbPlcDescriptionEng[randomIndex])
                                 self.questionCompleted.append(glbPlcObjectId[randomIndex])
@@ -1035,7 +1093,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                                 glbPlcOption2.remove(at: randomIndex)
                                 glbPlcOption3.remove(at: randomIndex)
                                 glbPlcOption4.remove(at: randomIndex)
-                                glbPlcImageFile.remove(at: randomIndex)
+                                glbPlcImgs.remove(at: randomIndex)
                                 glbPlcCorrectAnswer.remove(at: randomIndex)
                                 glbPlcDescriptionEng.remove(at: randomIndex)
                                 glbPlcObjectId.remove(at: randomIndex)
@@ -1063,7 +1121,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                             self.option2.append(glbPlcOption2[randomIndex])
                             self.option3.append(glbPlcOption3[randomIndex])
                             self.option4.append(glbPlcOption4[randomIndex])
-                            self.imageFile.append(glbPlcImageFile[randomIndex])
+                            self.imageArr.append(glbPlcImgs[randomIndex])
                             self.correctAnswer.append(glbPlcCorrectAnswer[randomIndex])
                             self.descriptionEng.append(glbPlcDescriptionEng[randomIndex])
                             self.questionCompleted.append(glbPlcObjectId[randomIndex])
@@ -1075,7 +1133,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                             glbPlcOption2.remove(at: randomIndex)
                             glbPlcOption3.remove(at: randomIndex)
                             glbPlcOption4.remove(at: randomIndex)
-                            glbPlcImageFile.remove(at: randomIndex)
+                            glbPlcImgs.remove(at: randomIndex)
                             glbPlcCorrectAnswer.remove(at: randomIndex)
                             glbPlcDescriptionEng.remove(at: randomIndex)
                             glbPlcObjectId.remove(at: randomIndex)
@@ -1103,7 +1161,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 option2.append(glbPlcOption2[randomIndex])
                 option3.append(glbPlcOption3[randomIndex])
                 option4.append(glbPlcOption4[randomIndex])
-                imageFile.append(glbPlcImageFile[randomIndex])
+                imageArr.append(glbPlcImgs[randomIndex])
                 correctAnswer.append(glbPlcCorrectAnswer[randomIndex])
                 descriptionEng.append(glbPlcDescriptionEng[randomIndex])
                 questionCompleted.append(glbPlcObjectId[randomIndex])
@@ -1115,7 +1173,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 glbPlcOption2.remove(at: randomIndex)
                 glbPlcOption3.remove(at: randomIndex)
                 glbPlcOption4.remove(at: randomIndex)
-                glbPlcImageFile.remove(at: randomIndex)
+                glbPlcImgs.remove(at: randomIndex)
                 glbPlcCorrectAnswer.remove(at: randomIndex)
                 glbPlcDescriptionEng.remove(at: randomIndex)
                 glbPlcObjectId.remove(at: randomIndex)

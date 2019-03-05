@@ -13,7 +13,7 @@ import GoogleMobileAds
 import Reachability
 import UserNotifications
 
-var glbPlcImageFile = [PFFile]() // Global place variables
+//var glbPlcImageFile = [PFFile]() // Global place variables
 var glbPlcOption1 = [String]()
 var glbPlcOption2 = [String]()
 var glbPlcOption3 = [String]()
@@ -21,8 +21,9 @@ var glbPlcOption4 = [String]()
 var glbPlcCorrectAnswer = [String]()
 var glbPlcDescriptionEng = [String]()
 var glbPlcObjectId = [String]()
+var glbPlcImgs = [UIImage]()
 
-var glbFdImageFile = [PFFile]() // Global food variables
+//var glbFdImageFile = [PFFile]() // Global food variables
 var glbFdOption1 = [String]()
 var glbFdOption2 = [String]()
 var glbFdOption3 = [String]()
@@ -30,10 +31,11 @@ var glbFdOption4 = [String]()
 var glbFdCorrectAnswer = [String]()
 var glbFdDescriptionEng = [String]()
 var glbFdObjectId = [String]()
+var glbFdImgs = [UIImage]()
 
 var glbToDoItemNames = [String]()
 var glbToDoItemDescriptions = [String]()
-var glbToDoItemImageFile = [PFFile]()
+var glbToDoItemImg = [UIImage]()
 var glbToDoItemIDs = [String]()
 var glbToDoItemCompleted = [Bool]()
 var glbToDoItemPlaceOrFood = [String]()
@@ -49,6 +51,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
     
     var isEnglish = true
     var questionSeenBefore = [String]()
+    var cache = NSCache<AnyObject, AnyObject>()
 
     
     @IBOutlet weak var mainPageTableView: UITableView!
@@ -217,42 +220,84 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                 
                 let placesQuery = PFQuery(className: "Places")
                 placesQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
-                placesQuery.findObjectsInBackground { (objects, error) in
+                placesQuery.findObjectsInBackground { [unowned self] (objects, error) in
                     if let places = objects {
                         
                         for place in places {
                             
-                            glbPlcOption1.append(place["alternative1"] as! String)
-                            glbPlcOption2.append(place["alternative2"] as! String)
-                            glbPlcOption3.append(place["alternative3"] as! String)
-                            glbPlcOption4.append(place["alternative4"] as! String)
-                            glbPlcImageFile.append(place["imageFile"] as! PFFile)
-                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
-                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
-                            
-                            if let question = place.objectId {
-                                glbPlcObjectId.append(question)
+                            //Caching update
+                            let plcImg = place["imageFile"] as! PFFile
+                            plcImg.getDataInBackground { [unowned self] (data, error) in
+                                
+                                if let imageData = data {
+                                    
+                                    if let imageToDisplay = UIImage(data: imageData) {
+                                        
+                                        let imageCache = imageToDisplay
+                                        
+                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                        
+                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                            
+                                            glbPlcImgs.append(cacheimg)
+                                            
+                                            glbPlcOption1.append(place["alternative1"] as! String)
+                                            glbPlcOption2.append(place["alternative2"] as! String)
+                                            glbPlcOption3.append(place["alternative3"] as! String)
+                                            glbPlcOption4.append(place["alternative4"] as! String)
+                                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
+                                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
+                                            
+                                            if let question = place.objectId {
+                                                glbPlcObjectId.append(question)
+                                            }
+
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                     
                     if glbPlcObjectId.count < 4 {
                         let allPlacesQuery = PFQuery(className: "Places")
-                        allPlacesQuery.findObjectsInBackground { (objects, error) in
+                        allPlacesQuery.findObjectsInBackground { [unowned self] (objects, error) in
                             if let places = objects {
                                 
                                 for place in places {
                                     
                                     if let question = place.objectId {
                                         if glbPlcObjectId.firstIndex(of: question) == nil {
-                                            glbPlcObjectId.append(question)
-                                            glbPlcOption1.append(place["alternative1"] as! String)
-                                            glbPlcOption2.append(place["alternative2"] as! String)
-                                            glbPlcOption3.append(place["alternative3"] as! String)
-                                            glbPlcOption4.append(place["alternative4"] as! String)
-                                            glbPlcImageFile.append(place["imageFile"] as! PFFile)
-                                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
-                                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
+                                            
+                                            //Caching update
+                                            let plcImg = place["imageFile"] as! PFFile
+                                            plcImg.getDataInBackground { [unowned self] (data, error) in
+                                                
+                                                if let imageData = data {
+                                                    
+                                                    if let imageToDisplay = UIImage(data: imageData) {
+                                                        
+                                                        let imageCache = imageToDisplay
+                                                        
+                                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                        
+                                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                            
+                                                            glbPlcImgs.append(cacheimg)
+                                                            
+                                                            glbPlcObjectId.append(question)
+                                                            glbPlcOption1.append(place["alternative1"] as! String)
+                                                            glbPlcOption2.append(place["alternative2"] as! String)
+                                                            glbPlcOption3.append(place["alternative3"] as! String)
+                                                            glbPlcOption4.append(place["alternative4"] as! String)
+                                                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
+                                                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
+
+                                                        }
+                                                    }
+                                                }
+                                            }
+
                                         }
                                     }
                                 }
@@ -309,44 +354,86 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                 
                 let foodsQuery = PFQuery(className: "Foods")
                 foodsQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
-                foodsQuery.findObjectsInBackground { (objects, error) in
+                foodsQuery.findObjectsInBackground { [unowned self] (objects, error) in
                     if let foods = objects {
                         
                         for food in foods {
                             
-                            glbFdOption1.append(food["alternative1"] as! String)
-                            glbFdOption2.append(food["alternative2"] as! String)
-                            glbFdOption3.append(food["alternative3"] as! String)
-                            glbFdOption4.append(food["alternative4"] as! String)
-                            glbFdImageFile.append(food["imageFile"] as! PFFile)
-                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
-                            glbFdDescriptionEng.append(food["engDescription"] as! String)
-                            
-                            if let question = food.objectId {
-                                glbFdObjectId.append(question)
+                            //Caching update
+                            let fdImg = food["imageFile"] as! PFFile
+                            fdImg.getDataInBackground { [unowned self] (data, error) in
+                                
+                                if let imageData = data {
+                                    
+                                    if let imageToDisplay = UIImage(data: imageData) {
+                                        
+                                        let imageCache = imageToDisplay
+                                        
+                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                        
+                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                            
+                                            glbFdImgs.append(cacheimg)
+                                            glbFdOption1.append(food["alternative1"] as! String)
+                                            glbFdOption2.append(food["alternative2"] as! String)
+                                            glbFdOption3.append(food["alternative3"] as! String)
+                                            glbFdOption4.append(food["alternative4"] as! String)
+                                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
+                                            glbFdDescriptionEng.append(food["engDescription"] as! String)
+                                            
+                                            if let question = food.objectId {
+                                                glbFdObjectId.append(question)
+                                            }
+
+                                        }
+                                    }
+                                }
                             }
+
                             
                         }
                     }
                     
                     if glbFdObjectId.count < 4 {
                         let allFoodsQuery = PFQuery(className: "Foods")
-                        allFoodsQuery.findObjectsInBackground { (objects, error) in
+                        allFoodsQuery.findObjectsInBackground { [unowned self] (objects, error) in
                             if let foods = objects {
                                 
                                 for food in foods {
                                     
                                     if let question = food.objectId {
                                         if glbFdObjectId.firstIndex(of: question) == nil {
-                                            glbFdObjectId.append(question)
-                                            glbFdOption1.append(food["alternative1"] as! String)
-                                            glbFdOption2.append(food["alternative2"] as! String)
-                                            glbFdOption3.append(food["alternative3"] as! String)
-                                            glbFdOption4.append(food["alternative4"] as! String)
-                                            glbFdImageFile.append(food["imageFile"] as! PFFile)
-                                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
-                                            glbFdDescriptionEng.append(food["engDescription"] as! String)
+                                            
+                                            //Caching update
+                                            let fdImg = food["imageFile"] as! PFFile
+                                            fdImg.getDataInBackground { [unowned self] (data, error) in
+                                                
+                                                if let imageData = data {
+                                                    
+                                                    if let imageToDisplay = UIImage(data: imageData) {
+                                                        
+                                                        let imageCache = imageToDisplay
+                                                        
+                                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                        
+                                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                            
+                                                            glbFdImgs.append(cacheimg)
+                                                            glbFdObjectId.append(question)
+                                                            glbFdOption1.append(food["alternative1"] as! String)
+                                                            glbFdOption2.append(food["alternative2"] as! String)
+                                                            glbFdOption3.append(food["alternative3"] as! String)
+                                                            glbFdOption4.append(food["alternative4"] as! String)
+                                                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
+                                                            glbFdDescriptionEng.append(food["engDescription"] as! String)
+
+                                                        }
+                                                    }
+                                                }
+                                            }
+
                                         }
+                                        
                                     }
                                 }
                             }
@@ -380,7 +467,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
             var localItemIDs = [String]()
             let toDoListItemQuery = PFQuery(className: "ToDoList")
             toDoListItemQuery.whereKey("userId", equalTo: PFUser.current()?.objectId)
-            toDoListItemQuery.findObjectsInBackground { (objects, error) in
+            toDoListItemQuery.findObjectsInBackground { [unowned self] (objects, error) in
                 if let error = error {
                     print(error.localizedDescription)
                 }
@@ -415,30 +502,49 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                     print("place items count : \(placeItems.count)")
                     let placeQuery = PFQuery(className: "Places")
                     placeQuery.whereKey("objectId", containedIn: placeItems)
-                    placeQuery.findObjectsInBackground(block: { (objects, error) in
+                    placeQuery.findObjectsInBackground(block: { [unowned self] (objects, error) in
                         if let error = error {
                             print(error.localizedDescription)
                         }
                         else {
                             if let places = objects {
                                 for place in places {
-                                    if let correctAnsInt = Int(place["correctAlternative"] as! String) {
-                                        if correctAnsInt == 1 {
-                                            glbToDoItemNames.append(place["alternative1"] as! String)
-                                        }
-                                        else if correctAnsInt == 2 {
-                                            glbToDoItemNames.append(place["alternative2"] as! String)
-                                        }
-                                        else if correctAnsInt == 3 {
-                                            glbToDoItemNames.append(place["alternative3"] as! String)
-                                        }
-                                        else if correctAnsInt == 4 {
-                                            glbToDoItemNames.append(place["alternative4"] as! String)
+                                    
+                                    //Caching update
+                                    let todoImg = place["imageFile"] as! PFFile
+                                    todoImg.getDataInBackground { [unowned self] (data, error) in
+                                        
+                                        if let imageData = data {
+                                            
+                                            if let imageToDisplay = UIImage(data: imageData) {
+                                                
+                                                let imageCache = imageToDisplay
+                                                
+                                                self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                
+                                                if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                    
+                                                    glbToDoItemImg.append(cacheimg)
+                                                    if let correctAnsInt = Int(place["correctAlternative"] as! String) {
+                                                        if correctAnsInt == 1 {
+                                                            glbToDoItemNames.append(place["alternative1"] as! String)
+                                                        }
+                                                        else if correctAnsInt == 2 {
+                                                            glbToDoItemNames.append(place["alternative2"] as! String)
+                                                        }
+                                                        else if correctAnsInt == 3 {
+                                                            glbToDoItemNames.append(place["alternative3"] as! String)
+                                                        }
+                                                        else if correctAnsInt == 4 {
+                                                            glbToDoItemNames.append(place["alternative4"] as! String)
+                                                        }
+                                                    }
+                                                    glbToDoItemDescriptions.append(place["engDescription"] as! String)
+
+                                                }
+                                            }
                                         }
                                     }
-                                    glbToDoItemDescriptions.append(place["engDescription"] as! String)
-                                    glbToDoItemImageFile.append(place["imageFile"] as! PFFile)
-                                    
                                     
                                     if let plcObjId = place.objectId {
                                         let arrIndx = localItemIDs.firstIndex(of: plcObjId)
@@ -462,29 +568,49 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                         if foodItems.count > 0 {
                             let foodQuery = PFQuery(className: "Foods")
                             foodQuery.whereKey("objectId", containedIn: foodItems)
-                            foodQuery.findObjectsInBackground(block: { (objects, error) in
+                            foodQuery.findObjectsInBackground(block: { [unowned self] (objects, error) in
                                 if let error = error {
                                     print(error.localizedDescription)
                                 }
                                 else {
                                     if let foods = objects {
                                         for food in foods {
-                                            if let correctAnsInt = Int(food["correctAlternative"] as! String) {
-                                                if correctAnsInt == 1 {
-                                                    glbToDoItemNames.append(food["alternative1"] as! String)
-                                                }
-                                                else if correctAnsInt == 2 {
-                                                    glbToDoItemNames.append(food["alternative2"] as! String)
-                                                }
-                                                else if correctAnsInt == 3 {
-                                                    glbToDoItemNames.append(food["alternative3"] as! String)
-                                                }
-                                                else if correctAnsInt == 4 {
-                                                    glbToDoItemNames.append(food["alternative4"] as! String)
+                                            
+                                            //Caching update
+                                            let todoImg = food["imageFile"] as! PFFile
+                                            todoImg.getDataInBackground { [unowned self] (data, error) in
+                                                
+                                                if let imageData = data {
+                                                    
+                                                    if let imageToDisplay = UIImage(data: imageData) {
+                                                        
+                                                        let imageCache = imageToDisplay
+                                                        
+                                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                        
+                                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                            
+                                                            glbToDoItemImg.append(cacheimg)
+                                                            if let correctAnsInt = Int(food["correctAlternative"] as! String) {
+                                                                if correctAnsInt == 1 {
+                                                                    glbToDoItemNames.append(food["alternative1"] as! String)
+                                                                }
+                                                                else if correctAnsInt == 2 {
+                                                                    glbToDoItemNames.append(food["alternative2"] as! String)
+                                                                }
+                                                                else if correctAnsInt == 3 {
+                                                                    glbToDoItemNames.append(food["alternative3"] as! String)
+                                                                }
+                                                                else if correctAnsInt == 4 {
+                                                                    glbToDoItemNames.append(food["alternative4"] as! String)
+                                                                }
+                                                            }
+                                                            glbToDoItemDescriptions.append(food["engDescription"] as! String)
+
+                                                        }
+                                                    }
                                                 }
                                             }
-                                            glbToDoItemDescriptions.append(food["engDescription"] as! String)
-                                            glbToDoItemImageFile.append(food["imageFile"] as! PFFile)
                                             
                                             if let fdObjId = food.objectId {
                                                 let arrIndx = localItemIDs.firstIndex(of: fdObjId)
@@ -521,29 +647,48 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                 else if foodItems.count > 0 {
                     let foodQuery = PFQuery(className: "Foods")
                     foodQuery.whereKey("objectId", containedIn: foodItems)
-                    foodQuery.findObjectsInBackground(block: { (objects, error) in
+                    foodQuery.findObjectsInBackground(block: { [unowned self] (objects, error) in
                         if let error = error {
                             print(error.localizedDescription)
                         }
                         else {
                             if let foods = objects {
                                 for food in foods {
-                                    if let correctAnsInt = Int(food["correctAlternative"] as! String) {
-                                        if correctAnsInt == 1 {
-                                            glbToDoItemNames.append(food["alternative1"] as! String)
-                                        }
-                                        else if correctAnsInt == 2 {
-                                            glbToDoItemNames.append(food["alternative2"] as! String)
-                                        }
-                                        else if correctAnsInt == 3 {
-                                            glbToDoItemNames.append(food["alternative3"] as! String)
-                                        }
-                                        else if correctAnsInt == 4 {
-                                            glbToDoItemNames.append(food["alternative4"] as! String)
+                                    //Caching update
+                                    let todoImg = food["imageFile"] as! PFFile
+                                    todoImg.getDataInBackground { [unowned self] (data, error) in
+                                        
+                                        if let imageData = data {
+                                            
+                                            if let imageToDisplay = UIImage(data: imageData) {
+                                                
+                                                let imageCache = imageToDisplay
+                                                
+                                                self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                
+                                                if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                    
+                                                    glbToDoItemImg.append(cacheimg)
+                                                    if let correctAnsInt = Int(food["correctAlternative"] as! String) {
+                                                        if correctAnsInt == 1 {
+                                                            glbToDoItemNames.append(food["alternative1"] as! String)
+                                                        }
+                                                        else if correctAnsInt == 2 {
+                                                            glbToDoItemNames.append(food["alternative2"] as! String)
+                                                        }
+                                                        else if correctAnsInt == 3 {
+                                                            glbToDoItemNames.append(food["alternative3"] as! String)
+                                                        }
+                                                        else if correctAnsInt == 4 {
+                                                            glbToDoItemNames.append(food["alternative4"] as! String)
+                                                        }
+                                                    }
+                                                    glbToDoItemDescriptions.append(food["engDescription"] as! String)
+
+                                                }
+                                            }
                                         }
                                     }
-                                    glbToDoItemDescriptions.append(food["engDescription"] as! String)
-                                    glbToDoItemImageFile.append(food["imageFile"] as! PFFile)
                                     
                                     if let fdObjId = food.objectId {
                                         let arrIndx = localItemIDs.firstIndex(of: fdObjId)
