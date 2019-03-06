@@ -249,15 +249,15 @@ class luckyStrikeViewController: UIViewController {
                             }
                             else if correctAnsInt == 2 {
                                 self.headerLabel.text = self.option2[randomIndex]
-                                self.histHeader.append(self.option1[randomIndex])
+                                self.histHeader.append(self.option2[randomIndex])
                             }
                             else if correctAnsInt == 3 {
                                 self.headerLabel.text = self.option3[randomIndex]
-                                self.histHeader.append(self.option1[randomIndex])
+                                self.histHeader.append(self.option3[randomIndex])
                             }
                             else if correctAnsInt == 4 {
                                 self.headerLabel.text = self.option4[randomIndex]
-                                self.histHeader.append(self.option1[randomIndex])
+                                self.histHeader.append(self.option4[randomIndex])
                             }
                         }
 
@@ -326,15 +326,15 @@ class luckyStrikeViewController: UIViewController {
                     }
                     else if correctAnsInt == 2 {
                         headerLabel.text = option2[randomIndex]
-                        histHeader.append(option1[randomIndex])
+                        histHeader.append(option2[randomIndex])
                     }
                     else if correctAnsInt == 3 {
                         headerLabel.text = option3[randomIndex]
-                        histHeader.append(option1[randomIndex])
+                        histHeader.append(option3[randomIndex])
                     }
                     else if correctAnsInt == 4 {
                         headerLabel.text = option4[randomIndex]
-                        histHeader.append(option1[randomIndex])
+                        histHeader.append(option4[randomIndex])
                     }
                 }
                 
@@ -478,15 +478,15 @@ class luckyStrikeViewController: UIViewController {
                 }
                 else if correctAnsInt == 2 {
                     headerLabel.text = option2[randomIndex]
-                    histHeader.append(option1[randomIndex])
+                    histHeader.append(option2[randomIndex])
                 }
                 else if correctAnsInt == 3 {
                     headerLabel.text = option3[randomIndex]
-                    histHeader.append(option1[randomIndex])
+                    histHeader.append(option3[randomIndex])
                 }
                 else if correctAnsInt == 4 {
                     headerLabel.text = option4[randomIndex]
-                    histHeader.append(option1[randomIndex])
+                    histHeader.append(option4[randomIndex])
                 }
             }
             
@@ -636,15 +636,15 @@ class luckyStrikeViewController: UIViewController {
                         }
                         else if correctAnsInt == 2 {
                             self.headerLabel.text = self.option2[randomIndex]
-                            self.histHeader.append(self.option1[randomIndex])
+                            self.histHeader.append(self.option2[randomIndex])
                         }
                         else if correctAnsInt == 3 {
                             self.headerLabel.text = self.option3[randomIndex]
-                            self.histHeader.append(self.option1[randomIndex])
+                            self.histHeader.append(self.option3[randomIndex])
                         }
                         else if correctAnsInt == 4 {
                             self.headerLabel.text = self.option4[randomIndex]
-                            self.histHeader.append(self.option1[randomIndex])
+                            self.histHeader.append(self.option4[randomIndex])
                         }
                     }
                     
@@ -828,15 +828,15 @@ class luckyStrikeViewController: UIViewController {
                                     }
                                     else if correctAnsInt == 2 {
                                         self.headerLabel.text = self.option2[randomIndex]
-                                        self.histHeader.append(self.option1[randomIndex])
+                                        self.histHeader.append(self.option2[randomIndex])
                                     }
                                     else if correctAnsInt == 3 {
                                         self.headerLabel.text = self.option3[randomIndex]
-                                        self.histHeader.append(self.option1[randomIndex])
+                                        self.histHeader.append(self.option3[randomIndex])
                                     }
                                     else if correctAnsInt == 4 {
                                         self.headerLabel.text = self.option4[randomIndex]
-                                        self.histHeader.append(self.option1[randomIndex])
+                                        self.histHeader.append(self.option4[randomIndex])
                                     }
                                 }
                                 
@@ -903,15 +903,15 @@ class luckyStrikeViewController: UIViewController {
                             }
                             else if correctAnsInt == 2 {
                                 headerLabel.text = option2[randomIndex]
-                                histHeader.append(option1[randomIndex])
+                                histHeader.append(option2[randomIndex])
                             }
                             else if correctAnsInt == 3 {
                                 headerLabel.text = option3[randomIndex]
-                                histHeader.append(option1[randomIndex])
+                                histHeader.append(option3[randomIndex])
                             }
                             else if correctAnsInt == 4 {
                                 headerLabel.text = option4[randomIndex]
-                                histHeader.append(option1[randomIndex])
+                                histHeader.append(option4[randomIndex])
                             }
                         }
                         
