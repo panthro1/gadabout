@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import GoogleMobileAds
 
-var glbFlagImageFile = [PFFile]() // Global food variables
+var glbFlagImgs = [UIImage]() // Global food variables
 var glbFlagOption1 = [String]()
 var glbFlagOption2 = [String]()
 var glbFlagOption3 = [String]()
@@ -48,6 +48,8 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
     
     @IBOutlet weak var loadingView: UIView!
     
+    var cache = NSCache<AnyObject, AnyObject>()
+    
     var randomIndex = 0
     
     var score = 0
@@ -55,7 +57,7 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
     var correctAnsInt = 1
     
     @IBOutlet weak var nextButton: UIButton!
-    var flagImageFile = [PFFile]() // Global food variables
+    var flagImgs = [UIImage]() // Global food variables
     var flagOption1 = [String]()
     var flagOption2 = [String]()
     var flagOption3 = [String]()
@@ -160,7 +162,7 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
             flagOption2 = glbFlagOption2
             flagOption3 = glbFlagOption3
             flagOption4 = glbFlagOption4
-            flagImageFile = glbFlagImageFile
+            flagImgs = glbFlagImgs
             flagCorrectAnswer = glbFlagCorrectAnswer
             
             tryAgainButton.isHidden = false
@@ -269,7 +271,7 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
             flagOption2 = glbFlagOption2
             flagOption3 = glbFlagOption3
             flagOption4 = glbFlagOption4
-            flagImageFile = glbFlagImageFile
+            flagImgs = glbFlagImgs
             flagCorrectAnswer = glbFlagCorrectAnswer
             
             tryAgainButton.isHidden = false
@@ -343,7 +345,7 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
             flagOption2 = glbFlagOption2
             flagOption3 = glbFlagOption3
             flagOption4 = glbFlagOption4
-            flagImageFile = glbFlagImageFile
+            flagImgs = glbFlagImgs
             flagCorrectAnswer = glbFlagCorrectAnswer
             
             tryAgainButton.isHidden = false
@@ -416,7 +418,7 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
             flagOption2 = glbFlagOption2
             flagOption3 = glbFlagOption3
             flagOption4 = glbFlagOption4
-            flagImageFile = glbFlagImageFile
+            flagImgs = glbFlagImgs
             flagCorrectAnswer = glbFlagCorrectAnswer
             
             tryAgainButton.isHidden = false
@@ -502,33 +504,51 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
             let flagsQuery = PFQuery(className: "Flags")
             flagsQuery.findObjectsInBackground { [unowned self] (objects, error) in
                 if let flags = objects {
-                    
+                    var indx = 0
                     for flag in flags {
                         
-                        glbFlagOption1.append(flag["option1"] as! String)
-                        glbFlagOption2.append(flag["option2"] as! String)
-                        glbFlagOption3.append(flag["option3"] as! String)
-                        glbFlagOption4.append(flag["option4"] as! String)
-                        glbFlagImageFile.append(flag["imageFile"] as! PFFile)
-                        glbFlagCorrectAnswer.append(flag["correctAnswer"] as! String)
+                        let flgImg = flag["imageFile"] as! PFFile
+                        flgImg.getDataInBackground { [unowned self] (data, error) in
+                            indx += 1
+                            if let imageData = data {
+                                
+                                if let imageToDisplay = UIImage(data: imageData) {
+                                    
+                                    let imageCache = imageToDisplay
+                                    
+                                    self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                    
+                                    if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                        
+                                        glbFlagImgs.append(cacheimg)
+                                        glbFlagOption1.append(flag["option1"] as! String)
+                                        glbFlagOption2.append(flag["option2"] as! String)
+                                        glbFlagOption3.append(flag["option3"] as! String)
+                                        glbFlagOption4.append(flag["option4"] as! String)
+                                        glbFlagCorrectAnswer.append(flag["correctAnswer"] as! String)
                         
-                        self.flagOption1.append(flag["option1"] as! String)
-                        self.flagOption2.append(flag["option2"] as! String)
-                        self.flagOption3.append(flag["option3"] as! String)
-                        self.flagOption4.append(flag["option4"] as! String)
-                        self.flagImageFile.append(flag["imageFile"] as! PFFile)
-                        self.flagCorrectAnswer.append(flag["correctAnswer"] as! String)
+                                        self.flagOption1.append(flag["option1"] as! String)
+                                        self.flagOption2.append(flag["option2"] as! String)
+                                        self.flagOption3.append(flag["option3"] as! String)
+                                        self.flagOption4.append(flag["option4"] as! String)
+                                        self.flagImgs.append(cacheimg)
+                                        self.flagCorrectAnswer.append(flag["correctAnswer"] as! String)
+                                        
+                                    }
+                                }
+                            }
+                            
+                            if indx ==  flags.count {
+                                activityIndicator.stopAnimating()
+                                UIApplication.shared.endIgnoringInteractionEvents()
+                                self.prepareNextQuestion()
+                                self.loadingView.alpha = 0
+                            }
+                        }
                     }
-                    activityIndicator.stopAnimating()
-                    UIApplication.shared.endIgnoringInteractionEvents()
-                    
-                    self.prepareNextQuestion()
-                    self.loadingView.alpha = 0
+
                 }
-                //activityIndicator.stopAnimating()
-                //UIApplication.shared.endIgnoringInteractionEvents()
-                
-                
+
             }
         }
         else {
@@ -537,7 +557,7 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
             flagOption2 = glbFlagOption2
             flagOption3 = glbFlagOption3
             flagOption4 = glbFlagOption4
-            flagImageFile = glbFlagImageFile
+            flagImgs = glbFlagImgs
             flagCorrectAnswer = glbFlagCorrectAnswer
             
             prepareNextQuestion()
@@ -602,56 +622,43 @@ class flagChallengeViewController: UIViewController, scorePopupDelegate{
         randomIndex = Int(arc4random_uniform(UInt32(flagOption1.count)))
         print("Random Index: \(randomIndex)")
         
+        image.image = flagImgs[randomIndex]
+        option1.setTitle(flagOption1[randomIndex], for: [])
+        option2.setTitle(flagOption2[randomIndex], for: [])
+        option3.setTitle(flagOption3[randomIndex], for: [])
+        option4.setTitle(flagOption4[randomIndex], for: [])
         
-        flagImageFile[randomIndex].getDataInBackground { [unowned self] (data, error) in
+        if let temp = Int(flagCorrectAnswer[randomIndex]) {
+            correctAnsInt = temp
+        }
+        
+        image.isHidden = false
+        option1.isHidden = false
+        option2.isHidden = false
+        option3.isHidden = false
+        option4.isHidden = false
+        
+        optionALabel.isHidden = false
+        optionBLabel.isHidden = false
+        optionCLabel.isHidden = false
+        optionDLabel.isHidden = false
+        
+        
+        flagOption1.remove(at: randomIndex)
+        flagOption2.remove(at: randomIndex)
+        flagOption3.remove(at: randomIndex)
+        flagOption4.remove(at: randomIndex)
+        flagImgs.remove(at: randomIndex)
+        flagCorrectAnswer.remove(at: randomIndex)
+        
+        if flagOption1.count == 0 {
             
-            if let imageData = data {
-                
-                if let imageToDisplay = UIImage(data: imageData) {
-                    
-                    self.image.image = imageToDisplay
-                    
-                    self.option1.setTitle(self.flagOption1[self.randomIndex], for: [])
-                    self.option2.setTitle(self.flagOption2[self.randomIndex], for: [])
-                    self.option3.setTitle(self.flagOption3[self.randomIndex], for: [])
-                    self.option4.setTitle(self.flagOption4[self.randomIndex], for: [])
-                    
-                    if let temp = Int(self.flagCorrectAnswer[self.randomIndex]) {
-                        self.correctAnsInt = temp
-                    }
-                    
-                    self.image.isHidden = false
-                    self.option1.isHidden = false
-                    self.option2.isHidden = false
-                    self.option3.isHidden = false
-                    self.option4.isHidden = false
-                    
-                    self.optionALabel.isHidden = false
-                    self.optionBLabel.isHidden = false
-                    self.optionCLabel.isHidden = false
-                    self.optionDLabel.isHidden = false
-
-                    
-                    self.flagOption1.remove(at: self.randomIndex)
-                    self.flagOption2.remove(at: self.randomIndex)
-                    self.flagOption3.remove(at: self.randomIndex)
-                    self.flagOption4.remove(at: self.randomIndex)
-                    self.flagImageFile.remove(at: self.randomIndex)
-                    self.flagCorrectAnswer.remove(at: self.randomIndex)
-                    
-                    if self.flagOption1.count == 0 {
-                        
-                        self.flagOption1 = glbFlagOption1
-                        self.flagOption2 = glbFlagOption2
-                        self.flagOption3 = glbFlagOption3
-                        self.flagOption4 = glbFlagOption4
-                        self.flagImageFile = glbFlagImageFile
-                        self.flagCorrectAnswer = glbFlagCorrectAnswer
-                        
-                    }
-
-                }
-            }
+            flagOption1 = glbFlagOption1
+            flagOption2 = glbFlagOption2
+            flagOption3 = glbFlagOption3
+            flagOption4 = glbFlagOption4
+            flagImgs = glbFlagImgs
+            flagCorrectAnswer = glbFlagCorrectAnswer
             
         }
         
