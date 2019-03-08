@@ -304,7 +304,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                             }
                             activityIndicator.stopAnimating()
                             UIApplication.shared.endIgnoringInteractionEvents()
-                            print("Item Ids: \(glbPlcObjectId)")
                             
                         }
                     }

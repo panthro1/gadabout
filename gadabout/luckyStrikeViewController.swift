@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import GoogleMobileAds
+import CoreData
 
 class luckyStrikeViewController: UIViewController {
     
@@ -696,6 +697,41 @@ class luckyStrikeViewController: UIViewController {
         
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(wasDragged(gestureRecognizer:)))
         image.addGestureRecognizer(gesture)
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserActions")
+        
+        request.returnsObjectsAsFaults = false
+        
+        do {
+           let results = try context.fetch(request)
+            if results.count > 0 {
+                for result in results as! [NSManagedObject] {
+                    if let firstTimeInView = result.value(forKey: "firstTimeInLuckyStrike") as? Bool {
+                        print("Fetch result: \(firstTimeInView)")
+                        
+                    }
+                }
+            }
+            else {
+                let newEntity = NSEntityDescription.insertNewObject(forEntityName: "UserActions", into: context)
+                
+                newEntity.setValue(false, forKey: "firstTimeInLuckyStrike")
+                
+                do {
+                    try context.save()
+                    print("Saved")
+                } catch {
+                    print("There was error in Core Data save")
+                }
+            }
+        }
+        catch {
+            print("Request failed")
+        }
     }
     
     @objc func wasDragged(gestureRecognizer: UIPanGestureRecognizer) {
