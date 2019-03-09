@@ -48,6 +48,8 @@ class luckyStrikeViewController: UIViewController, LuckyInfoPopupDelegate {
     
     @IBOutlet weak var nextButton: UIButton!
     
+    @IBOutlet weak var prevButton: UIButton!
+    
     @IBOutlet weak var toDoListButton: UIButton!
     
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -705,25 +707,39 @@ class luckyStrikeViewController: UIViewController, LuckyInfoPopupDelegate {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "UserActions")
         
         request.returnsObjectsAsFaults = false
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            // Code you want to be delayed
-            self.showPopup()
-        }
-        
-        
-        
+
         do {
            let results = try context.fetch(request)
             if results.count > 0 {
                 for result in results as! [NSManagedObject] {
                     if let firstTimeInView = result.value(forKey: "firstTimeInLuckyStrike") as? Bool {
                         print("Fetch result: \(firstTimeInView)")
-                        
+                        if firstTimeInView == true {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                                // Code you want to be delayed
+                                self.showPopup()
+                                
+                                let newEntity = NSEntityDescription.insertNewObject(forEntityName: "UserActions", into: context)
+                                
+                                newEntity.setValue(false, forKey: "firstTimeInLuckyStrike")
+                                
+                                do {
+                                    try context.save()
+                                    print("Saved")
+                                } catch {
+                                    print("There was error in Core Data save")
+                                }
+
+                            }
+                        }
                     }
                 }
             }
             else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    // Code you want to be delayed
+                    self.showPopup()
+                }
                 let newEntity = NSEntityDescription.insertNewObject(forEntityName: "UserActions", into: context)
                 
                 newEntity.setValue(false, forKey: "firstTimeInLuckyStrike")
@@ -1074,6 +1090,12 @@ class luckyStrikeViewController: UIViewController, LuckyInfoPopupDelegate {
     }
     
     func showPopup() {
+        headerLabel.isHidden = true
+        descriptionLabel.isHidden = true
+        toDoListButton.isHidden = true
+        nextButton.isHidden = true
+        prevButton.isHidden = true
+        photoCredit.isHidden = true
         
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "luckyPopUpID") as! luckyInfoPopupViewController
         popOverVC.delegate = self
@@ -1089,14 +1111,25 @@ class luckyStrikeViewController: UIViewController, LuckyInfoPopupDelegate {
         //popOverVC.view.backgroundColor = UIColor(rgb: 0xDDD6F2)
         popOverVC.view.layer.cornerRadius = 20
         
+        UIView.animate(withDuration: 1, delay: 0, options: [.curveEaseIn], animations: {
+            self.view.addSubview(popOverVC.view)
+            popOverVC.didMove(toParentViewController: self)
+        }, completion: nil)
         
-        self.view.addSubview(popOverVC.view)
-        popOverVC.didMove(toParentViewController: self)
+        /*self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)*/
         
     }
 
     func LuckyInfoClosed() {
         print("Popup closed")
+        
+        headerLabel.isHidden = false
+        descriptionLabel.isHidden = false
+        toDoListButton.isHidden = false
+        nextButton.isHidden = false
+        prevButton.isHidden = false
+        photoCredit.isHidden = false
     }
     
     /*

@@ -1656,7 +1656,7 @@
                                     <action selector="prevTapped:" destination="Mu3-9O-FyB" eventType="touchUpInside" id="OdP-ku-5Xx"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="h1N-M5-vP2">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="h1N-M5-vP2">
                                 <rect key="frame" x="8.3333333333333428" y="650.66666666666663" width="397.33333333333326" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1738,6 +1738,7 @@
                         <outlet property="image" destination="xrk-5S-5Fk" id="oGw-fh-W1h"/>
                         <outlet property="nextButton" destination="0Py-TE-VEr" id="1vP-QI-rWy"/>
                         <outlet property="photoCredit" destination="h1N-M5-vP2" id="e3k-gJ-QWJ"/>
+                        <outlet property="prevButton" destination="TfE-JD-dcu" id="vO8-tA-gLL"/>
                         <outlet property="toDoListButton" destination="Lmc-la-YMg" id="zTo-aP-SbG"/>
                         <segue destination="77F-Fn-Frx" kind="presentation" identifier="luckyStrikeBackSegue" animates="NO" id="e9z-7M-9hq"/>
                     </connections>
@@ -2786,7 +2787,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="e9z-7M-9hq"/>
-        <segue reference="SrD-HH-HDz"/>
+        <segue reference="ksF-O3-2uc"/>
         <segue reference="RwC-9j-Eg1"/>
     </inferredMetricsTieBreakers>
 </document>
