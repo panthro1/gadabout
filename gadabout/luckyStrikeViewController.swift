@@ -11,7 +11,7 @@ import Parse
 import GoogleMobileAds
 import CoreData
 
-class luckyStrikeViewController: UIViewController {
+class luckyStrikeViewController: UIViewController, LuckyInfoPopupDelegate {
     
     
     var option1 = [String]()
@@ -706,6 +706,13 @@ class luckyStrikeViewController: UIViewController {
         
         request.returnsObjectsAsFaults = false
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // Code you want to be delayed
+            self.showPopup()
+        }
+        
+        
+        
         do {
            let results = try context.fetch(request)
             if results.count > 0 {
@@ -1066,6 +1073,31 @@ class luckyStrikeViewController: UIViewController {
 
     }
     
+    func showPopup() {
+        
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "luckyPopUpID") as! luckyInfoPopupViewController
+        popOverVC.delegate = self
+        
+        self.addChildViewController(popOverVC)
+        
+        let popUpSize = self.view.bounds.width*0.9
+        
+        let centerY = headerLabel.center.y - headerLabel.bounds.height
+        let centerX = self.view.bounds.width/2 - popUpSize/2
+        
+        popOverVC.view.frame = CGRect(x: centerX, y: centerY, width: popUpSize, height: popUpSize)//self.view.bounds
+        //popOverVC.view.backgroundColor = UIColor(rgb: 0xDDD6F2)
+        popOverVC.view.layer.cornerRadius = 20
+        
+        
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
+        
+    }
+
+    func LuckyInfoClosed() {
+        print("Popup closed")
+    }
     
     /*
      // MARK: - Navigation

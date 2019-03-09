@@ -7,18 +7,45 @@
 //
 
 import UIKit
+protocol LuckyInfoPopupDelegate {
+    func LuckyInfoClosed()
+}
+
 
 class luckyInfoPopupViewController: UIViewController {
     
-    
+    var delegate: LuckyInfoPopupDelegate?
 
+    @IBOutlet weak var okButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        okButton.layer.cornerRadius = 5
+        okButton.layer.borderWidth = 1
+        okButton.layer.borderColor = UIColor.black.cgColor
+
 
         // Do any additional setup after loading the view.
     }
     
 
+    @IBAction func OkTapped(_ sender: Any) {
+        
+        okButton.pulsate()
+        
+        delegate?.LuckyInfoClosed()
+        removeAnimate()
+    }
+    
+    func removeAnimate() {
+        UIView.animate(withDuration: 0.25) {
+            self.view.alpha = 1.0
+            self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        }
+        self.view.removeFromSuperview()
+    }
+    
     /*
     // MARK: - Navigation
 

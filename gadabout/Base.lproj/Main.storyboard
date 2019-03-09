@@ -2658,47 +2658,53 @@
         <!--Lucky Info Popup View Controller-->
         <scene sceneID="oeu-Yp-ag7">
             <objects>
-                <viewController id="vDK-Mk-VAe" customClass="luckyInfoPopupViewController" customModule="gadabout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="luckyPopUpID" id="vDK-Mk-VAe" customClass="luckyInfoPopupViewController" customModule="gadabout" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="csg-67-hfl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fo1-by-Rno">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fo1-by-Rno">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="20.666666666666668"/>
                                 <color key="backgroundColor" red="0.015686274510000001" green="0.20000000000000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ft-E4-ynk">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ft-E4-ynk">
                                 <rect key="frame" x="0.0" y="359.33333333333331" width="414" height="20.666666666666686"/>
                                 <color key="backgroundColor" red="0.015686274510000001" green="0.20000000000000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="88W-8m-0ix">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="88W-8m-0ix">
                                 <rect key="frame" x="0.0" y="20.666666666666657" width="20.666666666666668" height="338.66666666666674"/>
                                 <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8dk-rw-3os">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8dk-rw-3os">
                                 <rect key="frame" x="393.33333333333331" y="20.666666666666657" width="20.666666666666686" height="338.66666666666674"/>
                                 <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25u-Mo-wzB">
                                 <rect key="frame" x="165.66666666666666" y="276.66666666666669" width="82.666666666666657" height="82.666666666666686"/>
+                                <color key="backgroundColor" red="0.16118329763412476" green="0.46132254600524902" blue="0.71880263090133667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="Ok"/>
+                                <state key="normal" title="Ok">
+                                    <color key="titleColor" red="0.9370916485786438" green="0.93694382905960083" blue="0.95754462480545044" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="OkTapped:" destination="vDK-Mk-VAe" eventType="touchUpInside" id="QOd-vb-Exn"/>
+                                </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HLi-gI-DoZ">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HLi-gI-DoZ">
                                 <rect key="frame" x="20.666666666666657" y="268.33333333333331" width="372.66666666666674" height="8.3333333333333144"/>
                                 <color key="backgroundColor" red="0.015686274510000001" green="0.20000000000000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can swipe the image!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKN-B4-gHG">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can swipe the image!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="LKN-B4-gHG">
                                 <rect key="frame" x="20.666666666666657" y="206" width="372.66666666666674" height="62.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ha2-gG-tXK">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ha2-gG-tXK">
                                 <rect key="frame" x="20.666666666666657" y="198" width="372.66666666666674" height="8"/>
                                 <color key="backgroundColor" red="0.015686274510000001" green="0.20000000000000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZSl-oB-POS">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZSl-oB-POS">
                                 <rect key="frame" x="196.66666666666666" y="20.666666666666671" width="20.666666666666657" height="177.33333333333331"/>
                                 <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -2759,6 +2765,9 @@
                         <viewLayoutGuide key="safeArea" id="IIL-bZ-cVz"/>
                     </view>
                     <size key="freeformSize" width="414" height="414"/>
+                    <connections>
+                        <outlet property="okButton" destination="25u-Mo-wzB" id="Yc8-mW-eUj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yd0-Fx-oi3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
