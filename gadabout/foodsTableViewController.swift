@@ -918,6 +918,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         answer.removeAll()
         questionNo.removeAll()
         scorePoint = 0
+        tableView.isScrollEnabled = false
         
 
         if glbFdObjectId.count < 4 {
@@ -950,77 +951,33 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                 foodsQuery.limit = 50
                 foodsQuery.findObjectsInBackground { [unowned self] (objects, error) in
                     if let foods = objects {
-                        
-                        for food in foods {
-                            
-                            //Caching update
-                            let fdImg = food["imageFile"] as! PFFile
-                            fdImg.getDataInBackground { [unowned self] (data, error) in
+                        if glbFdOption1.count + foods.count >= 4 {
+                            for food in foods {
                                 
-                                if let imageData = data {
+                                //Caching update
+                                let fdImg = food["imageFile"] as! PFFile
+                                fdImg.getDataInBackground { [unowned self] (data, error) in
                                     
-                                    if let imageToDisplay = UIImage(data: imageData) {
+                                    if let imageData = data {
                                         
-                                        let imageCache = imageToDisplay
-                                        
-                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
-                                        
-                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                        if let imageToDisplay = UIImage(data: imageData) {
                                             
-                                            glbFdImgs.append(cacheimg)
-                                            glbFdOption1.append(food["alternative1"] as! String)
-                                            glbFdOption2.append(food["alternative2"] as! String)
-                                            glbFdOption3.append(food["alternative3"] as! String)
-                                            glbFdOption4.append(food["alternative4"] as! String)
-                                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
-                                            glbFdDescriptionEng.append(food["engDescription"] as! String)
+                                            let imageCache = imageToDisplay
                                             
-                                            if let question = food.objectId {
-                                                glbFdObjectId.append(question)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    
-                    if glbFdObjectId.count < 4 {
-                        let allFoodsQuery = PFQuery(className: "Foods")
-                        allFoodsQuery.limit = 50
-                        allFoodsQuery.findObjectsInBackground { [unowned self] (objects, error) in
-                            if let foods = objects {
-                                print("Nof Food Items: \(foods.count)")
-                                
-                                for food in foods {
-                                    
-                                    if let question = food.objectId {
-                                        if glbFdObjectId.firstIndex(of: question) == nil {
+                                            self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
                                             
-                                            //Caching update
-                                            let fdImg = food["imageFile"] as! PFFile
-                                            fdImg.getDataInBackground { [unowned self] (data, error) in
+                                            if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
                                                 
-                                                if let imageData = data {
-                                                    
-                                                    if let imageToDisplay = UIImage(data: imageData) {
-                                                        
-                                                        let imageCache = imageToDisplay
-                                                        
-                                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
-                                                        
-                                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
-                                                            
-                                                            glbFdImgs.append(cacheimg)
-                                                            glbFdObjectId.append(question)
-                                                            glbFdOption1.append(food["alternative1"] as! String)
-                                                            glbFdOption2.append(food["alternative2"] as! String)
-                                                            glbFdOption3.append(food["alternative3"] as! String)
-                                                            glbFdOption4.append(food["alternative4"] as! String)
-                                                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
-                                                            glbFdDescriptionEng.append(food["engDescription"] as! String)
-                                                        }
-                                                    }
+                                                glbFdImgs.append(cacheimg)
+                                                glbFdOption1.append(food["alternative1"] as! String)
+                                                glbFdOption2.append(food["alternative2"] as! String)
+                                                glbFdOption3.append(food["alternative3"] as! String)
+                                                glbFdOption4.append(food["alternative4"] as! String)
+                                                glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
+                                                glbFdDescriptionEng.append(food["engDescription"] as! String)
+                                                
+                                                if let question = food.objectId {
+                                                    glbFdObjectId.append(question)
                                                 }
                                                 
                                                 if food == foods.last {
@@ -1055,6 +1012,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                                                         glbFdDescriptionEng.remove(at: randomIndex)
                                                         glbFdObjectId.remove(at: randomIndex)
                                                     }
+                                                    self.tableView.isScrollEnabled = true
                                                     self.tableView.reloadData()
                                                     self.tableView.alpha = 1
                                                     self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
@@ -1065,46 +1023,13 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                                     }
                                 }
                             }
-                            
                         }
-                        
+                        else {
+                            self.pullAllObjects()
+                        }
                     }
                     else {
-                        var questionLimit = 4
-                        
-                        if glbFdObjectId.count < questionLimit {
-                            questionLimit = glbFdObjectId.count
-                        }
-
-                        for _ in 0 ..< questionLimit {
-                            
-                            let randomIndex = Int(arc4random_uniform(UInt32(glbFdObjectId.count)))
-                            
-                            self.option1.append(glbFdOption1[randomIndex])
-                            self.option2.append(glbFdOption2[randomIndex])
-                            self.option3.append(glbFdOption3[randomIndex])
-                            self.option4.append(glbFdOption4[randomIndex])
-                            self.imageArr.append(glbFdImgs[randomIndex])
-                            self.correctAnswer.append(glbFdCorrectAnswer[randomIndex])
-                            self.descriptionEng.append(glbFdDescriptionEng[randomIndex])
-                            self.questionCompleted.append(glbFdObjectId[randomIndex])
-                            
-                            self.showDetail.append(false)
-                            self.userRecord.append(false)
-                            
-                            glbFdOption1.remove(at: randomIndex)
-                            glbFdOption2.remove(at: randomIndex)
-                            glbFdOption3.remove(at: randomIndex)
-                            glbFdOption4.remove(at: randomIndex)
-                            glbFdImgs.remove(at: randomIndex)
-                            glbFdCorrectAnswer.remove(at: randomIndex)
-                            glbFdDescriptionEng.remove(at: randomIndex)
-                            glbFdObjectId.remove(at: randomIndex)
-                        }
-                        self.tableView.reloadData()
-                        self.tableView.alpha = 1
-                        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
-                        RunLoop.main.add(self.timer, forMode: .commonModes)
+                        self.pullAllObjects()
                     }
                 }
             }
@@ -1141,6 +1066,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                 glbFdDescriptionEng.remove(at: randomIndex)
                 glbFdObjectId.remove(at: randomIndex)
             }
+            tableView.isScrollEnabled = true
             tableView.reloadData()
             tableView.alpha = 1
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
@@ -1254,6 +1180,97 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
     
     override func viewWillDisappear(_ animated: Bool) {
         timer.invalidate()
+    }
+    
+    func pullAllObjects(){
+        glbFdImgs.removeAll()
+        glbFdObjectId.removeAll()
+        glbFdOption1.removeAll()
+        glbFdOption2.removeAll()
+        glbFdOption3.removeAll()
+        glbFdOption4.removeAll()
+        glbFdCorrectAnswer.removeAll()
+        glbFdDescriptionEng.removeAll()
+        
+        let allFoodsQuery = PFQuery(className: "Foods")
+        allFoodsQuery.limit = 50
+        allFoodsQuery.findObjectsInBackground { [unowned self] (objects, error) in
+            if let foods = objects {
+                print("Nof Food Items: \(foods.count)")
+                
+                for food in foods {
+                    
+                    if let question = food.objectId {
+                        
+                        //Caching update
+                        let fdImg = food["imageFile"] as! PFFile
+                        fdImg.getDataInBackground { [unowned self] (data, error) in
+                            
+                            if let imageData = data {
+                                
+                                if let imageToDisplay = UIImage(data: imageData) {
+                                    
+                                    let imageCache = imageToDisplay
+                                    
+                                    self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                    
+                                    if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                        
+                                        glbFdImgs.append(cacheimg)
+                                        glbFdObjectId.append(question)
+                                        glbFdOption1.append(food["alternative1"] as! String)
+                                        glbFdOption2.append(food["alternative2"] as! String)
+                                        glbFdOption3.append(food["alternative3"] as! String)
+                                        glbFdOption4.append(food["alternative4"] as! String)
+                                        glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
+                                        glbFdDescriptionEng.append(food["engDescription"] as! String)
+                                        
+                                        if food == foods.last {
+                                            var questionLimit = 4
+                                            
+                                            if glbFdObjectId.count < questionLimit {
+                                                questionLimit = glbFdObjectId.count
+                                            }
+                                            
+                                            for _ in 0 ..< questionLimit {
+                                                
+                                                let randomIndex = Int(arc4random_uniform(UInt32(glbFdObjectId.count)))
+                                                
+                                                self.option1.append(glbFdOption1[randomIndex])
+                                                self.option2.append(glbFdOption2[randomIndex])
+                                                self.option3.append(glbFdOption3[randomIndex])
+                                                self.option4.append(glbFdOption4[randomIndex])
+                                                self.imageArr.append(glbFdImgs[randomIndex])
+                                                self.correctAnswer.append(glbFdCorrectAnswer[randomIndex])
+                                                self.descriptionEng.append(glbFdDescriptionEng[randomIndex])
+                                                self.questionCompleted.append(glbFdObjectId[randomIndex])
+                                                
+                                                self.showDetail.append(false)
+                                                self.userRecord.append(false)
+                                                
+                                                glbFdOption1.remove(at: randomIndex)
+                                                glbFdOption2.remove(at: randomIndex)
+                                                glbFdOption3.remove(at: randomIndex)
+                                                glbFdOption4.remove(at: randomIndex)
+                                                glbFdImgs.remove(at: randomIndex)
+                                                glbFdCorrectAnswer.remove(at: randomIndex)
+                                                glbFdDescriptionEng.remove(at: randomIndex)
+                                                glbFdObjectId.remove(at: randomIndex)
+                                            }
+                                            self.tableView.isScrollEnabled = true
+                                            self.tableView.reloadData()
+                                            self.tableView.alpha = 1
+                                            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
+                                            RunLoop.main.add(self.timer, forMode: .commonModes)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     /*
     // Override to support conditional editing of the table view.

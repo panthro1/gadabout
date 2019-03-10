@@ -956,7 +956,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         answer.removeAll()
         questionNo.removeAll()
         scorePoint = 0
-        
+        tableView.isScrollEnabled = true
         
         
         // New code
@@ -991,79 +991,34 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 placesQuery.limit = 50
                 placesQuery.findObjectsInBackground { [unowned self] (objects, error) in
                     if let places = objects {
-                        
-                        for place in places {
-                            
-                            
-                            //Caching update
-                            let plcImg = place["imageFile"] as! PFFile
-                            plcImg.getDataInBackground { [unowned self] (data, error) in
+                        if glbPlcOption1.count + places.count >= 4 {
+                            for place in places {
                                 
-                                if let imageData = data {
-                                    
-                                    if let imageToDisplay = UIImage(data: imageData) {
-                                        
-                                        let imageCache = imageToDisplay
-                                        
-                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
-                                        
-                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
-                                            
-                                            glbPlcImgs.append(cacheimg)
-                                            glbPlcOption1.append(place["alternative1"] as! String)
-                                            glbPlcOption2.append(place["alternative2"] as! String)
-                                            glbPlcOption3.append(place["alternative3"] as! String)
-                                            glbPlcOption4.append(place["alternative4"] as! String)
-                                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
-                                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
-                                            
-                                            if let question = place.objectId {
-                                                glbPlcObjectId.append(question)
-                                            }
-
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    
-                    if glbPlcObjectId.count < 4 {
-                        let allPlacesQuery = PFQuery(className: "Places")
-                        allPlacesQuery.limit = 50
-                        allPlacesQuery.findObjectsInBackground { [unowned self] (objects, error) in
-                            if let places = objects {
                                 
-                                for place in places {
+                                //Caching update
+                                let plcImg = place["imageFile"] as! PFFile
+                                plcImg.getDataInBackground { [unowned self] (data, error) in
                                     
-                                    if let question = place.objectId {
-                                        if glbPlcObjectId.firstIndex(of: question) == nil {
+                                    if let imageData = data {
+                                        
+                                        if let imageToDisplay = UIImage(data: imageData) {
                                             
-                                            //Caching update
-                                            let plcImg = place["imageFile"] as! PFFile
-                                            plcImg.getDataInBackground { [unowned self] (data, error) in
+                                            let imageCache = imageToDisplay
+                                            
+                                            self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                            
+                                            if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
                                                 
-                                                if let imageData = data {
-                                                    
-                                                    if let imageToDisplay = UIImage(data: imageData) {
-                                                        
-                                                        let imageCache = imageToDisplay
-                                                        
-                                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
-                                                        
-                                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
-                                                            
-                                                            glbPlcImgs.append(cacheimg)
-                                                            glbPlcObjectId.append(question)
-                                                            glbPlcOption1.append(place["alternative1"] as! String)
-                                                            glbPlcOption2.append(place["alternative2"] as! String)
-                                                            glbPlcOption3.append(place["alternative3"] as! String)
-                                                            glbPlcOption4.append(place["alternative4"] as! String)
-                                                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
-                                                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
-
-                                                        }
-                                                    }
+                                                glbPlcImgs.append(cacheimg)
+                                                glbPlcOption1.append(place["alternative1"] as! String)
+                                                glbPlcOption2.append(place["alternative2"] as! String)
+                                                glbPlcOption3.append(place["alternative3"] as! String)
+                                                glbPlcOption4.append(place["alternative4"] as! String)
+                                                glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
+                                                glbPlcDescriptionEng.append(place["engDescription"] as! String)
+                                                
+                                                if let question = place.objectId {
+                                                    glbPlcObjectId.append(question)
                                                 }
                                                 
                                                 if place == places.last {
@@ -1098,57 +1053,25 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                                                         glbPlcDescriptionEng.remove(at: randomIndex)
                                                         glbPlcObjectId.remove(at: randomIndex)
                                                     }
+                                                    self.tableView.isScrollEnabled = true
                                                     self.tableView.reloadData()
                                                     self.tableView.alpha = 1
                                                     self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
                                                     RunLoop.main.add(self.timer, forMode: .commonModes)
-
                                                 }
                                             }
                                         }
                                     }
-                                    
                                 }
                             }
+
                         }
-                        
+                        else {
+                            self.pullAllObjects()
+                        }
                     }
                     else {
-                        var questionLimit = 4
-                        
-                        if glbPlcObjectId.count < questionLimit {
-                            questionLimit = glbPlcObjectId.count
-                        }
-                        print("Global Objects after: \(glbPlcObjectId)")
-                        for _ in 0 ..< questionLimit {
-                            
-                            let randomIndex = Int(arc4random_uniform(UInt32(glbPlcObjectId.count)))
-                            
-                            self.option1.append(glbPlcOption1[randomIndex])
-                            self.option2.append(glbPlcOption2[randomIndex])
-                            self.option3.append(glbPlcOption3[randomIndex])
-                            self.option4.append(glbPlcOption4[randomIndex])
-                            self.imageArr.append(glbPlcImgs[randomIndex])
-                            self.correctAnswer.append(glbPlcCorrectAnswer[randomIndex])
-                            self.descriptionEng.append(glbPlcDescriptionEng[randomIndex])
-                            self.questionCompleted.append(glbPlcObjectId[randomIndex])
-                            
-                            self.showDetail.append(false)
-                            self.userRecord.append(false)
-                            
-                            glbPlcOption1.remove(at: randomIndex)
-                            glbPlcOption2.remove(at: randomIndex)
-                            glbPlcOption3.remove(at: randomIndex)
-                            glbPlcOption4.remove(at: randomIndex)
-                            glbPlcImgs.remove(at: randomIndex)
-                            glbPlcCorrectAnswer.remove(at: randomIndex)
-                            glbPlcDescriptionEng.remove(at: randomIndex)
-                            glbPlcObjectId.remove(at: randomIndex)
-                        }
-                        self.tableView.reloadData()
-                        self.tableView.alpha = 1
-                        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
-                        RunLoop.main.add(self.timer, forMode: .commonModes)
+                        self.pullAllObjects()
                     }
                 }
             }
@@ -1185,6 +1108,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 glbPlcDescriptionEng.remove(at: randomIndex)
                 glbPlcObjectId.remove(at: randomIndex)
             }
+            tableView.isScrollEnabled = true
             tableView.reloadData()
             tableView.alpha = 1
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timeCount), userInfo: nil, repeats: true)
@@ -1306,6 +1230,97 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         let range = (string as NSString).range(of: boldString)
         attributedString.addAttributes(boldFontAttribute, range: range)
         return attributedString
+    }
+    
+    func pullAllObjects(){
+        glbPlcImgs.removeAll()
+        glbPlcObjectId.removeAll()
+        glbPlcOption1.removeAll()
+        glbPlcOption2.removeAll()
+        glbPlcOption3.removeAll()
+        glbPlcOption4.removeAll()
+        glbPlcCorrectAnswer.removeAll()
+        glbPlcDescriptionEng.removeAll()
+        
+        let allPlacesQuery = PFQuery(className: "Places")
+        allPlacesQuery.limit = 50
+        allPlacesQuery.findObjectsInBackground { [unowned self] (objects, error) in
+            if let places = objects {
+                print("Nof Place Items: \(places.count)")
+                
+                for place in places {
+                    
+                    if let question = place.objectId {
+                        
+                        //Caching update
+                        let plcImg = place["imageFile"] as! PFFile
+                        plcImg.getDataInBackground { [unowned self] (data, error) in
+                            
+                            if let imageData = data {
+                                
+                                if let imageToDisplay = UIImage(data: imageData) {
+                                    
+                                    let imageCache = imageToDisplay
+                                    
+                                    self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                    
+                                    if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                        
+                                        glbPlcImgs.append(cacheimg)
+                                        glbPlcObjectId.append(question)
+                                        glbPlcOption1.append(place["alternative1"] as! String)
+                                        glbPlcOption2.append(place["alternative2"] as! String)
+                                        glbPlcOption3.append(place["alternative3"] as! String)
+                                        glbPlcOption4.append(place["alternative4"] as! String)
+                                        glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
+                                        glbPlcDescriptionEng.append(place["engDescription"] as! String)
+                                        
+                                        if place == places.last {
+                                            var questionLimit = 4
+                                            
+                                            if glbPlcObjectId.count < questionLimit {
+                                                questionLimit = glbFdObjectId.count
+                                            }
+                                            
+                                            for _ in 0 ..< questionLimit {
+                                                
+                                                let randomIndex = Int(arc4random_uniform(UInt32(glbPlcObjectId.count)))
+                                                
+                                                self.option1.append(glbPlcOption1[randomIndex])
+                                                self.option2.append(glbPlcOption2[randomIndex])
+                                                self.option3.append(glbPlcOption3[randomIndex])
+                                                self.option4.append(glbPlcOption4[randomIndex])
+                                                self.imageArr.append(glbPlcImgs[randomIndex])
+                                                self.correctAnswer.append(glbPlcCorrectAnswer[randomIndex])
+                                                self.descriptionEng.append(glbPlcDescriptionEng[randomIndex])
+                                                self.questionCompleted.append(glbPlcObjectId[randomIndex])
+                                                
+                                                self.showDetail.append(false)
+                                                self.userRecord.append(false)
+                                                
+                                                glbPlcOption1.remove(at: randomIndex)
+                                                glbPlcOption2.remove(at: randomIndex)
+                                                glbPlcOption3.remove(at: randomIndex)
+                                                glbPlcOption4.remove(at: randomIndex)
+                                                glbPlcImgs.remove(at: randomIndex)
+                                                glbPlcCorrectAnswer.remove(at: randomIndex)
+                                                glbPlcDescriptionEng.remove(at: randomIndex)
+                                                glbPlcObjectId.remove(at: randomIndex)
+                                            }
+                                            self.tableView.isScrollEnabled = true
+                                            self.tableView.reloadData()
+                                            self.tableView.alpha = 1
+                                            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
+                                            RunLoop.main.add(self.timer, forMode: .commonModes)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     
