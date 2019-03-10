@@ -223,36 +223,95 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                 placesQuery.limit = 50
                 placesQuery.findObjectsInBackground { [unowned self] (objects, error) in
                     if let places = objects {
-                        
-                        for place in places {
+                        if places.count + glbPlcOption1.count >= 4 {
                             
-                            //Caching update
-                            let plcImg = place["imageFile"] as! PFFile
-                            plcImg.getDataInBackground { [unowned self] (data, error) in
+                            for place in places {
                                 
-                                if let imageData = data {
-                                    
-                                    if let imageToDisplay = UIImage(data: imageData) {
+                                //Caching update
+                                if let placeImage = place["imageFile"] {
+                                    let plcImg = placeImage as! PFFile
+                                    plcImg.getDataInBackground { [unowned self] (data, error) in
                                         
-                                        let imageCache = imageToDisplay
-                                        
-                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
-                                        
-                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                        if let imageData = data {
                                             
-                                            glbPlcImgs.append(cacheimg)
-                                            
-                                            glbPlcOption1.append(place["alternative1"] as! String)
-                                            glbPlcOption2.append(place["alternative2"] as! String)
-                                            glbPlcOption3.append(place["alternative3"] as! String)
-                                            glbPlcOption4.append(place["alternative4"] as! String)
-                                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
-                                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
-                                            
-                                            if let question = place.objectId {
-                                                glbPlcObjectId.append(question)
+                                            if let imageToDisplay = UIImage(data: imageData) {
+                                                
+                                                let imageCache = imageToDisplay
+                                                
+                                                self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                
+                                                if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                    
+                                                    glbPlcImgs.append(cacheimg)
+                                                    
+                                                    glbPlcOption1.append(place["alternative1"] as! String)
+                                                    glbPlcOption2.append(place["alternative2"] as! String)
+                                                    glbPlcOption3.append(place["alternative3"] as! String)
+                                                    glbPlcOption4.append(place["alternative4"] as! String)
+                                                    glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
+                                                    glbPlcDescriptionEng.append(place["engDescription"] as! String)
+                                                    
+                                                    if let question = place.objectId {
+                                                        glbPlcObjectId.append(question)
+                                                    }
+                                                    if place == places.last {
+                                                        activityIndicator.stopAnimating()
+                                                        UIApplication.shared.endIgnoringInteractionEvents()
+                                                    }
+                                                    
+                                                }
                                             }
-
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else {
+                            let allPlacesQuery = PFQuery(className: "Places")
+                            allPlacesQuery.limit = 50
+                            allPlacesQuery.findObjectsInBackground { [unowned self] (objects, error) in
+                                if let places = objects {
+                                    
+                                    for place in places {
+                                        
+                                        if let question = place.objectId {
+                                            if glbPlcObjectId.firstIndex(of: question) == nil {
+                                                
+                                                //Caching update
+                                                if let placeImage = place["imageFile"] {
+                                                    let plcImg = placeImage as! PFFile
+                                                    plcImg.getDataInBackground { [unowned self] (data, error) in
+                                                        
+                                                        if let imageData = data {
+                                                            
+                                                            if let imageToDisplay = UIImage(data: imageData) {
+                                                                
+                                                                let imageCache = imageToDisplay
+                                                                
+                                                                self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                                
+                                                                if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                                    
+                                                                    glbPlcImgs.append(cacheimg)
+                                                                    
+                                                                    glbPlcObjectId.append(question)
+                                                                    glbPlcOption1.append(place["alternative1"] as! String)
+                                                                    glbPlcOption2.append(place["alternative2"] as! String)
+                                                                    glbPlcOption3.append(place["alternative3"] as! String)
+                                                                    glbPlcOption4.append(place["alternative4"] as! String)
+                                                                    glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
+                                                                    glbPlcDescriptionEng.append(place["engDescription"] as! String)
+                                                                    
+                                                                    if place == places.last {
+                                                                        activityIndicator.stopAnimating()
+                                                                        UIApplication.shared.endIgnoringInteractionEvents()
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -260,55 +319,6 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                         }
                     }
                     
-                    if glbPlcObjectId.count < 4 {
-                        let allPlacesQuery = PFQuery(className: "Places")
-                        allPlacesQuery.limit = 50
-                        allPlacesQuery.findObjectsInBackground { [unowned self] (objects, error) in
-                            if let places = objects {
-                                
-                                for place in places {
-                                    
-                                    if let question = place.objectId {
-                                        if glbPlcObjectId.firstIndex(of: question) == nil {
-                                            
-                                            //Caching update
-                                            let plcImg = place["imageFile"] as! PFFile
-                                            plcImg.getDataInBackground { [unowned self] (data, error) in
-                                                
-                                                if let imageData = data {
-                                                    
-                                                    if let imageToDisplay = UIImage(data: imageData) {
-                                                        
-                                                        let imageCache = imageToDisplay
-                                                        
-                                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
-                                                        
-                                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
-                                                            
-                                                            glbPlcImgs.append(cacheimg)
-                                                            
-                                                            glbPlcObjectId.append(question)
-                                                            glbPlcOption1.append(place["alternative1"] as! String)
-                                                            glbPlcOption2.append(place["alternative2"] as! String)
-                                                            glbPlcOption3.append(place["alternative3"] as! String)
-                                                            glbPlcOption4.append(place["alternative4"] as! String)
-                                                            glbPlcCorrectAnswer.append(place["correctAlternative"] as! String)
-                                                            glbPlcDescriptionEng.append(place["engDescription"] as! String)
-
-                                                        }
-                                                    }
-                                                }
-                                            }
-
-                                        }
-                                    }
-                                }
-                            }
-                            activityIndicator.stopAnimating()
-                            UIApplication.shared.endIgnoringInteractionEvents()
-                            
-                        }
-                    }
                     else {
                         activityIndicator.stopAnimating()
                         UIApplication.shared.endIgnoringInteractionEvents()
@@ -358,91 +368,97 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                 foodsQuery.limit = 50
                 foodsQuery.findObjectsInBackground { [unowned self] (objects, error) in
                     if let foods = objects {
-                        
-                        for food in foods {
+                        if foods.count + glbFdOption1.count >= 4 {
                             
-                            //Caching update
-                            let fdImg = food["imageFile"] as! PFFile
-                            fdImg.getDataInBackground { [unowned self] (data, error) in
+                            for food in foods {
                                 
-                                if let imageData = data {
-                                    
-                                    if let imageToDisplay = UIImage(data: imageData) {
+                                //Caching update
+                                if let foodImage = food["imageFile"] {
+                                    let fdImg = foodImage as! PFFile
+                                    fdImg.getDataInBackground { [unowned self] (data, error) in
                                         
-                                        let imageCache = imageToDisplay
-                                        
-                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
-                                        
-                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                        if let imageData = data {
                                             
-                                            glbFdImgs.append(cacheimg)
-                                            glbFdOption1.append(food["alternative1"] as! String)
-                                            glbFdOption2.append(food["alternative2"] as! String)
-                                            glbFdOption3.append(food["alternative3"] as! String)
-                                            glbFdOption4.append(food["alternative4"] as! String)
-                                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
-                                            glbFdDescriptionEng.append(food["engDescription"] as! String)
-                                            
-                                            if let question = food.objectId {
-                                                glbFdObjectId.append(question)
+                                            if let imageToDisplay = UIImage(data: imageData) {
+                                                
+                                                let imageCache = imageToDisplay
+                                                
+                                                self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                
+                                                if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                    
+                                                    glbFdImgs.append(cacheimg)
+                                                    glbFdOption1.append(food["alternative1"] as! String)
+                                                    glbFdOption2.append(food["alternative2"] as! String)
+                                                    glbFdOption3.append(food["alternative3"] as! String)
+                                                    glbFdOption4.append(food["alternative4"] as! String)
+                                                    glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
+                                                    glbFdDescriptionEng.append(food["engDescription"] as! String)
+                                                    
+                                                    if let question = food.objectId {
+                                                        glbFdObjectId.append(question)
+                                                    }
+                                                    if food == foods.last {
+                                                        activityIndicator.stopAnimating()
+                                                        UIApplication.shared.endIgnoringInteractionEvents()
+                                                    }
+                                                    
+                                                }
                                             }
-
                                         }
                                     }
                                 }
                             }
-
-                            
                         }
-                    }
-                    
-                    if glbFdObjectId.count < 4 {
-                        let allFoodsQuery = PFQuery(className: "Foods")
-                        allFoodsQuery.limit = 50
-                        allFoodsQuery.findObjectsInBackground { [unowned self] (objects, error) in
-                            if let foods = objects {
-                                
-                                for food in foods {
+                        else {
+                            let allFoodsQuery = PFQuery(className: "Foods")
+                            allFoodsQuery.limit = 50
+                            allFoodsQuery.findObjectsInBackground { [unowned self] (objects, error) in
+                                if let foods = objects {
                                     
-                                    if let question = food.objectId {
-                                        if glbFdObjectId.firstIndex(of: question) == nil {
-                                            
-                                            //Caching update
-                                            let fdImg = food["imageFile"] as! PFFile
-                                            fdImg.getDataInBackground { [unowned self] (data, error) in
+                                    for food in foods {
+                                        
+                                        if let question = food.objectId {
+                                            if glbFdObjectId.firstIndex(of: question) == nil {
                                                 
-                                                if let imageData = data {
-                                                    
-                                                    if let imageToDisplay = UIImage(data: imageData) {
+                                                //Caching update
+                                                if let foodImage = food["imageFile"] {
+                                                    let fdImg = foodImage as! PFFile
+                                                    fdImg.getDataInBackground { [unowned self] (data, error) in
                                                         
-                                                        let imageCache = imageToDisplay
-                                                        
-                                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
-                                                        
-                                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                        if let imageData = data {
                                                             
-                                                            glbFdImgs.append(cacheimg)
-                                                            glbFdObjectId.append(question)
-                                                            glbFdOption1.append(food["alternative1"] as! String)
-                                                            glbFdOption2.append(food["alternative2"] as! String)
-                                                            glbFdOption3.append(food["alternative3"] as! String)
-                                                            glbFdOption4.append(food["alternative4"] as! String)
-                                                            glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
-                                                            glbFdDescriptionEng.append(food["engDescription"] as! String)
-
+                                                            if let imageToDisplay = UIImage(data: imageData) {
+                                                                
+                                                                let imageCache = imageToDisplay
+                                                                
+                                                                self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                                
+                                                                if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                                    
+                                                                    glbFdImgs.append(cacheimg)
+                                                                    glbFdObjectId.append(question)
+                                                                    glbFdOption1.append(food["alternative1"] as! String)
+                                                                    glbFdOption2.append(food["alternative2"] as! String)
+                                                                    glbFdOption3.append(food["alternative3"] as! String)
+                                                                    glbFdOption4.append(food["alternative4"] as! String)
+                                                                    glbFdCorrectAnswer.append(food["correctAlternative"] as! String)
+                                                                    glbFdDescriptionEng.append(food["engDescription"] as! String)
+                                                                    
+                                                                    if food == foods.last {
+                                                                        activityIndicator.stopAnimating()
+                                                                        UIApplication.shared.endIgnoringInteractionEvents()
+                                                                    }
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
-
                                         }
-                                        
                                     }
                                 }
                             }
-                            activityIndicator.stopAnimating()
-                            UIApplication.shared.endIgnoringInteractionEvents()
-                            
                         }
                     }
                     else {
@@ -477,10 +493,11 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                 else {
                     if let items = objects {
                         for item in items {
-                            localItemIDs.append(item["item"] as! String)
-                            glbToDoItemPlaceOrFood.append(item["PlaceOrFood"] as! String)
-                            completed.append(item["Completed"] as! String)
-                            
+                            if let itemItem = item["item"] {
+                                localItemIDs.append(itemItem as! String)
+                                glbToDoItemPlaceOrFood.append(item["PlaceOrFood"] as! String)
+                                completed.append(item["Completed"] as! String)
+                            }
                         }
                     }
                 }
@@ -514,36 +531,38 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                                 for place in places {
                                     
                                     //Caching update
-                                    let todoImg = place["imageFile"] as! PFFile
-                                    todoImg.getDataInBackground { [unowned self] (data, error) in
-                                        
-                                        if let imageData = data {
+                                    if let todoImage = place["imageFile"] {
+                                        let todoImg = todoImage as! PFFile
+                                        todoImg.getDataInBackground { [unowned self] (data, error) in
                                             
-                                            if let imageToDisplay = UIImage(data: imageData) {
+                                            if let imageData = data {
                                                 
-                                                let imageCache = imageToDisplay
-                                                
-                                                self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
-                                                
-                                                if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                if let imageToDisplay = UIImage(data: imageData) {
                                                     
-                                                    glbToDoItemImg.append(cacheimg)
-                                                    if let correctAnsInt = Int(place["correctAlternative"] as! String) {
-                                                        if correctAnsInt == 1 {
-                                                            glbToDoItemNames.append(place["alternative1"] as! String)
+                                                    let imageCache = imageToDisplay
+                                                    
+                                                    self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                    
+                                                    if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                        
+                                                        glbToDoItemImg.append(cacheimg)
+                                                        if let correctAnsInt = Int(place["correctAlternative"] as! String) {
+                                                            if correctAnsInt == 1 {
+                                                                glbToDoItemNames.append(place["alternative1"] as! String)
+                                                            }
+                                                            else if correctAnsInt == 2 {
+                                                                glbToDoItemNames.append(place["alternative2"] as! String)
+                                                            }
+                                                            else if correctAnsInt == 3 {
+                                                                glbToDoItemNames.append(place["alternative3"] as! String)
+                                                            }
+                                                            else if correctAnsInt == 4 {
+                                                                glbToDoItemNames.append(place["alternative4"] as! String)
+                                                            }
                                                         }
-                                                        else if correctAnsInt == 2 {
-                                                            glbToDoItemNames.append(place["alternative2"] as! String)
-                                                        }
-                                                        else if correctAnsInt == 3 {
-                                                            glbToDoItemNames.append(place["alternative3"] as! String)
-                                                        }
-                                                        else if correctAnsInt == 4 {
-                                                            glbToDoItemNames.append(place["alternative4"] as! String)
-                                                        }
+                                                        glbToDoItemDescriptions.append(place["engDescription"] as! String)
+                                                        
                                                     }
-                                                    glbToDoItemDescriptions.append(place["engDescription"] as! String)
-
                                                 }
                                             }
                                         }
@@ -580,36 +599,38 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                                         for food in foods {
                                             
                                             //Caching update
-                                            let todoImg = food["imageFile"] as! PFFile
-                                            todoImg.getDataInBackground { [unowned self] (data, error) in
-                                                
-                                                if let imageData = data {
+                                            if let todoImage = food["imageFile"] {
+                                                let todoImg = todoImage as! PFFile
+                                                todoImg.getDataInBackground { [unowned self] (data, error) in
                                                     
-                                                    if let imageToDisplay = UIImage(data: imageData) {
+                                                    if let imageData = data {
                                                         
-                                                        let imageCache = imageToDisplay
-                                                        
-                                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
-                                                        
-                                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                        if let imageToDisplay = UIImage(data: imageData) {
                                                             
-                                                            glbToDoItemImg.append(cacheimg)
-                                                            if let correctAnsInt = Int(food["correctAlternative"] as! String) {
-                                                                if correctAnsInt == 1 {
-                                                                    glbToDoItemNames.append(food["alternative1"] as! String)
+                                                            let imageCache = imageToDisplay
+                                                            
+                                                            self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                            
+                                                            if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                                
+                                                                glbToDoItemImg.append(cacheimg)
+                                                                if let correctAnsInt = Int(food["correctAlternative"] as! String) {
+                                                                    if correctAnsInt == 1 {
+                                                                        glbToDoItemNames.append(food["alternative1"] as! String)
+                                                                    }
+                                                                    else if correctAnsInt == 2 {
+                                                                        glbToDoItemNames.append(food["alternative2"] as! String)
+                                                                    }
+                                                                    else if correctAnsInt == 3 {
+                                                                        glbToDoItemNames.append(food["alternative3"] as! String)
+                                                                    }
+                                                                    else if correctAnsInt == 4 {
+                                                                        glbToDoItemNames.append(food["alternative4"] as! String)
+                                                                    }
                                                                 }
-                                                                else if correctAnsInt == 2 {
-                                                                    glbToDoItemNames.append(food["alternative2"] as! String)
-                                                                }
-                                                                else if correctAnsInt == 3 {
-                                                                    glbToDoItemNames.append(food["alternative3"] as! String)
-                                                                }
-                                                                else if correctAnsInt == 4 {
-                                                                    glbToDoItemNames.append(food["alternative4"] as! String)
-                                                                }
+                                                                glbToDoItemDescriptions.append(food["engDescription"] as! String)
+                                                                
                                                             }
-                                                            glbToDoItemDescriptions.append(food["engDescription"] as! String)
-
                                                         }
                                                     }
                                                 }
@@ -658,36 +679,38 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                             if let foods = objects {
                                 for food in foods {
                                     //Caching update
-                                    let todoImg = food["imageFile"] as! PFFile
-                                    todoImg.getDataInBackground { [unowned self] (data, error) in
-                                        
-                                        if let imageData = data {
+                                    if let todoImage = food["imageFile"] {
+                                        let todoImg = todoImage as! PFFile
+                                        todoImg.getDataInBackground { [unowned self] (data, error) in
                                             
-                                            if let imageToDisplay = UIImage(data: imageData) {
+                                            if let imageData = data {
                                                 
-                                                let imageCache = imageToDisplay
-                                                
-                                                self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
-                                                
-                                                if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                if let imageToDisplay = UIImage(data: imageData) {
                                                     
-                                                    glbToDoItemImg.append(cacheimg)
-                                                    if let correctAnsInt = Int(food["correctAlternative"] as! String) {
-                                                        if correctAnsInt == 1 {
-                                                            glbToDoItemNames.append(food["alternative1"] as! String)
+                                                    let imageCache = imageToDisplay
+                                                    
+                                                    self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                    
+                                                    if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                        
+                                                        glbToDoItemImg.append(cacheimg)
+                                                        if let correctAnsInt = Int(food["correctAlternative"] as! String) {
+                                                            if correctAnsInt == 1 {
+                                                                glbToDoItemNames.append(food["alternative1"] as! String)
+                                                            }
+                                                            else if correctAnsInt == 2 {
+                                                                glbToDoItemNames.append(food["alternative2"] as! String)
+                                                            }
+                                                            else if correctAnsInt == 3 {
+                                                                glbToDoItemNames.append(food["alternative3"] as! String)
+                                                            }
+                                                            else if correctAnsInt == 4 {
+                                                                glbToDoItemNames.append(food["alternative4"] as! String)
+                                                            }
                                                         }
-                                                        else if correctAnsInt == 2 {
-                                                            glbToDoItemNames.append(food["alternative2"] as! String)
-                                                        }
-                                                        else if correctAnsInt == 3 {
-                                                            glbToDoItemNames.append(food["alternative3"] as! String)
-                                                        }
-                                                        else if correctAnsInt == 4 {
-                                                            glbToDoItemNames.append(food["alternative4"] as! String)
-                                                        }
+                                                        glbToDoItemDescriptions.append(food["engDescription"] as! String)
+                                                        
                                                     }
-                                                    glbToDoItemDescriptions.append(food["engDescription"] as! String)
-
                                                 }
                                             }
                                         }

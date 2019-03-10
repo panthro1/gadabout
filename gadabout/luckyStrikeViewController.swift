@@ -161,31 +161,33 @@ class luckyStrikeViewController: UIViewController, LuckyInfoPopupDelegate {
                             
                             
                             //Caching update
-                            let plcImg = place["imageFile"] as! PFFile
-                            plcImg.getDataInBackground { [unowned self] (data, error) in
-                                
-                                if let imageData = data {
+                            if let placeImage = place["imageFile"] {
+                                let plcImg = placeImage as! PFFile
+                                plcImg.getDataInBackground { [unowned self] (data, error) in
                                     
-                                    if let imageToDisplay = UIImage(data: imageData) {
+                                    if let imageData = data {
                                         
-                                        let imageCache = imageToDisplay
-                                        
-                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
-                                        
-                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                        if let imageToDisplay = UIImage(data: imageData) {
                                             
-                                            self.imgArr.append(cacheimg)
-                                            self.option1.append(place["alternative1"] as! String)
-                                            self.option2.append(place["alternative2"] as! String)
-                                            self.option3.append(place["alternative3"] as! String)
-                                            self.option4.append(place["alternative4"] as! String)
-                                            self.correctAnswer.append(place["correctAlternative"] as! String)
-                                            self.descriptionEng.append(place["engDescription"] as! String)
-                                            self.isPlace.append(true)
-                                            if let question = place.objectId {
-                                                self.objectId.append(question)
+                                            let imageCache = imageToDisplay
+                                            
+                                            self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                            
+                                            if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                
+                                                self.imgArr.append(cacheimg)
+                                                self.option1.append(place["alternative1"] as! String)
+                                                self.option2.append(place["alternative2"] as! String)
+                                                self.option3.append(place["alternative3"] as! String)
+                                                self.option4.append(place["alternative4"] as! String)
+                                                self.correctAnswer.append(place["correctAlternative"] as! String)
+                                                self.descriptionEng.append(place["engDescription"] as! String)
+                                                self.isPlace.append(true)
+                                                if let question = place.objectId {
+                                                    self.objectId.append(question)
+                                                }
+                                                
                                             }
-
                                         }
                                     }
                                 }
@@ -205,32 +207,34 @@ class luckyStrikeViewController: UIViewController, LuckyInfoPopupDelegate {
                             for food in foods {
                                 
                                 //Caching update
-                                let fdImg = food["imageFile"] as! PFFile
-                                fdImg.getDataInBackground { [unowned self] (data, error) in
-                                    
-                                    if let imageData = data {
+                                if let foodImage = food["imageFile"] {
+                                    let fdImg = foodImage as! PFFile
+                                    fdImg.getDataInBackground { [unowned self] (data, error) in
                                         
-                                        if let imageToDisplay = UIImage(data: imageData) {
+                                        if let imageData = data {
                                             
-                                            let imageCache = imageToDisplay
-                                            
-                                            self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
-                                            
-                                            if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                            if let imageToDisplay = UIImage(data: imageData) {
                                                 
-                                                self.imgArr.append(cacheimg)
-                                                self.option1.append(food["alternative1"] as! String)
-                                                self.option2.append(food["alternative2"] as! String)
-                                                self.option3.append(food["alternative3"] as! String)
-                                                self.option4.append(food["alternative4"] as! String)
-                                                self.correctAnswer.append(food["correctAlternative"] as! String)
-                                                self.descriptionEng.append(food["engDescription"] as! String)
-                                                self.isPlace.append(false)
-                                                if let question = food.objectId {
-                                                    self.objectId.append(question)
+                                                let imageCache = imageToDisplay
+                                                
+                                                self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                
+                                                if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                    
+                                                    self.imgArr.append(cacheimg)
+                                                    self.option1.append(food["alternative1"] as! String)
+                                                    self.option2.append(food["alternative2"] as! String)
+                                                    self.option3.append(food["alternative3"] as! String)
+                                                    self.option4.append(food["alternative4"] as! String)
+                                                    self.correctAnswer.append(food["correctAlternative"] as! String)
+                                                    self.descriptionEng.append(food["engDescription"] as! String)
+                                                    self.isPlace.append(false)
+                                                    if let question = food.objectId {
+                                                        self.objectId.append(question)
+                                                    }
+                                                    
+                                                    
                                                 }
-                                                
-
                                             }
                                         }
                                     }
@@ -548,31 +552,33 @@ class luckyStrikeViewController: UIViewController, LuckyInfoPopupDelegate {
                     for place in places {
                         
                         //Caching update
-                        let plcImg = place["imageFile"] as! PFFile
-                        plcImg.getDataInBackground { [unowned self] (data, error) in
-                            
-                            if let imageData = data {
+                        if let placeImage = place["imageFile"] {
+                            let plcImg = placeImage as! PFFile
+                            plcImg.getDataInBackground { [unowned self] (data, error) in
                                 
-                                if let imageToDisplay = UIImage(data: imageData) {
+                                if let imageData = data {
                                     
-                                    let imageCache = imageToDisplay
-                                    
-                                    self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
-                                    
-                                    if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                    if let imageToDisplay = UIImage(data: imageData) {
                                         
-                                        self.imgArr.append(cacheimg)
-                                        self.option1.append(place["alternative1"] as! String)
-                                        self.option2.append(place["alternative2"] as! String)
-                                        self.option3.append(place["alternative3"] as! String)
-                                        self.option4.append(place["alternative4"] as! String)
-                                        self.correctAnswer.append(place["correctAlternative"] as! String)
-                                        self.descriptionEng.append(place["engDescription"] as! String)
-                                        self.isPlace.append(true)
-                                        if let question = place.objectId {
-                                            self.objectId.append(question)
+                                        let imageCache = imageToDisplay
+                                        
+                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                        
+                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                            
+                                            self.imgArr.append(cacheimg)
+                                            self.option1.append(place["alternative1"] as! String)
+                                            self.option2.append(place["alternative2"] as! String)
+                                            self.option3.append(place["alternative3"] as! String)
+                                            self.option4.append(place["alternative4"] as! String)
+                                            self.correctAnswer.append(place["correctAlternative"] as! String)
+                                            self.descriptionEng.append(place["engDescription"] as! String)
+                                            self.isPlace.append(true)
+                                            if let question = place.objectId {
+                                                self.objectId.append(question)
+                                            }
+                                            
                                         }
-
                                     }
                                 }
                             }
@@ -592,31 +598,33 @@ class luckyStrikeViewController: UIViewController, LuckyInfoPopupDelegate {
                         for food in foods {
                             
                             //Caching update
-                            let fdImg = food["imageFile"] as! PFFile
-                            fdImg.getDataInBackground { [unowned self] (data, error) in
-                                
-                                if let imageData = data {
+                            if let foodImage = food["imageFile"] {
+                                let fdImg = foodImage as! PFFile
+                                fdImg.getDataInBackground { [unowned self] (data, error) in
                                     
-                                    if let imageToDisplay = UIImage(data: imageData) {
+                                    if let imageData = data {
                                         
-                                        let imageCache = imageToDisplay
-                                        
-                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
-                                        
-                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                        if let imageToDisplay = UIImage(data: imageData) {
                                             
-                                            self.imgArr.append(cacheimg)
-                                            self.option1.append(food["alternative1"] as! String)
-                                            self.option2.append(food["alternative2"] as! String)
-                                            self.option3.append(food["alternative3"] as! String)
-                                            self.option4.append(food["alternative4"] as! String)
-                                            self.correctAnswer.append(food["correctAlternative"] as! String)
-                                            self.descriptionEng.append(food["engDescription"] as! String)
-                                            self.isPlace.append(false)
-                                            if let question = food.objectId {
-                                                self.objectId.append(question)
+                                            let imageCache = imageToDisplay
+                                            
+                                            self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                            
+                                            if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                
+                                                self.imgArr.append(cacheimg)
+                                                self.option1.append(food["alternative1"] as! String)
+                                                self.option2.append(food["alternative2"] as! String)
+                                                self.option3.append(food["alternative3"] as! String)
+                                                self.option4.append(food["alternative4"] as! String)
+                                                self.correctAnswer.append(food["correctAlternative"] as! String)
+                                                self.descriptionEng.append(food["engDescription"] as! String)
+                                                self.isPlace.append(false)
+                                                if let question = food.objectId {
+                                                    self.objectId.append(question)
+                                                }
+                                                
                                             }
-
                                         }
                                     }
                                 }
@@ -796,31 +804,33 @@ class luckyStrikeViewController: UIViewController, LuckyInfoPopupDelegate {
                                 for place in places {
                                     
                                     //Caching update
-                                    let plcImg = place["imageFile"] as! PFFile
-                                    plcImg.getDataInBackground { [unowned self] (data, error) in
-                                        
-                                        if let imageData = data {
+                                    if let placeImage = place["imageFile"] {
+                                        let plcImg = placeImage as! PFFile
+                                        plcImg.getDataInBackground { [unowned self] (data, error) in
                                             
-                                            if let imageToDisplay = UIImage(data: imageData) {
+                                            if let imageData = data {
                                                 
-                                                let imageCache = imageToDisplay
-                                                
-                                                self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
-                                                
-                                                if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                if let imageToDisplay = UIImage(data: imageData) {
                                                     
-                                                    self.imgArr.append(cacheimg)
-                                                    self.option1.append(place["alternative1"] as! String)
-                                                    self.option2.append(place["alternative2"] as! String)
-                                                    self.option3.append(place["alternative3"] as! String)
-                                                    self.option4.append(place["alternative4"] as! String)
-                                                    self.correctAnswer.append(place["correctAlternative"] as! String)
-                                                    self.descriptionEng.append(place["engDescription"] as! String)
-                                                    self.isPlace.append(true)
-                                                    if let question = place.objectId {
-                                                        self.objectId.append(question)
+                                                    let imageCache = imageToDisplay
+                                                    
+                                                    self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                    
+                                                    if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                        
+                                                        self.imgArr.append(cacheimg)
+                                                        self.option1.append(place["alternative1"] as! String)
+                                                        self.option2.append(place["alternative2"] as! String)
+                                                        self.option3.append(place["alternative3"] as! String)
+                                                        self.option4.append(place["alternative4"] as! String)
+                                                        self.correctAnswer.append(place["correctAlternative"] as! String)
+                                                        self.descriptionEng.append(place["engDescription"] as! String)
+                                                        self.isPlace.append(true)
+                                                        if let question = place.objectId {
+                                                            self.objectId.append(question)
+                                                        }
+                                                        
                                                     }
-
                                                 }
                                             }
                                         }
@@ -840,31 +850,33 @@ class luckyStrikeViewController: UIViewController, LuckyInfoPopupDelegate {
                                     for food in foods {
                                         
                                         //Caching update
-                                        let fdImg = food["imageFile"] as! PFFile
-                                        fdImg.getDataInBackground { [unowned self] (data, error) in
-                                            
-                                            if let imageData = data {
+                                        if let foodImage = food["imageFile"] {
+                                            let fdImg = foodImage as! PFFile
+                                            fdImg.getDataInBackground { [unowned self] (data, error) in
                                                 
-                                                if let imageToDisplay = UIImage(data: imageData) {
+                                                if let imageData = data {
                                                     
-                                                    let imageCache = imageToDisplay
-                                                    
-                                                    self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
-                                                    
-                                                    if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                    if let imageToDisplay = UIImage(data: imageData) {
                                                         
-                                                        self.imgArr.append(cacheimg)
-                                                        self.option1.append(food["alternative1"] as! String)
-                                                        self.option2.append(food["alternative2"] as! String)
-                                                        self.option3.append(food["alternative3"] as! String)
-                                                        self.option4.append(food["alternative4"] as! String)
-                                                        self.correctAnswer.append(food["correctAlternative"] as! String)
-                                                        self.descriptionEng.append(food["engDescription"] as! String)
-                                                        self.isPlace.append(false)
-                                                        if let question = food.objectId {
-                                                            self.objectId.append(question)
+                                                        let imageCache = imageToDisplay
+                                                        
+                                                        self.cache.setObject(imageCache, forKey: "cacheImg" as AnyObject)
+                                                        
+                                                        if let cacheimg = self.cache.object(forKey: "cacheImg" as AnyObject) as? UIImage {
+                                                            
+                                                            self.imgArr.append(cacheimg)
+                                                            self.option1.append(food["alternative1"] as! String)
+                                                            self.option2.append(food["alternative2"] as! String)
+                                                            self.option3.append(food["alternative3"] as! String)
+                                                            self.option4.append(food["alternative4"] as! String)
+                                                            self.correctAnswer.append(food["correctAlternative"] as! String)
+                                                            self.descriptionEng.append(food["engDescription"] as! String)
+                                                            self.isPlace.append(false)
+                                                            if let question = food.objectId {
+                                                                self.objectId.append(question)
+                                                            }
+                                                            
                                                         }
-
                                                     }
                                                 }
                                             }
