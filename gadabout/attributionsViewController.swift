@@ -64,7 +64,7 @@ class attributionsViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 14
+        return 16
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -145,6 +145,14 @@ class attributionsViewController: UIViewController, UITableViewDataSource, UITab
             cell.accessoryView = UIImageView(image: UIImage(named: "replay.png"))
             cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
         }
+        else if indexPath.section == 14 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "swipeLeft.png"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
+        }
+        else if indexPath.section == 15 {
+            cell.accessoryView = UIImageView(image: UIImage(named: "swipeRight.png"))
+            cell.accessoryView?.frame = CGRect(x: 0, y: 0, width: rowImageSize, height: rowImageSize)
+        }
 
         
         
@@ -189,6 +197,12 @@ class attributionsViewController: UIViewController, UITableViewDataSource, UITab
         }
         else if indexPath.section == 13 {
             cell.textLabel?.text = "Icon made by Freepik from www.flaticon.com"
+        }
+        else if indexPath.section == 14 {
+            cell.textLabel?.text = "Icon made by Kirill Kazachek from www.flaticon.com"
+        }
+        else if indexPath.section == 15 {
+            cell.textLabel?.text = "Icon made by Kirill Kazachek from www.flaticon.com"
         }
 
         cell.textLabel?.sizeToFit()

@@ -41,8 +41,8 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
 
     @IBOutlet weak var complete: UIBarButtonItem!
     
-    var timeRemaining = 15
-    let totalTime = 15
+    var timeRemaining = 30
+    let totalTime = 30
     
     var progressLayer: CAShapeLayer!
     var timer = Timer()
@@ -103,7 +103,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
         else {
             complete.title = "Complete"
             isCompleted = false
-            timeRemaining = 15
+            timeRemaining = 30
             progressLayer.strokeEnd = 0
             timeLabel.text = "\(timeRemaining)"
             timeLabel.font = UIFont.boldSystemFont(ofSize: 25)
@@ -167,6 +167,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                 
                 let foodsQuery = PFQuery(className: "Foods")
                 foodsQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
+                foodsQuery.limit = 50
                 foodsQuery.findObjectsInBackground { [unowned self] (objects, error) in
                     if let foods = objects {
                         
@@ -206,6 +207,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                     
                     if glbFdObjectId.count < 4 {
                         let allFoodsQuery = PFQuery(className: "Foods")
+                        allFoodsQuery.limit = 50
                         allFoodsQuery.findObjectsInBackground { [unowned self] (objects, error) in
                             if let foods = objects {
                                 
@@ -547,9 +549,9 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
             cell.toDoListButton.titleLabel?.font = .systemFont(ofSize: 17)
         }
         
-        cell.layer.cornerRadius = 20 //set corner radius here
-        cell.layer.borderColor = UIColor.lightGray.cgColor  // set cell border color here
-        cell.layer.borderWidth = 2 // set border width here
+        cell.layer.cornerRadius = 0 //set corner radius here
+        cell.layer.borderColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 100).cgColor  // set cell border color here
+        cell.layer.borderWidth = 1 // set border width here
 
         
         //print("Row: \(indexPath.row) showDetail: \(showDetail) Completed: \(isCompleted)")
@@ -945,6 +947,7 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                 
                 let foodsQuery = PFQuery(className: "Foods")
                 foodsQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
+                foodsQuery.limit = 50
                 foodsQuery.findObjectsInBackground { [unowned self] (objects, error) in
                     if let foods = objects {
                         
@@ -984,8 +987,10 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                     
                     if glbFdObjectId.count < 4 {
                         let allFoodsQuery = PFQuery(className: "Foods")
+                        allFoodsQuery.limit = 50
                         allFoodsQuery.findObjectsInBackground { [unowned self] (objects, error) in
                             if let foods = objects {
+                                print("Nof Food Items: \(foods.count)")
                                 
                                 for food in foods {
                                     
@@ -1017,48 +1022,49 @@ class foodsTableViewController: UITableViewController, foodsTableViewCellDelegat
                                                         }
                                                     }
                                                 }
+                                                
+                                                if food == foods.last {
+                                                    var questionLimit = 4
+                                                    
+                                                    if glbFdObjectId.count < questionLimit {
+                                                        questionLimit = glbFdObjectId.count
+                                                    }
+                                                    
+                                                    for _ in 0 ..< questionLimit {
+                                                        
+                                                        let randomIndex = Int(arc4random_uniform(UInt32(glbFdObjectId.count)))
+                                                        
+                                                        self.option1.append(glbFdOption1[randomIndex])
+                                                        self.option2.append(glbFdOption2[randomIndex])
+                                                        self.option3.append(glbFdOption3[randomIndex])
+                                                        self.option4.append(glbFdOption4[randomIndex])
+                                                        self.imageArr.append(glbFdImgs[randomIndex])
+                                                        self.correctAnswer.append(glbFdCorrectAnswer[randomIndex])
+                                                        self.descriptionEng.append(glbFdDescriptionEng[randomIndex])
+                                                        self.questionCompleted.append(glbFdObjectId[randomIndex])
+                                                        
+                                                        self.showDetail.append(false)
+                                                        self.userRecord.append(false)
+                                                        
+                                                        glbFdOption1.remove(at: randomIndex)
+                                                        glbFdOption2.remove(at: randomIndex)
+                                                        glbFdOption3.remove(at: randomIndex)
+                                                        glbFdOption4.remove(at: randomIndex)
+                                                        glbFdImgs.remove(at: randomIndex)
+                                                        glbFdCorrectAnswer.remove(at: randomIndex)
+                                                        glbFdDescriptionEng.remove(at: randomIndex)
+                                                        glbFdObjectId.remove(at: randomIndex)
+                                                    }
+                                                    self.tableView.reloadData()
+                                                    self.tableView.alpha = 1
+                                                    self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
+                                                    RunLoop.main.add(self.timer, forMode: .commonModes)
+                                                }
                                             }
                                         }
                                     }
-                                    
                                 }
                             }
-                            
-                            var questionLimit = 4
-                            
-                            if glbFdObjectId.count < questionLimit {
-                                questionLimit = glbFdObjectId.count
-                            }
-                            
-                            for _ in 0 ..< questionLimit {
-                                
-                                let randomIndex = Int(arc4random_uniform(UInt32(glbFdObjectId.count)))
-                                
-                                self.option1.append(glbFdOption1[randomIndex])
-                                self.option2.append(glbFdOption2[randomIndex])
-                                self.option3.append(glbFdOption3[randomIndex])
-                                self.option4.append(glbFdOption4[randomIndex])
-                                self.imageArr.append(glbFdImgs[randomIndex])
-                                self.correctAnswer.append(glbFdCorrectAnswer[randomIndex])
-                                self.descriptionEng.append(glbFdDescriptionEng[randomIndex])
-                                self.questionCompleted.append(glbFdObjectId[randomIndex])
-                                
-                                self.showDetail.append(false)
-                                self.userRecord.append(false)
-                                
-                                glbFdOption1.remove(at: randomIndex)
-                                glbFdOption2.remove(at: randomIndex)
-                                glbFdOption3.remove(at: randomIndex)
-                                glbFdOption4.remove(at: randomIndex)
-                                glbFdImgs.remove(at: randomIndex)
-                                glbFdCorrectAnswer.remove(at: randomIndex)
-                                glbFdDescriptionEng.remove(at: randomIndex)
-                                glbFdObjectId.remove(at: randomIndex)
-                            }
-                            self.tableView.reloadData()
-                            self.tableView.alpha = 1
-                            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
-                            RunLoop.main.add(self.timer, forMode: .commonModes)
                             
                         }
                         

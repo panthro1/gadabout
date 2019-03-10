@@ -220,6 +220,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                 
                 let placesQuery = PFQuery(className: "Places")
                 placesQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
+                placesQuery.limit = 50
                 placesQuery.findObjectsInBackground { [unowned self] (objects, error) in
                     if let places = objects {
                         
@@ -261,6 +262,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                     
                     if glbPlcObjectId.count < 4 {
                         let allPlacesQuery = PFQuery(className: "Places")
+                        allPlacesQuery.limit = 50
                         allPlacesQuery.findObjectsInBackground { [unowned self] (objects, error) in
                             if let places = objects {
                                 
@@ -353,6 +355,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                 
                 let foodsQuery = PFQuery(className: "Foods")
                 foodsQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
+                foodsQuery.limit = 50
                 foodsQuery.findObjectsInBackground { [unowned self] (objects, error) in
                     if let foods = objects {
                         
@@ -395,6 +398,7 @@ class MainPageViewController: UIViewController, UITableViewDelegate, UITableView
                     
                     if glbFdObjectId.count < 4 {
                         let allFoodsQuery = PFQuery(className: "Foods")
+                        allFoodsQuery.limit = 50
                         allFoodsQuery.findObjectsInBackground { [unowned self] (objects, error) in
                             if let foods = objects {
                                 

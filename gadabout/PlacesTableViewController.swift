@@ -41,8 +41,8 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
     var detailText: String = ""
     var userRecord = [Bool]()
     
-    var timeRemaining = 15
-    let totalTime = 15
+    var timeRemaining = 30
+    let totalTime = 30
     var timeLabel = UILabel()
     var timer = Timer()
     var scorePoint = 0
@@ -115,7 +115,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
         else {
             complete.title = "Complete"
             isCompleted = false
-            timeRemaining = 15
+            timeRemaining = 30
             progressLayer.strokeEnd = 0
             timeLabel.text = "\(timeRemaining)"
             timeLabel.font = UIFont.boldSystemFont(ofSize: 25)
@@ -178,6 +178,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                 
                 let placesQuery = PFQuery(className: "Places")
                 placesQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
+                placesQuery.limit = 50
                 placesQuery.findObjectsInBackground { [unowned self] (objects, error) in
                     if let places = objects {
                         
@@ -218,6 +219,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     
                     if glbPlcObjectId.count < 4 {
                         let allPlacesQuery = PFQuery(className: "Places")
+                        allPlacesQuery.limit = 50
                         allPlacesQuery.findObjectsInBackground { [unowned self] (objects, error) in
                             if let places = objects {
                                 
@@ -252,46 +254,47 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                                                         }
                                                     }
                                                 }
+                                                
+                                                if place == places.last {
+                                                    var questionLimit = 4
+                                                    
+                                                    if glbPlcObjectId.count < questionLimit {
+                                                        questionLimit = glbPlcObjectId.count
+                                                    }
+                                                    
+                                                    for _ in 0 ..< questionLimit {
+                                                        
+                                                        let randomIndex = Int(arc4random_uniform(UInt32(glbPlcObjectId.count)))
+                                                        
+                                                        self.option1.append(glbPlcOption1[randomIndex])
+                                                        self.option2.append(glbPlcOption2[randomIndex])
+                                                        self.option3.append(glbPlcOption3[randomIndex])
+                                                        self.option4.append(glbPlcOption4[randomIndex])
+                                                        self.imageArr.append(glbPlcImgs[randomIndex])
+                                                        self.correctAnswer.append(glbPlcCorrectAnswer[randomIndex])
+                                                        self.descriptionEng.append(glbPlcDescriptionEng[randomIndex])
+                                                        self.questionCompleted.append(glbPlcObjectId[randomIndex])
+                                                        
+                                                        self.showDetail.append(false)
+                                                        self.userRecord.append(false)
+                                                        
+                                                        glbPlcOption1.remove(at: randomIndex)
+                                                        glbPlcOption2.remove(at: randomIndex)
+                                                        glbPlcOption3.remove(at: randomIndex)
+                                                        glbPlcOption4.remove(at: randomIndex)
+                                                        glbPlcImgs.remove(at: randomIndex)
+                                                        glbPlcCorrectAnswer.remove(at: randomIndex)
+                                                        glbPlcDescriptionEng.remove(at: randomIndex)
+                                                        glbPlcObjectId.remove(at: randomIndex)
+                                                    }
+                                                    self.tableView.reloadData()
+                                                }
                                             }
                                         }
                                     }
                                     
                                 }
                             }
-                            
-                            var questionLimit = 4
-                            
-                            if glbPlcObjectId.count < questionLimit {
-                                questionLimit = glbPlcObjectId.count
-                            }
-                            
-                            for _ in 0 ..< questionLimit {
-                                
-                                let randomIndex = Int(arc4random_uniform(UInt32(glbPlcObjectId.count)))
-                                
-                                self.option1.append(glbPlcOption1[randomIndex])
-                                self.option2.append(glbPlcOption2[randomIndex])
-                                self.option3.append(glbPlcOption3[randomIndex])
-                                self.option4.append(glbPlcOption4[randomIndex])
-                                self.imageArr.append(glbPlcImgs[randomIndex])
-                                self.correctAnswer.append(glbPlcCorrectAnswer[randomIndex])
-                                self.descriptionEng.append(glbPlcDescriptionEng[randomIndex])
-                                self.questionCompleted.append(glbPlcObjectId[randomIndex])
-                                
-                                self.showDetail.append(false)
-                                self.userRecord.append(false)
-                                
-                                glbPlcOption1.remove(at: randomIndex)
-                                glbPlcOption2.remove(at: randomIndex)
-                                glbPlcOption3.remove(at: randomIndex)
-                                glbPlcOption4.remove(at: randomIndex)
-                                glbPlcImgs.remove(at: randomIndex)
-                                glbPlcCorrectAnswer.remove(at: randomIndex)
-                                glbPlcDescriptionEng.remove(at: randomIndex)
-                                glbPlcObjectId.remove(at: randomIndex)
-                            }
-                            self.tableView.reloadData()
-
                         }
                         
                     }
@@ -579,9 +582,9 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
             cell.detailsButton.titleLabel?.font = .systemFont(ofSize: 15)
         }*/
         
-        cell.layer.cornerRadius=20 //set corner radius here
-        cell.layer.borderColor = UIColor.lightGray.cgColor  // set cell border color here
-        cell.layer.borderWidth = 2 // set border width here
+        cell.layer.cornerRadius = 0 //set corner radius here
+        cell.layer.borderColor = UIColor(red: 235/255, green: 235/255, blue: 235/255, alpha: 100).cgColor  // set cell border color here
+        cell.layer.borderWidth = 1 // set border width here
         
         //print("Row: \(indexPath.row) showDetail: \(showDetail) Completed: \(isCompleted)")
         
@@ -985,6 +988,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
 
                 let placesQuery = PFQuery(className: "Places")
                 placesQuery.whereKey("objectId", notContainedIn: self.questionSeenBefore)
+                placesQuery.limit = 50
                 placesQuery.findObjectsInBackground { [unowned self] (objects, error) in
                     if let places = objects {
                         
@@ -1026,6 +1030,7 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                     
                     if glbPlcObjectId.count < 4 {
                         let allPlacesQuery = PFQuery(className: "Places")
+                        allPlacesQuery.limit = 50
                         allPlacesQuery.findObjectsInBackground { [unowned self] (objects, error) in
                             if let places = objects {
                                 
@@ -1060,49 +1065,51 @@ class PlacesTableViewController: UITableViewController, placesTableViewCellDeleg
                                                         }
                                                     }
                                                 }
+                                                
+                                                if place == places.last {
+                                                    var questionLimit = 4
+                                                    
+                                                    if glbPlcObjectId.count < questionLimit {
+                                                        questionLimit = glbPlcObjectId.count
+                                                    }
+                                                    print("Global Objects after: \(glbPlcObjectId)")
+                                                    for _ in 0 ..< questionLimit {
+                                                        
+                                                        let randomIndex = Int(arc4random_uniform(UInt32(glbPlcObjectId.count)))
+                                                        
+                                                        self.option1.append(glbPlcOption1[randomIndex])
+                                                        self.option2.append(glbPlcOption2[randomIndex])
+                                                        self.option3.append(glbPlcOption3[randomIndex])
+                                                        self.option4.append(glbPlcOption4[randomIndex])
+                                                        self.imageArr.append(glbPlcImgs[randomIndex])
+                                                        self.correctAnswer.append(glbPlcCorrectAnswer[randomIndex])
+                                                        self.descriptionEng.append(glbPlcDescriptionEng[randomIndex])
+                                                        self.questionCompleted.append(glbPlcObjectId[randomIndex])
+                                                        
+                                                        self.showDetail.append(false)
+                                                        self.userRecord.append(false)
+                                                        
+                                                        glbPlcOption1.remove(at: randomIndex)
+                                                        glbPlcOption2.remove(at: randomIndex)
+                                                        glbPlcOption3.remove(at: randomIndex)
+                                                        glbPlcOption4.remove(at: randomIndex)
+                                                        glbPlcImgs.remove(at: randomIndex)
+                                                        glbPlcCorrectAnswer.remove(at: randomIndex)
+                                                        glbPlcDescriptionEng.remove(at: randomIndex)
+                                                        glbPlcObjectId.remove(at: randomIndex)
+                                                    }
+                                                    self.tableView.reloadData()
+                                                    self.tableView.alpha = 1
+                                                    self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
+                                                    RunLoop.main.add(self.timer, forMode: .commonModes)
+
+                                                }
                                             }
                                         }
                                     }
                                     
                                 }
                             }
-                            
-                            var questionLimit = 4
-                            
-                            if glbPlcObjectId.count < questionLimit {
-                                questionLimit = glbPlcObjectId.count
-                            }
-                            print("Global Objects after: \(glbPlcObjectId)")
-                            for _ in 0 ..< questionLimit {
-                                
-                                let randomIndex = Int(arc4random_uniform(UInt32(glbPlcObjectId.count)))
-                                
-                                self.option1.append(glbPlcOption1[randomIndex])
-                                self.option2.append(glbPlcOption2[randomIndex])
-                                self.option3.append(glbPlcOption3[randomIndex])
-                                self.option4.append(glbPlcOption4[randomIndex])
-                                self.imageArr.append(glbPlcImgs[randomIndex])
-                                self.correctAnswer.append(glbPlcCorrectAnswer[randomIndex])
-                                self.descriptionEng.append(glbPlcDescriptionEng[randomIndex])
-                                self.questionCompleted.append(glbPlcObjectId[randomIndex])
-                                
-                                self.showDetail.append(false)
-                                self.userRecord.append(false)
-                                
-                                glbPlcOption1.remove(at: randomIndex)
-                                glbPlcOption2.remove(at: randomIndex)
-                                glbPlcOption3.remove(at: randomIndex)
-                                glbPlcOption4.remove(at: randomIndex)
-                                glbPlcImgs.remove(at: randomIndex)
-                                glbPlcCorrectAnswer.remove(at: randomIndex)
-                                glbPlcDescriptionEng.remove(at: randomIndex)
-                                glbPlcObjectId.remove(at: randomIndex)
-                            }
-                            self.tableView.reloadData()
-                            self.tableView.alpha = 1
-                            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeCount), userInfo: nil, repeats: true)
-                            RunLoop.main.add(self.timer, forMode: .commonModes)
-                            
                         }
                         
                     }

@@ -151,7 +151,7 @@ class luckyStrikeViewController: UIViewController, LuckyInfoPopupDelegate {
 
                 let placesQuery = PFQuery(className: "Places")
                 
-                placesQuery.limit = 1000
+                placesQuery.limit = 50
                 placesQuery.findObjectsInBackground { [unowned self] (objects, error) in
                     
                     
@@ -196,7 +196,7 @@ class luckyStrikeViewController: UIViewController, LuckyInfoPopupDelegate {
                     
                     let foodsQuery = PFQuery(className: "Foods")
                     
-                    foodsQuery.limit = 1000
+                    foodsQuery.limit = 50
                     foodsQuery.findObjectsInBackground { [unowned self](objects, error) in
                         
                         
@@ -539,7 +539,7 @@ class luckyStrikeViewController: UIViewController, LuckyInfoPopupDelegate {
         else {
             let placesQuery = PFQuery(className: "Places")
             
-            placesQuery.limit = 1000
+            placesQuery.limit = 50
             placesQuery.findObjectsInBackground { [unowned self] (objects, error) in
                 
                 
@@ -583,7 +583,7 @@ class luckyStrikeViewController: UIViewController, LuckyInfoPopupDelegate {
                 
                 let foodsQuery = PFQuery(className: "Foods")
                 
-                foodsQuery.limit = 1000
+                foodsQuery.limit = 50
                 foodsQuery.findObjectsInBackground { [unowned self] (objects, error) in
                     
                     
@@ -787,7 +787,7 @@ class luckyStrikeViewController: UIViewController, LuckyInfoPopupDelegate {
 
                         let placesQuery = PFQuery(className: "Places")
                         
-                        placesQuery.limit = 1000
+                        placesQuery.limit = 50
                         placesQuery.findObjectsInBackground { [unowned self] (objects, error) in
                             
                             
@@ -831,7 +831,7 @@ class luckyStrikeViewController: UIViewController, LuckyInfoPopupDelegate {
                             
                             let foodsQuery = PFQuery(className: "Foods")
                             
-                            foodsQuery.limit = 1000
+                            foodsQuery.limit = 50
                             foodsQuery.findObjectsInBackground { [unowned self] (objects, error) in
                                 
                                 
